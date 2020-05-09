@@ -376,6 +376,33 @@
         </div>
         <div class="card">
             
+            <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'd729c3a2fbe8b3000a70',
+        clientSecret: 'dd1fae45deb7dee8e3389d2a8014e9c9ff5fd68a',
+        repo: 'Tlhg-gitalks',
+        owner: 'Tlhg-0',
+        admin: "Tlhg-0",
+        id: '2020-05-09T11-31-15',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+
+            
 
             
 
@@ -449,7 +476,7 @@
 
 
 
-    <a href="https://weibo.com/u/3295102785" class="tooltipped" target="_blank" data-tooltip="关注我的微博: https://weibo.com/u/3295102785" data-position="top" data-delay="50">
+    <a href="https://weibo.com/3295102785" class="tooltipped" target="_blank" data-tooltip="关注我的微博: https://weibo.com/3295102785" data-position="top" data-delay="50">
         <i class="fab fa-weibo"></i>
     </a>
 

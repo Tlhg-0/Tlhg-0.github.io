@@ -42,11 +42,11 @@
   </entry>
   
   <entry>
-    <title>Markdown 基本语法</title>
+    <title>Markdown grammer</title>
     <link href="http://tlhg.top/posts/b01d.html"/>
     <id>http://tlhg.top/posts/b01d.html</id>
     <published>2020-05-19T09:50:05.000Z</published>
-    <updated>2020-05-29T07:11:17.392Z</updated>
+    <updated>2020-05-29T09:04:26.626Z</updated>
     
     <summary type="html">
     
@@ -74,7 +74,7 @@
     <link href="http://tlhg.top/posts/7b5d.html"/>
     <id>http://tlhg.top/posts/7b5d.html</id>
     <published>2020-05-10T03:12:16.059Z</published>
-    <updated>2020-05-19T13:15:26.905Z</updated>
+    <updated>2020-05-29T09:14:37.719Z</updated>
     
     <summary type="html">
     
@@ -101,7 +101,7 @@
     <link href="http://tlhg.top/posts/bfb3.html"/>
     <id>http://tlhg.top/posts/bfb3.html</id>
     <published>2020-05-09T12:25:40.000Z</published>
-    <updated>2020-05-19T13:13:30.815Z</updated>
+    <updated>2020-05-29T09:14:45.105Z</updated>
     
     <summary type="html">
     
@@ -128,7 +128,7 @@
     <link href="http://tlhg.top/posts/3eeb.html"/>
     <id>http://tlhg.top/posts/3eeb.html</id>
     <published>2020-05-09T01:48:01.059Z</published>
-    <updated>2020-05-19T13:12:39.050Z</updated>
+    <updated>2020-05-29T09:13:43.234Z</updated>
     
     <summary type="html">
     
@@ -142,8 +142,6 @@
     
     </summary>
     
-    
-      <category term="Blog" scheme="http://tlhg.top/categories/Blog/"/>
     
     
       <category term="Hexo" scheme="http://tlhg.top/tags/Hexo/"/>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tlhg.top/"/>
-  <updated>2020-05-30T00:40:24.120Z</updated>
+  <updated>2020-06-01T13:43:39.030Z</updated>
   <id>http://tlhg.top/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>VS Code edit background</title>
-    <link href="http://tlhg.top/posts/7060.html"/>
-    <id>http://tlhg.top/posts/7060.html</id>
-    <published>2020-05-29T06:19:19.000Z</published>
-    <updated>2020-05-30T00:40:24.120Z</updated>
+    <title>C++ Inherited constructor</title>
+    <link href="http://tlhg.top/posts/d1a9.html"/>
+    <id>http://tlhg.top/posts/d1a9.html</id>
+    <published>2020-05-30T00:44:37.000Z</published>
+    <updated>2020-06-01T13:43:39.030Z</updated>
     
     <summary type="html">
     
@@ -29,7 +29,32 @@
       
         
         
-          &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;  今天用VS Code
+          &lt;h1 id=&quot;继承的构造函数&quot;&gt;&lt;a href=&quot;#继承的构造函数&quot; class=&quot;headerlink&quot; title=&quot;继承的构造函数&quot;&gt;&lt;/a&gt;&lt;center&gt;继承的构造函数&lt;/center&gt;&lt;/h1&gt;&lt;h2 id=&quot;基类-amp-派生类的关系&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="C++" scheme="http://tlhg.top/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VS Code edit background</title>
+    <link href="http://tlhg.top/posts/7060.html"/>
+    <id>http://tlhg.top/posts/7060.html</id>
+    <published>2020-05-29T06:19:19.000Z</published>
+    <updated>2020-06-01T09:06:19.633Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;VS-Code-edit-background&quot;&gt;&lt;a href=&quot;#VS-Code-edit-background&quot; class=&quot;headerlink&quot; title=&quot;VS Code edit background &quot;&gt;&lt;/a&gt;&lt;center&gt;VS Code
         
       
     
@@ -46,7 +71,7 @@
     <link href="http://tlhg.top/posts/b01d.html"/>
     <id>http://tlhg.top/posts/b01d.html</id>
     <published>2020-05-19T09:50:05.000Z</published>
-    <updated>2020-05-29T09:04:26.626Z</updated>
+    <updated>2020-06-01T10:27:09.793Z</updated>
     
     <summary type="html">
     
@@ -54,15 +79,14 @@
       
         
         
-          &lt;h2 id=&quot;主要内容&quot;&gt;&lt;a href=&quot;#主要内容&quot; class=&quot;headerlink&quot; title=&quot;主要内容&quot;&gt;&lt;/a&gt;主要内容&lt;/h2&gt;&lt;blockquote&gt;
-&lt;h4 id=&quot;Markdown是什么？&quot;&gt;&lt;a href=&quot;#Markdown是什么？&quot;
+          &lt;h1 id=&quot;Markdown-grammer&quot;&gt;&lt;a href=&quot;#Markdown-grammer&quot; class=&quot;headerlink&quot; title=&quot;Markdown grammer&quot;&gt;&lt;/a&gt;&lt;center&gt;Markdown
         
       
     
     </summary>
     
     
-      <category term="Markdown" scheme="http://tlhg.top/categories/Markdown/"/>
+      <category term="Blog" scheme="http://tlhg.top/categories/Blog/"/>
     
     
       <category term="Markdown grammar" scheme="http://tlhg.top/tags/Markdown-grammar/"/>
@@ -74,7 +98,7 @@
     <link href="http://tlhg.top/posts/7b5d.html"/>
     <id>http://tlhg.top/posts/7b5d.html</id>
     <published>2020-05-10T03:12:16.059Z</published>
-    <updated>2020-05-29T09:14:37.719Z</updated>
+    <updated>2020-06-01T09:04:44.223Z</updated>
     
     <summary type="html">
     
@@ -82,7 +106,7 @@
       
         
         
-          &lt;h1 id=&quot;Front-matter&quot;&gt;&lt;a href=&quot;#Front-matter&quot; class=&quot;headerlink&quot; title=&quot;Front-matter&quot;&gt;&lt;/a&gt;Front-matter&lt;/h1&gt;&lt;iframe
+          &lt;h1 id=&quot;Front-matter&quot;&gt;&lt;a href=&quot;#Front-matter&quot; class=&quot;headerlink&quot; title=&quot;Front-matter&quot;&gt;&lt;/a&gt;&lt;center&gt;Front-matter&lt;/center&gt;&lt;/h1&gt;&lt;iframe
         
       
     
@@ -128,7 +152,7 @@
     <link href="http://tlhg.top/posts/3eeb.html"/>
     <id>http://tlhg.top/posts/3eeb.html</id>
     <published>2020-05-09T01:48:01.059Z</published>
-    <updated>2020-05-29T09:13:43.234Z</updated>
+    <updated>2020-05-30T00:50:18.325Z</updated>
     
     <summary type="html">
     
@@ -142,6 +166,8 @@
     
     </summary>
     
+    
+      <category term="Blog" scheme="http://tlhg.top/categories/Blog/"/>
     
     
       <category term="Hexo" scheme="http://tlhg.top/tags/Hexo/"/>

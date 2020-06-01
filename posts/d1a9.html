@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Front-matter, Tlhg&#39;blog">
+    <meta name="keywords" content="C++ Inherited constructor, Tlhg&#39;blog">
     <meta name="description" content="Blog that records the learning process">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Front-matter | Tlhg&#39;blog</title>
+    <title>C++ Inherited constructor | Tlhg&#39;blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200529171322.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Front-matter</h1>
+                    <h1 class="description center-align post-title">C++ Inherited constructor</h1>
                 </div>
             </div>
         </div>
@@ -439,23 +439,14 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Hexo/">
-                                <span class="chip bg-color">Hexo</span>
+                            <a href="/tags/C/">
+                                <span class="chip bg-color">C++</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/Blog/" class="post-category">
-                                Blog
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -464,7 +455,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-10
+                    2020-05-30
                 </div>
                 
 
@@ -473,7 +464,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    546
+                    641
                 </div>
                 
 
@@ -490,88 +481,97 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Front-matter"><a href="#Front-matter" class="headerlink" title="Front-matter"></a><center>Front-matter</center></h1><iframe src="https://www.youtube.com/embed/Rl48Yk4A_V8" frameborder="0" loading="lazy" allowfullscreen="" style="box-sizing: inherit; user-select: text !important; margin: 1em 0px; padding: 0px; border: 0px; outline: 0px; font-weight: inherit; font-style: inherit; font-family: inherit; font-size: 15px; vertical-align: baseline;"></iframe>
-
-<p>Front-matter 是文件最上方以 <code>---</code> 分隔的区域，用于指定个别文件的变量，举例来说：</p>
-<pre><code>---
-title: Hello World
-date: 2013/7/13 20:46:25
----</code></pre><p>以下是预先定义的参数，您可在模板中使用这些参数值并加以利用。</p>
-<table>
-<thead>
-<tr>
-<th align="left">参数</th>
-<th align="left">描述</th>
-<th align="left">默认值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>layout</code></td>
-<td align="left">布局</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left"><code>title</code></td>
-<td align="left">标题</td>
-<td align="left">文章的文件名</td>
-</tr>
-<tr>
-<td align="left"><code>date</code></td>
-<td align="left">建立日期</td>
-<td align="left">文件建立日期</td>
-</tr>
-<tr>
-<td align="left"><code>updated</code></td>
-<td align="left">更新日期</td>
-<td align="left">文件更新日期</td>
-</tr>
-<tr>
-<td align="left"><code>comments</code></td>
-<td align="left">开启文章的评论功能</td>
-<td align="left">true</td>
-</tr>
-<tr>
-<td align="left"><code>tags</code></td>
-<td align="left">标签（不适用于分页）</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left"><code>categories</code></td>
-<td align="left">分类（不适用于分页）</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left"><code>permalink</code></td>
-<td align="left">覆盖文章网址</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left"><code>keywords</code></td>
-<td align="left">仅用于 meta 标签和 Open Graph 的关键词（不推荐使用）</td>
-<td align="left"></td>
-</tr>
-</tbody></table>
-<h2 id="分类和标签"><a href="#分类和标签" class="headerlink" title="分类和标签"></a>分类和标签</h2><p>只有文章支持分类和标签，您可以在 Front-matter 中设置。在其他系统中，分类和标签听起来很接近，但是在 Hexo 中两者有着明显的差别：分类具有顺序性和层次性，也就是说 <code>Foo, Bar</code> 不等于 <code>Bar, Foo</code>；而标签没有顺序和层次。</p>
-<pre><code>categories:
-- Diary
-tags:
-- PS3
-- Games</code></pre><blockquote>
-<p>分类方法的分歧</p>
-<p>如果您有过使用 WordPress 的经验，就很容易误解 Hexo 的分类方式。WordPress 支持对一篇文章设置多个分类，而且这些分类可以是同级的，也可以是父子分类。但是 Hexo 不支持指定多个同级分类。下面的指定方法：</p>
-<pre><code>categories:
-  - Diary
-  - Life</code></pre><p>会使分类<code>Life</code>成为<code>Diary</code>的子分类，而不是并列分类。因此，有必要为您的文章选择尽可能准确的分类。</p>
-<p>如果你需要为文章添加多个分类，可以尝试以下 list 中的方法。</p>
-<pre><code>categories:
-- [Diary, PlayStation]
-- [Diary, Games]
-- [Life]</code></pre><p>此时这篇文章同时包括三个分类： <code>PlayStation</code> 和 <code>Games</code> 分别都是父分类 <code>Diary</code> 的子分类，同时 <code>Life</code> 是一个没有子分类的分类。</p>
-</blockquote>
-<h2 id="JSON-Front-matter"><a href="#JSON-Front-matter" class="headerlink" title="JSON Front-matter"></a>JSON Front-matter</h2><p>除了 YAML 外，你也可以使用 JSON 来编写 Front-matter，只要将 <code>---</code> 代换成 <code>;;;</code> 即可。</p>
-<pre><code>"title": "Hello World",
-"date": "2013/7/13 20:46:25"
-;;;</code></pre><script>
+                <h1 id="继承的构造函数"><a href="#继承的构造函数" class="headerlink" title="继承的构造函数"></a><center>继承的构造函数</center></h1><h2 id="基类-amp-派生类的关系"><a href="#基类-amp-派生类的关系" class="headerlink" title="基类&amp;派生类的关系"></a>基类&amp;派生类的关系</h2><h3 id="1-派生类拥有基类的数据成员和成员函数；"><a href="#1-派生类拥有基类的数据成员和成员函数；" class="headerlink" title="1. 派生类拥有基类的数据成员和成员函数；"></a>1. 派生类拥有基类的数据成员和成员函数；</h3><ul>
+<li><p>派生类在基类的基础上<strong>可实施以下改变</strong>：</p>
+<ol>
+<li>增加新的成员（数据+函数）。</li>
+<li>重载(overload)基类的成员函数。 </li>
+<li>重定义(override,覆盖)基类已有的成员函数。</li>
+<li>改变基类成员在派生类中的访问属性。</li>
+</ol>
+</li>
+<li><p>派生类<strong>不能继承</strong>基类的以下内容： </p>
+<ol>
+<li>析构函数。 </li>
+<li>基类的友元函数。 </li>
+<li>静态成员（数据+函数）  </li>
+<li>针对基类定义的一些特殊运算符，如new等。 基类的构造函数C++11之前不能继承，之后可以继承；</li>
+</ol>
+</li>
+<li><p>基类的构造函数C++11之前不能继承，之后可以继承；  </p>
+</li>
+</ul>
+<h3 id="2-派生类的访问权限"><a href="#2-派生类的访问权限" class="headerlink" title="2. 派生类的访问权限"></a>2. 派生类的访问权限</h3><ul>
+<li><p>派生类继承了基类的所有成员，但派生类能够直接访问从基类继承来的公有和保护成员，且只能通过这两类成员访问从基类继承来的私有成员。</p>
+<ul>
+<li>基类：</li>
+</ul>
+<pre class=" language-C++"><code class="language-C++">class Base{
+    base members;
+};</code></pre>
+<ul>
+<li>派生类：</li>
+</ul>
+<pre class=" language-C++"><code class="language-C++">class Derived: public Base{
+    new members;
+};</code></pre>
+</li>
+</ul>
+<ul>
+<li><p>派生类对基类(子对象)成员的访问形式</p>
+<ol>
+<li>通过派生类对象直接访问基类成员</li>
+</ol>
+<pre class=" language-C++"><code class="language-C++">    Derived d;
+    cout&lt&ltd.j;   d.fn2();</code></pre>
+<ol start="2">
+<li>在派生类成员函数中直接访问基类成员 </li>
+</ol>
+<pre class=" language-C++"><code class="language-C++">Derived d;
+d.fn3();</code></pre>
+<ol start="3">
+<li>通过基类名字限定访问被重载或重定义的基类成员名</li>
+</ol>
+<pre><code>Derived d;
+d.Base::fn1(); </code></pre><p><strong>有关派生类访问权限的例子：</strong></p>
+<pre class=" language-objective-c"><code class="language-objective-c">#include &ltiostream&gt
+using namespace std;
+class Base { //基类
+public:
+    int k;      //为演示,将数据成员声明为公有
+    void fn1(){ cout&lt&lt"Base::fn1()"&lt&ltendl; }    
+    void fn2(){ cout&lt&lt"Base::fn2()"&lt&ltendl; }
+};
+class Derived: public Base { //派生类
+};
+void main(){ Derived d;
+    cout&lt&lt"k="&lt&ltd.k&lt&ltendl;
+    d.fn1();
+    d.fn2();
+}</code></pre>
+<p>上述代码说明： 派生类中没有新增加或者是重定义的成员，派生类Derived 拥有成员：k, fn1(), fn2()，派生类拥有的数据成员和基类是一样的。          </p>
+<pre class=" language-CPP"><code class="language-CPP">#include &ltiostream&gt
+using namespace std;
+class Base { //基类
+public:
+    int k;      //为演示,将数据成员声明为公有
+    void fn1(){ cout&lt&lt"Base::fn1()"&lt&ltendl; }    
+    void fn2(){ cout&lt&lt"Base::fn2()"&lt&ltendl; }
+};
+class Derived: public Base { //派生类
+public: int m;
+    void fn3(){ cout&lt&lt"Derived::fn3()"&lt&ltendl; }
+};
+void main(){ Derived d;
+    cout&lt&lt"k="&lt&ltd.k&lt&ltendl;
+    d.fn1();
+    d.fn2();
+    cout&lt&lt"m="&lt&ltd.m&lt&ltendl;   d.fn3();
+}</code></pre>
+</li>
+</ul>
+<p>​            </p>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -614,7 +614,7 @@ tags:
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://tlhg.top/posts/7b5d.html">http://tlhg.top/posts/7b5d.html</a>
+                    <a href="http://tlhg.top/posts/d1a9.html">http://tlhg.top/posts/d1a9.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -652,8 +652,8 @@ tags:
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Hexo/">
-                                    <span class="chip bg-color">Hexo</span>
+                                <a href="/tags/C/">
+                                    <span class="chip bg-color">C++</span>
                                 </a>
                             
                         </div>
@@ -824,7 +824,7 @@ tags:
         repo: 'Tlhg-gitalks',
         owner: 'Tlhg-0',
         admin: "Tlhg-0",
-        id: '2020-05-10T11-12-16',
+        id: '2020-05-30T08-44-37',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -848,45 +848,48 @@ tags:
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/posts/b01d.html">
+                <a href="/posts/d1a9.html">
                     <div class="card-image">
                         
-                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200529170322.png" class="responsive-img" alt="Markdown grammer">
+                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png" class="responsive-img" alt="C++ Inherited constructor">
                         
-                        <span class="card-title">Markdown grammer</span>
+                        <span class="card-title">C++ Inherited constructor</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Markdown grammer正文1. Markdown是什么？Markdown是一种轻量级标记语言，它以纯文本形式(易读、易写、易更改)编写文档，并最终以HTML格式发布。Markdown也可以理解为将以MARKDOWN语法编写的语言转
+                            继承的构造函数基类&amp;派生类的关系1. 派生类拥有基类的数据成员和成员函数；
+派生类在基类的基础上可实施以下改变：
+
+增加新的成员（数据+函数）。
+重载(overload)基类的成员函数。 
+重定义(override,覆盖)基类已有的
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-19
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-30
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Blog/" class="post-category">
-                                    Blog
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Heisenberg Lee
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Markdown-grammar/">
-                        <span class="chip bg-color">Markdown grammar</span>
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C++</span>
                     </a>
                     
                 </div>
@@ -900,36 +903,28 @@ tags:
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/posts/bfb3.html">
+                <a href="/posts/7060.html">
                     <div class="card-image">
                         
-                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200529171322.jpg" class="responsive-img" alt="writing">
+                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200529162413.png" class="responsive-img" alt="VS Code edit background">
                         
-                        <span class="card-title">writing</span>
+                        <span class="card-title">VS Code edit background</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            布局（Layout）Hexo 有三种默认布局：post、page 和 draft。在创建者三种不同类型的文件时，它们将会被保存到不同的路径；而您自定义的其他布局和 post 相同，都将储存到 source/_posts 文件夹。
-
-
-
-布局
+                            VS Code edit background 前言  今天用VS Code 写代码，感觉背景有点单调，所以决定美化一下（美名其曰美化，其实是偷偷摸鱼），网上大部分教程都是使用background插件来自定义vscode的背景图，这种方法需
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-29
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Blog/" class="post-category">
-                                    Blog
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Heisenberg Lee
                             
                         </span>
                     </div>
@@ -937,8 +932,8 @@ tags:
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
+                    <a href="/tags/VS-Code/">
+                        <span class="chip bg-color">VS Code</span>
                     </a>
                     
                 </div>

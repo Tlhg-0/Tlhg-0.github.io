@@ -30,7 +30,9 @@
     <script src="/libs/jquery/jquery.min.js"></script>
 
 <meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Tlhg'blog" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
+<script src="/js/prism-line-numbers.min.js"></script></head>
 
 
 <body>
@@ -506,15 +508,15 @@
 <ul>
 <li>基类：</li>
 </ul>
-<pre class=" language-C++"><code class="language-C++">class Base{
+<pre class="line-numbers language-C++"><code class="language-C++">class Base{
     base members;
-};</code></pre>
+};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>派生类：</li>
 </ul>
-<pre class=" language-C++"><code class="language-C++">class Derived: public Base{
+<pre class="line-numbers language-C++"><code class="language-C++">class Derived: public Base{
     new members;
-};</code></pre>
+};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <ul>
@@ -522,19 +524,20 @@
 <ol>
 <li>通过派生类对象直接访问基类成员</li>
 </ol>
-<pre class=" language-C++"><code class="language-C++">    Derived d;
-    cout&lt&ltd.j;   d.fn2();</code></pre>
+<pre class="line-numbers language-C++"><code class="language-C++">Derived d;
+cout&lt&ltd.j;   d.fn2();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ol start="2">
 <li>在派生类成员函数中直接访问基类成员 </li>
 </ol>
-<pre class=" language-C++"><code class="language-C++">Derived d;
-d.fn3();</code></pre>
+<pre class="line-numbers language-C++"><code class="language-C++">Derived d;
+d.fn3();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ol start="3">
 <li>通过基类名字限定访问被重载或重定义的基类成员名</li>
 </ol>
-<pre><code>Derived d;
-d.Base::fn1(); </code></pre><p><strong>有关派生类访问权限的例子：</strong></p>
-<pre class=" language-objective-c"><code class="language-objective-c">#include &ltiostream&gt
+<pre class="line-numbers language-c++"><code class="language-c++">Derived d;
+d.Base::fn1(); <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><strong>有关派生类访问权限的例子：</strong></p>
+<pre class="line-numbers language-c++"><code class="language-c++">#include &ltiostream&gt
 using namespace std;
 class Base { //基类
 public:
@@ -548,9 +551,9 @@ void main(){ Derived d;
     cout&lt&lt"k="&lt&ltd.k&lt&ltendl;
     d.fn1();
     d.fn2();
-}</code></pre>
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上述代码说明： 派生类中没有新增加或者是重定义的成员，派生类Derived 拥有成员：k, fn1(), fn2()，派生类拥有的数据成员和基类是一样的。          </p>
-<pre class=" language-CPP"><code class="language-CPP">#include &ltiostream&gt
+<pre class="line-numbers language-c++"><code class="language-c++">#include &#60iostream&#62
 using namespace std;
 class Base { //基类
 public:
@@ -567,10 +570,9 @@ void main(){ Derived d;
     d.fn1();
     d.fn2();
     cout&lt&lt"m="&lt&ltd.m&lt&ltendl;   d.fn3();
-}</code></pre>
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
-<p>​            </p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1123,7 +1125,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">3.9k</span>&nbsp;字
+                class="white-color">3.4k</span>&nbsp;字
             
             
             

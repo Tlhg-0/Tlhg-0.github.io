@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="C++ 构造和析构(派生类对象), tlhg.0X&#39;blog">
+    <meta name="keywords" content="C++ 构造和析构(派生类对象), null">
     <meta name="description" content="Blog that records the learning process">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>C++ 构造和析构(派生类对象) | tlhg.0X&#39;blog</title>
+    <title>C++ 构造和析构(派生类对象) | null</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="tlhg.0X'blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="null" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
 <script src="/js/prism-line-numbers.min.js"></script></head>
@@ -44,7 +44,7 @@
                     
                     <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">tlhg.0X&#39;blog</span>
+                    <span class="logo-span"></span>
                 </a>
             </div>
             
@@ -143,7 +143,7 @@
         
         <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">tlhg.0X&#39;blog</div>
+        <div class="logo-name"></div>
         <div class="logo-desc">
             
             Blog that records the learning process
@@ -492,7 +492,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="派生类对象的构造和析构顺序-amp-原则1-5"><a href="#派生类对象的构造和析构顺序-amp-原则1-5" class="headerlink" title="派生类对象的构造和析构顺序&amp;原则1/5"></a><center>派生类对象的构造和析构顺序&amp;原则1/5</center></h1><h2 id="1-派生类对象的构造顺序"><a href="#1-派生类对象的构造顺序" class="headerlink" title="1. 派生类对象的构造顺序:"></a>1. 派生类对象的构造顺序:</h2><ul>
+                <h1 id="派生类对象的构造和析构顺序-amp-原则"><a href="#派生类对象的构造和析构顺序-amp-原则" class="headerlink" title="派生类对象的构造和析构顺序&amp;原则"></a><center>派生类对象的构造和析构顺序&amp;原则</center></h1><h2 id="1-派生类对象的构造顺序"><a href="#1-派生类对象的构造顺序" class="headerlink" title="1. 派生类对象的构造顺序:"></a>1. 派生类对象的构造顺序:</h2><ul>
 <li>步骤1：先构造基类；</li>
 <li>步骤2：再构造对象成员；</li>
 <li>步骤3：最后构造派生类自身；</li>
@@ -589,9 +589,9 @@
 </ul>
 </li>
 <li><p>派生类<font color="red">只能采用“构造函数初始化参数列表”的方式</font>向基类或成员对象的构造函数传递参数，形式如下：</p>
-<p> 派生类构造函数名(参数表): 基类1构造函数名(参数表), 基类2构造函数名(参数表), … ,成员对象名1(参数表), 成员对象名2(参数表),…{</p>
-<pre><code>     //……
- }</code></pre></li>
+<pre><code> /*派生类构造函数名(参数表): 基类1构造函数名(参数表), 基类2构造函数名(参数表), … ,成员对象名1(参数表), 成员对象名2(参数表),…{
+         //……
+     } /*</code></pre></li>
 <li><p>派生类什么时候可以不定义构造函数？</p>
 <p> 答：当 <font color="red"><strong>基类</strong></font> 和 <font color="red"><strong>所有成员对象</strong></font>具有无参构造函数时！</p>
 <ul>
@@ -986,12 +986,13 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            派生类对象的构造和析构顺序&amp;原则1/51. 派生类对象的构造顺序:
+                            派生类对象的构造和析构顺序&amp;原则1. 派生类对象的构造顺序:
 步骤1：先构造基类；
 步骤2：再构造对象成员；
 步骤3：最后构造派生类自身；
 
 2. 关于构造和调用顺序的说明（1）基类构造顺序由派生层次决定：最远的基类最先构造;
+（2
                         
                     </div>
                     <div class="publish-info">
@@ -1109,7 +1110,7 @@
 
         var url = document.location.href;
         newdiv.innerHTML += '<br />'
-            + '来源: tlhg.0X&#39;blog<br />'
+            + '来源: <br />'
             + '文章作者: Heisenberg Lee<br />'
             + '文章链接: <a href="' + url + '">' + url + '</a><br />'
             + '本文章著作权归作者所有，任何形式的转载都请注明出处。';

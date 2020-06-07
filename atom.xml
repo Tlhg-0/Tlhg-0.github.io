@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title></title>
+  <title>tlhg.0X</title>
   
   <subtitle>tlhg.0X</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tlhg.top/"/>
-  <updated>2020-06-07T12:10:14.895Z</updated>
+  <updated>2020-06-07T13:22:04.932Z</updated>
   <id>http://tlhg.top/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>C++ 继承</title>
+    <link href="http://tlhg.top/posts/2c6d.html"/>
+    <id>http://tlhg.top/posts/2c6d.html</id>
+    <published>2020-06-07T11:33:09.000Z</published>
+    <updated>2020-06-07T13:22:04.932Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;C-继承&quot;&gt;&lt;a href=&quot;#C-继承&quot; class=&quot;headerlink&quot; title=&quot;C++ 继承&quot;&gt;&lt;/a&gt;&lt;center&gt;C++ 继承&lt;/center&gt;&lt;/h1&gt;&lt;h2 id=&quot;1-C-继承的语法形式&quot;&gt;&lt;a href=&quot;#1-C-继承的语法形式&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
+    
+    
+      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
+    
+  </entry>
+  
+  <entry>
     <title>C++ 构造和析构(派生类对象)</title>
     <link href="http://tlhg.top/posts/33f.html"/>
     <id>http://tlhg.top/posts/33f.html</id>
     <published>2020-06-07T03:44:40.000Z</published>
-    <updated>2020-06-07T12:10:14.895Z</updated>
+    <updated>2020-06-07T13:21:22.737Z</updated>
     
     <summary type="html">
     

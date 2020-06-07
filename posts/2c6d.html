@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Markdown grammer, tlhg.0X">
+    <meta name="keywords" content="C++ 继承, tlhg.0X">
     <meta name="description" content="Blog that records the learning process">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Markdown grammer | tlhg.0X</title>
+    <title>C++ 继承 | tlhg.0X</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200529170322.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Markdown grammer</h1>
+                    <h1 class="description center-align post-title">C++ 继承</h1>
                 </div>
             </div>
         </div>
@@ -441,8 +441,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Markdown-grammar/">
-                                <span class="chip bg-color">Markdown grammar</span>
+                            <a href="/tags/C-primer/">
+                                <span class="chip bg-color">C++ primer</span>
                             </a>
                         
                     </div>
@@ -453,8 +453,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Blog/" class="post-category">
-                                Blog
+                            <a href="/categories/C/" class="post-category">
+                                C++
                             </a>
                         
                     </div>
@@ -466,7 +466,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-19
+                    2020-06-07
                 </div>
                 
 
@@ -475,14 +475,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    8 分
                 </div>
                 
 
@@ -492,154 +492,315 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Markdown-grammer"><a href="#Markdown-grammer" class="headerlink" title="Markdown grammer"></a><center>Markdown grammer</center></h1><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="1-Markdown是什么？"><a href="#1-Markdown是什么？" class="headerlink" title="1. Markdown是什么？"></a>1. Markdown<em>是什么</em>？</h3><p><strong>Markdown</strong>是一种轻量级<strong>标记语言</strong>，它以纯文本形式(<em>易读、易写、易更改</em>)编写文档，并最终以HTML格式发布。<br><strong>Markdown</strong>也可以理解为将以MARKDOWN语法编写的语言转换成HTML内容的工具。</p>
-<h3 id="2-为什么要使用它？"><a href="#2-为什么要使用它？" class="headerlink" title="2. 为什么要使用它？"></a>2. <em>为什么</em>要使用它？</h3><ul>
-<li>它是易读（看起来舒服）、易写（语法简单）、易更改<strong>纯文本</strong>。处处体现着<strong>极简主义</strong>的影子。</li>
-<li>兼容HTML，可以转换为HTML格式发布。</li>
-<li>跨平台使用。</li>
-<li>越来越多的网站支持Markdown。</li>
-<li>更方便清晰地组织你的电子邮件。（Markdown-here, Airmail）</li>
-<li>摆脱Word（我不是认真的）。</li>
+                <h1 id="C-继承"><a href="#C-继承" class="headerlink" title="C++ 继承"></a><center>C++ 继承</center></h1><h2 id="1-C-继承的语法形式"><a href="#1-C-继承的语法形式" class="headerlink" title="1. C++ 继承的语法形式"></a>1. C++ 继承的语法形式</h2><pre class="line-numbers language-c++"><code class="language-c++">class B {……};                    //基类
+class D : [private | protected | public] B {    //派生类
+    ……
+};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="2-C-继承的类型"><a href="#2-C-继承的类型" class="headerlink" title="2. C++ 继承的类型"></a>2. C++ 继承的类型</h2><ul>
+<li>可分为公有(public)继承、保护(protected)继承和私有(private)继承，也称为公有派生、保护派生和私有派生。</li>
+<li>不同继承方式会不同程度地影响基类成员在派生类中的访问权限。 </li>
 </ul>
-<h3 id="3-怎么使用？"><a href="#3-怎么使用？" class="headerlink" title="3. 怎么使用？"></a>3. <em>怎么</em>使用？</h3><p>如果不算<strong>扩展</strong>，Markdown的语法绝对<strong>简单</strong>到让你爱不释手。</p>
-<p>Markdown语法主要分为如下几大部分： <strong>标题</strong>，<strong>段落</strong>，<strong>区块引用</strong>，<strong>代码区块</strong>，<strong>强调</strong>，<strong>列表</strong>，<strong>分割线</strong>，<strong>链接</strong>，<strong>图片</strong>，<strong>反斜杠 <code>\</code></strong>，<strong>符号’`’</strong>。</p>
-<h4 id="3-1-标题"><a href="#3-1-标题" class="headerlink" title="3.1 标题"></a>3.1 标题</h4><p>两种形式：<br>1）使用<code>=</code>和<code>-</code>标记一级和二级标题。</p>
-<blockquote>
-<p>一级标题<br><code>=========</code><br>二级标题<br><code>---------</code></p>
-</blockquote>
-<p>效果：</p>
-<blockquote>
-<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2></blockquote>
-<p>2）使用<code>#</code>，可表示1-6级标题。</p>
-<blockquote>
-<p># 一级标题<br>## 二级标题<br>### 三级标题<br>#### 四级标题<br>##### 五级标题<br>###### 六级标题</p>
-</blockquote>
-<p>效果：</p>
-<blockquote>
-<h1 id="一级标题-1"><a href="#一级标题-1" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题-1"><a href="#二级标题-1" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6></blockquote>
-<h4 id="3-2-段落"><a href="#3-2-段落" class="headerlink" title="3.2 段落"></a>3.2 段落</h4><p>段落的前后要有空行，所谓的空行是指没有文字内容。若想在段内强制换行的方式是使用<strong>两个以上</strong>空格加上回车（引用中换行省略回车）。</p>
-<h4 id="3-3-区块引用"><a href="#3-3-区块引用" class="headerlink" title="3.3 区块引用"></a>3.3 区块引用</h4><p>在段落的每行或者只在第一行使用符号<code>&gt;</code>,还可使用多个嵌套引用，如：</p>
-<blockquote>
-<p>&gt; 区块引用<br>&gt;&gt; 嵌套引用</p>
-</blockquote>
-<p>效果：</p>
-<blockquote>
-<p>区块引用</p>
-<blockquote>
-<p>嵌套引用</p>
-</blockquote>
-</blockquote>
-<h4 id="3-4-代码区块"><a href="#3-4-代码区块" class="headerlink" title="3.4 代码区块"></a>3.4 代码区块</h4><ul>
-<li>在需要高亮的代码块的前一行及后一行使用三个反引号 ```（~ 键）</li>
-<li>同时第一行反引号后面，输入代码块所使用的语言，实现代码高亮。</li>
+<h3 id="1-公有-public-继承"><a href="#1-公有-public-继承" class="headerlink" title="1. 公有(public)继承"></a>1. 公有(public)继承</h3><ul>
+<li><p>不改变基类成员在派生类中可访问权限；</p>
+</li>
+<li><p>派生类中自定义的成员函数不能直接访问基类的<font color="orange">private</font>成员，只能可通过基类的<font color="orange">public</font>成员函数或<font color="orange">protected</font>成员函数访问基类的<font color="orange">private</font>成员；</p>
+<p>例子：公有继承</p>
+<pre class="line-numbers language-c++"><code class="language-c++">  #include &#60iostream#&62
+  using namespace std;
+  class base{
+      int x;
+  public:
+      void setx(int n){ x=n; }
+      int getx(){ return x; }
+      void showx(){ cout&lt&ltx&lt&ltendl; }
+  };
+
+  class derived:public base{
+      int y;
+  public:
+      void sety(int n){ y=n;}
+      void sety(){ y=getx();}
+      void showy() { cout&lt&lty&lt&ltendl;}
+  };
+
+  void main(){    derived obj;
+      obj.setx(10);    obj.sety(20);
+      obj.showx();    obj.showy();
+      obj.sety();
+      obj.showx();    obj.showy();
+  }
+  // 输出： 10 20 10 10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
-<p>普通段落：</p>
-<p>void main()<br>{<br>printf(“Hello, Markdown.”);<br>}</p>
-<p>代码区块：</p>
-<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Hello, Markdown."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>注意</strong>:需要和普通段落之间存在空行。</p>
-<h4 id="3-5-强调"><a href="#3-5-强调" class="headerlink" title="3.5 强调"></a>3.5 强调</h4><p>在强调内容两侧分别加上<code>*</code>或者<code>_</code>，如：</p>
-<blockquote>
-<p><em>斜体</em>，<em>斜体</em><br><strong>粗体</strong>，<strong>粗体</strong></p>
-</blockquote>
-<p>效果：</p>
-<blockquote>
-<p><em>斜体<em>，</em>斜体</em><br><strong>粗体</strong>，<strong>粗体</strong></p>
-</blockquote>
-<h4 id="3-6-列表"><a href="#3-6-列表" class="headerlink" title="3.6 列表"></a>3.6 列表</h4><p>使用<code>·</code>、<code>+</code>、或<code>-</code>标记无序列表，如：</p>
-<blockquote>
-<p>-（+<em>） 第一项 -（+</em>） 第二项 - （+*）第三项</p>
-</blockquote>
-<p><strong>注意</strong>：标记后面最少有一个_空格<em>或</em>制表符_。若不在引用区块中，必须和前方段落之间存在空行。</p>
-<p>效果：</p>
-<blockquote>
+<h3 id="2-私有-private-继承"><a href="#2-私有-private-继承" class="headerlink" title="2. 私有(private)继承"></a>2. 私有(private)继承</h3><ul>
+<li><p>基类的所有成员（包括public成员）<font color="orange">在派生类中都是private私有的，不再是派生类的公有接口函数，不能被派生类的外部函数访问</font>；</p>
+</li>
+<li><p>派生类的成员函数<font color="orange">不能直接访问</font>基类的private成员，但可以访问基类的public成员和protected成员，并且通过它们访问基类的private成员。</p>
+<p>  例子：私有继承</p>
+<pre class="line-numbers language-C++"><code class="language-C++">  #include &#60iostream#&62
+  using namespace std;
+  class base{
+      int x;
+  public:
+      void setx(int n){x=n; }
+      int getx(){return x; }
+      void showx(){cout&lt&ltx&lt&ltendl; }
+  };
+
+  class derived:private base{
+      int y;
+  public:
+      void sety(int n){y=n;}
+      void sety(){ y=getx();}
+      void showy(){ cout&lt&lty&lt&ltendl;}
+  };
+
+  void main(){
+      derived obj;
+      obj.setx(10);//不能访问
+      obj.sety(20);
+      obj.showx();//不能访问
+      obj.showy();    
+  }
+  // 输出 20<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h3 id="3-保护-protected-继承"><a href="#3-保护-protected-继承" class="headerlink" title="3. 保护(protected)继承"></a>3. 保护(protected)继承</h3><ul>
+<li><p>基类的<font color="orange">public</font>成员在派生类中 –&gt; 将变成protected成员;</p>
+</li>
+<li><p>基类的<font color="orange">protected</font>和<font color="orange">private</font>成员在派生类中 –&gt; 将保持原来的访问权限。</p>
+<p>  例子：保护继承</p>
+<pre class="line-numbers language-c++"><code class="language-c++">  #include &#60iostream#&62
+  using namespace std;
+  class base{
+      int x;
+  protected:
+      int getx(){ return x; }
+  public:
+      void setx(int n){ x=n; }
+      void showx(){ cout&lt&ltx&lt&ltendl; }
+  };
+
+  class derived:protected base{
+      int y;
+  public:
+      void sety(int n){ y=n; }
+      void sety(){ y=getx();}   //派生类访问基类的保护成员
+      void showy(){ cout&lt&lty&lt&ltendl; }
+  };
+
+  void main(){
+      derived obj;
+      obj.setx(10); //错误:类使用者
+      obj.sety(20);
+      obj.showx();  //错误:类使用者
+      obj.showy();    
+  }
+  // 输出 20<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="4-基类成员在派生类中的访问权限"><a href="#4-基类成员在派生类中的访问权限" class="headerlink" title="4. 基类成员在派生类中的访问权限"></a>4. 基类成员在派生类中的访问权限</h3><p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200607203749.png" alt="汇总图"></p>
+</li>
+</ul>
+<h3 id="5-阻止继承-11C"><a href="#5-阻止继承-11C" class="headerlink" title="5. 阻止继承 11C++"></a>5. 阻止继承 11C++</h3><p>如果不想让一个类作为其它类的基类，可以用final关键字阻止它被继承。形式如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">class Base{……}               //可以被继承
+class NoDeri  final{……}      //不能被继承
+class D final:Base{……}       //正确，D不能被继承
+class D1:NoDeri{……}          //错误，NoDeri不能被继承
+class D2:D{……}               //错误，D不能被继承
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="6-多重继承"><a href="#6-多重继承" class="headerlink" title="6. 多重继承"></a>6. 多重继承</h3><ol>
+<li><p>C++允许一个类从一个或多个基类派生。   </p>
 <ul>
-<li>第一项</li>
-<li>第二项</li>
-<li>第三项</li>
+<li><p>如果一个类只有一个基类，就称为单一继承。</p>
+</li>
+<li><p>如果一个类具有两个或两个以上的基类，就称为多重继承。</p>
+<p>多继承的形式：</p>
+<p>class 派生类名: [继承方式] 基类名1, [继承方式] 基类名2,  …<br>{</p>
+<p>……</p>
+<p>};</p>
+</li>
 </ul>
-</blockquote>
-<p>有序列表的标记方式是将上述的符号换成数字,并辅以<code>.</code>，如：</p>
-<blockquote>
-<p>1 . 第一项<br>2 . 第二项<br>3 . 第三项</p>
-</blockquote>
-<p>效果：</p>
-<blockquote>
-<ol>
-<li>第一项</li>
-<li>第二项</li>
-<li>第三项</li>
+</li>
+<li><p>多重继承的说明：</p>
+<ul>
+<li><p>派生类必须负责为每个基类的构造函数提供初始化参数，构造方法和构造原则 与单继承相同。</p>
+</li>
+<li><p>构造函数的调用次序仍然是先基类，再对象成员，然后才是派生类的构造函数。</p>
+<font color="orange"></font></li><font color="orange">
+</font><li><font color="orange"><p>多个基类的构造函数的调用次序与它们在被继承时的声明次序相同，与它们在派生类构造函数的初始化列表中的次序没有关系。</p>
+</font></li>
+<li><p>多继承方式下的<font color="orange">析构函数调用次序仍然与构造函数的调用次序相反。</font></p>
+<p>例子：类Base1、Base2、Base3、Derived的继承关系如图所示，验证其构造函数和析构函数的调用次序。</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#include &#60iostream#&62
+using namespace std;
+class Base1{
+private:
+  int x;
+protected:
+  int getx(){ return x; }
+public:
+  Base1(int p=1){
+      x=p;
+      cout&lt&lt"Constructing Base1!"&lt&ltendl;
+  }
+  ~Base1(){
+      cout&lt&lt"Destructing Base1!"&lt&ltendl;
+  }
+  void setx(int a=1){ x=a; }
+};
+
+class Base2{
+private:
+  int y;
+public:
+  Base2(int p=2){
+      y=p;
+      cout&lt&lt"Constructing Base2!"&lt&ltendl;
+  }
+  ~Base2(){
+      cout&lt&lt"Destructing Base2!"&lt&ltendl;
+  }
+  void sety(int a){ y=a; }
+  int gety(){ return y; }
+};
+
+class Base3{
+private:
+  int z;
+public:
+  Base3(int p=3){
+      z=p;
+      cout&lt&lt"Constructing Base3!"&lt&ltendl;
+  }
+  ~Base3(){
+      cout&lt&lt"Destructing Base3!"&lt&ltendl;
+  }
+  void setz(int a){ z=a; }
+  int getz(){ return z; }
+}; 
+
+class Derived:public Base1, public Base2, public Base3{
+private:
+  int d;
+public:
+  Derived(int p=4){
+      d=p;
+      cout&lt&lt"Constructing Derived!"&lt&ltendl;
+  }
+  ~Derived(){
+      cout&lt&lt"Destructing Derived!"&lt&ltendl;
+  }
+  void setd(int a){ d=a; }
+  void display();
+};
+
+void Derived::display(){
+  cout&lt&lt"Base1::x="&lt&ltgetx()&lt&ltendl;
+  cout&lt&lt"Base2::y="&lt&ltgety()&lt&ltendl;
+  cout&lt&lt"Base3::z="&lt&ltgetz()&lt&ltendl;
+  cout&lt&lt"Derived::d="&lt&ltd&lt&ltendl;
+}
+
+int main(){  Derived obj;  return 0; }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">//输出结果：
+Constructing Base1
+Constructing Base2
+Constructing Base3
+Constructing Derived
+Destructing Derived
+Destructing Base3
+Destructing Base2
+Destructing Base1
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+</li>
 </ol>
-</blockquote>
-<h4 id="3-7-分割线"><a href="#3-7-分割线" class="headerlink" title="3.7 分割线"></a>3.7 分割线</h4><p>分割线最常使用就是三个或以上<code>*</code>，还可以使用<code>-</code>和<code>_</code>。</p>
-<h4 id="3-8-链接"><a href="#3-8-链接" class="headerlink" title="3.8 链接"></a>3.8 链接</h4><p>链接可以由两种形式生成：<strong>行内式</strong>和<strong>参考式</strong>。<br><strong>行内式</strong>：</p>
-<blockquote>
-<p><a href="https://tlhg.top">Tlhg‘s blog address1</a></p>
-</blockquote>
-<p>效果：</p>
-<blockquote>
-<p><a href="https://tlhg.top">Tlhg‘s blog address1</a></p>
-</blockquote>
-<p><strong>参考式</strong>：</p>
-<blockquote>
-<p><a href="https://tlhg.top">Tlhg’s blog address1</a><br><a href="https://tlhg.top">Tlhg’s blog address2</a></p>
-</blockquote>
-<p>效果：</p>
-<blockquote>
-<p><a href="https://tlhg.top">Tlhg‘s blog address1</a><br><a href="https://tlhg.top">Tlhg‘s blog address2</a></p>
-</blockquote>
-<h4 id="3-9-图片"><a href="#3-9-图片" class="headerlink" title="3.9 图片"></a>3.9 图片</h4><p>添加图片的形式和链接相似，只需在链接的基础上前方加一个<code>！</code>。</p>
-<h4 id="3-10-反斜杠"><a href="#3-10-反斜杠" class="headerlink" title="3.10 反斜杠\"></a>3.10 反斜杠<code>\</code></h4><p>相当于<strong>反转义</strong>作用。使符号成为普通符号。</p>
-<h4 id="3-11-符号’-’"><a href="#3-11-符号’-’" class="headerlink" title="3.11 符号’`’"></a>3.11 符号’`’</h4><p>起到标记作用。如：</p>
-<blockquote>
-<pre><code>ctrl+a</code></pre></blockquote>
-<p>效果：</p>
-<blockquote>
-<pre><code>ctrl+a</code></pre></blockquote>
-<h4 id="4-谁在用？"><a href="#4-谁在用？" class="headerlink" title="4. 谁在用？"></a>4. <em>谁</em>在用？</h4><p>Markdown的使用者：</p>
+<h3 id="7-虚拟继承"><a href="#7-虚拟继承" class="headerlink" title="7. 虚拟继承"></a>7. 虚拟继承</h3><ol>
+<li><p>引入原因：重复基类的存在 </p>
 <ul>
-<li>GitHub</li>
-<li>简书</li>
-<li>Stack Overflow</li>
-<li>Apollo</li>
-<li>Moodle</li>
-<li>Reddit</li>
-<li>等等</li>
+<li>派生类间接继承同一基类使得间接基类（Person）在派生类中有具有<font color="red">多份拷贝，引发二义性。</font></li>
 </ul>
-<h4 id="5-尝试一下"><a href="#5-尝试一下" class="headerlink" title="5. 尝试一下"></a>5. 尝试一下</h4><ul>
-<li><strong>Chrome</strong>下的插件诸如<code>stackedit</code>与<code>markdown-here</code>等非常方便，也不用担心平台受限。</li>
-<li><strong>在线</strong>的dillinger.io评价也不错</li>
-<li><strong>Windowns</strong>下的MarkdownPad也用过，不过免费版的体验不是很好。</li>
-<li><strong>Mac</strong>下的Mou是国人贡献的，口碑很好。</li>
-<li><strong>Linux</strong>下的ReText不错。</li>
+</li>
+<li><p>解决方法：<font color="orange">虚拟基类</font>（只保留一份拷贝）</p>
+<ul>
+<li>虚拟基类：使得派生类中只存在同一基类的一份拷贝，解决了基类 数据成员的二义性问题；</li>
 </ul>
-<p><strong>当然，最终境界永远都是笔下是语法，心中格式化 :)。</strong></p>
-<hr>
-<p><strong>注意</strong>：不同的Markdown解释器或工具对相应语法（扩展语法）的解释效果不尽相同，具体可参见工具的使用说明。 虽然有人想出面搞一个所谓的标准化的Markdown，[没想到还惹怒了健在的创始人John Gruber] (<a href="http://blog.codinghorror.com/standard-markdown-is-now-common-markdown/" target="_blank" rel="noopener">http://blog.codinghorror.com/standard-markdown-is-now-common-markdown/</a> )。</p>
-<hr>
-<p>以上基本是所有traditonal markdown的语法。</p>
-<h3 id="其它："><a href="#其它：" class="headerlink" title="其它："></a>其它：</h3><p>列表的使用(非traditonal markdown)：</p>
-<p>用<code>|</code>表示表格纵向边界，表头和表内容用<code>-</code>隔开，并可用<code>:</code>进行对齐设置，两边都有<code>:</code>则表示居中，若不加<code>:</code>则默认左对齐。</p>
-<table>
-<thead>
-<tr>
-<th>代码库</th>
-<th>链接</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>MarkDown</td>
-<td><a href="https://github.com/Tlhg-0" target="_blank" rel="noopener">https://github.com/Tlhg-0</a></td>
-</tr>
-<tr>
-<td>MarkDownCopy</td>
-<td><a href="https://github.com/Tlhg-0" target="_blank" rel="noopener">https://github.com/Tlhg-0</a></td>
-</tr>
-</tbody></table>
-<p>关于其它扩展语法可参见具体工具的使用说明。</p>
+</li>
+<li><p>虚拟继承 virtual inheritance</p>
+<p> class 派生类名:virtual [继承方式] 基类名1，virtual [继承方式] 基类名2,…{</p>
+<p> 派生类成员声明与定义;</p>
+<p> };</p>
+<ul>
+<li><p>关键字<font color="red">virtual</font>限定继承方式，将基类指定为虚拟基类，就使该基类的成员在派生类中只有一份拷贝。</p>
+<p>例子：无参虚基类的执行次序分析</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#include &#60iostream#&62
+using namespace std;
+class A {
+   int a;
+public: 
+   A(){ cout&lt&lt"Constructing A"&lt&ltendl; }
+}; 
+
+class B {
+public: 
+   B(){ cout&lt&lt"Constructing B"&lt&ltendl;}
+}; 
+
+class B1:virtual public B, virtual public A{
+public: 
+   B1(int i){ cout&lt&lt"Constructing B1"&lt&ltendl; }
+}; 
+
+class B2:public A,virtual public B {
+public: 
+   B2(int j){ cout&lt&lt"Constructing B2"&lt&ltendl; }
+};
+
+class D: public B1, public B2 {
+public:
+   D(int m,int n): B1(m),B2(n){
+   cout&lt&lt"Constructing D"&lt&ltendl;
+   }
+   A a;
+}; 
+
+int main(){  D d(1,2);  return 0; }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">//输出结果：
+Constructing B
+Constructing A
+Constructing B1
+Constructing A
+Constructing B
+Constructing B2
+Constructing A
+Constructing D<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+</li>
+<li><p>虚基类的初始化与一般的多重继承的初始化在语法上是一样的，但<font color="orange">构造函数的调用顺序不同；</font></p>
+<ul>
+<li>若基类由虚拟基类派生而来，则最终派生类必须提供对间接基类的构造（即在最终派生类的构造函数初始列表中构造虚基类，无论此虚基类是直接还是间接基类）</li>
+</ul>
+</li>
+<li><p>关于构造函数调用顺序：</p>
+<ul>
+<li><p>最终派生类总是：(1)先调用虚基类的构造函数，(2) 再调用非虚基类的构造函数；</p>
+</li>
+<li><p>若同一层次中包含多个虚基类，<font color="orange">这些虚基类的构造函数按它们声明的顺序调用</font>；若某个<font color="orange">虚基类的构造函数已被调用，则不再被调用。</font></p>
+</li>
+<li><p>若虚基类由非虚基类派生而来 ，则仍然先调用基类构造函数，再调用派生类构造函数；</p>
+</li>
+</ul>
+</li>
+<li><p>虚基类由最终派生类初始化 </p>
+<ul>
+<li><p>在没有虚拟继承的情况下，每个派生类的构造函数只负责其直接基类的初始化。&lt;–&gt;但在虚拟继承方式下，虚基类则由最终派生类的构造函数负责初始化。 </p>
+</li>
+<li><p>在虚拟继承方式下，若最终派生类的构造函数没有明确调用虚基类的构造函数，编译器就会尝试调用虚基类不需要参数的构造函数（包括缺省构造、无参构造和缺省参数的构造函数），如果没找到就会产生编译错误。</p>
+</li>
+</ul>
+</li>
+</ol>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -683,7 +844,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://tlhg.top/posts/b01d.html">http://tlhg.top/posts/b01d.html</a>
+                    <a href="http://tlhg.top/posts/2c6d.html">http://tlhg.top/posts/2c6d.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -721,8 +882,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Markdown-grammar/">
-                                    <span class="chip bg-color">Markdown grammar</span>
+                                <a href="/tags/C-primer/">
+                                    <span class="chip bg-color">C++ primer</span>
                                 </a>
                             
                         </div>
@@ -893,7 +1054,7 @@
         repo: 'Tlhg-gitalks',
         owner: 'Tlhg-0',
         admin: "Tlhg-0",
-        id: '2020-05-19T17-50-05',
+        id: '2020-06-07T19-33-09',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -917,45 +1078,50 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/posts/7060.html">
+                <a href="/posts/2c6d.html">
                     <div class="card-image">
                         
-                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200529162413.png" class="responsive-img" alt="VS Code edit background">
+                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png" class="responsive-img" alt="C++ 继承">
                         
-                        <span class="card-title">VS Code edit background</span>
+                        <span class="card-title">C++ 继承</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            VS Code edit background 前言  今天用VS Code 写代码，感觉背景有点单调，所以决定美化一下（美名其曰美化，其实是偷偷摸鱼），网上大部分教程都是使用background插件来自定义vscode的背景图，这种方法需
+                            C++ 继承1. C++ 继承的语法形式class B {……};                    //基类
+class D : [private | protected | public] B {    //派生类
+    ……
+}
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-29
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/tools/" class="post-category">
-                                    tools
+                            <a href="/categories/C/" class="post-category">
+                                    C++
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/VS-Code/">
-                        <span class="chip bg-color">VS Code</span>
+                    <a href="/tags/C-primer/">
+                        <span class="chip bg-color">C++ primer</span>
                     </a>
                     
                 </div>
@@ -969,36 +1135,36 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/posts/7b5d.html">
+                <a href="/posts/33f.html">
                     <div class="card-image">
                         
-                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200529171322.jpg" class="responsive-img" alt="Front-matter">
+                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png" class="responsive-img" alt="C++ 构造和析构(派生类对象)">
                         
-                        <span class="card-title">Front-matter</span>
+                        <span class="card-title">C++ 构造和析构(派生类对象)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Front-matter
+                            派生类对象的构造和析构顺序&amp;原则1. 派生类对象的构造顺序:
+步骤1：先构造基类；
+步骤2：再构造对象成员；
+步骤3：最后构造派生类自身；
 
-Front-matter 是文件最上方以 --- 分隔的区域，用于指定个别文件的变量，举例来说：
----
-title: Hello World
-date: 2013/7/13 20:46:25
----以下是预先定
+2. 关于构造和调用顺序的说明（1）基类构造顺序由派生层次决定：最远的基类最先构造;
+（2
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-07
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Blog/" class="post-category">
-                                    Blog
+                            <a href="/categories/C/" class="post-category">
+                                    C++
                                 </a>
                             
                             
@@ -1008,8 +1174,8 @@ date: 2013/7/13 20:46:25
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
+                    <a href="/tags/C-primer/">
+                        <span class="chip bg-color">C++ primer</span>
                     </a>
                     
                 </div>

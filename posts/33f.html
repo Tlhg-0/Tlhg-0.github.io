@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="C++ 构造和析构(派生类对象), null">
+    <meta name="keywords" content="C++ 构造和析构(派生类对象), tlhg.0X">
     <meta name="description" content="Blog that records the learning process">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>C++ 构造和析构(派生类对象) | null</title>
+    <title>C++ 构造和析构(派生类对象) | tlhg.0X</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="null" type="application/atom+xml">
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="tlhg.0X" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
 <script src="/js/prism-line-numbers.min.js"></script></head>
@@ -44,7 +44,7 @@
                     
                     <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span"></span>
+                    <span class="logo-span">tlhg.0X</span>
                 </a>
             </div>
             
@@ -143,7 +143,7 @@
         
         <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name"></div>
+        <div class="logo-name">tlhg.0X</div>
         <div class="logo-desc">
             
             Blog that records the learning process
@@ -589,9 +589,10 @@
 </ul>
 </li>
 <li><p>派生类<font color="red">只能采用“构造函数初始化参数列表”的方式</font>向基类或成员对象的构造函数传递参数，形式如下：</p>
-<pre><code> /*派生类构造函数名(参数表): 基类1构造函数名(参数表), 基类2构造函数名(参数表), … ,成员对象名1(参数表), 成员对象名2(参数表),…{
-         //……
-     } /*</code></pre></li>
+<p> 派生类构造函数名(参数表): 基类1构造函数名(参数表), 基类2构造函数名(参数表), … ,成员对象名1(参数表), 成员对象名2(参数表),…{</p>
+<p>   …………   </p>
+<p> } </p>
+</li>
 <li><p>派生类什么时候可以不定义构造函数？</p>
 <p> 答：当 <font color="red"><strong>基类</strong></font> 和 <font color="red"><strong>所有成员对象</strong></font>具有无参构造函数时！</p>
 <ul>
@@ -970,35 +971,31 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/posts/33f.html">
+                <a href="/posts/2c6d.html">
                     <div class="card-image">
                         
-                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png" class="responsive-img" alt="C++ 构造和析构(派生类对象)">
+                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png" class="responsive-img" alt="C++ 继承">
                         
-                        <span class="card-title">C++ 构造和析构(派生类对象)</span>
+                        <span class="card-title">C++ 继承</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            派生类对象的构造和析构顺序&amp;原则1. 派生类对象的构造顺序:
-步骤1：先构造基类；
-步骤2：再构造对象成员；
-步骤3：最后构造派生类自身；
-
-2. 关于构造和调用顺序的说明（1）基类构造顺序由派生层次决定：最远的基类最先构造;
-（2
+                            C++ 继承1. C++ 继承的语法形式class B {……};                    //基类
+class D : [private | protected | public] B {    //派生类
+    ……
+}
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-07
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-07
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1011,7 +1008,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1110,7 +1106,7 @@
 
         var url = document.location.href;
         newdiv.innerHTML += '<br />'
-            + '来源: <br />'
+            + '来源: tlhg.0X<br />'
             + '文章作者: Heisenberg Lee<br />'
             + '文章链接: <a href="' + url + '">' + url + '</a><br />'
             + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
@@ -1281,7 +1277,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
                    type="playlist"
                    id="770900633"
                    fixed='true'
-                   autoplay='true'
+                   autoplay='false'
                    theme='#42b983'
                    loop='all'
                    order='random'
@@ -1307,7 +1303,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">22.5k</span>&nbsp;字
+                class="white-color">24.5k</span>&nbsp;字
             
             
             

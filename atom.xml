@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Tlhg&#39;blog</title>
+  <title>tlhg.0X&#39;blog</title>
   
-  <subtitle>Tlhg.0X</subtitle>
+  <subtitle>tlhg.0X</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tlhg.top/"/>
-  <updated>2020-06-02T08:04:26.531Z</updated>
+  <updated>2020-06-07T11:15:03.099Z</updated>
   <id>http://tlhg.top/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>C++ Inherited constructor</title>
-    <link href="http://tlhg.top/posts/d1a9.html"/>
-    <id>http://tlhg.top/posts/d1a9.html</id>
-    <published>2020-05-30T00:44:37.000Z</published>
-    <updated>2020-06-02T08:04:26.531Z</updated>
+    <title>C++ 构造和析构(派生类对象)</title>
+    <link href="http://tlhg.top/posts/33f.html"/>
+    <id>http://tlhg.top/posts/33f.html</id>
+    <published>2020-06-07T03:44:40.000Z</published>
+    <updated>2020-06-07T11:15:03.099Z</updated>
     
     <summary type="html">
     
@@ -29,15 +29,44 @@
       
         
         
-          &lt;h1 id=&quot;继承的构造函数&quot;&gt;&lt;a href=&quot;#继承的构造函数&quot; class=&quot;headerlink&quot; title=&quot;继承的构造函数&quot;&gt;&lt;/a&gt;&lt;center&gt;继承的构造函数&lt;/center&gt;&lt;/h1&gt;&lt;h2 id=&quot;基类-amp-派生类的关系&quot;&gt;&lt;a
+          &lt;h1 id=&quot;派生类对象的构造和析构顺序-amp-原则1-5&quot;&gt;&lt;a href=&quot;#派生类对象的构造和析构顺序-amp-原则1-5&quot; class=&quot;headerlink&quot;
         
       
     
     </summary>
     
     
+      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
     
-      <category term="C++" scheme="http://tlhg.top/tags/C/"/>
+    
+      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++ 基类&amp;派生</title>
+    <link href="http://tlhg.top/posts/d1a9.html"/>
+    <id>http://tlhg.top/posts/d1a9.html</id>
+    <published>2020-05-30T00:44:37.000Z</published>
+    <updated>2020-06-07T06:26:45.604Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;基类-amp-派生&quot;&gt;&lt;a href=&quot;#基类-amp-派生&quot; class=&quot;headerlink&quot; title=&quot;基类&amp;amp;派生&quot;&gt;&lt;/a&gt;&lt;center&gt;基类&amp;amp;派生&lt;/center&gt;&lt;/h1&gt;&lt;h2 id=&quot;一、基类-amp-派生类的关系&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
+    
+    
+      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
     
   </entry>
   
@@ -46,7 +75,7 @@
     <link href="http://tlhg.top/posts/7060.html"/>
     <id>http://tlhg.top/posts/7060.html</id>
     <published>2020-05-29T06:19:19.000Z</published>
-    <updated>2020-06-01T09:06:19.633Z</updated>
+    <updated>2020-06-07T11:14:07.176Z</updated>
     
     <summary type="html">
     
@@ -60,6 +89,8 @@
     
     </summary>
     
+    
+      <category term="tools" scheme="http://tlhg.top/categories/tools/"/>
     
     
       <category term="VS Code" scheme="http://tlhg.top/tags/VS-Code/"/>
@@ -152,7 +183,7 @@
     <link href="http://tlhg.top/posts/fef1.html"/>
     <id>http://tlhg.top/posts/fef1.html</id>
     <published>2020-05-02T06:55:31.000Z</published>
-    <updated>2020-06-06T01:42:56.774Z</updated>
+    <updated>2020-06-07T01:26:09.869Z</updated>
     
     <summary type="html">
     

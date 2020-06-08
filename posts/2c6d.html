@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="C++ 继承, tlhg.0X">
+    <meta name="keywords" content="C++ 继承, Tlhg.0X">
     <meta name="description" content="Blog that records the learning process">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>C++ 继承 | tlhg.0X</title>
+    <title>C++ 继承 | Tlhg.0X</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="tlhg.0X" type="application/atom+xml">
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Tlhg.0X" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
 <script src="/js/prism-line-numbers.min.js"></script></head>
@@ -44,7 +44,7 @@
                     
                     <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">tlhg.0X</span>
+                    <span class="logo-span">Tlhg.0X</span>
                 </a>
             </div>
             
@@ -143,7 +143,7 @@
         
         <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">tlhg.0X</div>
+        <div class="logo-name">Tlhg.0X</div>
         <div class="logo-desc">
             
             Blog that records the learning process
@@ -597,9 +597,9 @@ class D : [private | protected | public] B {    //派生类
       obj.showy();    
   }
   // 输出 20<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="4-基类成员在派生类中的访问权限"><a href="#4-基类成员在派生类中的访问权限" class="headerlink" title="4. 基类成员在派生类中的访问权限"></a>4. 基类成员在派生类中的访问权限</h3><p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200607203749.png" alt="汇总图"></p>
 </li>
 </ul>
+<h3 id="4-基类成员在派生类中的访问权限"><a href="#4-基类成员在派生类中的访问权限" class="headerlink" title="4. 基类成员在派生类中的访问权限"></a>4. 基类成员在派生类中的访问权限</h3><p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200607203749.png" alt="汇总图"></p>
 <h3 id="5-阻止继承-11C"><a href="#5-阻止继承-11C" class="headerlink" title="5. 阻止继承 11C++"></a>5. 阻止继承 11C++</h3><p>如果不想让一个类作为其它类的基类，可以用final关键字阻止它被继承。形式如下：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">class Base{……}               //可以被继承
 class NoDeri  final{……}      //不能被继承
@@ -727,45 +727,52 @@ Destructing Base1
 </ul>
 </li>
 <li><p>虚拟继承 virtual inheritance</p>
-<p> class 派生类名:virtual [继承方式] 基类名1，virtual [继承方式] 基类名2,…{</p>
-<p> 派生类成员声明与定义;</p>
-<p> };</p>
+<p>class 派生类名:virtual [继承方式] 基类名1，virtual [继承方式] 基类名2,…{</p>
+<p>派生类成员声明与定义;</p>
+<p>};</p>
 <ul>
-<li><p>关键字<font color="red">virtual</font>限定继承方式，将基类指定为虚拟基类，就使该基类的成员在派生类中只有一份拷贝。</p>
-<p>例子：无参虚基类的执行次序分析</p>
-<pre class="line-numbers language-c++"><code class="language-c++">#include &#60iostream#&62
+<li>关键字<font color="red">virtual</font>限定继承方式，将基类指定为虚拟基类，就使该基类的成员在派生类中只有一份拷贝。</li>
+</ul>
+</li>
+</ol>
+<pre><code>例子：无参虚基类的执行次序分析
+```c++
+#include &amp;#60iostream#&amp;62
 using namespace std;
 class A {
-   int a;
+    int a;
 public: 
-   A(){ cout&lt&lt"Constructing A"&lt&ltendl; }
+    A(){ cout&amp;lt&amp;lt"Constructing A"&amp;lt&amp;ltendl; }
 }; 
 
 class B {
 public: 
-   B(){ cout&lt&lt"Constructing B"&lt&ltendl;}
+    B(){ cout&amp;lt&amp;lt"Constructing B"&amp;lt&amp;ltendl;}
 }; 
 
 class B1:virtual public B, virtual public A{
 public: 
-   B1(int i){ cout&lt&lt"Constructing B1"&lt&ltendl; }
+    B1(int i){ cout&amp;lt&amp;lt"Constructing B1"&amp;lt&amp;ltendl; }
 }; 
 
 class B2:public A,virtual public B {
 public: 
-   B2(int j){ cout&lt&lt"Constructing B2"&lt&ltendl; }
+    B2(int j){ cout&amp;lt&amp;lt"Constructing B2"&amp;lt&amp;ltendl; }
 };
 
 class D: public B1, public B2 {
 public:
-   D(int m,int n): B1(m),B2(n){
-   cout&lt&lt"Constructing D"&lt&ltendl;
-   }
-   A a;
+    D(int m,int n): B1(m),B2(n){
+    cout&amp;lt&amp;lt"Constructing D"&amp;lt&amp;ltendl;
+    }
+    A a;
 }; 
 
-int main(){  D d(1,2);  return 0; }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">//输出结果：
+int main(){  D d(1,2);  return 0; }
+```
+
+```c++
+//输出结果：
 Constructing B
 Constructing A
 Constructing B1
@@ -773,10 +780,8 @@ Constructing A
 Constructing B
 Constructing B2
 Constructing A
-Constructing D<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-</ul>
-</li>
+Constructing D
+```</code></pre><ol start="4">
 <li><p>虚基类的初始化与一般的多重继承的初始化在语法上是一样的，但<font color="orange">构造函数的调用顺序不同；</font></p>
 <ul>
 <li>若基类由虚拟基类派生而来，则最终派生类必须提供对间接基类的构造（即在最终派生类的构造函数初始列表中构造虚基类，无论此虚基类是直接还是间接基类）</li>
@@ -1216,7 +1221,7 @@ class D : [private | protected | public] B {    //派生类
 
         var url = document.location.href;
         newdiv.innerHTML += '<br />'
-            + '来源: tlhg.0X<br />'
+            + '来源: Tlhg.0X<br />'
             + '文章作者: Heisenberg Lee<br />'
             + '文章链接: <a href="' + url + '">' + url + '</a><br />'
             + '本文章著作权归作者所有，任何形式的转载都请注明出处。';

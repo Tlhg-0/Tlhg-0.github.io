@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tlhg.top/"/>
-  <updated>2020-06-08T08:30:15.634Z</updated>
+  <updated>2020-06-09T13:55:13.388Z</updated>
   <id>http://tlhg.top/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++ 多态性-纯虚函数&amp;抽象类</title>
+    <link href="http://tlhg.top/posts/728c.html"/>
+    <id>http://tlhg.top/posts/728c.html</id>
+    <published>2020-06-09T12:53:23.000Z</published>
+    <updated>2020-06-09T13:55:13.388Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;虚析构函数、纯虚函数与抽象类&quot;&gt;&lt;a href=&quot;#虚析构函数、纯虚函数与抽象类&quot; class=&quot;headerlink&quot; title=&quot;虚析构函数、纯虚函数与抽象类&quot;&gt;&lt;/a&gt;&lt;center&gt;虚析构函数、纯虚函数与抽象类&lt;/center&gt;&lt;/h1&gt;&lt;h1
+        
+      
+    
+    </summary>
+    
+    
+      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
+    
+    
+      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++ 多态性-虚函数</title>
+    <link href="http://tlhg.top/posts/2c92.html"/>
+    <id>http://tlhg.top/posts/2c92.html</id>
+    <published>2020-06-09T02:24:11.000Z</published>
+    <updated>2020-06-09T14:01:43.186Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;C-多态性-虚函数&quot;&gt;&lt;a href=&quot;#C-多态性-虚函数&quot; class=&quot;headerlink&quot; title=&quot;C++ 多态性-虚函数&quot;&gt;&lt;/a&gt;&lt;center&gt;C++ 多态性-虚函数&lt;/center&gt;&lt;/h1&gt;&lt;h2 id=&quot;1、虚函数&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
+    
+    
+      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
+    
+  </entry>
   
   <entry>
     <title>C++ 继承</title>
@@ -75,7 +129,7 @@
     <link href="http://tlhg.top/posts/d1a9.html"/>
     <id>http://tlhg.top/posts/d1a9.html</id>
     <published>2020-05-30T00:44:37.000Z</published>
-    <updated>2020-06-07T06:26:45.604Z</updated>
+    <updated>2020-06-09T02:55:29.917Z</updated>
     
     <summary type="html">
     

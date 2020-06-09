@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="C++ 构造和析构(派生类对象), Tlhg.0X">
+    <meta name="keywords" content="C++ 多态性-纯虚函数&amp;抽象类, Tlhg.0X">
     <meta name="description" content="Blog that records the learning process">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>C++ 构造和析构(派生类对象) | Tlhg.0X</title>
+    <title>C++ 多态性-纯虚函数&amp;抽象类 | Tlhg.0X</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -316,7 +316,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">C++ 构造和析构(派生类对象)</h1>
+                    <h1 class="description center-align post-title">C++ 多态性-纯虚函数&amp;抽象类</h1>
                 </div>
             </div>
         </div>
@@ -466,7 +466,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-06-07
+                    2020-06-09
                 </div>
                 
 
@@ -475,14 +475,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    5 分
                 </div>
                 
 
@@ -492,208 +492,240 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="派生类对象的构造和析构顺序-amp-原则"><a href="#派生类对象的构造和析构顺序-amp-原则" class="headerlink" title="派生类对象的构造和析构顺序&amp;原则"></a><center>派生类对象的构造和析构顺序&amp;原则</center></h1><h2 id="1-派生类对象的构造顺序"><a href="#1-派生类对象的构造顺序" class="headerlink" title="1. 派生类对象的构造顺序:"></a>1. 派生类对象的构造顺序:</h2><ul>
-<li>步骤1：先构造基类；</li>
-<li>步骤2：再构造对象成员；</li>
-<li>步骤3：最后构造派生类自身；</li>
-</ul>
-<h2 id="2-关于构造和调用顺序的说明"><a href="#2-关于构造和调用顺序的说明" class="headerlink" title="2. 关于构造和调用顺序的说明"></a>2. 关于构造和调用顺序的说明</h2><p>（1）基类构造顺序由派生层次决定：最远的基类最先构造;</p>
-<p>（2）对象成员的构造顺序与它们的定义顺序符合;</p>
-<p>（3）析构函数的析构顺序与构造顺序相反；</p>
-<ul>
-<li><p>例子 对象成员 (类A, B, C之间无继承关系!)</p>
-<pre class="line-numbers language-c++"><code class="language-c++">  #include &#60iostream&#62
-  class A{ 
-  public: 
-      A() { cout&lt&lt"Constructing A"&lt&ltendl;} 
-      ~A(){ cout&lt&lt"Destructing A"&lt&ltendl;}
-  };
-  class B{
-  public: 
-      B() { cout&lt&lt"Constructing B"&lt&ltendl;}
-      ~B(){ cout&lt&lt"Destructing B"&lt&ltendl;}
-  };
-  class C{
-  public: 
-      C() { cout&lt&lt"Constructing C"&lt&ltendl;}
-      ~C(){ cout&lt&lt"Destructing C"&lt&ltendl;}
-      B b;
-      A a;
-  };
-  int  main(){   C c;  return 0; }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">  //输出结果：
-  Constructing B
-  Constructing A
-  Constructing C
-  Destructing C
-  Destructing A
-  Destructing B<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>  结论： 无基类，有对象成员，所以对象成员的构造顺序与它们的定义顺序符合;</p>
-</li>
-</ul>
-<ul>
-<li><p>例子 继承关系(类A, B, C之间有继承关系)</p>
-<pre class="line-numbers language-c++"><code class="language-c++">  //  1. 类C中无对象成员!
-  //  2. 类C中有对象成员b,a!
-  #include &#60iostream&#62
-  using namespace std;
-  class A{ 
-  public: 
-      A() { cout&lt&lt"Constructing A"&lt&ltendl;} 
-      ~A(){ cout&lt&lt"Destructing A"&lt&ltendl;}
-  };
-  class B:public A{
-  public: 
-      B() { cout&lt&lt"Constructing B"&lt&ltendl;}
-      ~B(){ cout&lt&lt"Destructing B"&lt&ltendl;}
-  };
-  class C:public B{
-  public: 
-      C() { cout&lt&lt"Constructing C"&lt&ltendl;}
-      ~C(){ cout&lt&lt"Destructing C"&lt&ltendl;}
-
-      //B b;  //不要这个B成员
-      //A a;  //不要这个A成员
-  };
-  int main(){    C c;  return 0; }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">  //类C中无对象成员! 输出结果：
-  Constructing A
-  Constructing B
-  Constructing C
-  Destructing C
-  Destructing B
-  Destructing A
-
-  //类C中存在对象成员b,a! 输出结果：
-  Constructing A
-  Constructing B
-  Constructing A
-  Constructing B
-  Constructing A
-  Constructing C
-  Destructing C
-  Destructing A
-  Destructing B
-  Destructing A
-  Destructing B
-  Destructing A
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>  结论： 有无基类，有对象成员，先构造基类（由远及近），再构造对象成员（从基类开始构造，顺序与定义顺序符合）</p>
-</li>
-</ul>
-<h2 id="3-派生类构造函数及其定义"><a href="#3-派生类构造函数及其定义" class="headerlink" title="3. 派生类构造函数及其定义"></a>3. 派生类构造函数及其定义</h2><ol>
-<li><p>派生类可能有多个基类(多重继承)，也可能包括多个成员对象，在创建派生类对象时，派生类的构造函数必须：</p>
-<ul>
-<li>负责本类成员的初始化；</li>
-<li>调用基类和成员对象的构造函数，并向它们传递参数，以完成基类子对象和成员对象的建立和初始化。</li>
-</ul>
-</li>
-<li><p>派生类<font color="red">只能采用“构造函数初始化参数列表”的方式</font>向基类或成员对象的构造函数传递参数，形式如下：</p>
-<p> 派生类构造函数名(参数表): 基类1构造函数名(参数表), 基类2构造函数名(参数表), … ,成员对象名1(参数表), 成员对象名2(参数表),…{</p>
-<p>   …………   </p>
-<p> } </p>
-</li>
-<li><p>派生类什么时候可以不定义构造函数？</p>
-<p> 答：当 <font color="red"><strong>基类</strong></font> 和 <font color="red"><strong>所有成员对象</strong></font>具有无参构造函数时！</p>
-<ul>
-<li>无参构造函数细分为3种情况:</li>
+                <h1 id="虚析构函数、纯虚函数与抽象类"><a href="#虚析构函数、纯虚函数与抽象类" class="headerlink" title="虚析构函数、纯虚函数与抽象类"></a><center>虚析构函数、纯虚函数与抽象类</center></h1><h1 id="1-虚析构函数"><a href="#1-虚析构函数" class="headerlink" title="1. 虚析构函数"></a>1. 虚析构函数</h1><ul>
+<li>构造函数不能为虚函数</li>
+<li>析构函数可以定义为虚函数</li>
+<li>如果基类的析构函数是虚函数，则所有直接或间接从基类派生的类的析构函数都是虚函数；</li>
 </ul>
 <ol>
-<li>没有定义任何构造函数;</li>
-<li>具有[重定义的]无参构造函数; </li>
-<li>具有缺省参数的构造函数。</li>
-</ol>
-</li>
-<li><p>派生类什么时候“必须”定义构造函数？</p>
-<p> 答：当<font color="red"><strong>基类</strong></font> 或<font color="red"><strong>成员对象</strong></font>所属类只含有带参数的构造函数时。即使派生类本身没有数据成员要初始化，它也必须定义构造函数！</p>
-<ul>
-<li>以“构造函数初始化列表”的方式向基类和成员对象的构造函数传递参数，以实现基类子对象和成员对象的初始化。</li>
-</ul>
-</li>
-<li><p>当同时存在直接基类和间接基类时，每个派生类只负责其直接基类的构造。</p>
-<pre class="line-numbers language-c++"><code class="language-c++"> #include &#60iostream&#62
+<li><p>使用虚析构函数的原因：在非虚析构函数的情况下，通过基类指针a 对 派生对象的析构可能是不彻底的。</p>
+<pre class="line-numbers language-c++"><code class="language-c++"> #include &#60iostream#&62
  using namespace std;
- class A{ 
- public: 
-     A(int a) { cout&lt&lt"Constructing A:"&lt&lta&lt&ltendl;} 
-     ~A(){ cout&lt&lt"Destructing A"&lt&ltendl;}
+ class A{
+ public:
+     //virtual ~A(){ cout&lt&lt"调用A::~A()"&lt&ltendl; }  //声明为 “虚”析构函数
+
+     ~A(){ cout&lt&lt"调用A::~A()"&lt&ltendl; }
  };
  class B:public A{
- public: 
-     B(int b): A(b) { cout&lt&lt"Constructing B:"&lt&ltb&lt&ltendl;}
-     ~B(){ cout&lt&lt"Destructing B"&lt&ltendl;}
+     char *buf;
+ public:
+     B(int i){    buf=new char[i]; }
+     ~B(){
+         delete [] buf;
+         cout&lt&lt"调用B::~B()"&lt&ltendl;
+     }
  };
- class C: public B{
- public: 
-     C():a(11), B(22), b(33) {
-             cout&lt&lt"Constructing C"&lt&ltendl;}
-     ~C(){ cout&lt&lt"Destructing C"&lt&ltendl;}
-     B b;
-     A a;
- };
- int main(){   C c; return 0; }`<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p> 结论：</p>
-<p> (1)派生类B具有直接基类A——B负责A的构造！</p>
-<p> (2)派生类C具有直接基类B 和 间接基类A——C只负责B的构造！</p>
-<p> <strong><font color="red">例外</font></strong><br> 当派生类存在虚基类时，所有虚基类都由最后的派生类负责初始化</p>
+ void main(){
+     A* a=new B(10);    //基类指针a ->指向派生类对象new B(10)
+     delete a;        //通过指针a ->删除 动态创建的 派生类对象new B(10)
+ }
+ /*  输出结果：
+     调用A::~A()
+     此结果表明: 没有析构buf
+
+     声明为 “虚”析构函数 输出结果：
+     调用B::~B()
+     调用A::~A()
+     此结果表明: 
+     (1)先-调用派生类析构
+     (2)再-调用基类析构
+
+     回收了buf空间!!!
+ */<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>派生类继承基类的构造函数  (11C++)</p>
+<li><p><font color="red">基类析构函数</font>几乎总是为虚析构函数。</p>
+<ul>
+<li>派生类的构造顺序: (1)先基类; (2)再对象成员; (3)后派生类本身；</li>
+<li>如果只调用基类析构函数，可能析构不彻底；</li>
+</ul>
+</li>
+<li><p>假定使用delete和一个指向派生类的基类指针来销毁派生类对象，如果基类析构函数不为虚，就如一个普通成员函数，delete函数调用的就是基类析构函数，这将致使对象析构不彻底！    </p>
 </li>
 </ol>
-<ul>
-<li><p>构造函数继承方法:</p>
-<p>  用using在派生类中声明基类构造函数名即可。形式如下：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">  class Base:{……}
-  class Derived: [private|protected|public]  Base{  
-  ……
-  using Base::Base;            //继承基类构造函数
-  }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="2-纯虚函数和抽象类"><a href="#2-纯虚函数和抽象类" class="headerlink" title="2. 纯虚函数和抽象类"></a>2. 纯虚函数和抽象类</h1><h2 id="1-纯虚函数"><a href="#1-纯虚函数" class="headerlink" title="1. 纯虚函数"></a>1. 纯虚函数</h2><ul>
+<li><p>概念：仅定义函数原型，而不定义其实现的虚函数；</p>
+</li>
+<li><p>语法格式</p>
+<pre class="line-numbers language-c++"><code class="language-c++">  class X {
+  virtual  ret_type   func_name (params) = 0;
+  }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>需要纯虚函数的原因：</p>
 </li>
 </ul>
 <ol>
-<li><p>using在派生类中声明基类的构造函数和声明其他成员有所不同；</p>
+<li><p>实用角度：占位手段（place-holder）</p>
 </li>
-<li><p>声明其他成员只是使该成员在指定的派生类权限区域可见，并不生成代码；</p>
-</li>
-<li><p>用using继承基类的构造函数，则会使编译器在派生类中生成类似下面形式的派生类构造函数代码：</p>
-<pre class="line-numbers language-c++"><code class="language-c++"> Derived（参数表）：Base（参数表）{}<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p> 例子：</p>
-<p> 类A具有数据成员x，y，并且定义了初始化它们的构造函数；类B从A派生，没有任何成员要初始化；类C从类B派生，具有新定义数据成员c。设计A、B、C的构造函数。</p>
-<pre class="line-numbers language-c++"><code class="language-c++"> #include "stdafx.h"
- #include &#60iostream&#62
- using namespace std;
- class A {
-     int x, y;
- public:
-     A(int aa) :x(aa) { cout &lt&lt "Constructing A:x=\t" &lt&lt x &lt&lt endl; }
-     A(int a, int b) :x(a), y(b) {
-         cout &lt&lt "Constructing A:x=\t" &lt&lt x &lt&lt endl;
-     }
- };
- class B :public A {
- public:
-     using A::A;                             //L1
-  B(int x) :A(x) {                        //L2
-     cout &lt&lt "Constructing B\t" &lt&lt endl;
- }
-
- };
- class C :public B {
-     using B::B;                             //L3
-     int c;
- public:
-     C(int x, int y, int z) :B(x, y), c(z) { //L4
-         cout &lt&lt "Constructing C:\t" &lt&lt c &lt&lt endl;
-     }
- };
- int main() {
-     B b1(1), b2(8, 9);                      //L5
-     C c1(1), c2(3, 4);                      //L6
-     return 0;
- }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<li><p>方法学：接口定义手段，抽象表达手段</p>
 </li>
 </ol>
+<h2 id="2-抽象类"><a href="#2-抽象类" class="headerlink" title="2. 抽象类"></a>2. 抽象类</h2><ul>
+<li>抽象类的定义：包含一个或多个纯虚函数的类；</li>
+<li>C++对抽象类具有以下规定：</li>
+</ul>
+<ol>
+<li><p>抽象类中必含有纯虚函数（至少1个纯虚函数）；</p>
+</li>
+<li><p>由于纯虚函数没有实现代码，所以不能建立抽象类的对象。即抽象类只能作为其它类的基类；</p>
+</li>
+<li><p>可以通过抽象类对象的指针（或引用）访问到它的派生类对象，实现运行时的多态性。</p>
+</li>
+<li><p>如果派生类只是简单地继承了抽象类的纯虚函数，而没有重新定义基类的纯虚函数，则派生类也是一个抽象类。</p>
+</li>
+<li><p>抽象类转化为实体类的方法是：定义一个抽象类的派生类，并定义所有纯虚函数！</p>
+</li>
+</ol>
+<ul>
+<li>抽象类的主要用途——作为“<font color="red">接口</font>”</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200609213111.png" alt=""></p>
+<pre class="line-numbers language-c++"><code class="language-c++">#include &#60iostream#&62
+using namespace std;
+class Figure{                                    
+protected:
+    double x,y;
+public:
+    void set(double i,double j){ x=i; y=j; }
+    virtual void area()=0;                                //纯虚函数
+};
+
+class Triangle:public Figure{
+public:
+    void area(){cout&lt&lt"三角形 面积："&lt&ltx*y*0.5&lt&ltendl;}    //重写基类纯虚函数
+};
+
+class Rectangle:public Figure{
+public:
+    void area(int i){cout&lt&lt"矩形 面积："&lt&ltx*y&lt&ltendl;}    //‘不是’基类纯虚函数的重写
+}; 
+
+int main(){
+    Figure *pF;                //基类（抽象类）指针
+    //  Figure f1;            //L1，错误 抽象类只能作为其它类的基类
+    //  Rectangle r;        //L2，错误
+
+    Triangle t;                //L3: 派生类（实体类）对象t
+    t.set(10,20);
+
+    pF=&t;                    
+    pF->area();                //L4: 调用派生类的虚函数area()
+
+    Figure &rF=t;
+    rF.set(20,20);
+    rF.area();                //L5
+    return 0;
+}
+/*   输出结果：
+    三角形 面积：100
+    三角形 面积：200
+*/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>虚基类</li>
+</ul>
+<h1 id="3-运行时类型信息"><a href="#3-运行时类型信息" class="headerlink" title="3. 运行时类型信息"></a>3. 运行时类型信息</h1><ul>
+<li><p>运行时类型信息（RTTI，Run-time Type Information）</p>
+<ul>
+<li>提供了在程序运行时刻确定对象类型的方法，是面向对象程序语言为解决多态问题而引入的一种语言特性；</li>
+<li>在最初的非多态程序程序设计语言中，并没有RTTI机制。</li>
+</ul>
+</li>
+<li><p>在C++中，用于支持RTTI的运算符有：dynamic_cast，typeid。</p>
+</li>
+</ul>
+<ol>
+<li><p>dynamic_cast的用途</p>
+<ul>
+<li><p>dynamic_cast是一个强制类型转换操作符，主要用于多态基类的指针（或引用）与派生类指针（或引用）之间的转换，它是在程序运行时刻执行的。</p>
+</li>
+<li><p>强制类型转换: const_cast、static_cast和reinterpret_cast,  则是在编译时期完成的。</p>
+</li>
+</ul>
+</li>
+<li><p>dynamic_cast的用法</p>
+<pre class="line-numbers language-c++"><code class="language-c++"> dynamic_cast<type *>(e)       //指针转换，e是指针
+ dynamic_cast<type &>(e)     //引用转换，e必须是左值
+ dynamic_cast<type &&>(e)   //右值转换，e不能是左值<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+</ol>
+<ul>
+<li>type必须是类类型，通常情况下type类型中应该有虚函数；</li>
+<li>当e和type之间是基类和派生类关系时，转换易成功。如果指针转换失败，dynamic_cast将返回0值；引用转换失败，dynamic_cast将会引发异常。</li>
+</ul>
+<ol start="3">
+<li>dynamic_cast强制类型：</li>
+</ol>
+<ul>
+<li><p><font color="red">向上转换</font>是指在类的继承层次结构中，从派生类向基类方向的转换，即把派生类对象的指针（或引用）转换成基类对象的指针(或引用)，这种转换常用C++的默认方式完成。</p>
+</li>
+<li><p><font color="red">向下转换</font>是指在类的继承层次结构中，从基类向派生类方向的转换，即把基类对象的指针或引用转换成派生类对象的指针或引用。</p>
+<p>  向上转换 &amp; 向下转换</p>
+<pre class="line-numbers language-c++"><code class="language-c++">  #include &#60iostream#&62
+  using namespace std;
+  class Base{
+  public:
+      virtual ~Base(){}
+  };
+
+  class Derived:public Base{
+      void f(){ cout<<"f in Derived!\n"<<endl; }
+  }; 
+
+  void main(){
+      Base *pb,b;
+      Derived d,*pd;
+
+      pb=&d;         //（派生类对象的地址->赋值给:基类指针）默认转换，编译时完成，是常用方式
+
+      pd=&d;        //派生类指针
+
+      pb=dynamic_cast<Base *>(&d);    //向上转换，运行时完成
+      pb=dynamic_cast<Base *>(pd);    //向上转换，运行时完成
+  }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  向上转换 &amp; 向下转换</p>
+<pre class="line-numbers language-c++"><code class="language-c++">  #include &#60iostream#&62
+  using namespace std;
+  class Base{
+  public:
+      virtual ~Base(){}
+  };
+
+  class Derived:public Base{
+      void f(){ cout<<"f in Derived!\n"<<endl; }
+  }; 
+
+  void main(){
+      Base *pb,b;
+      Derived d,*pd;
+
+      pb=&b; //基类 指针
+      pd=dynamic_cast<Derived *>(pb);    //L1：向下强制转换
+      if(pd){
+          cout<<"ok\n";   
+      }else{
+          cout<<"error!\n";
+      }
+
+      pd=dynamic_cast<Derived *>(&b);    //L2：向下强制转换
+      if(pd){
+          cout<<"ok\n";   
+      }else{
+          cout<<"error!\n";
+      }
+
+      pb=&d;    //（派生类对象的地址->赋值给: 基类指针）默认转换，编译时完成，是常用方式
+      pd=dynamic_cast<Derived *>(pb);    //L3：向下强制转换
+      if(pd){
+          cout<<"ok!\n";   
+      }else{
+          cout<<"error!\n";;
+      }
+  }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>在默认情况下，在类的继承体系结构中，当用基类对象的指针操作（指向）派生类对象时，只能通过该指针访问派生类中的虚函数（这些虚函数也是基类中的虚函数）。</p>
+<p>  那些在基类中没有被定义为虚函数，或派生类新增加的函数，通过基类指针是无法访问的。</p>
+</li>
+</ul>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -737,7 +769,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://tlhg.top/posts/33f.html">http://tlhg.top/posts/33f.html</a>
+                    <a href="http://tlhg.top/posts/728c.html">http://tlhg.top/posts/728c.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -947,7 +979,7 @@
         repo: 'Tlhg-gitalks',
         owner: 'Tlhg-0',
         admin: "Tlhg-0",
-        id: '2020-06-07T11-44-40',
+        id: '2020-06-09T20-53-23',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -971,31 +1003,35 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/posts/2c6d.html">
+                <a href="/posts/728c.html">
                     <div class="card-image">
                         
-                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png" class="responsive-img" alt="C++ 继承">
+                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png" class="responsive-img" alt="C++ 多态性-纯虚函数&amp;抽象类">
                         
-                        <span class="card-title">C++ 继承</span>
+                        <span class="card-title">C++ 多态性-纯虚函数&amp;抽象类</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            C++ 继承1. C++ 继承的语法形式class B {……};                    //基类
-class D : [private | protected | public] B {    //派生类
-    ……
-}
+                            虚析构函数、纯虚函数与抽象类1. 虚析构函数
+构造函数不能为虚函数
+析构函数可以定义为虚函数
+如果基类的析构函数是虚函数，则所有直接或间接从基类派生的类的析构函数都是虚函数；
+
+
+使用虚析构函数的原因：在非虚析构函数的情况下，通过基类指针a
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-07
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-09
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1008,6 +1044,7 @@ class D : [private | protected | public] B {    //派生类
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1026,28 +1063,25 @@ class D : [private | protected | public] B {    //派生类
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/posts/d1a9.html">
+                <a href="/posts/2c92.html">
                     <div class="card-image">
                         
-                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png" class="responsive-img" alt="C++ 基类&amp;派生">
+                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png" class="responsive-img" alt="C++ 多态性-虚函数">
                         
-                        <span class="card-title">C++ 基类&amp;派生</span>
+                        <span class="card-title">C++ 多态性-虚函数</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            基类&amp;派生一、基类&amp;派生类的关系1. 派生类拥有基类的数据成员和成员函数；
-派生类在基类的基础上可实施以下改变 ：
-
-增加新的成员（数据+函数）。
-重载(overload)基类的成员函数。 
-重定义(override,覆盖)
+                            C++ 多态性-虚函数1、虚函数
+在C++ 基类&amp;派生类中讲过，基类对象 &amp; 派生类对象具有赋值相容性
+回顾：通过基类指针、基类引用，都只能访问到派生类 从基类中继承到的成员(基类子对象中的成员)，不能访问到派生类中定义的成
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-30
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-09
                             </span>
                         <span class="publish-author">
                             

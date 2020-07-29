@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Tlhg.0X">
+    <meta name="keywords" content="C++ 运算符重载, Tlhg.0X">
     <meta name="description" content="Blog that records the learning process">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | Tlhg.0X</title>
+    <title>C++ 运算符重载 | Tlhg.0X</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200529171322.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">C++ 运算符重载</h1>
                 </div>
             </div>
         </div>
@@ -441,23 +441,14 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Hexo/">
-                                <span class="chip bg-color">Hexo</span>
+                            <a href="/tags/C-primer/">
+                                <span class="chip bg-color">C++ primer</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/Blog/" class="post-category">
-                                Blog
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -466,7 +457,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-09
+                    2020-06-10
                 </div>
                 
 
@@ -475,14 +466,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    125
+                    711
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -492,15 +483,135 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+                <h1 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a><center>运算符重载</center></h1><h2 id="1-运算符重载"><a href="#1-运算符重载" class="headerlink" title="1. 运算符重载"></a>1. 运算符重载</h2><h3 id="1-基础"><a href="#1-基础" class="headerlink" title="1. 基础"></a>1. 基础</h3><ol>
+<li>C++运算符对“程序语言预定义的数据类型（整型, 字符型, 浮点型）”是重载的!</li>
+</ol>
+<ul>
+<li>例如：</li>
+</ul>
+<pre class="line-numbers language-c++"><code class="language-c++">int  i=2+3;
+double  j=2+4.8;
+float  f=float(3.1)+float(2.0);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>对上述 3个加法表达式，C++系统提供了类似于以下形式的运算符重载函数：</li>
+</ul>
+<pre class="line-numbers language-c++"><code class="language-c++">int  operator+(int, int);
+double  operator+(int, double);
+float  operator+(float, float);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ol start="2">
+<li>C++允许程序员通过重载 –&gt; 扩展运算符的功能，使重载后的运算符能够对<font color="red">用户自定义的数据</font>类型进行运算。</li>
+</ol>
+<ul>
+<li>比如，有复数类Complex，其形式如下：</li>
+</ul>
+<pre class="line-numbers language-c++"><code class="language-c++">class Complex{
+     double real, image;
+public:
+     ......
+};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>假设已定义了复数Complex对象之上的加法运算，则可实现 2个复数的相加运算。如：</li>
+</ul>
+<pre class="line-numbers language-c++"><code class="language-c++">Complex  c1, c2；
+……
+Complex result = c1 + c2;    //实现2个复数的相加<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-语法"><a href="#2-语法" class="headerlink" title="2. 语法"></a>2. 语法</h3><ul>
+<li><p>运算符的计算结果是：值。因此 运算符重载函数是具有返回值的函数。</p>
+<ul>
+<li><p>运算符重载函数的语法形式如下：</p>
+<p>返回类型  operator@(参数表)</p>
+<ol>
+<li><p>operator：是C++的保留关键字，表示运算符函数。</p>
+</li>
+<li><p>@：代表要重载的运算符，它可以是后续列举的可重载运算符中的任何一个。</p>
+</li>
+<li><p>返回类型：是运算符重载函数计算获得的结果的类型；</p>
+</li>
+<li><p>参数表：是运算符重载函数 操作 (或运算) 的对象；</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-类运算符重载"><a href="#2-类运算符重载" class="headerlink" title="2. 类运算符重载"></a>2. 类运算符重载</h2><h3 id="1-作用对象（数据类型）"><a href="#1-作用对象（数据类型）" class="headerlink" title="1. 作用对象（数据类型）"></a>1. 作用对象（数据类型）</h3><ul>
+<li><p>C&amp;C++语言预定义的数据类型</p>
+<ul>
+<li>字符型</li>
+<li>整型</li>
+<li>浮点型</li>
+</ul>
+</li>
+<li><p>用户定义的数据类型</p>
+<ul>
+<li><p>构造数据类型（C程序设计语言中 使用的概念！）</p>
+<ul>
+<li>数组</li>
+<li>结构体</li>
+<li>共用体</li>
+<li>枚举类型</li>
+</ul>
+</li>
+<li><p>面向对象类（ C++面向对象程序设计中 使用的概念！）</p>
+<ul>
+<li>种类最多的‘一类’数据类型！</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-运算符分类-amp-限制"><a href="#2-运算符分类-amp-限制" class="headerlink" title="2. 运算符分类&amp;限制"></a>2. 运算符分类&amp;限制</h3><h4 id="1-分类"><a href="#1-分类" class="headerlink" title="1.分类"></a>1.分类</h4><ul>
+<li><p>算术运算符与算术表达式</p>
+<ul>
+<li>+(正) -(负)；+ - * / %； ++, –</li>
+</ul>
+</li>
+<li><p>赋值运算符与赋值表达式</p>
+<ul>
+<li>=,  复合赋值:{ +=, -=, *=, /=, %=, &gt;&gt;=, &lt;&lt;=, &amp;=, |=, ^=}</li>
+</ul>
+</li>
+<li><p>关系运算符与关系表达式</p>
+<ul>
+<li>&amp;gt, &gt;=, &lt;, &lt;=, ==, !=</li>
+</ul>
+</li>
+<li><p>位运算符与位运算表达式</p>
+<ul>
+<li>~, &amp;, |, ^, &lt;&lt;, &gt;&gt;</li>
+</ul>
+</li>
+<li><p>条件运算符与条件表达式</p>
+<ul>
+<li>判定式 ? 表达式1: 表达式2 </li>
+</ul>
+</li>
+<li><p>逗号运算符</p>
+<ul>
+<li>,</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-限制"><a href="#2-限制" class="headerlink" title="2. 限制"></a>2. 限制</h4><ol>
+<li>只有C++预定义的操作符集合中的运算符才能够被重载，<font color="red">不能定义[创造]新的运算符</font>!。</li>
+</ol>
+<ul>
+<li><p>大多数运算符可以重载（重新定义），包括：</p>
+<ul>
+<li><p>&amp;#43   -  *  /  %  ++  –；  ^ &amp; | ~ !； ==  !=  &lt;  &gt;  &lt;=   &gt;=；,； &lt;&lt;   &gt;&gt;；</p>
+</li>
+<li><p>=  +=  -=  *=   /=  %=； &gt;&gt;=   &lt;&lt;= ；  ^=   &amp;=   |=；</p>
+</li>
+<li><input disabled="" type="checkbox"> <p>()   -&gt;  -&gt;*   new   new[]   delete  delete[]</p>
+</li>
+</ul>
+</li>
+<li><p>不能重载（重新定义）某些特殊运算符，包括：</p>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -544,7 +655,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://tlhg.top/posts/3eeb.html">http://tlhg.top/posts/3eeb.html</a>
+                    <a href="http://tlhg.top/posts/12a5.html">http://tlhg.top/posts/12a5.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -582,8 +693,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Hexo/">
-                                    <span class="chip bg-color">Hexo</span>
+                                <a href="/tags/C-primer/">
+                                    <span class="chip bg-color">C++ primer</span>
                                 </a>
                             
                         </div>
@@ -754,7 +865,7 @@
         repo: 'Tlhg-gitalks',
         owner: 'Tlhg-0',
         admin: "Tlhg-0",
-        id: '2020-05-09T09-48-01',
+        id: '2020-06-10T09-58-55',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -778,51 +889,52 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/posts/7b5d.html">
+                <a href="/posts/12a5.html">
                     <div class="card-image">
                         
-                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200529171322.jpg" class="responsive-img" alt="Front-matter">
                         
-                        <span class="card-title">Front-matter</span>
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="C++ 运算符重载">
+                        
+                        <span class="card-title">C++ 运算符重载</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Front-matter
+                            运算符重载1. 运算符重载1. 基础
+C++运算符对“程序语言预定义的数据类型（整型, 字符型, 浮点型）”是重载的!
 
-Front-matter 是文件最上方以 --- 分隔的区域，用于指定个别文件的变量，举例来说：
----
-title: Hello World
-date: 2013/7/13 20:46:25
----以下是预先定
+
+例如：
+
+int  i=2+3;
+double  j=2+4.8;
+float  f=float(3.1)+floa
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-10
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-10
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Blog/" class="post-category">
-                                    Blog
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Heisenberg Lee
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
+                    <a href="/tags/C-primer/">
+                        <span class="chip bg-color">C++ primer</span>
                     </a>
                     
                 </div>
@@ -836,31 +948,36 @@ date: 2013/7/13 20:46:25
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/posts/fef1.html">
+                <a href="/posts/728c.html">
                     <div class="card-image">
                         
-                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200605145644.jpg" class="responsive-img" alt="Hexo+github搭建博客">
+                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png" class="responsive-img" alt="C++ 多态性-纯虚函数&amp;抽象类">
                         
-                        <span class="card-title">Hexo+github搭建博客</span>
+                        <span class="card-title">C++ 多态性-纯虚函数&amp;抽象类</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            转载此文章前，请先联系作者，经作者同意后再转载，并请注明原文链接和作者，整理这些不容易，最终版权归作者所有，谢谢合作！
-前言你了解Hexo吗？ Hexo是一个静态博客框架，基于Node.js，将Markdown文章通过渲染引擎，生成一个静态
+                            虚析构函数、纯虚函数与抽象类1. 虚析构函数
+构造函数不能为虚函数
+析构函数可以定义为虚函数
+如果基类的析构函数是虚函数，则所有直接或间接从基类派生的类的析构函数都是虚函数；
+
+
+使用虚析构函数的原因：在非虚析构函数的情况下，通过基类指针a
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-09
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Blog/" class="post-category">
-                                    Blog
+                            <a href="/categories/C/" class="post-category">
+                                    C++
                                 </a>
                             
                             
@@ -870,12 +987,8 @@ date: 2013/7/13 20:46:25
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
-                    </a>
-                    
-                    <a href="/tags/matery/">
-                        <span class="chip bg-color">matery</span>
+                    <a href="/tags/C-primer/">
+                        <span class="chip bg-color">C++ primer</span>
                     </a>
                     
                 </div>

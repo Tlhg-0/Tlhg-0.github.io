@@ -1,498 +1,102 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>C++ 基类&amp;派生 | Tlhg.0X</title><meta name="description" content="基类&amp;派生一、基类&amp;派生类的关系1. 派生类拥有基类的数据成员和成员函数； 派生类在基类的基础上可实施以下改变 ：  增加新的成员（数据+函数）。 重载(overload)基类的成员函数。  重定义(override,覆盖)基类已有的成员函数。 改变基类成员在派生类中的访问属性。   派生类不能继承基类的以下内容：   析构函数。  基类的友元函数。  静态成员（数据+函数）"><meta name="keywords" content="C++ primer"><meta name="author" content="Heisenberg Lee"><meta name="copyright" content="Heisenberg Lee"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/picture/favicon.png"><link rel="canonical" href="http://tlhg.top/posts/d1a9.html"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="360-site-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#00c4b6&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#00c4b6&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#00c4b6&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"/><meta property="og:type" content="article"><meta property="og:title" content="C++ 基类&amp;派生"><meta property="og:url" content="http://tlhg.top/posts/d1a9.html"><meta property="og:site_name" content="Tlhg.0X"><meta property="og:description" content="基类&amp;派生一、基类&amp;派生类的关系1. 派生类拥有基类的数据成员和成员函数； 派生类在基类的基础上可实施以下改变 ：  增加新的成员（数据+函数）。 重载(overload)基类的成员函数。  重定义(override,覆盖)基类已有的成员函数。 改变基类成员在派生类中的访问属性。   派生类不能继承基类的以下内容：   析构函数。  基类的友元函数。  静态成员（数据+函数）"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png"><meta property="article:published_time" content="2020-05-30T00:44:37.000Z"><meta property="article:modified_time" content="2020-07-31T13:36:10.868Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
 
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="keywords" content="C++ 基类&amp;派生, Tlhg.0X">
-    <meta name="description" content="Blog that records the learning process">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="renderer" content="webkit|ie-stand|ie-comp">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+var autoChangeMode = '2'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
 
-
-    <title>C++ 基类&amp;派生 | Tlhg.0X</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
-
-    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="/css/my.css">
-
-    <script src="/libs/jquery/jquery.min.js"></script>
-
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Tlhg.0X" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
-<script src="/js/prism-line-numbers.min.js"></script></head>
-
-
-<body>
-    <header class="navbar-fixed">
-    <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper container">
-            <div class="brand-logo">
-                <a href="/" class="waves-effect waves-light">
-                    
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
-                    
-                    <span class="logo-span">Tlhg.0X</span>
-                </a>
-            </div>
-            
-
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
-<ul class="right nav-menu">
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/" class="waves-effect waves-light">
-      
-      <i class="fas fa-home" style="zoom: 0.6;"></i>
-      
-      <span>首页</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/archives" class="waves-effect waves-light">
-      
-      <i class="fas fa-archive" style="zoom: 0.6;"></i>
-      
-      <span>归档</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/about" class="waves-effect waves-light">
-      
-      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
-      
-      <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
-    </a>
-    
-  </li>
-  
-  <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
-    </a>
-  </li>
-</ul>
-
-
-<div id="mobile-nav" class="side-nav sidenav">
-
-    <div class="mobile-head bg-color">
-        
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
-        
-        <div class="logo-name">Tlhg.0X</div>
-        <div class="logo-desc">
-            
-            Blog that records the learning process
-            
-        </div>
-    </div>
-
-    
-
-    <ul class="menu-list mobile-menu-list">
-        
-        <li class="m-nav-item">
-	  
-		<a href="/" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-home"></i>
-			
-			首页
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/archives" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-archive"></i>
-			
-			归档
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/about" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-user-circle"></i>
-			
-			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			留言板
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
-		</a>
-          
-        </li>
-        
-        
-        <li><div class="divider"></div></li>
-        <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
-                <i class="fab fa-github-square fa-fw"></i>Fork Me
-            </a>
-        </li>
-        
-    </ul>
-</div>
-
-
-        </div>
-
-        
-            <style>
-    .nav-transparent .github-corner {
-        display: none !important;
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
     }
-
-    .github-corner {
-        position: absolute;
-        z-index: 10;
-        top: 0;
-        right: 0;
-        border: 0;
-        transform: scale(1.1);
-    }
-
-    .github-corner svg {
-        color: #0f9d58;
-        fill: #fff;
-        height: 64px;
-        width: 64px;
-    }
-
-    .github-corner:hover .octo-arm {
-        animation: a 0.56s ease-in-out;
-    }
-
-    .github-corner .octo-arm {
-        animation: none;
-    }
-
-    @keyframes a {
-        0%,
-        to {
-            transform: rotate(0);
-        }
-        20%,
-        60% {
-            transform: rotate(-25deg);
-        }
-        40%,
-        80% {
-            transform: rotate(10deg);
-        }
-    }
-</style>
-
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
-   data-tooltip="Fork Me" data-position="left" data-delay="50">
-    <svg viewBox="0 0 250 250" aria-hidden="true">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-              fill="currentColor" class="octo-body"></path>
-    </svg>
-</a>
-        
-    </nav>
-
-</header>
-
-    
-
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">C++ 基类&amp;派生</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-<main class="post-container content">
-
-    
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
-<style>
-    #articleContent h1::before,
-    #articleContent h2::before,
-    #articleContent h3::before,
-    #articleContent h4::before,
-    #articleContent h5::before,
-    #articleContent h6::before {
-        display: block;
-        content: " ";
-        height: 100px;
-        margin-top: -100px;
-        visibility: hidden;
-    }
-
-    #articleContent :focus {
-        outline: none;
-    }
-
-    .toc-fixed {
-        position: fixed;
-        top: 64px;
-    }
-
-    .toc-widget {
-        width: 345px;
-        padding-left: 20px;
-    }
-
-    .toc-widget .toc-title {
-        margin: 35px 0 15px 0;
-        padding-left: 17px;
-        font-size: 1.5rem;
-        font-weight: bold;
-        line-height: 1.5rem;
-    }
-
-    .toc-widget ol {
-        padding: 0;
-        list-style: none;
-    }
-
-    #toc-content {
-        height: calc(100vh - 250px);
-        overflow: auto;
-    }
-
-    #toc-content ol {
-        padding-left: 10px;
-    }
-
-    #toc-content ol li {
-        padding-left: 10px;
-    }
-
-    #toc-content .toc-link:hover {
-        color: #42b983;
-        font-weight: 700;
-        text-decoration: underline;
-    }
-
-    #toc-content .toc-link::before {
-        background-color: transparent;
-        max-height: 25px;
-
-        position: absolute;
-        right: 23.5vw;
-        display: block;
-    }
-
-    .toc-fixed .toc-link::before{
-        position: fixed!important;/*当toc的位置改为fixed时，.toc-link::before也要改为fixed*/
-    }
-
-    #toc-content .is-active-link {
-        color: #42b983;
-    }
-
-    #toc-content .is-active-link::before {
-        background-color: #42b983;
-    }
-
-    #floating-toc-btn {
-        position: fixed;
-        right: 15px;
-        bottom: 76px;
-        padding-top: 15px;
-        margin-bottom: 0;
-        z-index: 998;
-    }
-
-    #floating-toc-btn .btn-floating {
-        width: 48px;
-        height: 48px;
-    }
-
-    #floating-toc-btn .btn-floating i {
-        line-height: 48px;
-        font-size: 1.4rem;
-    }
-</style>
-<div class="row">
-    <div id="main-content" class="col s12 m12 l9">
-        <!-- 文章内容详情 -->
-<div id="artDetail">
-    <div class="card">
-        <div class="card-content article-info">
-            <div class="row tag-cate">
-                <div class="col s7">
-                    
-                    <div class="article-tag">
-                        
-                            <a href="/tags/C-primer/">
-                                <span class="chip bg-color">C++ primer</span>
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-                <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/C/" class="post-category">
-                                C++
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-
-            <div class="post-info">
-                
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-30
-                </div>
-                
-
-                
-
-                
-                <div class="info-break-policy">
-                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.7k
-                </div>
-                
-
-                
-                <div class="info-break-policy">
-                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    12 分
-                </div>
-                
-
-                
-            </div>
-        </div>
-        <hr class="clearfix">
-        <div class="card-content article-card-content">
-            <div id="articleContent">
-                <h1 id="基类-amp-派生"><a href="#基类-amp-派生" class="headerlink" title="基类&amp;派生"></a><center>基类&amp;派生</center></h1><h2 id="一、基类-amp-派生类的关系"><a href="#一、基类-amp-派生类的关系" class="headerlink" title="一、基类&amp;派生类的关系"></a>一、基类&amp;派生类的关系</h2><h3 id="1-派生类拥有基类的数据成员和成员函数；"><a href="#1-派生类拥有基类的数据成员和成员函数；" class="headerlink" title="1. 派生类拥有基类的数据成员和成员函数；"></a>1. 派生类拥有基类的数据成员和成员函数；</h3><ul>
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="prev" title="C++ 构造和析构(派生类对象)" href="http://tlhg.top/posts/33f.html"><link rel="next" title="VS Code edit background" href="http://tlhg.top/posts/7060.html"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"富强,民主,文明,和谐,自由,平等,公正,法治,爱国,敬业,诚信,友善","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true
+  }</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Tlhg.0X" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/picture/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">11</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">5</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">3</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书籍</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基类-amp-派生"><span class="toc-number">1.</span> <span class="toc-text">基类&amp;派生</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、基类-amp-派生类的关系"><span class="toc-number">1.1.</span> <span class="toc-text">一、基类&amp;派生类的关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-派生类拥有基类的数据成员和成员函数；"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 派生类拥有基类的数据成员和成员函数；</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-派生类的访问权限"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. 派生类的访问权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-using与隐藏函数重现-C-11"><span class="toc-number">1.1.3.</span> <span class="toc-text">3. using与隐藏函数重现  (C++ 11)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-派生对基类同名成员的隐藏"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">1. 派生对基类同名成员的隐藏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-访问隐藏成员"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">2. 访问隐藏成员</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-友元与继承"><span class="toc-number">1.1.4.</span> <span class="toc-text">4. 友元与继承</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#友元不能被继承"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">* 友元不能被继承</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-静态成员与继承"><span class="toc-number">1.1.5.</span> <span class="toc-text">5. 静态成员与继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-继承与类作用域"><span class="toc-number">1.1.6.</span> <span class="toc-text">6. 继承与类作用域</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、-基类对象-amp-派生类对象的关系"><span class="toc-number">1.2.</span> <span class="toc-text">二、 基类对象 &amp; 派生类对象的关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-基类对象-amp-派生类对象赋值相容性"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.基类对象 &amp; 派生类对象赋值相容性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-把派生类对象赋值给基类对象——原理图"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. 把派生类对象赋值给基类对象——原理图</span></a></li></ol></li></ol></li></ol></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">Tlhg.0X</a></span><span class="pull-right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书籍</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">C++ 基类&amp;派生</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-05-30 08:44:37"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2020-05-30</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-07-31 21:36:10"><i class="fas fa-history fa-fw"></i> 更新于 2020-07-31</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/C/">C++</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta__icon"></i><span>字数总计:</span><span class="word-count">3k</span><span class="post-meta__separator">|</span><i class="far fa-clock fa-fw post-meta__icon"></i><span>阅读时长: 12 分钟</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"><span class="post-meta__separator">|</span><i class="far fa-comments fa-fw post-meta__icon"></i><span>评论数:</span><a href="/posts/d1a9.html#post-comment" itemprop="discussionUrl"><span class="valine-comment-count comment-count" data-xid="/posts/d1a9.html" itemprop="commentCount"></span></a></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="基类-amp-派生"><a href="#基类-amp-派生" class="headerlink" title="基类&amp;派生"></a><center>基类&amp;派生</center></h1><h2 id="一、基类-amp-派生类的关系"><a href="#一、基类-amp-派生类的关系" class="headerlink" title="一、基类&amp;派生类的关系"></a>一、基类&amp;派生类的关系</h2><h3 id="1-派生类拥有基类的数据成员和成员函数；"><a href="#1-派生类拥有基类的数据成员和成员函数；" class="headerlink" title="1. 派生类拥有基类的数据成员和成员函数；"></a>1. 派生类拥有基类的数据成员和成员函数；</h3><ul>
 <li><p>派生类在基类的基础上<font color="orange">可实施以下改变</font> ：</p>
 <ol>
 <li>增加新的成员（数据+函数）。</li>
@@ -517,108 +121,43 @@
 <ul>
 <li>基类：</li>
 </ul>
-<pre class="line-numbers language-C++"><code class="language-C++">class Base{
-    base members;
-};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>{</span></span><br><span class="line">	base members;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+
 <ul>
 <li>派生类：</li>
 </ul>
-<pre class="line-numbers language-C++"><code class="language-C++">class Derived: public Base{
-    new members;
-};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span>:</span> <span class="keyword">public</span> Base{</span><br><span class="line">	<span class="keyword">new</span> members;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>派生类对基类(子对象)成员的访问形式</p>
 <ol>
 <li>通过派生类对象直接访问基类成员</li>
 </ol>
-<pre class="line-numbers language-C++"><code class="language-C++">Derived d;
-cout&lt&ltd.j;   d.fn2();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">Derived d;</span><br><span class="line"><span class="built_in">cout</span>&amp;lt&amp;ltd.j;   d.fn2();</span><br></pre></td></tr></tbody></table></figure>
+
 <ol start="2">
 <li>在派生类成员函数中直接访问基类成员 </li>
 </ol>
-<pre class="line-numbers language-C++"><code class="language-C++">Derived d;
-d.fn3();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">Derived d;</span><br><span class="line">d.fn3();</span><br></pre></td></tr></tbody></table></figure>
+
 <ol start="3">
 <li>通过基类名字限定访问被重载或重定义的基类成员名</li>
 </ol>
-<pre class="line-numbers language-c++"><code class="language-c++">Derived d;
-d.Base::fn1(); <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">Derived d;</span><br><span class="line">d.Base::fn1();</span><br></pre></td></tr></tbody></table></figure>
+
 <ul>
 <li><strong>有关派生类访问权限的例子：</strong></li>
 </ul>
-<pre class="line-numbers language-c++"><code class="language-c++">#include &ltiostream&gt
-using namespace std;
-class Base { //基类
-public:
-    int k;      //为演示,将数据成员声明为公有
-    void fn1(){ cout&lt&lt"Base::fn1()"&lt&ltendl; }    
-    void fn2(){ cout&lt&lt"Base::fn2()"&lt&ltendl; }
-};
-class Derived: public Base { //派生类
-};
-void main(){ Derived d;
-    cout&lt&lt"k="&lt&ltd.k&lt&ltendl;
-    d.fn1();
-    d.fn2();
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> &amp;ltiostream&amp;gt</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> {</span> <span class="comment">//基类</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">int</span> k;      <span class="comment">//为演示,将数据成员声明为公有</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fn1</span><span class="params">()</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Base::fn1()"</span>&amp;lt&amp;ltendl; }	</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fn2</span><span class="params">()</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Base::fn2()"</span>&amp;lt&amp;ltendl; }</span><br><span class="line">};</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span>:</span> <span class="keyword">public</span> Base { <span class="comment">//派生类</span></span><br><span class="line">};</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>{ Derived d;</span><br><span class="line">	<span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"k="</span>&amp;lt&amp;ltd.k&amp;lt&amp;ltendl;</span><br><span class="line">	d.fn1();</span><br><span class="line">	d.fn2();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
 <p>结论： 派生类中没有新增加或者是重定义的成员，<font color="red">派生类Derived 拥有成员：k, fn1(), fn2()</font>，派生类拥有的数据成员和基类是一样的。          </p>
-<pre class="line-numbers language-c++"><code class="language-c++">#include &#60iostream&#62
-using namespace std;
-class Base { //基类
-public:
-    int k;      //为演示,将数据成员声明为公有
-    void fn1(){ cout&lt&lt"Base::fn1()"&lt&ltendl; }    
-    void fn2(){ cout&lt&lt"Base::fn2()"&lt&ltendl; }
-};
-class Derived: public Base { //派生类
-public: int m;
-    void fn3(){ cout&lt&lt"Derived::fn3()"&lt&ltendl; }
-};
-void main(){ Derived d;
-    cout&lt&lt"k="&lt&ltd.k&lt&ltendl;
-    d.fn1();
-    d.fn2();
-    cout&lt&lt"m="&lt&ltd.m&lt&ltendl;   d.fn3();
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> &amp;#60iostream&amp;#62</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> {</span> <span class="comment">//基类</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">int</span> k;      <span class="comment">//为演示,将数据成员声明为公有</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fn1</span><span class="params">()</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Base::fn1()"</span>&amp;lt&amp;ltendl; }	</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fn2</span><span class="params">()</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Base::fn2()"</span>&amp;lt&amp;ltendl; }</span><br><span class="line">};</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span>:</span> <span class="keyword">public</span> Base { <span class="comment">//派生类</span></span><br><span class="line"><span class="keyword">public</span>: <span class="keyword">int</span> m;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fn3</span><span class="params">()</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Derived::fn3()"</span>&amp;lt&amp;ltendl; }</span><br><span class="line">};</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>{ Derived d;</span><br><span class="line">	<span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"k="</span>&amp;lt&amp;ltd.k&amp;lt&amp;ltendl;</span><br><span class="line">	d.fn1();</span><br><span class="line">	d.fn2();</span><br><span class="line">	<span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"m="</span>&amp;lt&amp;ltd.m&amp;lt&amp;ltendl;   d.fn3();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
 <p>结论： 派生类中有新增加的成员 m fn3()，<font color="red">派生类Derived 拥有成员：k, fn1(), fn2()</font>，派生类拥有的数据成员和基类是一样的。     </p>
-<pre class="line-numbers language-c++"><code class="language-c++">#include &#60iostream&#62
-using namespace std;
-class Base { //基类
-public:
-    //int k;     
-    void fn1(){ cout&lt&lt"Base::fn1()"&lt&ltendl; }    
-    void fn2(){ cout&lt&lt"Base::fn2()"&lt&ltendl; }
-};
-class Derived: public Base { //派生类
-public: //int m;
-    void fn1(){ cout&lt&lt"Derived::fn1()"&lt&ltendl; }
-    void fn3(){ cout&lt&lt"Derived::fn3()"&lt&ltendl; }
-};
-void main(){ Derived d;     
-    d.fn1();
-    d.fn2();
-  d.fn3();
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> &amp;#60iostream&amp;#62</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> {</span> <span class="comment">//基类</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">//int k;     </span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fn1</span><span class="params">()</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Base::fn1()"</span>&amp;lt&amp;ltendl; }	</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fn2</span><span class="params">()</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Base::fn2()"</span>&amp;lt&amp;ltendl; }</span><br><span class="line">};</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span>:</span> <span class="keyword">public</span> Base { <span class="comment">//派生类</span></span><br><span class="line"><span class="keyword">public</span>: <span class="comment">//int m;</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fn1</span><span class="params">()</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Derived::fn1()"</span>&amp;lt&amp;ltendl; }</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fn3</span><span class="params">()</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Derived::fn3()"</span>&amp;lt&amp;ltendl; }</span><br><span class="line">};</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>{ Derived d; 	</span><br><span class="line">	d.fn1();</span><br><span class="line">	d.fn2();</span><br><span class="line">  d.fn3();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
 <p>结论：<br>(1) d.fn1()访问的是派生类对象Derived中的fn1()<br>(2) 重定义fn1()，隐藏了成员函数fn1()；</p>
-<pre class="line-numbers language-c++"><code class="language-c++">#include &#60iostream&#62
-using namespace std;
-class Base { //基类
-public:
-    //int k;     
-    void fn1(){ cout&lt&lt"Base::fn1()"&lt&ltendl; }    
-    void fn2(){ cout&lt&lt"Base::fn2()"&lt&ltendl; }
-};
-class Derived: public Base { //派生类
-public: //int m;
-    void fn1(){ cout&lt&lt"Derived::fn1()"&lt&ltendl; }
-    void fn3(){ cout&lt&lt"Derived::fn3()"&lt&ltendl; }
-};
-void main(){ Derived d;     
-    //d.fn1();  //出错，无法访问！
-  d.fn1(8);
-    d.fn2();
-  d.fn3();
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> &amp;#60iostream&amp;#62</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> {</span> <span class="comment">//基类</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">//int k;     </span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fn1</span><span class="params">()</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Base::fn1()"</span>&amp;lt&amp;ltendl; }	</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fn2</span><span class="params">()</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Base::fn2()"</span>&amp;lt&amp;ltendl; }</span><br><span class="line">};</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span>:</span> <span class="keyword">public</span> Base { <span class="comment">//派生类</span></span><br><span class="line"><span class="keyword">public</span>: <span class="comment">//int m;</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fn1</span><span class="params">()</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Derived::fn1()"</span>&amp;lt&amp;ltendl; }</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fn3</span><span class="params">()</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Derived::fn3()"</span>&amp;lt&amp;ltendl; }</span><br><span class="line">};</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>{ Derived d; 	</span><br><span class="line">	<span class="comment">//d.fn1();  //出错，无法访问！</span></span><br><span class="line">  d.fn1(<span class="number">8</span>);</span><br><span class="line">	d.fn2();</span><br><span class="line">  d.fn3();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
 <font color="red">
 结论：
 
@@ -626,26 +165,8 @@ void main(){ Derived d;
 <p>(2) d.fn1(8)访问的是派生类对象Derived中的fn1(int)</p>
 </font>
 
-<pre class="line-numbers language-c++"><code class="language-c++">#include &#60iostream&#62
-using namespace std;
-class Base { //基类
-public:
-    //int k;     
-    void fn1(){ cout&lt&lt"Base::fn1()"&lt&ltendl; }    
-    void fn2(){ cout&lt&lt"Base::fn2()"&lt&ltendl; }
-};
-class Derived: public Base { //派生类
-public: //int m;
-    void fn1(){ cout&lt&lt"Derived::fn1()"&lt&ltendl; }
-  void fn1(int){ cout&lt&lt"Derived::fn1()"&lt&ltendl; }
-    void fn3(){ cout&lt&lt"Derived::fn3()"&lt&ltendl; }
-};
-void main(){ Derived d;     
-    //d.fn1();  //出错，无法访问！
-  d.fn1(8);
-    d.fn2();
-  d.fn3();
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> &amp;#60iostream&amp;#62</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> {</span> <span class="comment">//基类</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">//int k;     </span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fn1</span><span class="params">()</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Base::fn1()"</span>&amp;lt&amp;ltendl; }	</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fn2</span><span class="params">()</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Base::fn2()"</span>&amp;lt&amp;ltendl; }</span><br><span class="line">};</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span>:</span> <span class="keyword">public</span> Base { <span class="comment">//派生类</span></span><br><span class="line"><span class="keyword">public</span>: <span class="comment">//int m;</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fn1</span><span class="params">()</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Derived::fn1()"</span>&amp;lt&amp;ltendl; }</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">fn1</span><span class="params">(<span class="keyword">int</span>)</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Derived::fn1()"</span>&amp;lt&amp;ltendl; }</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fn3</span><span class="params">()</span></span>{ <span class="built_in">cout</span>&amp;lt&amp;lt<span class="string">"Derived::fn3()"</span>&amp;lt&amp;ltendl; }</span><br><span class="line">};</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>{ Derived d; 	</span><br><span class="line">	<span class="comment">//d.fn1();  //出错，无法访问！</span></span><br><span class="line">  d.fn1(<span class="number">8</span>);</span><br><span class="line">	d.fn2();</span><br><span class="line">  d.fn3();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
 <font color="red">
 结论：
 
@@ -665,27 +186,8 @@ void main(){ Derived d;
 </li>
 <li><p>用<font color="red">using</font>声明使基类重载函数在派生类中可见。用法如下：using 基类名称::被隐藏成员函数名;</p>
 <p>例子：基类B的f1成员函数具有3个重载函数，派生D新增加了f1函数的功能，此f1会隐藏基类B中f1函数在派生类的可见性，用using将基类的f1引入到派生类作用域内</p>
-<pre class="line-numbers language-c++"><code class="language-c++">#include &#60iostream&#62
-using namespace std;
-class B {
-public:
-  void f1(int a) { cout &lt&lt a &lt&lt endl; }
-  void f1(int a,int b) { cout &lt&lt a+b&lt&lt endl; }
-  void f1() { cout &lt&lt "B::f1" &lt&lt endl; }
-};
-class D : public B {    
-public:
-  using B::f1;      //L1，使基类的3个f1函数在此区域可见
-  void f1(char * d) { cout &lt&lt d &lt&lt endl; }
-};
-void main() {
-  D d;
-  d.f1();                           //L2，正确
-  d.f1(3);                           //L3，正确
-  d.f1(3, 5);                      //L4，正确
-  d.f1("Hellow c++!");
-  getchar();
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> &amp;#60iostream&amp;#62</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> {</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">int</span> a)</span> </span>{ <span class="built_in">cout</span> &amp;lt&amp;lt a &amp;lt&amp;lt <span class="built_in">endl</span>; }</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span> </span>{ <span class="built_in">cout</span> &amp;lt&amp;lt a+b&amp;lt&amp;lt <span class="built_in">endl</span>; }</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">()</span> </span>{ <span class="built_in">cout</span> &amp;lt&amp;lt <span class="string">"B::f1"</span> &amp;lt&amp;lt <span class="built_in">endl</span>; }</span><br><span class="line">};</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> :</span> <span class="keyword">public</span> B {	</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">using</span> B::f1;      <span class="comment">//L1，使基类的3个f1函数在此区域可见</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">char</span> * d)</span> </span>{ <span class="built_in">cout</span> &amp;lt&amp;lt d &amp;lt&amp;lt <span class="built_in">endl</span>; }</span><br><span class="line">};</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>{</span><br><span class="line">  D d;</span><br><span class="line">  d.f1();             			  <span class="comment">//L2，正确</span></span><br><span class="line">  d.f1(<span class="number">3</span>); 						  <span class="comment">//L3，正确</span></span><br><span class="line">  d.f1(<span class="number">3</span>, <span class="number">5</span>);			    	  <span class="comment">//L4，正确</span></span><br><span class="line">  d.f1(<span class="string">"Hellow c++!"</span>);</span><br><span class="line">  getchar();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
 </li>
 </ul>
 <h3 id="4-友元与继承"><a href="#4-友元与继承" class="headerlink" title="4. 友元与继承"></a>4. <font color="red">友元</font>与继承</h3><h4 id="友元不能被继承"><a href="#友元不能被继承" class="headerlink" title="* 友元不能被继承"></a>* 友元不能被继承</h4><ul>
@@ -693,40 +195,8 @@ void main() {
 </li>
 <li><p>如果一个类<font color="red">继承</font>了其它类，则它声明的友元也<font color="red">只能访问它自己的全体成员，包括它从基类继承到的public和protected成员。</font>而它的基类和派生类并不认可这种友元关系，按照规则只能访问公有成员。</p>
 <p>例子：类Deri是基类Base的友元，函数f1和f2是类Deri的友元，分析下面程序中L4、L5、L7正确的原因，以及L8和L6错误的原因。</p>
-<pre class="line-numbers language-c++"><code class="language-c++">#include &#60iostream&#62
-using namespace std;
-class Base {
-public:
-  int x = 0;
-protected:
-  double y = 0;
-private:
-  float z = 0;
-  friend class Deri;                        //L1
-};
-class Deri :public Base {
-protected:
-  int dx = 1;
-public:
-  friend    void f1(Deri d);                 //L2
-  friend  void f2(Base b);                 //L3
-  void f3(Base b) { cout &lt&lt b.x &lt&lt b.y &lt&lt b.z &lt&lt endl; } //L4,正确
-};
-void f1(Deri d) {
-  cout &lt&lt d.x &lt&lt d.y &lt&lt d.dx &lt&lt endl;   //L5，正确
-//cout&lt&ltd.z&lt&ltendl;                 //L6，错误
-}
-void f2(Base b) {
-  cout &lt&lt b.x &lt&lt endl;            //L7，正确
-//cout &lt&lt b.y &lt&lt endl;            //L8, 错误
-}
-void main() {
-  Base b;
-  Deri d;
-  f1(d);
-  f2(b);
-  getchar();
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> &amp;#60iostream&amp;#62</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> {</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">  <span class="keyword">double</span> y = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  <span class="keyword">float</span> z = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">friend</span> <span class="class"><span class="keyword">class</span> <span class="title">Deri</span>;</span>                        <span class="comment">//L1</span></span><br><span class="line">};</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Deri</span> :</span><span class="keyword">public</span> Base {</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">  <span class="keyword">int</span> dx = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="function"><span class="keyword">friend</span>	<span class="keyword">void</span> <span class="title">f1</span><span class="params">(Deri d)</span></span>;                 <span class="comment">//L2</span></span><br><span class="line">  <span class="function"><span class="keyword">friend</span>  <span class="keyword">void</span> <span class="title">f2</span><span class="params">(Base b)</span></span>;                 <span class="comment">//L3</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">f3</span><span class="params">(Base b)</span> </span>{ <span class="built_in">cout</span> &amp;lt&amp;lt b.x &amp;lt&amp;lt b.y &amp;lt&amp;lt b.z &amp;lt&amp;lt <span class="built_in">endl</span>; } <span class="comment">//L4,正确</span></span><br><span class="line">};</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(Deri d)</span> </span>{</span><br><span class="line">  <span class="built_in">cout</span> &amp;lt&amp;lt d.x &amp;lt&amp;lt d.y &amp;lt&amp;lt d.dx &amp;lt&amp;lt <span class="built_in">endl</span>;   <span class="comment">//L5，正确</span></span><br><span class="line"><span class="comment">//cout&amp;lt&amp;ltd.z&amp;lt&amp;ltendl;                 //L6，错误</span></span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">(Base b)</span> </span>{</span><br><span class="line">  <span class="built_in">cout</span> &amp;lt&amp;lt b.x &amp;lt&amp;lt <span class="built_in">endl</span>;            <span class="comment">//L7，正确</span></span><br><span class="line"><span class="comment">//cout &amp;lt&amp;lt b.y &amp;lt&amp;lt endl;            //L8, 错误</span></span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>{</span><br><span class="line">  Base b;</span><br><span class="line">  Deri d;</span><br><span class="line">  f1(d);</span><br><span class="line">  f2(b);</span><br><span class="line">  getchar();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
 <p>解释：</p>
 <ol>
 <li><p>由于类Deri是基类Base的友元类，所以类Deri中的成员函数可以访问Base中的所有成员，包括 public、protected、private 属性的。L4正确</p>
@@ -756,38 +226,10 @@ void main() {
 </ul>
 </li>
 <li><p>编译器解析之后的派生类类域形式</p>
-<pre class="line-numbers language-c++"><code class="language-c++"> class A  {
-   int g();……
- }；
- class B:public A{
-   int h(int);……
- };
- class C:public B{
-   int c；
-   int h()；
-   int f(int )；……
- }；
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ <figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>  {</span></span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">g</span><span class="params">()</span></span>;……</span><br><span class="line">}；</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span><span class="keyword">public</span> A{</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">h</span><span class="params">(<span class="keyword">int</span>)</span></span>;……</span><br><span class="line">};</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span><span class="keyword">public</span> B{</span><br><span class="line">  <span class="keyword">int</span> c；</span><br><span class="line">  int h()；</span><br><span class="line">  int f(int )；……</span><br><span class="line">}；</span><br></pre></td></tr></tbody></table></figure>
 <p> 经编译器处理之后，形成类似于下面的块作用域：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">A{
-   int g(){……}
-……
-B { 
-       int h(int ){……}；
-       ……
-       C {
-          int c;
-          int h(){……};
-                   int f(int i){……;return  B::h(i);}    //L1
-              ……
-            }
-    }
- }
+ <figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">A{</span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">g</span><span class="params">()</span></span>{……}</span><br><span class="line">……</span><br><span class="line">B { </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">h</span><span class="params">(<span class="keyword">int</span> )</span></span>{……}；</span><br><span class="line">   	……</span><br><span class="line">   	C {</span><br><span class="line">       <span class="keyword">int</span> c;</span><br><span class="line">       <span class="function"><span class="keyword">int</span> <span class="title">h</span><span class="params">()</span></span>{……};</span><br><span class="line">                   <span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> i)</span></span>{……;<span class="keyword">return</span>  B::h(i);}    <span class="comment">//L1</span></span><br><span class="line">      		……</span><br><span class="line">     	   }</span><br><span class="line">    }</span><br><span class="line"> }</span><br><span class="line"></span><br><span class="line"> C xa;</span><br><span class="line"> xa.g();</span><br><span class="line"> xa.h(<span class="number">3</span>);      <span class="comment">//L2，错误</span></span><br><span class="line"> xa.B::h(<span class="number">3</span>);   <span class="comment">//L3，正确</span></span><br></pre></td></tr></tbody></table></figure>
 
- C xa;
- xa.g();
- xa.h(3);      //L2，错误
- xa.B::h(3);   //L3，正确<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ol>
 <h2 id="二、-基类对象-amp-派生类对象的关系"><a href="#二、-基类对象-amp-派生类对象的关系" class="headerlink" title="二、 基类对象 &amp; 派生类对象的关系"></a>二、 基类对象 <strong>&amp;</strong> 派生类对象的关系</h2><h3 id="1-基类对象-amp-派生类对象赋值相容性"><a href="#1-基类对象-amp-派生类对象赋值相容性" class="headerlink" title="1.基类对象 &amp; 派生类对象赋值相容性"></a>1.基类对象 <strong>&amp;</strong> 派生类对象<font color="orange">赋值相容性</font></h3><ol>
@@ -799,10 +241,7 @@ B {
 <li><p>把派生类对象的地址<font color="red">赋值</font>给基类指针。</p>
 </li>
 <li><p>用派生类对象<font color="red">初始化</font>基类对象的引用。</p>
-<pre class="line-numbers language-c++"><code class="language-c++"> Derived d;
- Base b=d;     
- Base *pb=&d;
- Base &rb=d;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">Derived d;</span><br><span class="line">Base b=d;     </span><br><span class="line">Base *pb=&amp;d;</span><br><span class="line">Base &amp;rb=d;</span><br></pre></td></tr></tbody></table></figure>
 </li>
 </ol>
 <ul>
@@ -810,95 +249,13 @@ B {
 <p>也就是说通过基类指针、基类引用，<font color="red">不能访问到派生类中定义的成员</font></p>
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200607112701.png" alt=""></p>
-<h3 id="2-把派生类对象赋值给基类对象——原理图"><a href="#2-把派生类对象赋值给基类对象——原理图" class="headerlink" title="2. 把派生类对象赋值给基类对象——原理图"></a>2. 把派生类对象赋值给基类对象——原理图</h3><p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200607113443.png" alt=""></p>
+<p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200607112701.png" alt=""></p>
+<h3 id="2-把派生类对象赋值给基类对象——原理图"><a href="#2-把派生类对象赋值给基类对象——原理图" class="headerlink" title="2. 把派生类对象赋值给基类对象——原理图"></a>2. 把派生类对象赋值给基类对象——原理图</h3><p><img src= "/img/loading.gif" data-src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200607113443.png" alt=""></p>
 <p>说明：不论以哪种方式把派生类对象赋值给基类对象，<font color="red">都只能访问到派生类对象中‘基类子对象那部份’的成员，不能访问派生类的自定义成员。</font></p>
 <p>例子：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">#include &#60iostream&#62
-class A {
-    int a;
-public: 
-    void setA(int x){ a=x; }
-    int getA(){ return a;} 
-}; 
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> &amp;#60iostream&amp;#62</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> {</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setA</span><span class="params">(<span class="keyword">int</span> x)</span></span>{ a=x; }</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getA</span><span class="params">()</span></span>{ <span class="keyword">return</span> a;} </span><br><span class="line">}; </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span> <span class="keyword">public</span> A{</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line"><span class="keyword">public</span>: </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setB</span><span class="params">(<span class="keyword">int</span> x)</span></span>{ b=x; }</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getB</span><span class="params">()</span></span>{ <span class="keyword">return</span> b;} </span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(A a, <span class="keyword">int</span> x)</span>   </span>{ a.setA(x); }</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">(A *pA, <span class="keyword">int</span> x)</span> </span>{ pA-&gt;setA(x); }</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f3</span><span class="params">(A &amp;rA, <span class="keyword">int</span> x)</span> </span>{ rA.setA(x); }</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">    A a1, *pA;</span><br><span class="line">    B b1;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*(0)*/</span></span><br><span class="line">    a1.setA(<span class="number">1</span>);</span><br><span class="line">    b1.setA(<span class="number">2</span>);</span><br><span class="line">	<span class="comment">//cou&amp;lt&amp;lt"a1.getA()=&amp;lt&amp;lta1.getA(&amp;lt&amp;ltendl;        //a1.getA()=1</span></span><br><span class="line">	<span class="comment">//cou&amp;lt&amp;lt"b1.getA()=&amp;lt&amp;ltb1.getA(&amp;lt&amp;ltend&amp;lt&amp;ltendl;  //b1.getA()=2</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/*(1)派生类对象赋给基类对象*/</span></span><br><span class="line">    a1=b1;</span><br><span class="line">    cou&amp;lt&amp;lt<span class="string">"a1.getA()=&amp;lt&amp;lta1.getA(&amp;lt&amp;ltendl;</span></span><br><span class="line"><span class="string">    cou&amp;lt&amp;lt"</span>b1.getA()=&amp;lt&amp;ltb1.getA(&amp;lt&amp;ltend&amp;lt&amp;ltendl;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*(2)*/</span></span><br><span class="line">    a1.setA(<span class="number">10</span>);</span><br><span class="line">    cou&amp;lt&amp;lt<span class="string">"a1.getA()=&amp;lt&amp;lta1.getA(&amp;lt&amp;ltendl;		</span></span><br><span class="line"><span class="string">    cou&amp;lt&amp;lt"</span>b1.getA()=&amp;lt&amp;ltb1.getA(&amp;lt&amp;ltend&amp;lt&amp;ltendl;	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*(3)派生类对象的地址赋值给基类指针*/</span></span><br><span class="line">    pA=&amp;b1; </span><br><span class="line">    pA-&gt;setA(<span class="number">20</span>);</span><br><span class="line">    cou&amp;lt&amp;lt<span class="string">"pA-&gt;getA()=&amp;lt&amp;ltpA-&gt;getA(&amp;lt&amp;ltendl;	    </span></span><br><span class="line"><span class="string">    cou&amp;lt&amp;lt"</span>b1.getA()=&amp;lt&amp;ltb1.getA(&amp;lt&amp;ltend&amp;lt&amp;ltendl;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*(4)用派生类对象初始化基类对象的引用*/</span></span><br><span class="line">    A &amp;ra=b1;</span><br><span class="line">    ra.setA(<span class="number">30</span>);</span><br><span class="line">	cou&amp;lt&amp;lt<span class="string">"ra.getA()=&amp;lt&amp;ltra.getA(&amp;lt&amp;ltendl;	</span></span><br><span class="line"><span class="string">    cou&amp;lt&amp;lt"</span>b1.getA()=&amp;lt&amp;ltb1.getA(&amp;lt&amp;ltend&amp;lt&amp;ltendl;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*(5)*/</span></span><br><span class="line">	b1.setA(<span class="number">8</span>);</span><br><span class="line">    cou&amp;lt&amp;lt<span class="string">"b1.getA()=&amp;lt&amp;ltb1.getA(&amp;lt&amp;ltendl;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	/*(6)值传递*/</span></span><br><span class="line"><span class="string">	f1(b1,100); </span></span><br><span class="line"><span class="string">    cou&amp;lt&amp;lt"</span>b1.getA()=&amp;lt&amp;ltb1.getA(&amp;lt&amp;ltendl;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*(7)地址传递*/</span></span><br><span class="line">	f2(&amp;b1,<span class="number">200</span>);</span><br><span class="line">    cou&amp;lt&amp;lt<span class="string">"b1.getA()=&amp;lt&amp;ltb1.getA(&amp;lt&amp;ltendl;</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">	/*(8)引用传递*/</span></span><br><span class="line"><span class="string">	f3(b1,300);</span></span><br><span class="line"><span class="string">    cou&amp;lt&amp;lt"</span>b1.getA()=&amp;lt&amp;ltb1.getA(&amp;lt&amp;ltendl;</span><br><span class="line">  }</span><br></pre></td></tr></tbody></table></figure>
 
-class B: public A{
-    int b;
-public: 
-    void setB(int x){ b=x; }
-    int getB(){ return b;} 
-};
-
-void f1(A a, int x)   { a.setA(x); }
-void f2(A *pA, int x) { pA->setA(x); }
-void f3(A &rA, int x) { rA.setA(x); }
-
-void main(){
-    A a1, *pA;
-    B b1;
-
-    /*(0)*/
-    a1.setA(1);
-    b1.setA(2);
-    //cou&lt&lt"a1.getA()=&lt&lta1.getA(&lt&ltendl;        //a1.getA()=1
-    //cou&lt&lt"b1.getA()=&lt&ltb1.getA(&lt&ltend&lt&ltendl;  //b1.getA()=2
-
-    /*(1)派生类对象赋给基类对象*/
-    a1=b1;
-    cou&lt&lt"a1.getA()=&lt&lta1.getA(&lt&ltendl;
-    cou&lt&lt"b1.getA()=&lt&ltb1.getA(&lt&ltend&lt&ltendl;
-
-    /*(2)*/
-    a1.setA(10);
-    cou&lt&lt"a1.getA()=&lt&lta1.getA(&lt&ltendl;        
-    cou&lt&lt"b1.getA()=&lt&ltb1.getA(&lt&ltend&lt&ltendl;    
-
-    /*(3)派生类对象的地址赋值给基类指针*/
-    pA=&b1; 
-    pA->setA(20);
-    cou&lt&lt"pA->getA()=&lt&ltpA->getA(&lt&ltendl;        
-    cou&lt&lt"b1.getA()=&lt&ltb1.getA(&lt&ltend&lt&ltendl;
-
-    /*(4)用派生类对象初始化基类对象的引用*/
-    A &ra=b1;
-    ra.setA(30);
-    cou&lt&lt"ra.getA()=&lt&ltra.getA(&lt&ltendl;    
-    cou&lt&lt"b1.getA()=&lt&ltb1.getA(&lt&ltend&lt&ltendl;
-
-    /*(5)*/
-    b1.setA(8);
-    cou&lt&lt"b1.getA()=&lt&ltb1.getA(&lt&ltendl;
-
-    /*(6)值传递*/
-    f1(b1,100); 
-    cou&lt&lt"b1.getA()=&lt&ltb1.getA(&lt&ltendl;
-
-    /*(7)地址传递*/
-    f2(&b1,200);
-    cou&lt&lt"b1.getA()=&lt&ltb1.getA(&lt&ltendl;
-
-    /*(8)引用传递*/
-    f3(b1,300);
-    cou&lt&lt"b1.getA()=&lt&ltb1.getA(&lt&ltendl;
-  }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">  //运行结果：
-  a1.getA()=2
-  b1.getA()=2
-
-  a1.getA()=10
-  b1.getA()=2
-
-  pA->getA()=20
-  b1.getA()=20
-
-  ra.getA()=30
-  b1.getA()=30
-
-  b1.getA()=8
-  b1.getA()=8
-  b1.getA()=200
-  b1.getA()=300
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//运行结果：</span></span><br><span class="line">a1.getA()=<span class="number">2</span></span><br><span class="line">b1.getA()=<span class="number">2</span></span><br><span class="line"></span><br><span class="line">a1.getA()=<span class="number">10</span></span><br><span class="line">b1.getA()=<span class="number">2</span></span><br><span class="line"></span><br><span class="line">pA-&gt;getA()=<span class="number">20</span></span><br><span class="line">b1.getA()=<span class="number">20</span></span><br><span class="line"></span><br><span class="line">ra.getA()=<span class="number">30</span></span><br><span class="line">b1.getA()=<span class="number">30</span></span><br><span class="line"></span><br><span class="line">b1.getA()=<span class="number">8</span></span><br><span class="line">b1.getA()=<span class="number">8</span></span><br><span class="line">b1.getA()=<span class="number">200</span></span><br><span class="line">b1.getA()=<span class="number">300</span></span><br></pre></td></tr></tbody></table></figure>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -917,780 +274,42 @@ void main(){
             });
             document.body.appendChild(img);
           });
-      </script>
-            </div>
-            <hr/>
-
-            
-
-    <div class="reprint" id="reprint-statement">
-        
-            <div class="reprint__author">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-user">
-                        文章作者:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="http://tlhg.top" rel="external nofollow noreferrer">Heisenberg Lee</a>
-                </span>
-            </div>
-            <div class="reprint__type">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-link">
-                        文章链接:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="http://tlhg.top/posts/d1a9.html">http://tlhg.top/posts/d1a9.html</a>
-                </span>
-            </div>
-            <div class="reprint__notice">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-copyright">
-                        版权声明:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    本博客所有文章除特別声明外，均采用
-                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a>
-                    许可协议。转载请注明来源
-                    <a href="http://tlhg.top" target="_blank">Heisenberg Lee</a>
-                    !
-                </span>
-            </div>
-        
-    </div>
-
-    <script async defer>
-      document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
-        M.toast({html: toastHTML})
-      });
-
-      function navToReprintStatement() {
-        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
-      }
-    </script>
-
-
-
-            <div class="tag_share" style="display: block;">
-                <div class="post-meta__tag-list" style="display: inline-block;">
-                    
-                        <div class="article-tag">
-                            
-                                <a href="/tags/C-primer/">
-                                    <span class="chip bg-color">C++ primer</span>
-                                </a>
-                            
-                        </div>
-                    
-                </div>
-                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
-<div id="article-share">
-
-    
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="/libs/share/js/social-share.min.js"></script>
-    
-
-    
-
-</div>
-
-                </div>
-            </div>
-            
-                <style>
-    #reward {
-        margin: 40px 0;
-        text-align: center;
-    }
-
-    #reward .reward-link {
-        font-size: 1.4rem;
-        line-height: 38px;
-    }
-
-    #reward .btn-floating:hover {
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    #rewardModal {
-        width: 320px;
-        height: 350px;
-    }
-
-    #rewardModal .reward-title {
-        margin: 15px auto;
-        padding-bottom: 5px;
-    }
-
-    #rewardModal .modal-content {
-        padding: 10px;
-    }
-
-    #rewardModal .close {
-        position: absolute;
-        right: 15px;
-        top: 15px;
-        color: rgba(0, 0, 0, 0.5);
-        font-size: 1.3rem;
-        line-height: 20px;
-        cursor: pointer;
-    }
-
-    #rewardModal .close:hover {
-        color: #ef5350;
-        transform: scale(1.3);
-        -moz-transform:scale(1.3);
-        -webkit-transform:scale(1.3);
-        -o-transform:scale(1.3);
-    }
-
-    #rewardModal .reward-tabs {
-        margin: 0 auto;
-        width: 210px;
-    }
-
-    .reward-tabs .tabs {
-        height: 38px;
-        margin: 10px auto;
-        padding-left: 0;
-    }
-
-    .reward-content ul {
-        padding-left: 0 !important;
-    }
-
-    .reward-tabs .tabs .tab {
-        height: 38px;
-        line-height: 38px;
-    }
-
-    .reward-tabs .tab a {
-        color: #fff;
-        background-color: #ccc;
-    }
-
-    .reward-tabs .tab a:hover {
-        background-color: #ccc;
-        color: #fff;
-    }
-
-    .reward-tabs .wechat-tab .active {
-        color: #fff !important;
-        background-color: #22AB38 !important;
-    }
-
-    .reward-tabs .alipay-tab .active {
-        color: #fff !important;
-        background-color: #019FE8 !important;
-    }
-
-    .reward-tabs .reward-img {
-        width: 210px;
-        height: 210px;
-    }
-</style>
-
-<div id="reward">
-    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
-
-    <!-- Modal Structure -->
-    <div id="rewardModal" class="modal">
-        <div class="modal-content">
-            <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
-            <div class="reward-content">
-                <div class="reward-tabs">
-                    <ul class="tabs row">
-                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
-                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
-                    </ul>
-                    <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
-                    </div>
-                    <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    $(function () {
-        $('.tabs').tabs();
-    });
-</script>
-
-            
-        </div>
-    </div>
-
-    
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
-
-<div class="card gitalk-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitalk-container" class="card-content"></div>
-</div>
-
-<script src="/libs/gitalk/gitalk.min.js"></script>
-<script>
-    let gitalk = new Gitalk({
-        clientID: 'd729c3a2fbe8b3000a70',
-        clientSecret: 'dd1fae45deb7dee8e3389d2a8014e9c9ff5fd68a',
-        repo: 'Tlhg-gitalks',
-        owner: 'Tlhg-0',
-        admin: "Tlhg-0",
-        id: '2020-05-30T08-44-37',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
-
-    gitalk.render('gitalk-container');
-</script>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/posts/33f.html">
-                    <div class="card-image">
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png" class="responsive-img" alt="C++ 构造和析构(派生类对象)">
-                        
-                        <span class="card-title">C++ 构造和析构(派生类对象)</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            派生类对象的构造和析构顺序&amp;原则1. 派生类对象的构造顺序:
-步骤1：先构造基类；
-步骤2：再构造对象成员；
-步骤3：最后构造派生类自身；
-
-2. 关于构造和调用顺序的说明（1）基类构造顺序由派生层次决定：最远的基类最先构造;
-（2
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-07
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/C/" class="post-category">
-                                    C++
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/C-primer/">
-                        <span class="chip bg-color">C++ primer</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/posts/7060.html">
-                    <div class="card-image">
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200529162413.png" class="responsive-img" alt="VS Code edit background">
-                        
-                        <span class="card-title">VS Code edit background</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            VS Code edit background 前言  今天用VS Code 写代码，感觉背景有点单调，所以决定美化一下（美名其曰美化，其实是偷偷摸鱼），网上大部分教程都是使用background插件来自定义vscode的背景图，这种方法需
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-29
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/tools/" class="post-category">
-                                    tools
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/VS-Code/">
-                        <span class="chip bg-color">VS Code</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-    </div>
-</article>
-
-</div>
-
-
-<script>
-    $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
-        if (typeof window.getSelection === 'undefined') return;
-
-        var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
-            return;
-        }
-
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
-        var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '来源: Tlhg.0X<br />'
-            + '文章作者: Heisenberg Lee<br />'
-            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
-    });
-</script>
-
-
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
-
-<!-- 代码语言 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-
-<!-- 代码块复制 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
-
-
-<!-- 代码块折行 -->
-
-<style type="text/css">
-code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
-</style>
-
-
-    </div>
-    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget">
-            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
-            <div id="toc-content"></div>
-        </div>
-    </div>
-</div>
-
-<!-- TOC 悬浮按钮. -->
-
-<div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
-</div>
-
-
-<script src="/libs/tocbot/tocbot.min.js"></script>
-<script>
-    $(function () {
-        tocbot.init({
-            tocSelector: '#toc-content',
-            contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('0'),
-            headingSelector: 'h2, h3, h4'
-        });
-
-        // modify the toc link href to support Chinese.
-        let i = 0;
-        let tocHeading = 'toc-heading-';
-        $('#toc-content a').each(function () {
-            $(this).attr('href', '#' + tocHeading + (++i));
-        });
-
-        // modify the heading title id to support Chinese.
-        i = 0;
-        $('#articleContent').children('h2, h3, h4').each(function () {
-            $(this).attr('id', tocHeading + (++i));
-        });
-
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
-        let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
-            } else {
-                $tocWidget.removeClass('toc-fixed');
-            }
-        });
-
-        
-        /* 修复文章卡片 div 的宽度. */
-        let fixPostCardWidth = function (srcId, targetId) {
-            let srcDiv = $('#' + srcId);
-            if (srcDiv.length === 0) {
-                return;
-            }
-
-            let w = srcDiv.width();
-            if (w >= 450) {
-                w = w + 21;
-            } else if (w >= 350 && w < 450) {
-                w = w + 18;
-            } else if (w >= 300 && w < 350) {
-                w = w + 16;
-            } else {
-                w = w + 14;
-            }
-            $('#' + targetId).width(w);
-        };
-
-        // 切换TOC目录展开收缩的相关操作.
-        const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
-        let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).hide();
-                $mainContent.removeClass('l9');
-            } else {
-                $tocAside.addClass(expandedClass).show();
-                $mainContent.addClass('l9');
-            }
-            fixPostCardWidth('artDetail', 'prenext-posts');
-        });
-        
-    });
-</script>
-
-    
-
-</main>
-
-
-
-
-    <footer class="page-footer bg-color">
-    
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="770900633"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-
-    
-    <div class="container row center-align" style="margin-bottom: 15px !important;">
-        <div class="col s12 m8 l8 copy-right">
-            Copyright&nbsp;&copy;
-            <span id="year">2020</span>
-            <a href="http://tlhg.top" target="_blank">Heisenberg Lee</a>
-            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
-            <br>
-            
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">28.8k</span>&nbsp;字
-            
-            
-            
-            
-            
-            
-            <span id="busuanzi_container_site_pv">
-                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
-                    class="white-color"></span>&nbsp;次
-            </span>
-            
-            
-            <span id="busuanzi_container_site_uv">
-                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
-                    class="white-color"></span>&nbsp;人
-            </span>
-            
-            <br>
-            
-            <span id="sitetime">载入运行时间...</span>
-            <script>
-                function siteTime() {
-                    var seconds = 1000;
-                    var minutes = seconds * 60;
-                    var hours = minutes * 60;
-                    var days = hours * 24;
-                    var years = days * 365;
-                    var today = new Date();
-                    var startYear = "2020";
-                    var startMonth = "2";
-                    var startDate = "18";
-                    var startHour = "0";
-                    var startMinute = "0";
-                    var startSecond = "0";
-                    var todayYear = today.getFullYear();
-                    var todayMonth = today.getMonth() + 1;
-                    var todayDate = today.getDate();
-                    var todayHour = today.getHours();
-                    var todayMinute = today.getMinutes();
-                    var todaySecond = today.getSeconds();
-                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
-                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-                    var diff = t2 - t1;
-                    var diffYears = Math.floor(diff / years);
-                    var diffDays = Math.floor((diff / days) - diffYears * 365);
-                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
-                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
-                        minutes);
-                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
-                        diffMinutes * minutes) / seconds);
-                    if (startYear == todayYear) {
-                        document.getElementById("year").innerHTML = todayYear;
-                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
-                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
-                    } else {
-                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
-                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
-                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
-                    }
-                }
-                setInterval(siteTime, 1000);
-            </script>
-            
-            <br>
-            
-        </div>
-        <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/Tlhg-0" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
-
-
-
-    <a href="mailto:847607350@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=847607350" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 847607350" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-    <a href="https://weibo.com/3295102785" class="tooltipped" target="_blank" data-tooltip="关注我的微博: https://weibo.com/3295102785" data-position="top" data-delay="50">
-        <i class="fab fa-weibo"></i>
-    </a>
-
-
-
-
-
-</div>
-    </div>
-</footer>
-
-<div class="progress-bar"></div>
-
-
-    <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
-    <div class="modal-content">
-        <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
-            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
-        </div>
-        <div id="searchResult"></div>
-    </div>
-</div>
-
-<script src="/js/search.js"></script>
-<script type="text/javascript">
-$(function () {
-    searchFunc("/search.xml", 'searchInput', 'searchResult');
-});
-</script>
-
-    <!-- 回到顶部按钮 -->
-<div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-</div>
-
-
-    <script src="/libs/materialize/materialize.min.js"></script>
-    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/libs/aos/aos.js"></script>
-    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/js/matery.js"></script>
-
-    <!-- Baidu Analytics -->
-
-    <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
-
-    
-    <script src="/libs/others/clicklove.js" async="async"></script>
-    
-    
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
-    
-
-    
-
-    
-
-    
-    <script type="text/javascript" color="0,0,255"
-        pointColor="0,0,255" opacity='0.7'
-        zIndex="-1" count="99"
-        src="/libs/background/canvas-nest.js"></script>
-    
-
-    
-
-    
-    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
-    
-
-    
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
-    	
-
+      </script></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Heisenberg Lee</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://tlhg.top/posts/d1a9.html">http://tlhg.top/posts/d1a9.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://tlhg.top" target="_blank">Tlhg.0X</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C-primer/">C++ primer</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><button class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="/picture/wechat.jpg" alt="wechat" onclick="window.open('/picture/wechat.jpg')"/><div class="post-qr-code__desc">wechat</div></li><li class="reward-item"><img class="post-qr-code__img" src="/picture/alipay.jpg" alt="alipay" onclick="window.open('/picture/alipay.jpg')"/><div class="post-qr-code__desc">alipay</div></li></ul></div></button></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/33f.html"><img class="prev-cover" data-src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C++ 构造和析构(派生类对象)</div></div></a></div><div class="next-post pull-right"><a href="/posts/7060.html"><img class="next-cover" data-src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200529162413.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">VS Code edit background</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/posts/2c92.html" title="C++ 多态性-虚函数"><img class="relatedPosts_cover" data-src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-09</div><div class="relatedPosts_title">C++ 多态性-虚函数</div></div></a></div><div class="relatedPosts_item"><a href="/posts/728c.html" title="C++ 多态性-纯虚函数&抽象类"><img class="relatedPosts_cover" data-src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-09</div><div class="relatedPosts_title">C++ 多态性-纯虚函数&抽象类</div></div></a></div><div class="relatedPosts_item"><a href="/posts/33f.html" title="C++ 构造和析构(派生类对象)"><img class="relatedPosts_cover" data-src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-07</div><div class="relatedPosts_title">C++ 构造和析构(派生类对象)</div></div></a></div><div class="relatedPosts_item"><a href="/posts/12a5.html" title="C++ 运算符重载"><img class="relatedPosts_cover" data-src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-10</div><div class="relatedPosts_title">C++ 运算符重载</div></div></a></div><div class="relatedPosts_item"><a href="/posts/2c6d.html" title="C++ 继承"><img class="relatedPosts_cover" data-src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-07</div><div class="relatedPosts_title">C++ 继承</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var requestSetting = function (from,set) {
+  var from = from
+  var setting = set.split(',').filter(function(item){
+  return from.indexOf(item) > -1
+  });
+  setting = setting.length == 0 ? from :setting;
+  return setting
+}
+
+var guestInfo = requestSetting(['nick','mail','link'],'nick,mail,link')
+var requiredFields = requestSetting(['nick','mail'],'nick,mail')
+
+window.valine = new Valine({
+  el:'#vcomment',
+  appId: 'AA9eNAftQgfjEcK3l0j71rDS-gzGzoHsz',
+  appKey: 'E1r06kyXdl3RxWbXxaUQ6tPg',
+  placeholder: '记得留下你的昵称和邮箱....可以快速收到回复',
+  avatar: 'monsterid',
+  meta: guestInfo,
+  pageSize: '10',
+  lang: 'en',
+  recordIP: false,
+  serverURLs: '',
+  emojiCDN: '',
+  emojiMaps: "",
+  enableQQ: false,
+  requiredFields: requiredFields
+});</script></div></article></main><footer id="footer" style="background-image: url(https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/C++pro.png)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By Heisenberg Lee</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://jerryc.me/" target="_blank" rel="noopener">blog</a>!</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><button id="readmode" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" title="缩小字体"><i class="fas fa-minus"></i></button><button class="translate_chn_to_cht" id="translateLink" title="简繁转换">繁</button><button id="darkmode" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fas fa-comments"></i></a><button class="close" id="mobile-toc-button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="false" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="/js/third-party/ClickShowText.js"></script><script src="/js/search/local-search.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script>
         <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
         <script>
         $('a').each(function() {
@@ -1709,6 +328,4 @@ $(function () {
             }
           }
         });
-        </script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"live2d-widget-model-hijiki"},"display":{"superSample":2,"width":250,"height":500,"position":"right"},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2}});</script></body>
-
-</html>
+        </script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"live2d-widget-model-hijiki"},"display":{"superSample":2,"width":250,"height":500,"position":"right"},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2}});</script></body></html>

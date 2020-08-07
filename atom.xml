@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tlhg.top/"/>
-  <updated>2020-08-01T02:09:39.689Z</updated>
+  <updated>2020-08-07T12:07:21.649Z</updated>
   <id>http://tlhg.top/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>C++ 运算符重载</title>
-    <link href="http://tlhg.top/posts/12a5.html"/>
-    <id>http://tlhg.top/posts/12a5.html</id>
-    <published>2020-06-10T01:58:55.000Z</published>
-    <updated>2020-08-01T02:09:39.689Z</updated>
+    <title>数理逻辑</title>
+    <link href="http://tlhg.top/posts/8463.html"/>
+    <id>http://tlhg.top/posts/8463.html</id>
+    <published>2020-08-03T03:04:54.000Z</published>
+    <updated>2020-08-07T12:07:21.649Z</updated>
     
     <summary type="html">
     
@@ -29,7 +29,68 @@
       
         
         
-          &lt;h1 id=&quot;运算符重载&quot;&gt;&lt;a href=&quot;#运算符重载&quot; class=&quot;headerlink&quot; title=&quot;运算符重载&quot;&gt;&lt;/a&gt;&lt;center&gt;运算符重载&lt;/center&gt;&lt;/h1&gt;&lt;h2 id=&quot;1-运算符重载&quot;&gt;&lt;a href=&quot;#1-运算符重载&quot;
+          &lt;h2 id=&quot;命题逻辑的基本概念&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#命题逻辑的基本概念&quot;&gt;&lt;/a&gt; 命题逻辑的基本概念&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;五个基本的逻辑连接词&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img
+        
+      
+    
+    </summary>
+    
+    
+      <category term="mathematics" scheme="http://tlhg.top/categories/mathematics/"/>
+    
+    
+      <category term="discrete mathematics" scheme="http://tlhg.top/tags/discrete-mathematics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>EOP 脱壳常用方法</title>
+    <link href="http://tlhg.top/posts/45e4.html"/>
+    <id>http://tlhg.top/posts/45e4.html</id>
+    <published>2020-07-01T05:23:20.000Z</published>
+    <updated>2020-08-07T06:15:44.900Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;0x1-oep&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#0x1-oep&quot;&gt;&lt;/a&gt; 0X1 OEP&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;OEP：(Original Entry
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Crack" scheme="http://tlhg.top/categories/Crack/"/>
+    
+    
+      <category term="Shelling method" scheme="http://tlhg.top/tags/Shelling-method/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++ 运算符重载</title>
+    <link href="http://tlhg.top/posts/12a5.html"/>
+    <id>http://tlhg.top/posts/12a5.html</id>
+    <published>2020-06-10T01:58:55.000Z</published>
+    <updated>2020-08-07T12:08:57.102Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;运算符重载&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#运算符重载&quot;&gt;&lt;/a&gt; 运算符重载&lt;/h2&gt;
+&lt;h3 id=&quot;基础&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#基础&quot;&gt;&lt;/a&gt;
         
       
     
@@ -46,7 +107,7 @@
     <link href="http://tlhg.top/posts/728c.html"/>
     <id>http://tlhg.top/posts/728c.html</id>
     <published>2020-06-09T12:53:23.000Z</published>
-    <updated>2020-07-31T13:34:05.312Z</updated>
+    <updated>2020-08-07T13:15:14.828Z</updated>
     
     <summary type="html">
     
@@ -54,7 +115,7 @@
       
         
         
-          &lt;h1 id=&quot;虚析构函数、纯虚函数与抽象类&quot;&gt;&lt;a href=&quot;#虚析构函数、纯虚函数与抽象类&quot; class=&quot;headerlink&quot; title=&quot;虚析构函数、纯虚函数与抽象类&quot;&gt;&lt;/a&gt;&lt;center&gt;虚析构函数、纯虚函数与抽象类&lt;/center&gt;&lt;/h1&gt;&lt;h1
+          &lt;h1 id=&quot;虚析构函数&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#虚析构函数&quot;&gt;&lt;/a&gt;
         
       
     
@@ -73,7 +134,7 @@
     <link href="http://tlhg.top/posts/2c92.html"/>
     <id>http://tlhg.top/posts/2c92.html</id>
     <published>2020-06-09T02:24:11.000Z</published>
-    <updated>2020-07-31T13:33:45.476Z</updated>
+    <updated>2020-08-07T13:19:28.119Z</updated>
     
     <summary type="html">
     
@@ -81,7 +142,9 @@
       
         
         
-          &lt;h1 id=&quot;C-多态性-虚函数&quot;&gt;&lt;a href=&quot;#C-多态性-虚函数&quot; class=&quot;headerlink&quot; title=&quot;C++ 多态性-虚函数&quot;&gt;&lt;/a&gt;&lt;center&gt;C++ 多态性-虚函数&lt;/center&gt;&lt;/h1&gt;&lt;h2 id=&quot;1、虚函数&quot;&gt;&lt;a
+          &lt;h2 id=&quot;虚函数&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#虚函数&quot;&gt;&lt;/a&gt; 虚函数&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在C++ 基类&amp;amp;派生类中讲过，基类对象 &lt;strong&gt;&amp;amp;&lt;/strong&gt;
         
       
     
@@ -100,7 +163,7 @@
     <link href="http://tlhg.top/posts/2c6d.html"/>
     <id>http://tlhg.top/posts/2c6d.html</id>
     <published>2020-06-07T11:33:09.000Z</published>
-    <updated>2020-07-31T13:30:44.381Z</updated>
+    <updated>2020-08-07T12:26:57.497Z</updated>
     
     <summary type="html">
     
@@ -108,7 +171,8 @@
       
         
         
-          &lt;h1 id=&quot;C-继承&quot;&gt;&lt;a href=&quot;#C-继承&quot; class=&quot;headerlink&quot; title=&quot;C++ 继承&quot;&gt;&lt;/a&gt;&lt;center&gt;C++ 继承&lt;/center&gt;&lt;/h1&gt;&lt;h2 id=&quot;1-C-继承的语法形式&quot;&gt;&lt;a href=&quot;#1-C-继承的语法形式&quot;
+          &lt;p&gt;C++ 继承的语法形式&lt;/p&gt;
+&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span
         
       
     
@@ -127,7 +191,7 @@
     <link href="http://tlhg.top/posts/33f.html"/>
     <id>http://tlhg.top/posts/33f.html</id>
     <published>2020-06-07T03:44:40.000Z</published>
-    <updated>2020-07-31T13:31:26.375Z</updated>
+    <updated>2020-08-07T12:17:51.762Z</updated>
     
     <summary type="html">
     
@@ -135,7 +199,7 @@
       
         
         
-          &lt;h1 id=&quot;派生类对象的构造和析构顺序-amp-原则&quot;&gt;&lt;a href=&quot;#派生类对象的构造和析构顺序-amp-原则&quot; class=&quot;headerlink&quot;
+          &lt;h2 id=&quot;派生类对象的构造顺序&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#派生类对象的构造顺序&quot;&gt;&lt;/a&gt;
         
       
     
@@ -154,7 +218,7 @@
     <link href="http://tlhg.top/posts/d1a9.html"/>
     <id>http://tlhg.top/posts/d1a9.html</id>
     <published>2020-05-30T00:44:37.000Z</published>
-    <updated>2020-07-31T13:36:10.868Z</updated>
+    <updated>2020-08-07T13:22:25.813Z</updated>
     
     <summary type="html">
     
@@ -162,7 +226,8 @@
       
         
         
-          &lt;h1 id=&quot;基类-amp-派生&quot;&gt;&lt;a href=&quot;#基类-amp-派生&quot; class=&quot;headerlink&quot; title=&quot;基类&amp;amp;派生&quot;&gt;&lt;/a&gt;&lt;center&gt;基类&amp;amp;派生&lt;/center&gt;&lt;/h1&gt;&lt;h2 id=&quot;一、基类-amp-派生类的关系&quot;&gt;&lt;a
+          &lt;p&gt;基类&amp;amp;派生类的关系&lt;/p&gt;
+&lt;h3 id=&quot;派生类拥有基类的数据成员和成员函数&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#派生类拥有基类的数据成员和成员函数&quot;&gt;&lt;/a&gt;
         
       
     
@@ -181,7 +246,7 @@
     <link href="http://tlhg.top/posts/7060.html"/>
     <id>http://tlhg.top/posts/7060.html</id>
     <published>2020-05-29T06:19:19.000Z</published>
-    <updated>2020-07-31T13:37:43.202Z</updated>
+    <updated>2020-08-07T13:25:28.145Z</updated>
     
     <summary type="html">
     
@@ -189,7 +254,8 @@
       
         
         
-          &lt;h1 id=&quot;VS-Code-edit-background&quot;&gt;&lt;a href=&quot;#VS-Code-edit-background&quot; class=&quot;headerlink&quot; title=&quot;VS Code edit background &quot;&gt;&lt;/a&gt;&lt;center&gt;VS Code
+          &lt;h1 id=&quot;前言&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#前言&quot;&gt;&lt;/a&gt; 前言&lt;/h1&gt;
+&lt;p&gt;  今天用VS Code
         
       
     
@@ -208,7 +274,7 @@
     <link href="http://tlhg.top/posts/b01d.html"/>
     <id>http://tlhg.top/posts/b01d.html</id>
     <published>2020-05-19T09:50:05.000Z</published>
-    <updated>2020-07-31T13:35:01.851Z</updated>
+    <updated>2020-08-03T05:25:01.552Z</updated>
     
     <summary type="html">
     
@@ -216,7 +282,8 @@
       
         
         
-          &lt;h1 id=&quot;Markdown-grammer&quot;&gt;&lt;a href=&quot;#Markdown-grammer&quot; class=&quot;headerlink&quot; title=&quot;Markdown grammer&quot;&gt;&lt;/a&gt;&lt;center&gt;Markdown
+          &lt;h2 id=&quot;正文&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#正文&quot;&gt;&lt;/a&gt; 正文&lt;/h2&gt;
+&lt;h3 id=&quot;1-markdown是什么&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;
         
       
     
@@ -235,7 +302,7 @@
     <link href="http://tlhg.top/posts/7b5d.html"/>
     <id>http://tlhg.top/posts/7b5d.html</id>
     <published>2020-05-10T03:12:16.059Z</published>
-    <updated>2020-07-31T13:38:20.501Z</updated>
+    <updated>2020-08-03T05:24:50.030Z</updated>
     
     <summary type="html">
     
@@ -243,34 +310,7 @@
       
         
         
-          &lt;h1 id=&quot;Front-matter&quot;&gt;&lt;a href=&quot;#Front-matter&quot; class=&quot;headerlink&quot; title=&quot;Front-matter&quot;&gt;&lt;/a&gt;&lt;center&gt;Front-matter&lt;/center&gt;&lt;/h1&gt;&lt;iframe
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Blog" scheme="http://tlhg.top/categories/Blog/"/>
-    
-    
-      <category term="Hexo" scheme="http://tlhg.top/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://tlhg.top/posts/3eeb.html"/>
-    <id>http://tlhg.top/posts/3eeb.html</id>
-    <published>2020-05-09T01:48:01.059Z</published>
-    <updated>2020-05-30T00:50:18.325Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
+          &lt;iframe src=&quot;https://www.youtube.com/embed/Rl48Yk4A_V8&quot; frameborder=&quot;0&quot; loading=&quot;lazy&quot; allowfullscreen=&quot;&quot; style=&quot;box-sizing: inherit;
         
       
     
@@ -289,7 +329,7 @@
     <link href="http://tlhg.top/posts/fef1.html"/>
     <id>http://tlhg.top/posts/fef1.html</id>
     <published>2020-05-02T06:55:31.000Z</published>
-    <updated>2020-07-31T13:38:08.230Z</updated>
+    <updated>2020-08-07T13:25:52.612Z</updated>
     
     <summary type="html">
     
@@ -298,7 +338,7 @@
         
         
           &lt;p&gt;转载此文章前，请先联系作者，经作者同意后再转载，并请注明原文链接和作者，整理这些不容易，最终版权归作者所有，谢谢合作！&lt;/p&gt;
-&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+&lt;p&gt;你了解Hexo吗？
         
       
     
@@ -311,6 +351,61 @@
       <category term="Hexo" scheme="http://tlhg.top/tags/Hexo/"/>
     
       <category term="matery" scheme="http://tlhg.top/tags/matery/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++ getline()</title>
+    <link href="http://tlhg.top/posts/87ea.html"/>
+    <id>http://tlhg.top/posts/87ea.html</id>
+    <published>2020-04-04T14:50:35.000Z</published>
+    <updated>2020-08-07T06:17:47.997Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;虽然可以使用 cin 和 &amp;gt;&amp;gt; 运算符来输入字符串，但它可能会导致一些需要注意的问题。&lt;/p&gt;
+&lt;p&gt;当 cin
+        
+      
+    
+    </summary>
+    
+    
+      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
+    
+    
+      <category term="function" scheme="http://tlhg.top/tags/function/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Chapter03 字符串、向量和数组</title>
+    <link href="http://tlhg.top/posts/1d50.html"/>
+    <id>http://tlhg.top/posts/1d50.html</id>
+    <published>2020-04-03T13:54:37.000Z</published>
+    <updated>2020-08-07T13:11:28.333Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;命名空间的using声明namespace-using-declarations&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#命名空间的using声明namespace-using-declarations&quot;&gt;&lt;/a&gt;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
+    
+    
+      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
     
   </entry>
   

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tlhg.top/"/>
-  <updated>2020-08-07T12:07:21.649Z</updated>
+  <updated>2020-08-13T12:42:57.502Z</updated>
   <id>http://tlhg.top/</id>
   
   <author>
@@ -17,11 +17,35 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>LaTeX公式-Katex解析</title>
+    <link href="http://tlhg.top/posts/6d4d.html"/>
+    <id>http://tlhg.top/posts/6d4d.html</id>
+    <published>2020-08-09T11:41:13.000Z</published>
+    <updated>2020-08-13T12:42:57.502Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;概念&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#概念&quot;&gt;&lt;/a&gt; 概念&lt;/h2&gt;
+&lt;p&gt;LaTeX是一种基于ΤΕΧ的排版系统，由美国计算机学家莱斯利·兰伯特（Leslie
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>数理逻辑</title>
     <link href="http://tlhg.top/posts/8463.html"/>
     <id>http://tlhg.top/posts/8463.html</id>
     <published>2020-08-03T03:04:54.000Z</published>
-    <updated>2020-08-07T12:07:21.649Z</updated>
+    <updated>2020-08-13T11:34:32.431Z</updated>
     
     <summary type="html">
     
@@ -52,7 +76,7 @@
     <link href="http://tlhg.top/posts/45e4.html"/>
     <id>http://tlhg.top/posts/45e4.html</id>
     <published>2020-07-01T05:23:20.000Z</published>
-    <updated>2020-08-07T06:15:44.900Z</updated>
+    <updated>2020-08-13T13:03:56.987Z</updated>
     
     <summary type="html">
     
@@ -298,33 +322,6 @@
   </entry>
   
   <entry>
-    <title>Front-matter</title>
-    <link href="http://tlhg.top/posts/7b5d.html"/>
-    <id>http://tlhg.top/posts/7b5d.html</id>
-    <published>2020-05-10T03:12:16.059Z</published>
-    <updated>2020-08-03T05:24:50.030Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;iframe src=&quot;https://www.youtube.com/embed/Rl48Yk4A_V8&quot; frameborder=&quot;0&quot; loading=&quot;lazy&quot; allowfullscreen=&quot;&quot; style=&quot;box-sizing: inherit;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Blog" scheme="http://tlhg.top/categories/Blog/"/>
-    
-    
-      <category term="Hexo" scheme="http://tlhg.top/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Hexo+github搭建博客</title>
     <link href="http://tlhg.top/posts/fef1.html"/>
     <id>http://tlhg.top/posts/fef1.html</id>
@@ -351,6 +348,90 @@
       <category term="Hexo" scheme="http://tlhg.top/tags/Hexo/"/>
     
       <category term="matery" scheme="http://tlhg.top/tags/matery/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Exercise of chapter 05</title>
+    <link href="http://tlhg.top/posts/3ea6.html"/>
+    <id>http://tlhg.top/posts/3ea6.html</id>
+    <published>2020-04-09T08:40:13.000Z</published>
+    <updated>2020-08-13T12:55:45.262Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;exercise_51&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#exercise_51&quot;&gt;&lt;/a&gt; exercise_5.1&lt;/h2&gt;
+&lt;figure class=&quot;highlight
+        
+      
+    
+    </summary>
+    
+    
+      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
+    
+    
+      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Exercise of chapter 04</title>
+    <link href="http://tlhg.top/posts/5cc1.html"/>
+    <id>http://tlhg.top/posts/5cc1.html</id>
+    <published>2020-04-07T06:35:26.000Z</published>
+    <updated>2020-08-13T12:55:40.123Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;exercise_41&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#exercise_41&quot;&gt;&lt;/a&gt; Exercise_4.1&lt;/h2&gt;
+&lt;figure class=&quot;highlight
+        
+      
+    
+    </summary>
+    
+    
+      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
+    
+    
+      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Chapter04 表达式</title>
+    <link href="http://tlhg.top/posts/45e4.html"/>
+    <id>http://tlhg.top/posts/45e4.html</id>
+    <published>2020-04-07T05:23:20.000Z</published>
+    <updated>2020-08-12T07:50:55.642Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;第4章-表达式&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#第4章-表达式&quot;&gt;&lt;/a&gt; 第4章 表达式&lt;/h1&gt;
+&lt;h2 id=&quot;基础fundamentals&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
+    
+    
+      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
     
   </entry>
   
@@ -383,11 +464,39 @@
   </entry>
   
   <entry>
+    <title>Exercise of chapter 3</title>
+    <link href="http://tlhg.top/posts/a5.html"/>
+    <id>http://tlhg.top/posts/a5.html</id>
+    <published>2020-04-04T05:55:05.000Z</published>
+    <updated>2020-08-13T12:55:32.985Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;exercise-32&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#exercise-32&quot;&gt;&lt;/a&gt; Exercise 3.2&lt;/h2&gt;
+&lt;figure class=&quot;highlight
+        
+      
+    
+    </summary>
+    
+    
+      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
+    
+    
+      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Chapter03 字符串、向量和数组</title>
     <link href="http://tlhg.top/posts/1d50.html"/>
     <id>http://tlhg.top/posts/1d50.html</id>
     <published>2020-04-03T13:54:37.000Z</published>
-    <updated>2020-08-07T13:11:28.333Z</updated>
+    <updated>2020-08-11T05:51:18.166Z</updated>
     
     <summary type="html">
     

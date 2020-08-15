@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tlhg.top/"/>
-  <updated>2020-08-13T12:42:57.502Z</updated>
+  <updated>2020-08-15T13:43:21.692Z</updated>
   <id>http://tlhg.top/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>集合论</title>
+    <link href="http://tlhg.top/posts/ec8c.html"/>
+    <id>http://tlhg.top/posts/ec8c.html</id>
+    <published>2020-08-14T06:27:21.000Z</published>
+    <updated>2020-08-15T13:43:21.692Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;集合的基本概念及运算&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#集合的基本概念及运算&quot;&gt;&lt;/a&gt; 集合的基本概念及运算&lt;/h2&gt;
+&lt;p&gt;定 义：由离散个体构成的整体称为集合, 称这些个体为集合的元素&lt;br&gt;
+全集 E
+        
+      
+    
+    </summary>
+    
+    
+      <category term="mathematics" scheme="http://tlhg.top/categories/mathematics/"/>
+    
+    
+      <category term="discrete mathematics" scheme="http://tlhg.top/tags/discrete-mathematics/"/>
+    
+  </entry>
   
   <entry>
     <title>LaTeX公式-Katex解析</title>

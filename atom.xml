@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tlhg.top/"/>
-  <updated>2020-08-16T09:39:28.543Z</updated>
+  <updated>2020-08-17T13:44:11.184Z</updated>
   <id>http://tlhg.top/</id>
   
   <author>
@@ -17,11 +17,41 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>图论</title>
+    <link href="http://tlhg.top/posts/262a.html"/>
+    <id>http://tlhg.top/posts/262a.html</id>
+    <published>2020-08-17T08:07:03.000Z</published>
+    <updated>2020-08-17T13:44:11.184Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;图的基本概念之一&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#图的基本概念之一&quot;&gt;&lt;/a&gt; 图的基本概念之一&lt;/h2&gt;
+&lt;p&gt;定 义：&lt;br&gt;
+无向图G = &amp;lt;V,E&amp;gt;, 其中&lt;br&gt;
+(1)　&lt;span
+        
+      
+    
+    </summary>
+    
+    
+      <category term="mathematics" scheme="http://tlhg.top/categories/mathematics/"/>
+    
+    
+      <category term="discrete mathematics" scheme="http://tlhg.top/tags/discrete-mathematics/"/>
+    
+  </entry>
+  
+  <entry>
     <title>集合论</title>
     <link href="http://tlhg.top/posts/ec8c.html"/>
     <id>http://tlhg.top/posts/ec8c.html</id>
     <published>2020-08-14T06:27:21.000Z</published>
-    <updated>2020-08-16T09:39:28.543Z</updated>
+    <updated>2020-08-17T13:51:01.842Z</updated>
     
     <summary type="html">
     

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tlhg.top/"/>
-  <updated>2020-10-05T09:20:33.633Z</updated>
+  <updated>2020-10-13T15:27:24.685Z</updated>
   <id>http://tlhg.top/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>学习国外种子行业，摆脱种子进口依赖</title>
-    <link href="http://tlhg.top/posts/e20e.html"/>
-    <id>http://tlhg.top/posts/e20e.html</id>
-    <published>2020-10-04T11:46:08.000Z</published>
-    <updated>2020-10-05T09:20:33.633Z</updated>
+    <title>SQL Server notes</title>
+    <link href="http://tlhg.top/posts/9554.html"/>
+    <id>http://tlhg.top/posts/9554.html</id>
+    <published>2020-10-13T13:42:58.000Z</published>
+    <updated>2020-10-13T15:27:24.685Z</updated>
     
     <summary type="html">
     
@@ -29,14 +29,18 @@
       
         
         
-          &lt;p&gt;&lt;strong&gt;&lt;/strong&gt;&lt;/p&gt;&lt;center&gt;&lt;strong&gt;学习国外种子行业，摆脱种子进口依赖&lt;/strong&gt;&lt;/center&gt;&lt;p&gt;&lt;/p&gt;
-&lt;p&gt;近年来，中国种子进口贸易十分活跃，贸易量和贸易
+          &lt;h1 id=&quot;sql&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#sql&quot;&gt;&lt;/a&gt; SQL&lt;/h1&gt;
+&lt;h2 id=&quot;数据库的结构&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#数据库的结构&quot;&gt;&lt;/a&gt;
         
       
     
     </summary>
     
     
+      <category term="SQL" scheme="http://tlhg.top/categories/SQL/"/>
+    
+    
+      <category term="SQL Server" scheme="http://tlhg.top/tags/SQL-Server/"/>
     
   </entry>
   
@@ -45,7 +49,7 @@
     <link href="http://tlhg.top/posts/a89f.html"/>
     <id>http://tlhg.top/posts/a89f.html</id>
     <published>2020-09-27T14:49:24.000Z</published>
-    <updated>2020-10-04T10:29:23.024Z</updated>
+    <updated>2020-10-05T14:30:40.997Z</updated>
     
     <summary type="html">
     

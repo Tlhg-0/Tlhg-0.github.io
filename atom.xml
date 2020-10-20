@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tlhg.top/"/>
-  <updated>2020-10-13T15:27:24.685Z</updated>
+  <updated>2020-10-20T15:05:36.518Z</updated>
   <id>http://tlhg.top/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>SQL Server notes</title>
-    <link href="http://tlhg.top/posts/9554.html"/>
-    <id>http://tlhg.top/posts/9554.html</id>
-    <published>2020-10-13T13:42:58.000Z</published>
-    <updated>2020-10-13T15:27:24.685Z</updated>
+    <title>Function call Convention</title>
+    <link href="http://tlhg.top/posts/a251.html"/>
+    <id>http://tlhg.top/posts/a251.html</id>
+    <published>2020-10-18T09:12:13.000Z</published>
+    <updated>2020-10-20T15:05:36.518Z</updated>
     
     <summary type="html">
     
@@ -29,8 +29,123 @@
       
         
         
-          &lt;h1 id=&quot;sql&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#sql&quot;&gt;&lt;/a&gt; SQL&lt;/h1&gt;
-&lt;h2 id=&quot;数据库的结构&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#数据库的结构&quot;&gt;&lt;/a&gt;
+          &lt;h2 id=&quot;cdecl&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#cdecl&quot;&gt;&lt;/a&gt; cdecl&lt;/h2&gt;
+&lt;p&gt;cdecl是C语言中使用的调用方式，调用者负责处理栈&lt;/p&gt;
+&lt;figure class=&quot;highlight
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Reversing" scheme="http://tlhg.top/categories/Reversing/"/>
+    
+    
+      <category term="Register" scheme="http://tlhg.top/tags/Register/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Stack frame</title>
+    <link href="http://tlhg.top/posts/a7dd.html"/>
+    <id>http://tlhg.top/posts/a7dd.html</id>
+    <published>2020-10-17T11:46:50.000Z</published>
+    <updated>2020-10-20T15:01:54.787Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;什么是栈帧&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#什么是栈帧&quot;&gt;&lt;/a&gt;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Reversing" scheme="http://tlhg.top/categories/Reversing/"/>
+    
+    
+      <category term="Register" scheme="http://tlhg.top/tags/Register/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IA-32 register</title>
+    <link href="http://tlhg.top/posts/1a06.html"/>
+    <id>http://tlhg.top/posts/1a06.html</id>
+    <published>2020-10-16T14:54:54.000Z</published>
+    <updated>2020-10-20T15:05:46.779Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;strong&gt;基本程序运行寄存器&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;通用寄存器 （General Purpse Resigisters,32位，8个）&lt;/p&gt;
+&lt;p&gt;段寄存器 （Segment Register，16位，6个）&lt;/p&gt;
+&lt;p&gt;程序状态与控制寄存器
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Reversing" scheme="http://tlhg.top/categories/Reversing/"/>
+    
+    
+      <category term="Register" scheme="http://tlhg.top/tags/Register/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据更新</title>
+    <link href="http://tlhg.top/posts/b1de.html"/>
+    <id>http://tlhg.top/posts/b1de.html</id>
+    <published>2020-10-14T09:12:49.000Z</published>
+    <updated>2020-10-17T08:43:49.893Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;插入数据&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#插入数据&quot;&gt;&lt;/a&gt; 插入数据&lt;/h2&gt;
+&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td
+        
+      
+    
+    </summary>
+    
+    
+      <category term="SQL" scheme="http://tlhg.top/categories/SQL/"/>
+    
+    
+      <category term="SQL Server" scheme="http://tlhg.top/tags/SQL-Server/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据库和数据表</title>
+    <link href="http://tlhg.top/posts/9554.html"/>
+    <id>http://tlhg.top/posts/9554.html</id>
+    <published>2020-10-13T13:42:58.000Z</published>
+    <updated>2020-10-14T09:13:38.750Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;数据库的结构&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#数据库的结构&quot;&gt;&lt;/a&gt; 数据库的结构&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;数据库的结构&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;从逻辑上看：
         
       
     
@@ -461,118 +576,6 @@
         
         
           &lt;h2 id=&quot;简单语句simple-statements&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#简单语句simple-statements&quot;&gt;&lt;/a&gt; 简单语句（Simple
-        
-      
-    
-    </summary>
-    
-    
-      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
-    
-    
-      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Exercise of chapter 04</title>
-    <link href="http://tlhg.top/posts/5cc1.html"/>
-    <id>http://tlhg.top/posts/5cc1.html</id>
-    <published>2020-04-07T06:35:26.000Z</published>
-    <updated>2020-08-13T12:55:40.123Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;exercise_41&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#exercise_41&quot;&gt;&lt;/a&gt; Exercise_4.1&lt;/h2&gt;
-&lt;figure class=&quot;highlight
-        
-      
-    
-    </summary>
-    
-    
-      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
-    
-    
-      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Chapter04 表达式</title>
-    <link href="http://tlhg.top/posts/45e4.html"/>
-    <id>http://tlhg.top/posts/45e4.html</id>
-    <published>2020-04-07T05:23:20.000Z</published>
-    <updated>2020-08-12T07:50:55.642Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;第4章-表达式&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#第4章-表达式&quot;&gt;&lt;/a&gt; 第4章 表达式&lt;/h1&gt;
-&lt;h2 id=&quot;基础fundamentals&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
-    
-    
-      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++ getline()</title>
-    <link href="http://tlhg.top/posts/87ea.html"/>
-    <id>http://tlhg.top/posts/87ea.html</id>
-    <published>2020-04-04T14:50:35.000Z</published>
-    <updated>2020-08-07T06:17:47.997Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;虽然可以使用 cin 和 &amp;gt;&amp;gt; 运算符来输入字符串，但它可能会导致一些需要注意的问题。&lt;/p&gt;
-&lt;p&gt;当 cin
-        
-      
-    
-    </summary>
-    
-    
-      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
-    
-    
-      <category term="function" scheme="http://tlhg.top/tags/function/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Exercise of chapter 3</title>
-    <link href="http://tlhg.top/posts/a5.html"/>
-    <id>http://tlhg.top/posts/a5.html</id>
-    <published>2020-04-04T05:55:05.000Z</published>
-    <updated>2020-08-13T12:55:32.985Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;exercise-32&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#exercise-32&quot;&gt;&lt;/a&gt; Exercise 3.2&lt;/h2&gt;
-&lt;figure class=&quot;highlight
         
       
     

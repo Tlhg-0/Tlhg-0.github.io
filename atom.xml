@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tlhg.top/"/>
-  <updated>2020-10-22T00:28:48.732Z</updated>
+  <updated>2020-11-17T11:41:37.769Z</updated>
   <id>http://tlhg.top/</id>
   
   <author>
@@ -17,11 +17,100 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Git Command List</title>
+    <link href="http://tlhg.top/posts/5a5a.html"/>
+    <id>http://tlhg.top/posts/5a5a.html</id>
+    <published>2020-11-17T11:13:33.000Z</published>
+    <updated>2020-11-17T11:41:37.769Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;常用 Git 命令清单。几个专用名词的译名如下。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Workspace：工作区
+Index / Stage：暂存区
+Repository：仓库区（或本地仓库）
+Remote：远程仓库
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1
+        
+      
+    
+    </summary>
+    
+    
+      <category term="tools" scheme="http://tlhg.top/categories/tools/"/>
+    
+    
+      <category term="get" scheme="http://tlhg.top/tags/get/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何实现单链表的反转</title>
+    <link href="http://tlhg.top/posts/f962.html"/>
+    <id>http://tlhg.top/posts/f962.html</id>
+    <published>2020-10-25T06:42:39.000Z</published>
+    <updated>2020-10-25T08:03:39.451Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;反转链表：将链表整体“反过来”，将头变成尾、尾变成头。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025144559.png&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Algorithm and data structure" scheme="http://tlhg.top/categories/Algorithm-and-data-structure/"/>
+    
+    
+      <category term="Data Structure" scheme="http://tlhg.top/tags/Data-Structure/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>线性表</title>
+    <link href="http://tlhg.top/posts/82e6.html"/>
+    <id>http://tlhg.top/posts/82e6.html</id>
+    <published>2020-10-25T02:09:03.000Z</published>
+    <updated>2020-11-01T14:59:40.215Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;顺序表&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#顺序表&quot;&gt;&lt;/a&gt; 顺序表&lt;/h1&gt;
+&lt;h2 id=&quot;顺序表初始化&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#顺序表初始化&quot;&gt;&lt;/a&gt;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Algorithm and data structure" scheme="http://tlhg.top/categories/Algorithm-and-data-structure/"/>
+    
+    
+      <category term="Data Structure" scheme="http://tlhg.top/tags/Data-Structure/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Function call Convention</title>
     <link href="http://tlhg.top/posts/a251.html"/>
     <id>http://tlhg.top/posts/a251.html</id>
     <published>2020-10-18T09:12:13.000Z</published>
-    <updated>2020-10-22T00:28:48.732Z</updated>
+    <updated>2020-10-22T06:59:24.898Z</updated>
     
     <summary type="html">
     
@@ -103,68 +192,11 @@
   </entry>
   
   <entry>
-    <title>数据更新</title>
-    <link href="http://tlhg.top/posts/b1de.html"/>
-    <id>http://tlhg.top/posts/b1de.html</id>
-    <published>2020-10-14T09:12:49.000Z</published>
-    <updated>2020-10-17T08:43:49.893Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;插入数据&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#插入数据&quot;&gt;&lt;/a&gt; 插入数据&lt;/h2&gt;
-&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td
-        
-      
-    
-    </summary>
-    
-    
-      <category term="SQL" scheme="http://tlhg.top/categories/SQL/"/>
-    
-    
-      <category term="SQL Server" scheme="http://tlhg.top/tags/SQL-Server/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据库和数据表</title>
-    <link href="http://tlhg.top/posts/9554.html"/>
-    <id>http://tlhg.top/posts/9554.html</id>
-    <published>2020-10-13T13:42:58.000Z</published>
-    <updated>2020-10-14T09:13:38.750Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;数据库的结构&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#数据库的结构&quot;&gt;&lt;/a&gt; 数据库的结构&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;数据库的结构&lt;/strong&gt;：&lt;/p&gt;
-&lt;p&gt;从逻辑上看：
-        
-      
-    
-    </summary>
-    
-    
-      <category term="SQL" scheme="http://tlhg.top/categories/SQL/"/>
-    
-    
-      <category term="SQL Server" scheme="http://tlhg.top/tags/SQL-Server/"/>
-    
-  </entry>
-  
-  <entry>
     <title>git</title>
     <link href="http://tlhg.top/posts/a89f.html"/>
     <id>http://tlhg.top/posts/a89f.html</id>
     <published>2020-09-27T14:49:24.000Z</published>
-    <updated>2020-10-05T14:30:40.997Z</updated>
+    <updated>2020-11-19T13:32:38.410Z</updated>
     
     <summary type="html">
     
@@ -187,95 +219,6 @@
     
     
       <category term="get" scheme="http://tlhg.top/tags/get/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>代数结构</title>
-    <link href="http://tlhg.top/posts/da3b.html"/>
-    <id>http://tlhg.top/posts/da3b.html</id>
-    <published>2020-08-21T08:47:41.000Z</published>
-    <updated>2020-08-21T13:12:34.546Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;代数系统&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#代数系统&quot;&gt;&lt;/a&gt; 代数系统&lt;/h2&gt;
-&lt;h3 id=&quot;元&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#元&quot;&gt;&lt;/a&gt; 元&lt;/h3&gt;
-&lt;p&gt;定
-        
-      
-    
-    </summary>
-    
-    
-      <category term="mathematics" scheme="http://tlhg.top/categories/mathematics/"/>
-    
-    
-      <category term="discrete mathematics" scheme="http://tlhg.top/tags/discrete-mathematics/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图论</title>
-    <link href="http://tlhg.top/posts/262a.html"/>
-    <id>http://tlhg.top/posts/262a.html</id>
-    <published>2020-08-17T08:07:03.000Z</published>
-    <updated>2020-09-16T13:02:25.920Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;图的基本概念之一&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#图的基本概念之一&quot;&gt;&lt;/a&gt; 图的基本概念之一&lt;/h2&gt;
-&lt;p&gt;定 义：&lt;br&gt;
-无向图G = &amp;lt;V,E&amp;gt;, 其中&lt;br&gt;
-(1)　&lt;span
-        
-      
-    
-    </summary>
-    
-    
-      <category term="mathematics" scheme="http://tlhg.top/categories/mathematics/"/>
-    
-    
-      <category term="discrete mathematics" scheme="http://tlhg.top/tags/discrete-mathematics/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>集合论</title>
-    <link href="http://tlhg.top/posts/ec8c.html"/>
-    <id>http://tlhg.top/posts/ec8c.html</id>
-    <published>2020-08-14T06:27:21.000Z</published>
-    <updated>2020-08-17T13:51:01.842Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;集合的基本概念及运算&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#集合的基本概念及运算&quot;&gt;&lt;/a&gt; 集合的基本概念及运算&lt;/h2&gt;
-&lt;p&gt;定 义：&lt;br&gt;
-由离散个体构成的整体称为集合, 称这些个体为集合的元素&lt;br&gt;
-全集 E
-        
-      
-    
-    </summary>
-    
-    
-      <category term="mathematics" scheme="http://tlhg.top/categories/mathematics/"/>
-    
-    
-      <category term="discrete mathematics" scheme="http://tlhg.top/tags/discrete-mathematics/"/>
     
   </entry>
   
@@ -304,42 +247,11 @@
   </entry>
   
   <entry>
-    <title>数理逻辑</title>
-    <link href="http://tlhg.top/posts/8463.html"/>
-    <id>http://tlhg.top/posts/8463.html</id>
-    <published>2020-08-03T03:04:54.000Z</published>
-    <updated>2020-08-16T06:26:04.108Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;命题逻辑的基本概念&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#命题逻辑的基本概念&quot;&gt;&lt;/a&gt; 命题逻辑的基本概念&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;五个基本的逻辑连接词&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;img
-        
-      
-    
-    </summary>
-    
-    
-      <category term="mathematics" scheme="http://tlhg.top/categories/mathematics/"/>
-    
-    
-      <category term="discrete mathematics" scheme="http://tlhg.top/tags/discrete-mathematics/"/>
-    
-  </entry>
-  
-  <entry>
     <title>EOP 脱壳常用方法</title>
     <link href="http://tlhg.top/posts/cbad.html"/>
     <id>http://tlhg.top/posts/cbad.html</id>
     <published>2020-07-01T05:22:20.000Z</published>
-    <updated>2020-10-22T00:29:09.435Z</updated>
+    <updated>2020-10-25T06:32:12.548Z</updated>
     
     <summary type="html">
     
@@ -356,7 +268,7 @@
     </summary>
     
     
-      <category term="Reversing / Crack" scheme="http://tlhg.top/categories/Reversing-Crack/"/>
+      <category term="Reverse / Crack" scheme="http://tlhg.top/categories/Reverse-Crack/"/>
     
     
       <category term="Shelling method" scheme="http://tlhg.top/tags/Shelling-method/"/>
@@ -586,6 +498,90 @@
     
     
       <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Exercise of chapter 04</title>
+    <link href="http://tlhg.top/posts/5cc1.html"/>
+    <id>http://tlhg.top/posts/5cc1.html</id>
+    <published>2020-04-07T06:35:26.000Z</published>
+    <updated>2020-08-13T12:55:40.123Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;exercise_41&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#exercise_41&quot;&gt;&lt;/a&gt; Exercise_4.1&lt;/h2&gt;
+&lt;figure class=&quot;highlight
+        
+      
+    
+    </summary>
+    
+    
+      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
+    
+    
+      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Chapter04 表达式</title>
+    <link href="http://tlhg.top/posts/45e4.html"/>
+    <id>http://tlhg.top/posts/45e4.html</id>
+    <published>2020-04-07T05:23:20.000Z</published>
+    <updated>2020-08-12T07:50:55.642Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;第4章-表达式&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#第4章-表达式&quot;&gt;&lt;/a&gt; 第4章 表达式&lt;/h1&gt;
+&lt;h2 id=&quot;基础fundamentals&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
+    
+    
+      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++ getline()</title>
+    <link href="http://tlhg.top/posts/87ea.html"/>
+    <id>http://tlhg.top/posts/87ea.html</id>
+    <published>2020-04-04T14:50:35.000Z</published>
+    <updated>2020-08-07T06:17:47.997Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;虽然可以使用 cin 和 &amp;gt;&amp;gt; 运算符来输入字符串，但它可能会导致一些需要注意的问题。&lt;/p&gt;
+&lt;p&gt;当 cin
+        
+      
+    
+    </summary>
+    
+    
+      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
+    
+    
+      <category term="function" scheme="http://tlhg.top/tags/function/"/>
     
   </entry>
   

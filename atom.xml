@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tlhg.top/"/>
-  <updated>2020-11-17T11:41:37.769Z</updated>
+  <updated>2021-02-03T06:36:59.220Z</updated>
   <id>http://tlhg.top/</id>
   
   <author>
@@ -15,6 +15,117 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>自旋锁</title>
+    <link href="http://tlhg.top/posts/e3da.html"/>
+    <id>http://tlhg.top/posts/e3da.html</id>
+    <published>2021-02-02T13:18:12.000Z</published>
+    <updated>2021-02-03T06:36:59.220Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;自旋锁&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#自旋锁&quot;&gt;&lt;/a&gt; 自旋锁&lt;/h1&gt;
+&lt;p&gt;自旋锁是内核中提供的一种高IRQL锁，用同步以及独占的方式访问某个资源。&lt;/p&gt;
+&lt;figure class=&quot;highlight
+        
+      
+    
+    </summary>
+    
+    
+      <category term="kernel" scheme="http://tlhg.top/categories/kernel/"/>
+    
+    
+      <category term="kernel programm" scheme="http://tlhg.top/tags/kernel-programm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kernel linked list</title>
+    <link href="http://tlhg.top/posts/2587.html"/>
+    <id>http://tlhg.top/posts/2587.html</id>
+    <published>2021-02-02T08:30:30.000Z</published>
+    <updated>2021-02-03T03:31:27.830Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;链表的定义&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#链表的定义&quot;&gt;&lt;/a&gt; 链表的定义：&lt;/h1&gt;
+&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td
+        
+      
+    
+    </summary>
+    
+    
+      <category term="kernel" scheme="http://tlhg.top/categories/kernel/"/>
+    
+    
+      <category term="kernel programm" scheme="http://tlhg.top/tags/kernel-programm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kernel-UNICODE_STRING</title>
+    <link href="http://tlhg.top/posts/b83c.html"/>
+    <id>http://tlhg.top/posts/b83c.html</id>
+    <published>2021-02-02T07:36:10.000Z</published>
+    <updated>2021-02-02T10:48:12.415Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;unicode_string数据类型&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#unicode_string数据类型&quot;&gt;&lt;/a&gt;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="kernel" scheme="http://tlhg.top/categories/kernel/"/>
+    
+    
+      <category term="kernel programm" scheme="http://tlhg.top/tags/kernel-programm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++ Calculator</title>
+    <link href="http://tlhg.top/posts/190e.html"/>
+    <id>http://tlhg.top/posts/190e.html</id>
+    <published>2021-02-01T10:38:46.000Z</published>
+    <updated>2021-02-02T10:49:03.766Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;《The C++ Programming Language》
+        
+      
+    
+    </summary>
+    
+    
+      <category term="language" scheme="http://tlhg.top/categories/language/"/>
+    
+    
+      <category term="C++" scheme="http://tlhg.top/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>Git Command List</title>
@@ -50,11 +161,11 @@ Remote：远程仓库
   </entry>
   
   <entry>
-    <title>如何实现单链表的反转</title>
+    <title>单链表的反转</title>
     <link href="http://tlhg.top/posts/f962.html"/>
     <id>http://tlhg.top/posts/f962.html</id>
     <published>2020-10-25T06:42:39.000Z</published>
-    <updated>2020-10-25T08:03:39.451Z</updated>
+    <updated>2021-02-02T12:30:22.542Z</updated>
     
     <summary type="html">
     
@@ -70,7 +181,7 @@ Remote：远程仓库
     </summary>
     
     
-      <category term="Algorithm and data structure" scheme="http://tlhg.top/categories/Algorithm-and-data-structure/"/>
+      <category term="Algorithm" scheme="http://tlhg.top/categories/Algorithm/"/>
     
     
       <category term="Data Structure" scheme="http://tlhg.top/tags/Data-Structure/"/>
@@ -82,7 +193,7 @@ Remote：远程仓库
     <link href="http://tlhg.top/posts/82e6.html"/>
     <id>http://tlhg.top/posts/82e6.html</id>
     <published>2020-10-25T02:09:03.000Z</published>
-    <updated>2020-11-01T14:59:40.215Z</updated>
+    <updated>2021-02-02T08:26:48.460Z</updated>
     
     <summary type="html">
     
@@ -98,7 +209,7 @@ Remote：远程仓库
     </summary>
     
     
-      <category term="Algorithm and data structure" scheme="http://tlhg.top/categories/Algorithm-and-data-structure/"/>
+      <category term="Algorithm" scheme="http://tlhg.top/categories/Algorithm/"/>
     
     
       <category term="Data Structure" scheme="http://tlhg.top/tags/Data-Structure/"/>
@@ -110,7 +221,7 @@ Remote：远程仓库
     <link href="http://tlhg.top/posts/a251.html"/>
     <id>http://tlhg.top/posts/a251.html</id>
     <published>2020-10-18T09:12:13.000Z</published>
-    <updated>2020-10-22T06:59:24.898Z</updated>
+    <updated>2021-02-02T08:24:56.205Z</updated>
     
     <summary type="html">
     
@@ -127,7 +238,7 @@ Remote：远程仓库
     </summary>
     
     
-      <category term="Reverse / Crack" scheme="http://tlhg.top/categories/Reverse-Crack/"/>
+      <category term="Reverse" scheme="http://tlhg.top/categories/Reverse/"/>
     
     
       <category term="Reverse" scheme="http://tlhg.top/tags/Reverse/"/>
@@ -139,7 +250,7 @@ Remote：远程仓库
     <link href="http://tlhg.top/posts/a7dd.html"/>
     <id>http://tlhg.top/posts/a7dd.html</id>
     <published>2020-10-17T11:46:50.000Z</published>
-    <updated>2020-10-22T00:28:55.603Z</updated>
+    <updated>2021-02-02T08:26:33.432Z</updated>
     
     <summary type="html">
     
@@ -154,7 +265,7 @@ Remote：远程仓库
     </summary>
     
     
-      <category term="Reverse / Crack" scheme="http://tlhg.top/categories/Reverse-Crack/"/>
+      <category term="Reverse" scheme="http://tlhg.top/categories/Reverse/"/>
     
     
       <category term="Reverse" scheme="http://tlhg.top/tags/Reverse/"/>
@@ -166,7 +277,7 @@ Remote：远程仓库
     <link href="http://tlhg.top/posts/1a06.html"/>
     <id>http://tlhg.top/posts/1a06.html</id>
     <published>2020-10-16T14:54:54.000Z</published>
-    <updated>2020-10-22T00:29:04.812Z</updated>
+    <updated>2021-02-02T08:27:17.583Z</updated>
     
     <summary type="html">
     
@@ -184,7 +295,7 @@ Remote：远程仓库
     </summary>
     
     
-      <category term="Reverse / Crack" scheme="http://tlhg.top/categories/Reverse-Crack/"/>
+      <category term="Reverse" scheme="http://tlhg.top/categories/Reverse/"/>
     
     
       <category term="Reverse" scheme="http://tlhg.top/tags/Reverse/"/>
@@ -227,7 +338,7 @@ Remote：远程仓库
     <link href="http://tlhg.top/posts/6d4d.html"/>
     <id>http://tlhg.top/posts/6d4d.html</id>
     <published>2020-08-09T11:41:13.000Z</published>
-    <updated>2020-08-13T12:42:57.502Z</updated>
+    <updated>2021-02-02T08:27:15.771Z</updated>
     
     <summary type="html">
     
@@ -243,6 +354,10 @@ Remote：远程仓库
     </summary>
     
     
+      <category term="tools" scheme="http://tlhg.top/categories/tools/"/>
+    
+    
+      <category term="LaTex" scheme="http://tlhg.top/tags/LaTex/"/>
     
   </entry>
   
@@ -251,7 +366,7 @@ Remote：远程仓库
     <link href="http://tlhg.top/posts/cbad.html"/>
     <id>http://tlhg.top/posts/cbad.html</id>
     <published>2020-07-01T05:22:20.000Z</published>
-    <updated>2020-10-25T06:32:12.548Z</updated>
+    <updated>2021-02-02T08:26:29.478Z</updated>
     
     <summary type="html">
     
@@ -268,7 +383,7 @@ Remote：远程仓库
     </summary>
     
     
-      <category term="Reverse / Crack" scheme="http://tlhg.top/categories/Reverse-Crack/"/>
+      <category term="Reverse" scheme="http://tlhg.top/categories/Reverse/"/>
     
     
       <category term="Shelling method" scheme="http://tlhg.top/tags/Shelling-method/"/>
@@ -308,7 +423,7 @@ Remote：远程仓库
     <link href="http://tlhg.top/posts/b01d.html"/>
     <id>http://tlhg.top/posts/b01d.html</id>
     <published>2020-05-19T09:50:05.000Z</published>
-    <updated>2020-08-03T05:25:01.552Z</updated>
+    <updated>2021-02-02T08:26:21.076Z</updated>
     
     <summary type="html">
     
@@ -324,10 +439,10 @@ Remote：远程仓库
     </summary>
     
     
-      <category term="Blog" scheme="http://tlhg.top/categories/Blog/"/>
+      <category term="language" scheme="http://tlhg.top/categories/language/"/>
     
     
-      <category term="Markdown grammar" scheme="http://tlhg.top/tags/Markdown-grammar/"/>
+      <category term="Markdown" scheme="http://tlhg.top/tags/Markdown/"/>
     
   </entry>
   
@@ -336,7 +451,7 @@ Remote：远程仓库
     <link href="http://tlhg.top/posts/702d.html"/>
     <id>http://tlhg.top/posts/702d.html</id>
     <published>2020-05-12T09:44:15.000Z</published>
-    <updated>2020-08-25T09:56:23.018Z</updated>
+    <updated>2021-02-02T12:36:25.408Z</updated>
     
     <summary type="html">
     
@@ -355,10 +470,10 @@ Remote：远程仓库
     </summary>
     
     
-      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
+      <category term="language" scheme="http://tlhg.top/categories/language/"/>
     
     
-      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
+      <category term="C++" scheme="http://tlhg.top/tags/C/"/>
     
   </entry>
   
@@ -397,7 +512,7 @@ Remote：远程仓库
     <link href="http://tlhg.top/posts/88d3.html"/>
     <id>http://tlhg.top/posts/88d3.html</id>
     <published>2020-04-25T09:41:53.000Z</published>
-    <updated>2020-08-25T09:56:23.021Z</updated>
+    <updated>2021-02-02T12:36:27.546Z</updated>
     
     <summary type="html">
     
@@ -412,10 +527,10 @@ Remote：远程仓库
     </summary>
     
     
-      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
+      <category term="language" scheme="http://tlhg.top/categories/language/"/>
     
     
-      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
+      <category term="C++" scheme="http://tlhg.top/tags/C/"/>
     
   </entry>
   
@@ -424,7 +539,7 @@ Remote：远程仓库
     <link href="http://tlhg.top/posts/8bc5.html"/>
     <id>http://tlhg.top/posts/8bc5.html</id>
     <published>2020-04-15T02:19:22.000Z</published>
-    <updated>2020-08-25T09:39:38.451Z</updated>
+    <updated>2021-02-02T12:36:29.668Z</updated>
     
     <summary type="html">
     
@@ -439,10 +554,10 @@ Remote：远程仓库
     </summary>
     
     
-      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
+      <category term="language" scheme="http://tlhg.top/categories/language/"/>
     
     
-      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
+      <category term="C++" scheme="http://tlhg.top/tags/C/"/>
     
   </entry>
   
@@ -451,7 +566,7 @@ Remote：远程仓库
     <link href="http://tlhg.top/posts/3ea6.html"/>
     <id>http://tlhg.top/posts/3ea6.html</id>
     <published>2020-04-11T08:40:13.000Z</published>
-    <updated>2020-08-23T07:38:31.270Z</updated>
+    <updated>2021-02-02T12:36:13.784Z</updated>
     
     <summary type="html">
     
@@ -467,121 +582,10 @@ Remote：远程仓库
     </summary>
     
     
-      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
+      <category term="language" scheme="http://tlhg.top/categories/language/"/>
     
     
-      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Chapter05 语句</title>
-    <link href="http://tlhg.top/posts/eada.html"/>
-    <id>http://tlhg.top/posts/eada.html</id>
-    <published>2020-04-10T05:16:30.000Z</published>
-    <updated>2020-08-23T07:40:48.444Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;简单语句simple-statements&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#简单语句simple-statements&quot;&gt;&lt;/a&gt; 简单语句（Simple
-        
-      
-    
-    </summary>
-    
-    
-      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
-    
-    
-      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Exercise of chapter 04</title>
-    <link href="http://tlhg.top/posts/5cc1.html"/>
-    <id>http://tlhg.top/posts/5cc1.html</id>
-    <published>2020-04-07T06:35:26.000Z</published>
-    <updated>2020-08-13T12:55:40.123Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;exercise_41&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#exercise_41&quot;&gt;&lt;/a&gt; Exercise_4.1&lt;/h2&gt;
-&lt;figure class=&quot;highlight
-        
-      
-    
-    </summary>
-    
-    
-      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
-    
-    
-      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Chapter04 表达式</title>
-    <link href="http://tlhg.top/posts/45e4.html"/>
-    <id>http://tlhg.top/posts/45e4.html</id>
-    <published>2020-04-07T05:23:20.000Z</published>
-    <updated>2020-08-12T07:50:55.642Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;第4章-表达式&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#第4章-表达式&quot;&gt;&lt;/a&gt; 第4章 表达式&lt;/h1&gt;
-&lt;h2 id=&quot;基础fundamentals&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
-    
-    
-      <category term="C++ primer" scheme="http://tlhg.top/tags/C-primer/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++ getline()</title>
-    <link href="http://tlhg.top/posts/87ea.html"/>
-    <id>http://tlhg.top/posts/87ea.html</id>
-    <published>2020-04-04T14:50:35.000Z</published>
-    <updated>2020-08-07T06:17:47.997Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;虽然可以使用 cin 和 &amp;gt;&amp;gt; 运算符来输入字符串，但它可能会导致一些需要注意的问题。&lt;/p&gt;
-&lt;p&gt;当 cin
-        
-      
-    
-    </summary>
-    
-    
-      <category term="C++" scheme="http://tlhg.top/categories/C/"/>
-    
-    
-      <category term="function" scheme="http://tlhg.top/tags/function/"/>
+      <category term="C++" scheme="http://tlhg.top/tags/C/"/>
     
   </entry>
   

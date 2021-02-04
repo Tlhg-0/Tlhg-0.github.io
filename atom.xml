@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tlhg.top/"/>
-  <updated>2021-02-03T06:36:59.220Z</updated>
+  <updated>2021-02-04T13:25:08.540Z</updated>
   <id>http://tlhg.top/</id>
   
   <author>
@@ -15,6 +15,61 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C/C++ volatile</title>
+    <link href="http://tlhg.top/posts/16c1.html"/>
+    <id>http://tlhg.top/posts/16c1.html</id>
+    <published>2021-02-04T13:11:03.000Z</published>
+    <updated>2021-02-04T13:25:08.540Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;em&gt;原文地址：&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="language" scheme="http://tlhg.top/categories/language/"/>
+    
+    
+      <category term="C++" scheme="http://tlhg.top/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>内存分配</title>
+    <link href="http://tlhg.top/posts/9fa6.html"/>
+    <id>http://tlhg.top/posts/9fa6.html</id>
+    <published>2021-02-03T06:45:50.000Z</published>
+    <updated>2021-02-04T13:20:12.508Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;内存分配与回收&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#内存分配与回收&quot;&gt;&lt;/a&gt; 内存分配与回收&lt;/h1&gt;
+&lt;h2 id=&quot;内存分配&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="kernel" scheme="http://tlhg.top/categories/kernel/"/>
+    
+    
+      <category term="kernel programm" scheme="http://tlhg.top/tags/kernel-programm/"/>
+    
+  </entry>
   
   <entry>
     <title>自旋锁</title>
@@ -521,61 +576,6 @@ Remote：远程仓库
         
         
           &lt;p&gt;类的基本思想是数据抽象（data
-        
-      
-    
-    </summary>
-    
-    
-      <category term="language" scheme="http://tlhg.top/categories/language/"/>
-    
-    
-      <category term="C++" scheme="http://tlhg.top/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Chapter06 函数</title>
-    <link href="http://tlhg.top/posts/8bc5.html"/>
-    <id>http://tlhg.top/posts/8bc5.html</id>
-    <published>2020-04-15T02:19:22.000Z</published>
-    <updated>2021-02-02T12:36:29.668Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;函数基础function-basics&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#函数基础function-basics&quot;&gt;&lt;/a&gt; 函数基础（Function
-        
-      
-    
-    </summary>
-    
-    
-      <category term="language" scheme="http://tlhg.top/categories/language/"/>
-    
-    
-      <category term="C++" scheme="http://tlhg.top/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Exercise of chapter 05</title>
-    <link href="http://tlhg.top/posts/3ea6.html"/>
-    <id>http://tlhg.top/posts/3ea6.html</id>
-    <published>2020-04-11T08:40:13.000Z</published>
-    <updated>2021-02-02T12:36:13.784Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;exercise_51&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#exercise_51&quot;&gt;&lt;/a&gt; exercise_5.1&lt;/h2&gt;
-&lt;figure class=&quot;highlight
         
       
     

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tlhg.top/"/>
-  <updated>2021-02-04T13:25:08.540Z</updated>
+  <updated>2021-02-10T14:32:17.588Z</updated>
   <id>http://tlhg.top/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>注册表</title>
+    <link href="http://tlhg.top/posts/aecd.html"/>
+    <id>http://tlhg.top/posts/aecd.html</id>
+    <published>2021-02-08T13:31:14.000Z</published>
+    <updated>2021-02-10T14:32:17.588Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;注册表的打开与关闭&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#注册表的打开与关闭&quot;&gt;&lt;/a&gt;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="kernel" scheme="http://tlhg.top/categories/kernel/"/>
+    
+    
+      <category term="kernel programm" scheme="http://tlhg.top/tags/kernel-programm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>对象与句柄</title>
+    <link href="http://tlhg.top/posts/d839.html"/>
+    <id>http://tlhg.top/posts/d839.html</id>
+    <published>2021-02-08T11:37:11.000Z</published>
+    <updated>2021-02-08T13:08:01.866Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;句柄的定义&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#句柄的定义&quot;&gt;&lt;/a&gt;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="kernel" scheme="http://tlhg.top/categories/kernel/"/>
+    
+    
+      <category term="kernel programm" scheme="http://tlhg.top/tags/kernel-programm/"/>
+    
+  </entry>
   
   <entry>
     <title>C/C++ volatile</title>
@@ -48,7 +102,7 @@
     <link href="http://tlhg.top/posts/9fa6.html"/>
     <id>http://tlhg.top/posts/9fa6.html</id>
     <published>2021-02-03T06:45:50.000Z</published>
-    <updated>2021-02-04T13:20:12.508Z</updated>
+    <updated>2021-02-07T03:13:22.403Z</updated>
     
     <summary type="html">
     
@@ -519,63 +573,6 @@ Remote：远程仓库
 &lt;li&gt;&lt;code&gt;istream&lt;/code&gt;：输入流类型，提供输入操作。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;ostream&lt;/code&gt;：输出流类型，提供输出操作。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;cin&lt;/code&gt;：&lt;code&gt;istr
-        
-      
-    
-    </summary>
-    
-    
-      <category term="language" scheme="http://tlhg.top/categories/language/"/>
-    
-    
-      <category term="C++" scheme="http://tlhg.top/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo+github搭建博客</title>
-    <link href="http://tlhg.top/posts/fef1.html"/>
-    <id>http://tlhg.top/posts/fef1.html</id>
-    <published>2020-05-02T06:55:31.000Z</published>
-    <updated>2020-08-16T06:34:05.796Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;转载此文章前，请先联系作者，经作者同意后再转载，并请注明原文链接和作者，整理这些不容易，最终版权归作者所有，谢谢合作！&lt;/p&gt;
-&lt;p&gt;你了解Hexo吗？
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Blog" scheme="http://tlhg.top/categories/Blog/"/>
-    
-    
-      <category term="Hexo" scheme="http://tlhg.top/tags/Hexo/"/>
-    
-      <category term="matery" scheme="http://tlhg.top/tags/matery/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Chapter07-类.md</title>
-    <link href="http://tlhg.top/posts/88d3.html"/>
-    <id>http://tlhg.top/posts/88d3.html</id>
-    <published>2020-04-25T09:41:53.000Z</published>
-    <updated>2021-02-02T12:36:27.546Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;类的基本思想是数据抽象（data
         
       
     

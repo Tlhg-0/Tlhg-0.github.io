@@ -1,0 +1,370 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>LaTeX公式-Katex解析 | tlhg&#39;s Blog|</title>
+  <meta name="author" content="Heisenberg Lee">
+  
+  <meta name="description" content="学习记录。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="LaTeX公式-Katex解析"/>
+  <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
+
+  
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200813204226.png" />
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="tlhg's Blog|" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">tlhg&#39;s Blog|</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> LaTeX公式-Katex解析</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="概念"><a class="markdownIt-Anchor" href="#概念"></a> 概念</h2>
+<p>LaTeX是一种基于ΤΕΧ的排版系统，由美国计算机学家莱斯利·兰伯特（Leslie Lamport）在20世纪80年代初期开发，利用这种格式，即使使用者没有排版和程序设计的知识也可以充分发挥由TeX所提供的强大功能，能在几天，甚至几小时内生成很多具有书籍质量的印刷品。对于生成复杂表格和数学公式，这一点表现得尤为突出。因此它非常适用于生成高印刷质量的科技和数学类文档。</p>
+<p>MathJax是一个显示网络上数学公式的开源JavaScript引擎库，它可以在所有浏览器上面工作，其中就支持LaTeX，MathML和AsciiMath 符号，里面的数字会被MathJax使用JavaScript引擎解析成HTML，SVG或者是MathML 方程式，然后在现代的浏览器里面显示。 它的设计目标是利用最新的web技术，构建一个支持math的web平台。支持主要的浏览器和操作系统,包括那些移动设备</p>
+<p>KaTeX： 可汗学院出品，号称“最快”的数学公式渲染库<br>
+支持主流的浏览器：Chrome, Firefox, Safari, Opera和 IE8-IE11。</p>
+<p>快速：并发渲染，无需重排页面。根据这个测试，性能绝对秒杀MathJax； +渲染效果好：采用TeX语法，渲染效果达到印刷出版级别； +无依赖：不依赖其它库； +支持服务器端渲染：例如，服务器端的Node.js程序调用KaTeX，把渲染好的HTML片段直接发送给客户端。</p>
+<h2 id="在线测试工具"><a class="markdownIt-Anchor" href="#在线测试工具"></a> 在线测试工具</h2>
+<p>在线测试，我们可以进行latex公式、katex效果一一对应<br>
+<a target="_blank" rel="noopener" href="http://pandao.github.io/editor.md/examples/katex.html">http://pandao.github.io/editor.md/examples/katex.html</a><br>
+<a target="_blank" rel="noopener" href="http://latex.codecogs.com/eqneditor/editor.php">http://latex.codecogs.com/eqneditor/editor.php</a><br>
+<a target="_blank" rel="noopener" href="http://latex.91maths.com/">http://latex.91maths.com/</a></p>
+<p>latex公式<br>
+参考文档：<br>
+<a target="_blank" rel="noopener" href="http://www.mohu.org/info/lshort-cn.pdf">http://www.mohu.org/info/lshort-cn.pdf</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">空白</span><br><span class="line">1_1多个连续的空白字符等同为一个空白字符</span><br><span class="line">1_2每行开始的空白字符将被忽略</span><br><span class="line">1_3使用空行来结束段落，两行文本中的空行标志上一段落的结束和</span><br><span class="line">新段落的开始</span><br><span class="line"></span><br><span class="line">#空格</span><br><span class="line">使用\quad和\qquad 来表示空格</span><br><span class="line"></span><br><span class="line">#特殊字符</span><br><span class="line">前面需要添加\来表示特殊字符</span><br><span class="line">$ %  &amp; _ { } # ^ ~ </span><br><span class="line"></span><br><span class="line">语法对应</span><br><span class="line">\$ \%  \&amp; \_ \{ \}  \# </span><br><span class="line">\~{}  \^{}(测试有问题)</span><br><span class="line"></span><br><span class="line">#指数上下标</span><br><span class="line">指数可以用x^a 或者x^{a} 格式来表示,x代表底数，a是指数</span><br><span class="line">下标可以用x_{a}格式来表示,x代表底数,a代表下指数</span><br><span class="line">#下标</span><br><span class="line">a1(a的下标标为1)   表达式：a_{1}</span><br><span class="line"></span><br><span class="line">#指数(上标)</span><br><span class="line">x2(x的指数为2)   表达式：x^2</span><br><span class="line"></span><br><span class="line">#上下标</span><br><span class="line">b3ij(b的上标为3下标为ij)  表达式：b^{3}_{ij}</span><br><span class="line"></span><br><span class="line">#多次上标</span><br><span class="line">ex2(e的上标为x的平方)  表达式：{e^x}^2</span><br><span class="line"></span><br><span class="line">#平方根</span><br><span class="line">平方根命令为：\sqrt，n 次方根相应地为: \sqrt[n]</span><br><span class="line"></span><br><span class="line">x开根号  表达式：\sqrt{x} </span><br><span class="line">x开三次方根  表达式：\sqrt[3]{x} </span><br><span class="line">对x平方+根号y在开平方：表达式\sqrt{x^{2}+ \sqrt{y}}</span><br><span class="line"></span><br><span class="line">#分数</span><br><span class="line">分数使用\frac{a}{b} 排版,a是分子，b是分母</span><br><span class="line">例子如下：</span><br><span class="line">\frac{x^2}{k+1}</span><br><span class="line">x^{\frac{2}{k+1}}</span><br><span class="line">x^{1/2}</span><br><span class="line"></span><br><span class="line">#向量</span><br><span class="line">向量由\vec 得到。另两个命令\overrightarrow 和\overleftarrow在定义从A 到B 的向量</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#求和运算符</span><br><span class="line">求和运算符由\sum 生成</span><br><span class="line">\sum_{i=1}^{n}</span><br><span class="line"></span><br><span class="line">#数学运算符</span><br><span class="line">大于：&gt;  小于：&lt;  小于等于：\le  大于等于：\ge  不等于：\ne  双波浪线：\approx  单波浪线：\sim  子集：\subseteq  属于：\in  不属于：\notin  乘号：\times  除号：\div  加减号：\pm  右双箭头\Rightarrow 右单箭头：\rightarrow  无穷大：\infty   角度斜度\angle </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#常用小写希腊字母</span><br><span class="line">\alpha \beta \gamma \sigma \omega \delta \pi \rho \epsilon \eta \lambda \mu \xi \tau \kappa \zeta \phi \chi</span><br><span class="line"></span><br><span class="line">e^{2}\neq</span><br><span class="line"></span><br><span class="line">#小括号</span><br><span class="line">空格式：\left (  \right )</span><br><span class="line">效果：()</span><br><span class="line">有数据的括号格式：\left ( 123,45 \right )</span><br><span class="line">效果：(123,45)</span><br><span class="line">#中括号</span><br><span class="line">空格式：\left [  \right ]</span><br><span class="line">效果：[]</span><br><span class="line">有数据的括号格式：\left [ 3,5,9 \right ]</span><br><span class="line">效果：[3,5,9]</span><br><span class="line"></span><br><span class="line">#尖括号</span><br><span class="line">空数据格式：\left \langle  \right \rangle</span><br><span class="line">&lt;&gt;</span><br><span class="line">有数据格式：\left \langle 3,4 \right \rangle</span><br><span class="line">&lt;3,4&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#水平线</span><br><span class="line">使用 \overline 和 \underline 在表达式的上、下方画出水平线</span><br><span class="line">\overline{lindexi.oschina.io}+\underline{lindexi.github.io}</span><br><span class="line"></span><br><span class="line">#上大括号</span><br><span class="line">使用\overbrace 和 \underbrace 可以在表达式上方、下方添加花括号</span><br><span class="line"></span><br><span class="line">\overbrace{blog.csdn.net/lindexi_gd}_{lindexi} + \underbrace{lindexi.github.io}_{doubi}</span><br><span class="line"></span><br><span class="line">#三角函数</span><br><span class="line">\sin\theta </span><br><span class="line">\cos\theta </span><br><span class="line">\tan\theta </span><br><span class="line">\cot \theta</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="katex前端展示latex数学公式效果"><a class="markdownIt-Anchor" href="#katex前端展示latex数学公式效果"></a> katex前端展示latex数学公式效果</h2>
+<p>参考GitHub<br>
+<a target="_blank" rel="noopener" href="https://github.com/Khan/KaTeX">https://github.com/Khan/KaTeX</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang="en"&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset="UTF-8"&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">    &lt;script src='/static/jq/jquery.min.js'&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css"</span><br><span class="line">          integrity="sha384-9tPv11A+glH/on/wEu99NVwDPwkMQESOocs/ZGXPoIiLE8MU/qkqUcZ3zzL+6DuH" crossorigin="anonymous"&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.js"</span><br><span class="line">            integrity="sha384-U8Vrjwb8fuHMt6ewaCy8uqeUXv4oitYACKdB0VziCerzt011iQ/0TqlSlv8MReCm"</span><br><span class="line">            crossorigin="anonymous"&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;p&gt;&lt;span class="sp1"&gt;...&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;span class="sp2"&gt;...&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;span class="sp3"&gt;...&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;span class="sp4"&gt;...&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;span class="sp5"&gt;...&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;span class="sp6"&gt;...&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;span class="sp7"&gt;...&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;span class="sp8"&gt;...&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;span class="sp9"&gt;...&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;span class="sp10"&gt;...&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;span class="sp11"&gt;...&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;span class="sp12"&gt;...&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;span class="sp13"&gt;...&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;span class="sp14"&gt;...&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;&lt;span class="sp15"&gt;...&lt;/span&gt;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    {#var a = document.getElementsByClassName("sp15")#}</span><br><span class="line">    {#katex.render("c = \\pm\\sqrt{a^2 + b^2}", a);#}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    {#特殊符号#}</span><br><span class="line">    html = katex.renderToString("\\$ \\%  \\&amp; \\_ \\{ \\}  \\# ");</span><br><span class="line">    $(".sp1").html(html)</span><br><span class="line"></span><br><span class="line">    {#上下标#}</span><br><span class="line">    html = katex.renderToString("a_{1}\\qquad x^2 \\quad  b^{3}_{ij} \\quad e^{2}\\neq (e^x)^2 \\quad e^{x^2}");</span><br><span class="line">    $(".sp2").html(html)</span><br><span class="line"></span><br><span class="line">    {#平方根#}</span><br><span class="line">    html = katex.renderToString("\\sqrt{x} \\quad \\sqrt[3]{x} \\quad \\sqrt{x^{2}+ \\sqrt{y}}");</span><br><span class="line">    $(".sp3").html(html)</span><br><span class="line"></span><br><span class="line">    {#分数#}</span><br><span class="line">    html = katex.renderToString("\\frac{x^2}{k+1} \\quad  x^{\\frac{2}{k+1}} \\quad x^{1/2}");</span><br><span class="line">    $(".sp4").html(html)</span><br><span class="line"></span><br><span class="line">    {#向量#}</span><br><span class="line">    html = katex.renderToString("\\vec a  \\qquad  \\overrightarrow{AB}  \\qquad  \\overleftarrow{AB}");</span><br><span class="line">    $(".sp5").html(html)</span><br><span class="line"></span><br><span class="line">    {#求和运算符#}</span><br><span class="line">    html = katex.renderToString("\\displaystyle{\\sum_{i=4}^{10}}");</span><br><span class="line">    $(".sp6").html(html)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    {#希腊字母#}</span><br><span class="line">    html = katex.renderToString("\\alpha \\beta \\gamma \\sigma \\omega \\delta \\pi \\rho \\epsilon \\eta \\lambda \\mu \\xi \\tau \\kappa \\zeta \\phi \\chi");</span><br><span class="line">    $(".sp7").html(html)</span><br><span class="line"></span><br><span class="line">    {#常用的数学运算符#}</span><br><span class="line">    html = katex.renderToString("\&gt; \&lt; \\le  \\ge  \\ne  \\approx  \\sim  \\subseteq  \\in  \\notin  \\times  \\div  \\pm  \\Rightarrow  \\rightarrow  \\infty  \\partial  \\angle  \\triangle");</span><br><span class="line">    $(".sp8").html(html)</span><br><span class="line"></span><br><span class="line">    {#小括号,中括号#}</span><br><span class="line">    html = katex.renderToString("\\left (1,2,4\\right) \\qquad \\left [ 3,5,9 \\right ]");</span><br><span class="line">    $(".sp9").html(html)</span><br><span class="line"></span><br><span class="line">    {#尖括号#}</span><br><span class="line">    html = katex.renderToString("\\left \\langle  \\right \\rangle \\qquad \\left \\langle 3,4 \\right \\rangle");</span><br><span class="line">    $(".sp10").html(html)</span><br><span class="line"></span><br><span class="line">    {#水平线#}</span><br><span class="line">    html = katex.renderToString("\\overline{.oschina.io}+\\underline{lindexi.github.io}");</span><br><span class="line">    $(".sp11").html(html)</span><br><span class="line"></span><br><span class="line">    {#上下大括号#}</span><br><span class="line">    html = katex.renderToString("\\overbrace{blog.csdn.net/lindexi_gd}_{lindexi} + \\underbrace{lindexi.github.io}_{doubi}");</span><br><span class="line">    $(".sp12").html(html)</span><br><span class="line"></span><br><span class="line">    {#三角函数#}</span><br><span class="line">    html = katex.renderToString("\\sin\\theta \\qquad \\cos\\theta \\qquad \\tan\\theta \\qquad \\cot \\theta");</span><br><span class="line">    $(".sp13").html(html)</span><br><span class="line"></span><br><span class="line">    {#对数函数 #}</span><br><span class="line">    html = katex.renderToString("\\lg X \\qquad \\log X \\qquad \\log_ 3 10");</span><br><span class="line">    $(".sp14").html(html)</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></tbody></table></figure>
+<p>展现效果如下：<br>
+<img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200809194637.png" alt=""></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/posts/6d4d.html" class="leancloud-visitors view" data-flag-title="LaTeX公式-Katex解析">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/posts/a89f.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/posts/cbad.html" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"AA9eNAftQgfjEcK3l0j71rDS-gzGzoHsz","appKey":"E1r06kyXdl3RxWbXxaUQ6tPg","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2020-08-09 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/tools/">tools<span>4</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/LaTex/">LaTex<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2022 Heisenberg Lee's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'tlhg.top' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
+   </html>

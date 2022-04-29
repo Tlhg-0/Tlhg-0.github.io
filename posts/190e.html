@@ -1,0 +1,352 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>C++ Calculator | tlhg&#39;s Blog|</title>
+  <meta name="author" content="Heisenberg Lee">
+  
+  <meta name="description" content="学习记录。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="C++ Calculator"/>
+  <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="tlhg's Blog|" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">tlhg&#39;s Blog|</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> C++ Calculator</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>《The C++ Programming Language》 第六章函数的一个例子。</p>
+<p>没有高深的算法，都是c++中最常用的语法现象，但是这150行程序里蕴含的功力极深（至少我达不到这种水平，程序的效率，存储开销等方面做的都非常出色，甚至是天衣无缝）。</p>
+<p>今日贴出，请大家一同欣赏（作者在程序中因为简化程序而改写了一些更好的方法，正如作者在序言中所说，要有一种健康的怀疑态度,我之所以说它完美，并不是指我们编不出比它好的程序，而是指它清晰的结构，合理的设计，以及蕴含在这里面的编程艺术）</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//以下是 c++之父写的一个简单计算器程序 包括分析器,输入,符号表,驱动程序 </span></span><br><span class="line"><span class="comment">//计算器的输入语法: </span></span><br><span class="line"><span class="comment">// 1)以 ";" 号作为一行的结束 </span></span><br><span class="line"><span class="comment">// 2)可用英文单词命名变量 (但变量后要有空格) </span></span><br><span class="line"><span class="comment">// 例子如下: </span></span><br><span class="line"><span class="comment">// 输入: r =2.5; (注意空格) </span></span><br><span class="line"><span class="comment">// 输出: 2.5 (记负值结果) </span></span><br><span class="line"><span class="comment">// 输入: area = r * r * pi ; </span></span><br><span class="line"><span class="comment">// 输出: 19.635 </span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// 以下代码为标准c++代码,我在vc++2003.net上运行无误 </span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cctype&gt;</span> </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std; </span><br><span class="line"><span class="type">const</span> <span class="type">int</span> ture=<span class="number">1</span>; </span><br><span class="line"><span class="type">const</span> <span class="type">int</span> flase=<span class="number">0</span>; </span><br><span class="line"></span><br><span class="line">map&lt;string,<span class="type">double</span>&gt; table; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//计算器输入允许的词法 </span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">Token_value</span>{ </span><br><span class="line">    NAME, NUMBER, END, </span><br><span class="line">    PLUS=<span class="string">'+'</span>, MINUS=<span class="string">'-'</span>, MUL=<span class="string">'*'</span>, DIV=<span class="string">'/'</span>, </span><br><span class="line">    PRINT=<span class="string">';'</span>, ASSIGN=<span class="string">'='</span>, LP=<span class="string">'('</span>, RP=<span class="string">')'</span>, </span><br><span class="line">}; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//分析器 加和减 </span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">expr</span><span class="params">(<span class="type">bool</span>)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//分析器 乘和除 </span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">term</span><span class="params">(<span class="type">bool</span>)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//分析器 处理初等项 </span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">prim</span><span class="params">(<span class="type">bool</span>)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//词法分析器 </span></span><br><span class="line"><span class="function">Token_value <span class="title">get_token</span><span class="params">()</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//错误处理 </span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">error</span><span class="params">(<span class="type">const</span> string &amp;s)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//当前词法标记 </span></span><br><span class="line">Token_value curr_tok=PRINT; </span><br><span class="line"></span><br><span class="line"><span class="type">double</span> number_value;  <span class="comment">//存放数值 </span></span><br><span class="line">string string_value; <span class="comment">//存放计算器变量名 </span></span><br><span class="line"><span class="type">int</span> no_of_errors; <span class="comment">//记录错误个数 </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">expr</span><span class="params">(<span class="type">bool</span> get)</span> </span>{ </span><br><span class="line">    <span class="type">double</span> left=<span class="built_in">term</span>( get); </span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>( ; ; ) </span><br><span class="line">        <span class="keyword">switch</span>(curr_tok) { </span><br><span class="line">        <span class="keyword">case</span> PLUS: </span><br><span class="line">            left+=<span class="built_in">term</span>(ture); </span><br><span class="line">            <span class="keyword">break</span>; </span><br><span class="line">        <span class="keyword">case</span> MINUS: </span><br><span class="line">            left-=<span class="built_in">term</span>(ture); </span><br><span class="line">            <span class="keyword">break</span>; </span><br><span class="line">        <span class="keyword">default</span>: </span><br><span class="line">            <span class="keyword">return</span> left; </span><br><span class="line">    } </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">term</span><span class="params">(<span class="type">bool</span> get)</span> </span>{ </span><br><span class="line">    <span class="type">double</span> left=<span class="built_in">prim</span>(get); </span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>( ; ; ) </span><br><span class="line">        <span class="keyword">switch</span>(curr_tok) { </span><br><span class="line">        <span class="keyword">case</span> MUL: </span><br><span class="line">            left*=<span class="built_in">prim</span>(ture); </span><br><span class="line">            <span class="keyword">break</span>; </span><br><span class="line">        <span class="keyword">case</span> DIV: </span><br><span class="line">            <span class="keyword">if</span>(<span class="type">double</span> d=<span class="built_in">prim</span>(ture)) { </span><br><span class="line">                left/=d; </span><br><span class="line">                <span class="keyword">break</span>; </span><br><span class="line">            } </span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">error</span>(<span class="string">"divide by 0"</span>); </span><br><span class="line">        <span class="keyword">default</span>: </span><br><span class="line">            <span class="keyword">return</span> left; </span><br><span class="line">    } </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">prim</span><span class="params">(<span class="type">bool</span> get)</span> </span>{ </span><br><span class="line">    <span class="keyword">if</span>(get) <span class="built_in">get_token</span>(); </span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span>(curr_tok) { </span><br><span class="line">    <span class="keyword">case</span> NUMBER: { </span><br><span class="line">        <span class="type">double</span> v=number_value; </span><br><span class="line">        <span class="built_in">get_token</span>(); </span><br><span class="line">        <span class="keyword">return</span> v; </span><br><span class="line">                 } </span><br><span class="line">    <span class="keyword">case</span> NAME: { </span><br><span class="line">        <span class="type">double</span>&amp; v=table[string_value]; </span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">get_token</span>()==ASSIGN) </span><br><span class="line">            v=<span class="built_in">expr</span>(ture); </span><br><span class="line">        <span class="keyword">return</span> v; </span><br><span class="line">               } </span><br><span class="line">    <span class="keyword">case</span> MINUS: </span><br><span class="line">        <span class="keyword">return</span> -<span class="built_in">prim</span>(ture); </span><br><span class="line">    <span class="keyword">case</span> LP: { </span><br><span class="line">        <span class="type">double</span> e=<span class="built_in">expr</span>(ture); </span><br><span class="line">        <span class="keyword">if</span>(curr_tok!=RP) </span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">error</span>(<span class="string">") expected"</span>); </span><br><span class="line">        <span class="built_in">get_token</span>(); </span><br><span class="line">        <span class="keyword">return</span> e; </span><br><span class="line">             } </span><br><span class="line">    <span class="keyword">default</span>: </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">error</span>(<span class="string">"primary expected"</span>); </span><br><span class="line">    } </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function">Token_value <span class="title">get_token</span><span class="params">()</span> </span>{ </span><br><span class="line">    <span class="type">char</span> ch=<span class="number">0</span>; </span><br><span class="line">    cin&gt;&gt;ch; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span>(ch) { </span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span>: </span><br><span class="line">        <span class="keyword">return</span> curr_tok=END; </span><br><span class="line">    <span class="keyword">case</span> <span class="string">';'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'*'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'/'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'+'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'('</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">')'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'='</span>: </span><br><span class="line">        <span class="keyword">return</span> curr_tok=<span class="built_in">Token_value</span>(ch); </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'0'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'1'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'2'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'3'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'4'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'5'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'6'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'7'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'8'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'9'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'.'</span>: </span><br><span class="line">        cin.<span class="built_in">putback</span>(ch); </span><br><span class="line">        cin&gt;&gt;number_value; </span><br><span class="line">        <span class="keyword">return</span> curr_tok=NUMBER; </span><br><span class="line">    <span class="keyword">default</span>: </span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">isalpha</span>(ch)) { </span><br><span class="line">            cin.<span class="built_in">putback</span>(ch); </span><br><span class="line">            cin&gt;&gt;string_value; </span><br><span class="line">            <span class="keyword">return</span> curr_tok=NAME; </span><br><span class="line">        } </span><br><span class="line">        <span class="built_in">error</span>(<span class="string">"bad token"</span>); </span><br><span class="line">        <span class="keyword">return</span> curr_tok=PRINT; </span><br><span class="line">    } </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">error</span><span class="params">(<span class="type">const</span> string&amp; s)</span></span></span><br><span class="line"><span class="function"></span>{ </span><br><span class="line">    no_of_errors++; </span><br><span class="line">    cerr&lt;&lt;<span class="string">"error: "</span>&lt;&lt;s&lt;&lt;endl; </span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>; </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>{ </span><br><span class="line">    table[<span class="string">"pi"</span>]=<span class="number">3.1415926</span>; </span><br><span class="line">    table[<span class="string">"e"</span>]=<span class="number">2.718281828</span>; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(cin) { </span><br><span class="line">        <span class="built_in">get_token</span>(); </span><br><span class="line">        <span class="keyword">if</span>(curr_tok==END) </span><br><span class="line">            <span class="keyword">break</span>; </span><br><span class="line">        <span class="keyword">if</span>(curr_tok==PRINT) </span><br><span class="line">            <span class="keyword">continue</span>; </span><br><span class="line">        cout&lt;&lt;<span class="built_in">expr</span>(<span class="literal">false</span>)&lt;&lt;endl; </span><br><span class="line">    } </span><br><span class="line">    <span class="keyword">return</span> no_of_errors; </span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/posts/190e.html" class="leancloud-visitors view" data-flag-title="C++ Calculator">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/posts/b83c.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/posts/5a5a.html" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"AA9eNAftQgfjEcK3l0j71rDS-gzGzoHsz","appKey":"E1r06kyXdl3RxWbXxaUQ6tPg","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2021-02-01 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/language/">language<span>13</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/C/">C++<span>12</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2022 Heisenberg Lee's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'tlhg.top' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
+   </html>

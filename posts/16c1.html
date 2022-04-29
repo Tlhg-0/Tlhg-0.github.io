@@ -1,0 +1,408 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>C/C++ volatile | tlhg&#39;s Blog|</title>
+  <meta name="author" content="Heisenberg Lee">
+  
+  <meta name="description" content="学习记录。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="C/C++ volatile"/>
+  <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="tlhg's Blog|" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">tlhg&#39;s Blog|</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> C/C++ volatile</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p><em>原文地址：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yc_sunniwell/archive/2010/07/14/1777432.html">https://www.cnblogs.com/yc_sunniwell/archive/2010/07/14/1777432.html</a></em></p>
+<p>近日在读操作系统导论，看到书中的代码里面有volatile 关键字，找到了一篇不错的文章，所以转载了过来。</p>
+<h1 id="为什么用volatile"><a class="markdownIt-Anchor" href="#为什么用volatile"></a> 为什么用volatile?</h1>
+<p>C/C++ 中的 volatile 关键字和 const 对应，用来修饰变量，通常用于建立语言级别的 memory barrier。这是 BS 在 “The C++ Programming Language” 对 volatile 修饰词的说明：</p>
+<p>​		<em>A volatile specifier is a hint to a compiler that an object may change its value in ways not specified by the language so that aggressive optimizations must be avoided.</em></p>
+<p>volatile 关键字是一种类型修饰符，用它声明的类型变量表示可以被某些编译器未知的因素更改，比如：操作系统、硬件或者其它线程等。遇到这个关键字声明的变量，编译器对访问该变量的代码就不再进行优化，从而可以提供对特殊地址的稳定访问。声明时语法：<strong>int volatile vInt;</strong> 当要求使用 volatile 声明的变量的值的时候，系统总是重新从它所在的内存读取数据，即使它前面的指令刚刚从该处读取过数据。而且读取的数据立刻被保存。</p>
+<p>例如：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">volatile</span> <span class="type">int</span> i=<span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> a = i;</span><br><span class="line">...</span><br><span class="line"><span class="comment">// 其他代码，并未明确告诉编译器，对 i 进行过操作</span></span><br><span class="line"><span class="type">int</span> b = i;</span><br></pre></td></tr></tbody></table></figure>
+<p>volatile 指出 i 是随时可能发生变化的，每次使用它的时候必须从 i的地址中读取，因而编译器生成的汇编代码会重新从i的地址读取数据放在 b 中。而优化做法是，由于编译器发现两次从 i读数据的代码之间的代码没有对 i 进行过操作，它会自动把上次读的数据放在 b 中。而不是重新从 i 里面读。这样以来，如果 i是一个寄存器变量或者表示一个端口数据就容易出错，所以说 volatile 可以保证对特殊地址的稳定访问。注意，在 VC 6 中，一般调试模式没有进行代码优化，所以这个关键字的作用看不出来。下面通过插入汇编代码，测试有无 volatile 关键字，对程序最终代码的影响，输入下面的代码：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">    <span class="type">int</span> i = <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> a = i;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"i = %d"</span>, a);</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 下面汇编语句的作用就是改变内存中 i 的值</span></span><br><span class="line">    <span class="comment">// 但是又不让编译器知道</span></span><br><span class="line">    __asm {</span><br><span class="line">        mov dword ptr [ebp<span class="number">-4</span>], <span class="number">20</span>h</span><br><span class="line">    }</span><br><span class="line"> </span><br><span class="line">    <span class="type">int</span> b = i;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"i = %d"</span>, b);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>然后，在 Debug 版本模式运行程序，输出结果如下：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">i = <span class="number">10</span></span><br><span class="line">i = <span class="number">32</span></span><br></pre></td></tr></tbody></table></figure>
+<p>然后，在 Release 版本模式运行程序，输出结果如下：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">i = <span class="number">10</span></span><br><span class="line">i = <span class="number">10</span></span><br></pre></td></tr></tbody></table></figure>
+<p>输出的结果明显表明，Release 模式下，编译器对代码进行了优化，第二次没有输出正确的 i 值。下面，我们把 i 的声明加上 volatile 关键字，看看有什么变化：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">volatile</span> <span class="type">int</span> i = <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> a = i;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"i = %d"</span>, a);</span><br><span class="line">    __asm {</span><br><span class="line">        mov dword ptr [ebp<span class="number">-4</span>], <span class="number">20</span>h</span><br><span class="line">    }</span><br><span class="line"> </span><br><span class="line">    <span class="type">int</span> b = i;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"i = %d"</span>, b);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>分别在 Debug 和 Release 版本运行程序，输出都是：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">i = <span class="number">10</span></span><br><span class="line">i = <span class="number">32</span></span><br></pre></td></tr></tbody></table></figure>
+<p>这说明这个 volatile 关键字发挥了它的作用。其实不只是内嵌汇编操纵栈"这种方式属于编译无法识别的变量改变，另外更多的可能是多线程并发访问共享变量时，一个线程改变了变量的值，怎样让改变后的值对其它线程 visible。一般说来，volatile用在如下的几个地方：</p>
+<ol>
+<li>
+<p>中断服务程序中修改的供其它程序检测的变量需要加 volatile；</p>
+</li>
+<li>
+<p>多任务环境下各任务间共享的标志应该加 volatile；</p>
+</li>
+<li>
+<p>存储器映射的硬件寄存器通常也要加 volatile 说明，因为每次对它的读写都可能由不同意义；</p>
+</li>
+</ol>
+<h1 id="volatile-指针"><a class="markdownIt-Anchor" href="#volatile-指针"></a> volatile 指针</h1>
+<p>和 const 修饰词类似，const 有常量指针和指针常量的说法，volatile 也有相应的概念：</p>
+<p>修饰由指针指向的对象、数据是 const 或 volatile 的：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span>* cpch;</span><br><span class="line"><span class="keyword">volatile</span> <span class="type">char</span>* vpch;</span><br></pre></td></tr></tbody></table></figure>
+<p>注意：对于 VC，这个特性实现在 VC 8 之后才是安全的。</p>
+<p>指针自身的值——一个代表地址的整数变量，是 const 或 volatile 的：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">char</span>* <span class="type">const</span> pchc;</span><br><span class="line"><span class="type">char</span>* <span class="keyword">volatile</span> pchv;</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>注意：</strong></p>
+<ol>
+<li>
+<p>把一个非volatile int赋给volatile int，但是不能把非volatile对象赋给一个volatile对象。</p>
+</li>
+<li>
+<p>除了基本类型外，对用户定义类型也可以用volatile类型进行修饰。</p>
+</li>
+<li>
+<p>C++中一个有volatile标识符的类只能访问它接口的子集，一个由类的实现者控制的子集。用户只能用const_cast来获得对类型接口的完全访问。此外，volatile向const一样会从类传递到它的成员。</p>
+</li>
+</ol>
+<h1 id="多线程下的volatile"><a class="markdownIt-Anchor" href="#多线程下的volatile"></a> 多线程下的volatile</h1>
+<p>有些变量是用 volatile 关键字声明的。当两个线程都要用到某一个变量且该变量的值会被改变时，应该用 volatile 声明，该关键字的作用是防止优化编译器把变量从内存装入 CPU 寄存器中。如果变量被装入寄存器，那么两个线程有可能一个使用内存中的变量，一个使用寄存器中的变量，这会造成程序的错误执行。volatile 的意思是让编译器每次操作该变量时一定要从内存中真正取出，而不是使用已经存在寄存器中的值，如下：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">volatile</span>  BOOL  bStop  =  FALSE;</span><br></pre></td></tr></tbody></table></figure>
+<p>(1) 在一个线程中：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">while</span>(  !bStop  )  {  ...  }  </span><br><span class="line">bStop  =  FALSE;  </span><br><span class="line"><span class="keyword">return</span>;  </span><br></pre></td></tr></tbody></table></figure>
+<p>(2) 在另外一个线程中，要终止上面的线程循环：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">bStop  =  TRUE;  </span><br><span class="line"><span class="keyword">while</span>(  bStop  );  <span class="comment">//等待上面的线程终止，如果bStop不使用volatile申明，那么这个循环将是一个死循环，因为bStop已经读取到了寄存器中，寄存器中bStop的值永远不会变成FALSE，加上volatile，程序在执行时，每次均从内存中读出bStop的值，就不会死循环了。</span></span><br></pre></td></tr></tbody></table></figure>
+<p>这个关键字是用来设定某个对象的存储位置在内存中，而不是寄存器中。因为一般的对象编译器可能会将其的拷贝放在寄存器中用以加快指令的执行速度，例如下段代码中：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">...  </span><br><span class="line"><span class="type">int</span>  nMyCounter  =  <span class="number">0</span>;  </span><br><span class="line"><span class="keyword">for</span>(;  nMyCounter&lt;<span class="number">100</span>;nMyCounter++)  </span><br><span class="line">{  </span><br><span class="line">...  </span><br><span class="line">}  </span><br><span class="line">...</span><br></pre></td></tr></tbody></table></figure>
+<p>在此段代码中，nMyCounter 的拷贝可能存放到某个寄存器中（循环中，对 nMyCounter 的测试及操作总是对此寄存器中的值进行），但是另外又有段代码执行了这样的操作：<strong>nMyCounter -= 1;</strong> 这个操作中，对 nMyCounter 的改变是对内存中的 nMyCounter 进行操作，于是出现了这样一个现象：nMyCounter 的改变不同步。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/posts/16c1.html" class="leancloud-visitors view" data-flag-title="C/C++ volatile">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/posts/d839.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/posts/9fa6.html" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"AA9eNAftQgfjEcK3l0j71rDS-gzGzoHsz","appKey":"E1r06kyXdl3RxWbXxaUQ6tPg","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2021-02-04 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/language/">language<span>13</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/C/">C++<span>12</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2022 Heisenberg Lee's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'tlhg.top' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
+   </html>

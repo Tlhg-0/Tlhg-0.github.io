@@ -1,0 +1,446 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>注册表 | tlhg&#39;s Blog|</title>
+  <meta name="author" content="Heisenberg Lee">
+  
+  <meta name="description" content="学习记录。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="注册表"/>
+  <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="tlhg's Blog|" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">tlhg&#39;s Blog|</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 注册表</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="注册表的打开与关闭"><a class="markdownIt-Anchor" href="#注册表的打开与关闭"></a> 注册表的打开与关闭</h1>
+<p>注册表是一个巨大的树形结构。操作一般都是打开某个子键。子键下有若干个值可以获得。每一个值有一个名字。值有不同的类型。一般需要查询才能获得其类型。</p>
+<p>应用程序编程：需要提供一个根子键的句柄。</p>
+<p>驱动：全部用路径表示。</p>
+<p>应用编程中对应的子键 驱动编程中的路径写法：</p>
+<table>
+<thead>
+<tr>
+<th><strong>HKEY_LOCAL_MACHINE</strong></th>
+<th><strong>\Registry\Machine</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HKEY_USERS</td>
+<td>\Registry\User</td>
+</tr>
+<tr>
+<td>HKEY_CLASSES_ROOT</td>
+<td>没有对应的路径</td>
+</tr>
+<tr>
+<td>HKEY_CURRENT_USER</td>
+<td>没有简单的对应路径，但是可以求得</td>
+</tr>
+</tbody>
+</table>
+<p>实际上应用程序和驱动程序很大的一个不同在于应用程序总是由某个“当前用户”启动的。因此可以直接读取HKEY_CLASSES_ROOT和HKEY_CURRENT_USER。而驱动程序和用户无关，所以直接去打开HKEY_CURRENT_USER也就不符合逻辑了。</p>
+<p>打开注册表键使用函数ZwOpenKey。新建或者打开则使用ZwCreateKey。一般在驱动编程中，使用ZwOpenKey的情况比较多见。</p>
+<h2 id="zwopenkey-函数"><a class="markdownIt-Anchor" href="#zwopenkey-函数"></a> <strong>ZwOpenKey</strong> 函数</h2>
+<p><strong>ZwOpenKey</strong> 函数（打开注册表键），函数原型如下：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">NTSTATUS <span class="title function_">ZwOpenKey</span><span class="params">(</span></span><br><span class="line"><span class="params">    PHANDLE  KeyHandle,</span></span><br><span class="line"><span class="params">    ACCESS_MASK  DesiredAccess,</span></span><br><span class="line"><span class="params">    POBJECT_ATTRIBUTES  ObjectAttributes</span></span><br><span class="line"><span class="params">)</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>这个函数和ZwCreateFile是类似的。它并不接受直接传入一个字符串来表示一个子键。而是要求输入一个OBJECT_ATTRIBUTES的指针。</p>
+<p><strong>KeyHandle</strong> 参数是一个PAHDNLE类型，即句柄的指针，这个参数是一个返回参数，ZwOpenKey成功打开或创建注册表键后，KeyHandle保存注册表键的句柄。</p>
+<p><strong>DesiredAccess</strong>  参数表示权限，这个权限值需要根据后面具体的操作来决定，具体的参数可以查看下表。</p>
+<ul>
+<li>KEY_QUERY_VALUE：读取键下的值。</li>
+<li>KEY_SET_VALUE：设置键下的值。</li>
+<li>KEY_CREATE_SUB_KEY：生成子键。</li>
+<li>KEY_ENUMERATE_SUB_KEYS：枚举子键。</li>
+</ul>
+<p>实际上可以用  KEY_READ  来做为通用的读权限组合。这是一个组合宏。此外对应的有KEY_WRITE。</p>
+<p>如果需要获得全部的权限，可以使用KEY_ALL_ACCESS。</p>
+<p>下面的例子是 读取注册表中保存的Windows 系统目录（Windows 目录）的位置，只打开子键，不读取值。</p>
+<p>Windows目录的位置被称为SystemRoot，这一值保存在注册表中，路径是“HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion”。当然，请注意注意在驱动编程中的写法有所不同。下面的代码初始化一个OBJECT_ATTRIBUTES。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">HANDLE my_key = <span class="literal">NULL</span>;</span><br><span class="line">NTSTATUS status;</span><br><span class="line"><span class="comment">// 定义要获取的路径    </span></span><br><span class="line">UNICODE_STRING my_key_path = </span><br><span class="line">    RTL_CONSTANT_STRING(L” \\ Registry\\Machine\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion”);</span><br><span class="line">OBJECT_ATTRIBUTE my_obj_attr = { <span class="number">0</span> };</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化OBJECT_ATTRIBUTE</span></span><br><span class="line">InitializeObjectAttributes(</span><br><span class="line">    &amp;my_obj_attr,</span><br><span class="line">    &amp;my_key_path,</span><br><span class="line">    OBJ_CASE_INSENSITIVE,</span><br><span class="line">    <span class="literal">NULL</span>,</span><br><span class="line">    <span class="literal">NULL</span>);</span><br><span class="line"><span class="comment">// 接下来是打开Key</span></span><br><span class="line">status = ZwOpenKey(&amp;my_key,KEY_READ,&amp;my_obj_attr);</span><br><span class="line"><span class="keyword">if</span>(!NT_SUCCESS(status))</span><br><span class="line">{</span><br><span class="line">    <span class="comment">// 失败处理</span></span><br><span class="line">    ……</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>上面的代码得到了my_key。子键已经打开。然后的步骤是读取下面的SystemRoot值。这里省略。</p>
+<h2 id="zwcreatekey-函数"><a class="markdownIt-Anchor" href="#zwcreatekey-函数"></a> <strong>ZwCreateKey</strong> 函数</h2>
+<p><strong>ZwCreateKey</strong> 函数（新建或者打开注册表 ），函数原型如下：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">NTSTATUS <span class="title function_">ZwCreateKey</span><span class="params">(</span></span><br><span class="line"><span class="params">	PHANDLE 			KeyHandle,</span></span><br><span class="line"><span class="params">	ACCESS_MASK			DesireAccess,</span></span><br><span class="line"><span class="params">	POBJECT_ATTRIBUTES 	ObjectAttributes,</span></span><br><span class="line"><span class="params">	ULONG				TitleIndex,</span></span><br><span class="line"><span class="params">	PUNICODE_STRING 	Class,</span></span><br><span class="line"><span class="params">	ULONG				CreateOptions,</span></span><br><span class="line"><span class="params">	PULONG				Disposition</span></span><br><span class="line"><span class="params">)</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>KeyHandle</strong> 参数是一个PAHDNLE类型，即句柄的指针，这个参数是一个返回参数，ZwCreateKey成功打开或创建注册表键后，KeyHandle保存注册表键的句柄。</p>
+<p><strong>DesiredAccess</strong>  参数表示权限，这个权限值需要根据后面具体的操作来决定。</p>
+<p>如果需要获得全部的权限，可以使用KEY_ALL_ACCESS。</p>
+<p><strong>ObjectAttributes</strong>  参数在上一小节已经介绍过，表示对象的属性。ZwCreateKey函数第四个参数与第五个参数可以设置成NULL。</p>
+<p><strong>CreateOptions</strong> 参数 表示打开或创建注册表键的选项，常用的选项有：</p>
+<ul>
+<li>REG_OPTION_VOLATILE 表示新建的注册表键在系统重启后不保留</li>
+<li>REG_OPTION_NON_VOLATILE 表示新建的注册表键在系统重启后依然保留。</li>
+</ul>
+<p><strong>Disposition</strong>  参数是一个返回的参数，为ULONG指针，函数成功执行后，Disposition 等于 REG_CREATED_NEW_KEY或REG_OPENED_EXISTING_KEY，前者表示 ZwCreateKey 函数创建了一个新的注册表键，后者表示打开了一个已存在的注册表键。ZwCreateKey返回STATUS_SUCCESS则表示成功，否则返回一个错误码，对于内核大多数API，返回STATUS_SUCCESS则表示成功。</p>
+<p>ZwCreateKey 函数的用法：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">NTSTATUS <span class="title function_">DriverEntry</span><span class="params">(PDRIVER_OBJECT Driverobject, PUNICODE_STRING RegistryPath)</span></span><br><span class="line">{</span><br><span class="line">	OBJECT_ATTRIBUTES ObjAttr = { <span class="number">0</span> };</span><br><span class="line">	HANDLE hKey = <span class="literal">NULL</span>;</span><br><span class="line">	ULONG ulDisposition = <span class="number">0</span>;</span><br><span class="line">	NTSTATUS nStatus = STATUS_SUCCESS；</span><br><span class="line">	UNREFERENCED_PARAMETER ( DriverObject );</span><br><span class="line">	InitializeObjectAttributes(</span><br><span class="line">		&amp;ObjAttr,</span><br><span class="line">		RegistryPath,</span><br><span class="line">		OBJ_KERNEL_HANDLE | OBJ_CASE_INSENSITIVE,</span><br><span class="line">		<span class="literal">NULL</span>,</span><br><span class="line">		<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	nStatus = ZwCreateKey(</span><br><span class="line">		&amp;hKey,</span><br><span class="line">		KEY_WRITE,</span><br><span class="line">		&amp;ObjAttr,</span><br><span class="line">		<span class="number">0</span>,</span><br><span class="line">		<span class="literal">NULL</span>,</span><br><span class="line">		REG_OPTION_NON_VOLATILE,</span><br><span class="line">		&amp;ulDisposition);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (hKey != <span class="literal">NULL</span>)</span><br><span class="line">	{</span><br><span class="line">		ZwClose(hKey);</span><br><span class="line">		hKey = <span class="literal">NULL</span>;</span><br><span class="line">	}</span><br><span class="line">	DriverObject-&gt;DriverUnload = DriverUnload;</span><br><span class="line">	<span class="keyword">return</span> STATUS_SUCCESS;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>代码中使用了InitializeObjectAttributes宏来初始化OBJECT_ATTRIBUTES结构体。</p>
+<p>宏的每一个参数都对应着结构体中的一项成员。代码在调用InitializeObjectAttributes时，第三个参数传递的是OBJ_KERNEL_HANDLE | OBJ_CASE_INSENSITIVE，表示使用内核句柄以及对象名字不区分大小写。</p>
+<h1 id="注册表的读"><a class="markdownIt-Anchor" href="#注册表的读"></a> 注册表的读</h1>
+<h2 id="zwqueryvaluekey-函数"><a class="markdownIt-Anchor" href="#zwqueryvaluekey-函数"></a> <strong>ZwQueryValueKey</strong> 函数</h2>
+<p>ZwQueryValueKey这个函数的原型如下：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">NTSTATUS <span class="title function_">ZwQueryValueKey</span><span class="params">(</span></span><br><span class="line"><span class="params">     HANDLE  KeyHandle,</span></span><br><span class="line"><span class="params">     PUNICODE_STRING  ValueName,</span></span><br><span class="line"><span class="params">     KEY_VALUE_INFORMATION_CLASS  KeyValueInformationClass,</span></span><br><span class="line"><span class="params">     PVOID  KeyValueInformation,</span></span><br><span class="line"><span class="params">     ULONG  Length,</span></span><br><span class="line"><span class="params">     PULONG  ResultLength</span></span><br><span class="line"><span class="params">    )</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>KeyHandle</strong>：这是用ZwCreateKey或者ZwOpenKey所打开的一个注册表键句柄。</p>
+<p><strong>ValueName</strong>：UNICODE_STRING指针，要读取的值的名字。</p>
+<p><strong>KeyValueInformationClass</strong>：本次查询所需要查询的信息类型。</p>
+<p>这有如下的三种可能：</p>
+<ul>
+<li><strong>KeyValueBasicInformation</strong>：获得基础信息，包含值名和类型。</li>
+<li><strong>KeyValueFullInformation</strong>：获得完整信息。包含值名、类型和值的数据。</li>
+<li><strong>KeyValuePartialInformation</strong>：获得局部信息。包含类型和值数据。</li>
+</ul>
+<p>很容易看出实际上名字是已知的，获得基础信息是多此一举。同样获得完整信息也是浪费内存空间。因为调用ZwQueryValueKey的目的是为了得到类型和值数据。因此使用KeyValuePartialInformation最常见。当采用KeyValuePartialInformation的时候，一个类型为KEY_VALUE_PARTIAL_INFORMATION的结构将被返回到参数KeyValueInformation所指向的内存中。</p>
+<p><strong>KeyValueInformation</strong>：当KeyValueInformationClass被设置为KeyValuePartialInformation时，KEY_VALUE_PARTIAL_INFORMATION结构将被返回到这个指针所指内存中。下面是结构KEY_VALUE_PARTIAL_INFORMATION的原型。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">KEY_VALUE_PARTIAL_INFORMATION</span> {</span></span><br><span class="line">    ULONG  TitleIndex;          <span class="comment">// 请忽略这个成员</span></span><br><span class="line">    ULONG  Type;                <span class="comment">// 数据类型</span></span><br><span class="line">    ULONG  DataLength;          <span class="comment">// 数据长度</span></span><br><span class="line">    UCHAR  Data[<span class="number">1</span>];             <span class="comment">// 可变长度的数据</span></span><br><span class="line">}KEY_VALUE_PARTIAL_INFORMATION,*PKEY_VALUE_PARTIAL_INFORMATIO;</span><br></pre></td></tr></tbody></table></figure>
+<p>数据类型Type有很多种可能，但是最常见的几种如下：</p>
+<ul>
+<li>REG_BINARY：十六进制数据。</li>
+<li>REG_DWORD：四字节整数。</li>
+<li>REG_SZ：以空结束的Unicode字符串。</li>
+<li>Length：用户传入的输出空间KeyValueInformation的长度。</li>
+<li>ResultLength：返回实际需要的长度。</li>
+<li>返回值：如果说实际需要的长度比Length要大，那么返回STATUS_BUFFER_OVERFLOW或者是STATUS_BUFFER_TOO_SMALL。如果成功读出了全部数据，那么返回STATUS_SUCCESS。其他的情况，返回一个错误码。</li>
+</ul>
+<p><strong>注意</strong>：</p>
+<p>利用ResultLength参数以及STATUS_BUFFER_TOO_SMALL返回值，可以获取当前所查询键值信息大小，代码如下：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">NTSTATUS nStatus = STATUS_SUCCESS;</span><br><span class="line">UNICODE_STRING usValueName = { <span class="number">0</span> };</span><br><span class="line">ULONG ulRetSize = <span class="number">0</span>;</span><br><span class="line">RtlInitUnicodeString(&amp;usValueName, <span class="string">L"Start"</span>);</span><br><span class="line">nStatus = ZwQueryValueKey(</span><br><span class="line">	hKey,</span><br><span class="line">	&amp;usValueName,</span><br><span class="line">	KeyValuePartialInformation,</span><br><span class="line">	<span class="literal">NULL</span>,</span><br><span class="line">	<span class="number">0</span>,</span><br><span class="line">	&amp;ulRetSize);</span><br><span class="line"><span class="keyword">if</span>(nStatus == STATUS_BUFFER_TOO_SMALL &amp;&amp; ulRetSize!= <span class="number">0</span>)</span><br><span class="line">(</span><br><span class="line">	<span class="comment">//ulRetSize保存的是所需要获取的信息大小</span></span><br><span class="line">)</span><br></pre></td></tr></tbody></table></figure>
+<p>上述代码ZwQueryValueKey函数的KeyValueInformation传递NULL，Length传递0，ZwQueryValueKey函数会由于空间不足返回STATUS_BUFFER_TOO_SMALL，并设置ResultLength为所需大小。另外ZwQueryValueKey函数的第三个参数为KeyValuePartialInformation，表示获取键值的内容这个结构体的Data数组保存键值的内容，Data是一个长度不固定的数组，长度由DataLength决定，也就是说KEY_VALUE_PARTIAL_INFORMATION是一个变长结构体，这就是为什么首先需要通过ResultLength参数以及STATUS_BUFFER_TOO_SMALL返回值确定键值信息大小。</p>
+<p><strong>Length</strong>: KeyValueInformation缓冲区大小的，单位是字节。</p>
+<p><strong>ResultLength</strong>: 是一个返回参数，函数执行成功后，ResultLength返回的是KeyValueInformation缓冲区中实际键值信息大小，单位是字节</p>
+<p>下面代码展示了完整的获取键值的过程：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">NTSTATUS <span class="title function_">DriverEntry</span><span class="params">(PDRIVER_OBJECT Driverobject, PUNICODE_STRING RegistryPath)</span></span><br><span class="line">{</span><br><span class="line">	OBJECT_ATTRIBUTES ObjAttr = { <span class="number">0</span> };</span><br><span class="line">	HANDLE hKey = <span class="literal">NULL</span>;</span><br><span class="line">	ULONG ulDisposition = <span class="number">0</span>;</span><br><span class="line">	NTSTATUS nStatus = STATUS_SUCCESS;</span><br><span class="line">	UNREFERENCED_PARAMETER(DriverObject);</span><br><span class="line">	InitializeObjectAttributes(</span><br><span class="line">		&amp;ObjAttr,</span><br><span class="line">		RegistryPath,</span><br><span class="line">		OB3_KERNEL_HANDLE | OB3_CASE_INSENSITIVE,</span><br><span class="line">		<span class="literal">NULL</span>,</span><br><span class="line">		<span class="literal">NULL</span>);</span><br><span class="line">	nStatus = ZwCreateKey(</span><br><span class="line">			&amp;hKey,</span><br><span class="line">			KEY_WRITE,</span><br><span class="line">			&amp;ObjAttr,</span><br><span class="line">			<span class="number">0</span>,</span><br><span class="line">			<span class="literal">NULL</span>,</span><br><span class="line">			REG_OPTION_NON_VOLATILE,</span><br><span class="line">				&amp;ulDisposition);</span><br><span class="line">	<span class="keyword">if</span> (hKey != <span class="literal">NULL</span>)</span><br><span class="line">	{</span><br><span class="line">		UNICODE_STRING usValueName = { <span class="number">0</span> };</span><br><span class="line">		ULONG ulRetSize = <span class="number">0</span>;</span><br><span class="line">		RtlInitUnicodeString(&amp;usValueName, <span class="string">L"Start"</span>);</span><br><span class="line">		<span class="comment">//第一次查询获取所需长度</span></span><br><span class="line">		nStatus = ZwQueryValueKey(</span><br><span class="line">			hKey,</span><br><span class="line">			&amp;usValueName,</span><br><span class="line">			KeyValuePartialInformation,</span><br><span class="line">			<span class="literal">NULL</span>,</span><br><span class="line">			<span class="number">0</span>,</span><br><span class="line">			&amp;ulRetSize);</span><br><span class="line">		<span class="keyword">if</span> (nStatus == STATUS_BUFFER_TOO_SMALL &amp;&amp; ulRetSize != <span class="number">0</span>)</span><br><span class="line">		{</span><br><span class="line">			<span class="comment">//ulRetSize保存的是所需要获取的信息大小</span></span><br><span class="line">			ULONG ulStartValue = <span class="number">0</span>;</span><br><span class="line">			PKEY_VALUE_PARTIAL_INFORMATION pData = (PKEY_VALUE_PARTIAL_INFORMATION)</span><br><span class="line">				ExAllocatePoolWithTag(PagedPool, ulRetSize, <span class="string">'DriF'</span>);</span><br><span class="line">			<span class="keyword">if</span> (pData != <span class="literal">NULL</span>)</span><br><span class="line">			{</span><br><span class="line">				<span class="built_in">memset</span>(pData &gt; <span class="number">0</span>, ulRetSize);</span><br><span class="line">				<span class="comment">//再次查询</span></span><br><span class="line">				nStatus = ZwQueryValueKey(</span><br><span class="line">					hKey,</span><br><span class="line">					&amp;usValueName,</span><br><span class="line">					KeyValuePartialInformation,</span><br><span class="line">					(PVOID)pData,</span><br><span class="line">					ulRetSize,</span><br><span class="line">					&amp;ulRetSize);</span><br><span class="line">				<span class="keyword">if</span> (nStatus == STATUS_SUCCESS)</span><br><span class="line">				{</span><br><span class="line">					<span class="comment">//获取Start的值</span></span><br><span class="line">					ulStartValue = *((ULONG*)pData-&gt;Data);</span><br><span class="line">					DbgPrint(<span class="string">"Key:%wZ,ValueName:%wZ,Value:%u\n"</span>,</span><br><span class="line">						RegistryPath, &amp;usValueName, ulStartValue);</span><br><span class="line">				}</span><br><span class="line">				ExFreePoolWithTag(pData, <span class="string">'DriF'</span>);</span><br><span class="line">				pData = <span class="literal">NULL</span>;</span><br><span class="line">			}</span><br><span class="line">			ZwClose(hKey);</span><br><span class="line">			hKey = <span class="literal">NULL</span>;</span><br><span class="line">		}</span><br><span class="line">		Driverobject-&gt;DriverUnload = DriverUnload;</span><br><span class="line">		<span class="keyword">return</span> STATUS_SUCCESS;</span><br><span class="line">	}</span><br></pre></td></tr></tbody></table></figure>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/posts/aecd.html" class="leancloud-visitors view" data-flag-title="注册表">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/posts/d40c.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/posts/d839.html" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"AA9eNAftQgfjEcK3l0j71rDS-gzGzoHsz","appKey":"E1r06kyXdl3RxWbXxaUQ6tPg","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2021-02-08 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/kernel/">kernel<span>6</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/kernel-programm/">kernel programm<span>6</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2022 Heisenberg Lee's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'tlhg.top' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
+   </html>

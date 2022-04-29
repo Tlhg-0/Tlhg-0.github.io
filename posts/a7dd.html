@@ -1,0 +1,413 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Stack frame | tlhg&#39;s Blog|</title>
+  <meta name="author" content="Heisenberg Lee">
+  
+  <meta name="description" content="学习记录。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Stack frame"/>
+  <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
+
+  
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201022081449.png" />
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="tlhg's Blog|" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">tlhg&#39;s Blog|</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Stack frame</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="什么是栈帧"><a class="markdownIt-Anchor" href="#什么是栈帧"></a> 什么是栈帧</h2>
+<p>栈帧就是利用EBP（栈帧指针，注意不是ESP）寄存器访问栈内局部变量，参数，函数返回地址的手段，在IA-32寄存器中，ESP寄存器承担着栈顶指针的作用，而EBP寄存器则负责行使栈帧指针的职能。</p>
+<p>但是在程序运行的过程中，ESP寄存器的值随时发生变化，访问栈中函数的局部变量，参数时候，若以ESP值为基准编写程序会产生困难，并且难使CPU引用到准确的值。所以引入了栈帧。</p>
+<p>在调用某些函数时，先要把用作基准点（函数起始地址）的ESP值保存到EBP，并维持在函数内部，这样无论ESP的值如何变化，以EBP的值作为基准（base）就能够安全访问到相关函数的局部变量，参数，返回地址。</p>
+<h2 id="分析栈帧"><a class="markdownIt-Anchor" href="#分析栈帧"></a> 分析栈帧</h2>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span> <span class="string">"stdio.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">long</span> <span class="title">add</span> <span class="params">(<span class="type">long</span> a, <span class="type">long</span> b)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="type">long</span> x = a ,y = b;</span><br><span class="line">    <span class="keyword">return</span> (x + y);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="type">long</span> a = <span class="number">1</span>, b = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="built_in">add</span>(a, b));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201018115721.png" alt=""></p>
+<p><strong>main() 函数产生栈帧</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>*argv[])</span></span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">00401020         55                    push ebp</span><br><span class="line">00401021         8BEC                  mov ebp,esp</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>main() 函数局部变量</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">long</span> a=<span class="number">1</span>, b=<span class="number">2</span>;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">00401023         83EC 08               sub esp,0x8</span><br><span class="line">00401026         C745 FC 01000000      mov dword ptr ss:[ebp-0x4],0x1</span><br><span class="line">0040102D         C745 F8 02000000      mov dword ptr ss:[ebp-0x8],0x2</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>add()函数参数传递与调用</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"%d/n"</span>,<span class="built_in">add</span>(a,b));</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">00401034         8B45 F8               mov eax,dword ptr ss:[ebp-0x8]</span><br><span class="line">00401037         50                    push eax</span><br><span class="line">00401038         8B4D FC               mov ecx,dword ptr ss:[ebp-0x4]</span><br><span class="line">0040103B         51                    push ecx</span><br><span class="line">0040103C         E8 BFFFFFFF           call StackFra.00401000</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>开始执行add()函数 &amp; 生成栈帧</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">long</span> <span class="title">add</span><span class="params">(<span class="type">long</span> a,<span class="type">long</span> b)</span></span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">00401000         55                    push ebp</span><br><span class="line">00401001         8BEC                  mov ebp,espa</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>设置 add()函数的局部变量(x,y)</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">long</span> x=a, y=b;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">00401003         83EC 08               sub esp,0x8</span><br><span class="line">00401006         8B45 08               mov eax,dword ptr ss:[ebp+0x8]   ;[ebp+8]=param a</span><br><span class="line">00401009         8945 F8               mov dword ptr ss:[ebp-0x8],eax   ;[ebp-8]=local x</span><br><span class="line">0040100C         8B4D 0C               mov ecx,dword ptr ss:[ebp+0xC]   ;[ebp-8]=local x</span><br><span class="line">0040100F         894D FC               mov dword ptr ss:[ebp-0x4],ecx   ;[ebp-4]=local y </span><br></pre></td></tr></tbody></table></figure>
+<p><font color="red"><strong>注意</strong></font>：多个函数栈帧的生成：</p>
+<p>主函数会参数栈帧，程序运行到其他函数的时候也会产生栈帧，栈帧生成之后 EBP 的值就会发生变化，所以每当程序运行到一个新函数的时候，EBP 都会发生变化。</p>
+<p>主函数和其他函数中都存在局部变量，局部变量在引入的时候都要改变 栈中ESP （SS段中栈指针）的位置，为局部变量开辟内存空间。</p>
+<p>在上述代码中，</p>
+<p><code>main()</code> 函数的栈帧先生成（ESP-4，栈中填充EBP地址），之后为局部变量 a,b 开辟空间（ESP-4，ESP-8），此时a,b 的实际地址是 [EBP-4] 和 [EBP-8]；</p>
+<p><code>add()</code>函数的栈帧后生成（ESP-4，栈中填充EBP地址），（此时的 EBP 已经发生变化，此时参数a,b 的实际地址是 [EBP+8] 和 [EBP+c], 多的那一部分就是进入栈的 EBP 所占据的内存单元的长度。）  之后为局部变量x,y 开辟内存空间（ESP-4，ESP-8）。此时 x,y 的实际地址是 [EBP-4] 和 [EBP-8]</p>
+<p><strong>add运算</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">return</span> (x+y)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">00401012         8B45 F8               mov eax,dword ptr ss:[ebp-0x8]   ;[ebp-8]=local x</span><br><span class="line">00401015         0345 FC               add eax,dword ptr ss:[ebp-0x4]   [ebp-4]=local y</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>删除函数add()的栈帧 &amp; 函数执行完毕（返回）</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">return</span> (x+y)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">00401018         8BE5                  mov esp,ebp</span><br><span class="line">0040101A         5D                    pop ebp</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201018115306.png" alt=""></p>
+<p>图中红色矩形中的命令,在地址401001处，使用 MOV EBP,ESP 命令把函数 <code>add()</code> 开始执行时候的ESP值（12FF28）备份到EBP, 函数执行完毕后，使用地址401018处的 MOV ESP,EBP命令再把存储在EBP中的值恢复到ESP中。</p>
+<p>注意：执行完上述命令后，地址401003处的 SUB ESP,8就会失效，函数 <code>add()</code>的两个局部变量x,y ，不再有效。</p>
+<p><strong>从栈中删除函数 add()的参数（整理栈）</strong></p>
+<p>此时程序执行流已经回到了主函数main()</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">00401041         83C4 08               add esp,0x8</span><br></pre></td></tr></tbody></table></figure>
+<p>上述汇编指令的目的是清除在add()函数中给局部变量a,b开辟的内存空间，将他们从栈中清理掉。（由于a,b 都是长整型，各占4个字节，一共把八个字节，所以ESP+8）</p>
+<p><strong>调用printf() 函数</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"%d/n"</span>)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">00401044         50                    push eax</span><br><span class="line">00401045         68 84B34000           push StackFra.</span><br><span class="line">0040104A         E8 18000000           call StackFra.00401067</span><br><span class="line">0040104F         83C4 08               add esp,0x8</span><br></pre></td></tr></tbody></table></figure>
+<p>printf() 函数有两个参数，大小都是八个字节，（32位寄存器+32位常量=64位=8字节），所以在40104F地址处使用ADD命令，将ESP加上8个字节，把函数的参数从栈中删除。</p>
+<p>此时栈内地址如下：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">EBP-8    0012FF38      00000002</span><br><span class="line">EBP-4    0012FF3C      00000001</span><br><span class="line">EBP ==&gt;  0012FF40     /0012FF88</span><br><span class="line">EBP+4    0012FF44     |00401250  返回到 StackFra.00401250 来自 StackFra.00401020</span><br><span class="line">EBP+8    0012FF48     |00000001</span><br><span class="line">EBP+C    0012FF4C     |001E18A8  返回到 001E18A8</span><br><span class="line">EBP+10   0012FF50     |001E18F8</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>设置返回值</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">00401052         33C0                  xor eax,eax</span><br></pre></td></tr></tbody></table></figure>
+<p>汇编将数置零的操作：</p>
+<ol>
+<li>
+<p>MOV EAX,0</p>
+</li>
+<li>
+<p>XOR EAX,EAX  ;两个相同的值进行异或运算，，结果为零</p>
+</li>
+</ol>
+<p>异或运算的执行速度较快，常用于寄存器的初始化操作。</p>
+<p><strong>删除栈帧 &amp; main() 函数终止</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">00401054         8BE5                  mov esp,ebp</span><br><span class="line">00401056         5D                    pop ebp</span><br><span class="line">00401057         C3                    retn</span><br></pre></td></tr></tbody></table></figure>
+<p>此时主函数执行完毕并且返回，程序执行流程跳转到地址（401250），该地址指向 Visual C++ 的启动函数区域，随后执行进程终止代码。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/posts/a7dd.html" class="leancloud-visitors view" data-flag-title="Stack frame">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/posts/a251.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/posts/1a06.html" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"AA9eNAftQgfjEcK3l0j71rDS-gzGzoHsz","appKey":"E1r06kyXdl3RxWbXxaUQ6tPg","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2020-10-17 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Reverse/">Reverse<span>5</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Reverse/">Reverse<span>3</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2022 Heisenberg Lee's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'tlhg.top' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
+   </html>

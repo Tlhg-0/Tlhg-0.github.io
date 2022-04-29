@@ -1,0 +1,417 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>内存分配 | tlhg&#39;s Blog|</title>
+  <meta name="author" content="Heisenberg Lee">
+  
+  <meta name="description" content="学习记录。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="内存分配"/>
+  <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="tlhg's Blog|" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">tlhg&#39;s Blog|</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 内存分配</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="内存分配与回收"><a class="markdownIt-Anchor" href="#内存分配与回收"></a> 内存分配与回收</h1>
+<h2 id="内存分配"><a class="markdownIt-Anchor" href="#内存分配"></a> 内存分配</h2>
+<p>ExAllocatePoolWithTag(内存分配函数)</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">PVOID <span class="title function_">ExAllocatePoolWithTag</span><span class="params">(</span></span><br><span class="line"><span class="params">	POOL_TYPE PoolType,</span></span><br><span class="line"><span class="params">    SIZE_T NumberOfBytes,</span></span><br><span class="line"><span class="params">    ULONG Tag</span></span><br><span class="line"><span class="params">)</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>PoolType</strong> 为 POOL_TYPE 枚举类型，表示需要申请何种类型的内存。</p>
+<p>常用的值是 NonPagedPool 与 PagedPool，NonPagedPool表示非分页内存，PagedPool表示分页内存。</p>
+<p><strong>注意</strong>： 非分页内存是指这块内存的内容不会被置换到磁盘上，非分页内存非常宝贵，一般用于高IRQL（大于等于DISPATCH_LEVEL）的代码中。</p>
+<p>两个类型：NonPagedPoolExecute  与  NonPagedPoolNx<br>
+NonPagedPoolNx类型是指分配出来的非分页内存不具备“可执行”属性。对非分页内存进行读写而不需要进行代码或指令执行，那么可以使用NonPagedPoolNx类型的内存</p>
+<p>NonPagedPoolExecute 类型与 NonPagedPool 类型等价。</p>
+<p><strong>NumberOfBytes</strong>参数表示需要申请内存大小，单位是字节。</p>
+<p><strong>Tag</strong>参数是一个4个字节的标志，一般每个驱动程序定义一个自己的内存标记。也可以在每个模块中定义单独的内存标记。内存标记是随意的32位数字。即使冲突也不会有什么问题，这个Tag一般用于问题排查，如内存泄露，系统蓝屏等。</p>
+<p><strong>注意</strong>： ExAllocatePoolWithTag 函数成功执行后返回分配内存的首地址，失败返回NULL。使用过程中务必对该函数返回值进行判断。</p>
+<p>下的例子，是把一个字符串src拷贝到字符串dst。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 定义一个内存分配标记</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MEM_TAG    ‘MyTt’</span></span><br><span class="line"><span class="comment">// 目标字符串，接下来它需要分配空间。</span></span><br><span class="line">UNICODE_STRING dst = { <span class="number">0</span> };</span><br><span class="line"><span class="comment">// 分配空间给目标字符串。根据源字符串的长度。</span></span><br><span class="line">dst.Buffer = (PWCHAR)ExAllocatePoolWithTag(NonpagedPool,src-&gt;Length,MEM_TAG);</span><br><span class="line"><span class="keyword">if</span>(dst.Buffer == <span class="literal">NULL</span>)</span><br><span class="line">{</span><br><span class="line">    <span class="comment">// 错误处理</span></span><br><span class="line">    status = STATUS_INSUFFICIENT_RESOUCRES;</span><br><span class="line">    ……</span><br><span class="line">}</span><br><span class="line">dst.Length = dst.MaximumLength = src-&gt;Length;</span><br><span class="line">status = RtlCopyUnicodeString(&amp;dst,&amp;src);</span><br><span class="line">ASSERT(status == STATUS_SUCCESS);</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="内存释放"><a class="markdownIt-Anchor" href="#内存释放"></a> 内存释放</h2>
+<p>ExFreePoolWithTag(内存释放函数)</p>
+<p>ExAllocatePool这个函数已经废弃不用了，所以内核中最常见的分配内存的方法就是调用ExAllocatePoolWithTag函数。ExAllocatePoolWithTag的原型如下：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">VOID <span class="title function_">ExFreePoolWithTag</span><span class="params">(PVOID P,ULONG Tag)</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>P</strong> 参数表示需要释放的内存块地址</p>
+<p><strong>Tag</strong> 参数对应内存申请时的标记</p>
+<p><strong>注意</strong>：</p>
+<ol>
+<li>内存分配和释放函数要配套使用，分配内存使用ExAllocatePool函数，释放使用相应的ExFreePool函数。</li>
+<li>ExAllocatePoolWithTag分配的内存可以使用ExFreePool来释放。如果不释放，则永远泄漏。并不像用户进程关闭后自动释放所有分配的空间。即使驱动程序动态卸载，也不能释放空间。唯一的办法是重启计算机。</li>
+</ol>
+<h1 id="旁视列表"><a class="markdownIt-Anchor" href="#旁视列表"></a> 旁视列表</h1>
+<h2 id="旁视列表的原理"><a class="markdownIt-Anchor" href="#旁视列表的原理"></a> <strong>旁视列表的原理</strong>：</h2>
+<p>开发者首先初始化一个“旁视列表”对象，初始化时设置“旁视列表”中内存块的大小，在需要使用内存的时候，直接向“旁视列表”对象申请内存(申请的内存的大小为初始值申请值)，在内存使用完毕后，需要通过“旁视列表”对象来回收这些内存；最后，当不再需要使用“旁视列表”对象时将其删除。</p>
+<h2 id="旁视列表内存机制"><a class="markdownIt-Anchor" href="#旁视列表内存机制"></a> <strong>旁视列表内存机制</strong>：</h2>
+<p>旁视列表  对象内部会维护内存的使用状态，一块内存使用结束后，会释放回“旁视列表”对象内，但这块内存不会马上被释放到操作系统的Pool中。如果这个时候开发者向“旁视列表”对象申请内存，“旁视列表”对象会把刚才回收的内存块返回给申请者。</p>
+<p>这种类似“缓存”的机制，“旁视列表”对象对内存进行了二次管理，减少了向系统Pool申请或释放的次数，提高了性能。</p>
+<h2 id="旁视列表-初始化"><a class="markdownIt-Anchor" href="#旁视列表-初始化"></a> “旁视列表” 初始化</h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">ExinitializeNPagedLookadideList</span><span class="params">(</span></span><br><span class="line"><span class="params">	PANPAGED_LOOKASIDE_LIST 	Lookaside,</span></span><br><span class="line"><span class="params">    PANLLOCATE_FUNCTION 		Allocate,</span></span><br><span class="line"><span class="params">    PFREE_FUNCTION				Free,</span></span><br><span class="line"><span class="params">    ULONG						Flages,</span></span><br><span class="line"><span class="params">    SIZE_T						Size,</span></span><br><span class="line"><span class="params">    ULONG						Tag,</span></span><br><span class="line"><span class="params">    USHORT						Depth</span></span><br><span class="line"><span class="params">)</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>Lookaside</strong> 参数表示被初始化的“旁视列表”对象的指针，在64位系统下，这个指针必须以16字节对齐。</p>
+<p><strong>Allocate</strong> 参数是一个函数指针，从已初始化的“旁视列表”对象分配内存时，系统会调用开发者设置的 Allocate 函数。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">PVOID <span class="title function_">XxxAllocate</span><span class="params">(</span></span><br><span class="line"><span class="params">	POOL_TYPE PoolType,</span></span><br><span class="line"><span class="params">    SIZE_T NumberOfBytes,</span></span><br><span class="line"><span class="params">    ULONG Tag</span></span><br><span class="line"><span class="params">)</span>;<span class="comment">//Allocate函数的原型</span></span><br></pre></td></tr></tbody></table></figure>
+<p>设置Allocate参数为NULL，系统则使用默认的内存分配函数</p>
+<p>**Free **参数是一个函数指针，删除从“旁视列表”对象中申请出来的内存块时，系统就会调用 Free 参数指向的函数</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">VOID <span class="title function_">XxxFree</span><span class="params">(PVOID Buffer)</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>设置 Free 参数为NULL，在这种情况下，系统使用默认的释放函数。</p>
+<p><strong>Flags</strong> 参数控制“旁视列表”对象的内存分配行为，这个参数只有在Windows 8以及后续	系统中才有意义。</p>
+<p><strong>POOL_NX_ALLOCATION</strong>：表示分配的非分页内存的属性为“不可执行”，类似上一节	介	绍的NonPagedPoolNx标志。</p>
+<p><strong>POOL_RAISE_IF_ALLOCATION_FAILURE</strong>：表示如果内存失败，将抛出一个异常。</p>
+<p>如果没有特殊要求，可以把Flags参数设置为0。</p>
+<p><strong>Size</strong> 参数表示每次从“旁视列表”对象中申请内存的固定大小，单位是字节，这个值不能	小于LOOKASIDE_MINIMUM_BLOCK_SIZE。</p>
+<p>LOOKASIDE_MINIMUM_BLOCK_SIZE是WDK定义的一个宏，定义如下：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> LOOKASIDE_MINIMUM_BLOCK_SIZE (RTL_SIZEOF_THROUGH_FIELD (SLIST_ENTRY,Next))</span></span><br></pre></td></tr></tbody></table></figure>
+<p>RTL_SIZEOF_THROUGH_FIELD定义如下：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> RTL_SIZEOF_THROUGH_FIELD(type,field) \</span></span><br><span class="line"><span class="meta">	(FIELD_OFFSET(type,field)+RTL_FIELD_SIZE(type,field))</span></span><br><span class="line"></span><br><span class="line">FIELD_OFFSET 以及 RTL_FIELD_SIZE 的定义</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RTl_FIELD_SIZE(type,field) (sizeof(((type *)0)-&gt;field))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FIELD_OFFSET(type,field)   (LONG)(LONG_PTR)&amp;(((type *)-&gt;field))</span></span><br></pre></td></tr></tbody></table></figure>
+<p>RTL_SIZEOF_THROUGH_FIELD宏计算的是type结构体中field成员距离结构体首地址的偏移大小，加上field成员本身的大小。</p>
+<p>LOOKASIDE_MINIMUM_BLOCK_SIZE宏来说，计算的是Next成员与SLIST_ENTRY首地址的距离加上Next成员自身的大小。</p>
+<p>SLIST_ENTRY定义:</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">SLIST_ENTRY</span>{</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">SLIST_ENTRY</span> *<span class="title">Next</span>;</span></span><br><span class="line">}SLIST_ENTRY, *PLIST_ENTRY;</span><br></pre></td></tr></tbody></table></figure>
+<p>在64位系统下，LOOKASIDE_MINIMUM_BLOCK_SIZE宏的值为8；</p>
+<p><strong>Tag</strong> 参数表示分配内存时所使用的标记，与ExAllocatePoolWithTag函数中的Tag参数函数一样。</p>
+<p><strong>Depth</strong> 参数是一个保留参数，没有意义，传递0即可；</p>
+<h2 id="内存申请与释放"><a class="markdownIt-Anchor" href="#内存申请与释放"></a> 内存申请与释放</h2>
+<p>内存申请函数</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">ExAllocateFormNPageLookasideList(PNPAGED_LOOKASIDE_LIST Lookaside);</span><br></pre></td></tr></tbody></table></figure>
+<p>只需要传入“旁氏列表” 对象的地址传入上面的函数，就可以分配函数指定大小的内存。执行成功的话就会返回相应的内存块，否则返回NULL。</p>
+<p>内存释放函数</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">ExFreeToNPagedLookasideList(</span><br><span class="line">	PNPAGED_LOOKASIDE_LIST Lookaside,</span><br><span class="line">    PVOID	Entry</span><br><span class="line">);</span><br></pre></td></tr></tbody></table></figure>
+<p>Lookaside为“旁视列表”对象指针，Entry指针表示需要释放的内存块，也就是ExAllocateFromNPagedLookasideList的返回值。</p>
+<h2 id="旁氏列表删除"><a class="markdownIt-Anchor" href="#旁氏列表删除"></a> 旁氏列表删除</h2>
+<p>删除函数</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">ExDeleteNPageLookasideList(PNPAGED_LOOKASIDE_LIST Lookaside)</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>Lookaside</strong>  参数表示需要删除的“旁视列表”对象。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/posts/9fa6.html" class="leancloud-visitors view" data-flag-title="内存分配">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/posts/16c1.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/posts/e3da.html" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"AA9eNAftQgfjEcK3l0j71rDS-gzGzoHsz","appKey":"E1r06kyXdl3RxWbXxaUQ6tPg","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2021-02-03 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/kernel/">kernel<span>6</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/kernel-programm/">kernel programm<span>6</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2022 Heisenberg Lee's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'tlhg.top' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
+   </html>

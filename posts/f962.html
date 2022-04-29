@@ -1,0 +1,436 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>单链表的反转 | tlhg&#39;s Blog|</title>
+  <meta name="author" content="Heisenberg Lee">
+  
+  <meta name="description" content="学习记录。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="单链表的反转"/>
+  <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
+
+  
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025160054.png" />
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="tlhg's Blog|" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">tlhg&#39;s Blog|</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 单链表的反转</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>反转链表：将链表整体“反过来”，将头变成尾、尾变成头。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025144559.png" alt="反转的链表"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025144605.png" alt="反转后的链表"></p>
+<p>常见的四种方法:</p>
+<ol>
+<li>
+<p>迭代反转法</p>
+</li>
+<li>
+<p>递归反转法</p>
+</li>
+<li>
+<p>就地逆置法</p>
+</li>
+<li>
+<p>头插法</p>
+</li>
+</ol>
+<p>递归反转法更适用于反转不带头节点的链表；其它 3 种方法既能反转不带头节点的链表，也能反转带头节点的链表。</p>
+<h1 id="迭代反转链表"><a class="markdownIt-Anchor" href="#迭代反转链表"></a> 迭代反转链表</h1>
+<p>方法：从当前链表的首元节点开始，一直遍历至链表的最后一个节点，这期间会逐个改变所遍历到的节点的指针域，另其指向前一个节点。</p>
+<p>具体实现：借助 3 个指针即可。首先我们定义 3 个指针并分别命名为 beg、mid、end。它们的初始指向如下图所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025145917.png" alt=""></p>
+<p>在上图的基础上，遍历链表的过程就等价为：3 个指针每次各向后移动一个节点，直至 mid 指向链表中最后一个节点（此时 end 为 NULL ）。需要注意的是，这 3 个指针每移动之前，都需要做一步操作，即改变 mid 所指节点的指针域，另其指向和 beg 相同。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025150330.png" alt=""></p>
+<ol>
+<li>
+<p>3 个指针每次各向后移动一个节点（end 不为 NULL）</p>
+</li>
+<li>
+<p>改变 head 头指针的指向，另其和 mid 同向（end 为 NULL）</p>
+</li>
+</ol>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//迭代反转法，head 为无头节点链表的头指针</span></span><br><span class="line">link * <span class="title function_">iteration_reverse</span><span class="params">(link* head)</span> {</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="literal">NULL</span> || head-&gt;next == <span class="literal">NULL</span>) {</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">else</span> {</span><br><span class="line">        link * beg = <span class="literal">NULL</span>;</span><br><span class="line">        link * mid = head;</span><br><span class="line">        link * end = head-&gt;next;</span><br><span class="line">        <span class="comment">//一直遍历</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">        {</span><br><span class="line">            <span class="comment">//修改 mid 所指节点的指向</span></span><br><span class="line">            mid-&gt;next = beg;</span><br><span class="line">            <span class="comment">//此时判断 end 是否为 NULL，如果成立则退出循环</span></span><br><span class="line">            <span class="keyword">if</span> (end == <span class="literal">NULL</span>) {</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="comment">//整体向后移动 3 个指针</span></span><br><span class="line">            beg = mid;</span><br><span class="line">            mid = end;</span><br><span class="line">            end = end-&gt;next;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//最后修改 head 头指针的指向</span></span><br><span class="line">        head = mid;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="递归反转链表"><a class="markdownIt-Anchor" href="#递归反转链表"></a> 递归反转链表</h1>
+<p>方法：从链表的尾节点开始，依次向前遍历，遍历过程依次改变各节点的指向，即另其指向前一个节点。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">link* <span class="title function_">recursive_reverse</span><span class="params">(link* head)</span> {</span><br><span class="line">    <span class="comment">//递归的出口</span></span><br><span class="line">    <span class="keyword">if</span> (head == <span class="literal">NULL</span> || head-&gt;next == <span class="literal">NULL</span>)     <span class="comment">// 空链或只有一个结点，直接返回头指针</span></span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    {</span><br><span class="line">        <span class="comment">//一直递归，找到链表中最后一个节点</span></span><br><span class="line"></span><br><span class="line">        link *new_head = recursive_reverse(head-&gt;next);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//当逐层退出时，new_head 的指向都不变，一直指向原链表中最后一个节点；</span></span><br><span class="line">        <span class="comment">//递归每退出一层，函数中 head 指针的指向都会发生改变，都指向上一个节点。</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//每退出一层，都需要改变 head-&gt;next 节点指针域的指向，同时令 head 所指节点的指针域为 NULL。</span></span><br><span class="line">        head-&gt;next-&gt;next = head;</span><br><span class="line">        head-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//每一层递归结束，都要将新的头指针返回给上一层。由此，即可保证整个递归过程中，能够一直找得到新链表的表头。</span></span><br><span class="line">        <span class="keyword">return</span> new_head;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ol>
+<li>由于 head 不为 NULL，因此函数每执行到第 11 行时，递归都会深入一层，并依次将指向节点 2、3、4 的指针作为实参（head_next 的指向）参与递归。而根据递归出口的判断条件，当函数参数 head 指向的是节点 4 时满足 head-&gt;next == NULL，递归过程不再深入，并返回指向节点 4 的指针，这就是反转链表的新头指针。</li>
+</ol>
+<p>因此，当递归首次退出一层时，new_head 指向的是节点 4 ，而 head 由于退出一层，指向的是节点 3，如下图所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025153138.png" alt=""></p>
+<ol start="2">
+<li>在此基础上，开始执行 17、18 行代码，整个操作过程如下图所示，最后将 new_head 的指向继续作为函数的返回值，传给上一层的 new_head。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025153208.png" alt=""></p>
+<ol start="3">
+<li>再退一层，此时 new_head 仍指向节点 4，而 head 退出一层后，指向的是节点 2。在此基础上执行 17、18 行代码，并最终将 new_head 的指向作为函数返回值，继续传给上一层的 new_head。整个操作过程如下图所示：</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025153247.png" alt=""></p>
+<ol start="4">
+<li>再退一层，此时 new_head 仍指向节点 4，而 head 退出一层后，指向的是节点 1。在此基础上执行 17、18 行代码，并返回 new_head。整个操作过程如下图所示：</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025153329.png" alt=""></p>
+<p>head 由节点 1 进入递归，此时 head 的指向又返回到节点 1，整个递归过程结束。显然，以上过程已经实现了链表的反转，新反转链表的头指针为 new_head。</p>
+<h1 id="头插法反转链表"><a class="markdownIt-Anchor" href="#头插法反转链表"></a> 头插法反转链表</h1>
+<p>方法：在原有链表的基础上，依次将位于链表头部的节点摘下，然后采用从头部插入的方式生成一个新链表，则此链表即为原链表的反转版。</p>
+<p>步骤：</p>
+<ol>
+<li>创建一个新的空链表</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025154153.png" alt=""></p>
+<ol start="2">
+<li>从原链表中摘除头部节点 i（i &lt; N），并以头部插入的方式将该节点添加到新链表中</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025154220.png" alt=""></p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">link * <span class="title function_">head_reverse</span><span class="params">(link * head)</span> {</span><br><span class="line">    link * new_head = <span class="literal">NULL</span>;</span><br><span class="line">    link * temp = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="literal">NULL</span> || head-&gt;next == <span class="literal">NULL</span>) {</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">while</span> (head != <span class="literal">NULL</span>)</span><br><span class="line">    {</span><br><span class="line">        temp = head;</span><br><span class="line">        <span class="comment">//将 temp 从 head 中摘除</span></span><br><span class="line">        head = head-&gt;next;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//将 temp 插入到 new_head 的头部</span></span><br><span class="line">        temp-&gt;next = new_head;</span><br><span class="line">        new_head = temp;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> new_head;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="就地逆置法反转链表"><a class="markdownIt-Anchor" href="#就地逆置法反转链表"></a> 就地逆置法反转链表</h1>
+<p>方法：就地逆置法和头插法的实现思想类似，唯一的区别在于，头插法是通过建立一个新链表实现的，而就地逆置法则是直接对原链表做修改，从而实现将原链表反转。</p>
+<p>在原链表的基础上做修改，需要额外借助 2 个指针（假设分别为 beg 和 end）</p>
+<p>步骤：</p>
+<ol>
+<li>初始状态下，令 beg 指向第一个节点，end 指向 beg-&gt;next，如下图所示：</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025155134.png" alt=""></p>
+<ol start="2">
+<li>将 end 所指节点 2 从链表上摘除，然后再添加至当前链表的头部。如下图所示：</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025155238.png" alt=""></p>
+<ol start="3">
+<li>将 end 指向 beg-&gt;next，然后将 end 所指节点 3 从链表摘除，再添加到当前链表的头部，如下图所示：</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025155238.png" alt=""></p>
+<ol start="4">
+<li>将 end 指向 beg-&gt;next，再将 end 所示节点 4 从链表摘除，并添加到当前链表的头部，如下图所示：</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025155352.png" alt=""></p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">link * <span class="title function_">local_reverse</span><span class="params">(link * head)</span> {</span><br><span class="line">    link * beg = <span class="literal">NULL</span>;</span><br><span class="line">    link * end = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="literal">NULL</span> || head-&gt;next == <span class="literal">NULL</span>) {</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    }</span><br><span class="line">    beg = head;</span><br><span class="line">    end = head-&gt;next;</span><br><span class="line">    <span class="keyword">while</span> (end != <span class="literal">NULL</span>) {</span><br><span class="line">        <span class="comment">//将 end 从链表中摘除</span></span><br><span class="line">        beg-&gt;next = end-&gt;next;</span><br><span class="line">        <span class="comment">//将 end 移动至链表头</span></span><br><span class="line">        end-&gt;next = head;</span><br><span class="line">        head = end;</span><br><span class="line">        <span class="comment">//调整 end 的指向，另其指向 beg 后的一个节点，为反转下一个节点做准备</span></span><br><span class="line">        end = beg-&gt;next;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/posts/f962.html" class="leancloud-visitors view" data-flag-title="单链表的反转">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/posts/5a5a.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/posts/82e6.html" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"AA9eNAftQgfjEcK3l0j71rDS-gzGzoHsz","appKey":"E1r06kyXdl3RxWbXxaUQ6tPg","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2020-10-25 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Algorithm/">Algorithm<span>2</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Data-Structure/">Data Structure<span>2</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2022 Heisenberg Lee's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'tlhg.top' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
+   </html>

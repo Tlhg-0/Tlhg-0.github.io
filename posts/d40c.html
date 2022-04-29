@@ -1,0 +1,382 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>微信电脑版多开、防撤回破解 | tlhg&#39;s Blog|</title>
+  <meta name="author" content="Heisenberg Lee">
+  
+  <meta name="description" content="学习记录。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="微信电脑版多开、防撤回破解"/>
+  <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="tlhg's Blog|" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">tlhg&#39;s Blog|</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 微信电脑版多开、防撤回破解</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>网上有一堆 微信电脑版多开、防撤回等<strong>破解补丁</strong>，可以实现类似的功能，但是微信是比较<strong>涉及个人隐私</strong>的社交软件，所以网上公开的补丁基本都不敢用，<strong>万一自带木马后门</strong>什么的就惨了。所以在这里教大家纯手工修改方法。</p>
+<h1 id="准备工作"><a class="markdownIt-Anchor" href="#准备工作"></a> 准备工作</h1>
+<p>1. OllyDbg 或 OllyICE(OllyDbg 爱好者二次开发升级版本) 等反汇编软件。</p>
+<p>2. 安装好微信电脑版，提取安装路径文件夹中的 WeChatWin.dll 备用。</p>
+<p>使用 OllyDbg 纯手工修改微信电脑版 WeChatWin.dll 的汇编代码，<strong>实现无限多开和消息防撤回功能</strong>，并且有撤回提示。</p>
+<p>该方法适用于微信电脑版（Windows PC 版）近几年的所有版本，甚至未来新版本。</p>
+<p>有一定的技术门槛，需要了解基本的反汇编破解知识，如果不能熟练掌握 OllyDbg 等反汇编软件，那么底下内容就可以不用看了。</p>
+<h1 id="破解流程"><a class="markdownIt-Anchor" href="#破解流程"></a> 破解流程</h1>
+<h2 id="解除多开限制"><a class="markdownIt-Anchor" href="#解除多开限制"></a> 解除多开限制</h2>
+<p>微信启动后，会先尝试<strong>创建互斥体</strong>，如果创建成功则直接启动微信，否则依次判断 <strong>WeChatMainWndForPC</strong> 和 <strong>WeChatLoginWndForPC</strong> 两个窗口是否存在，如果存在则使用 BringWindowToTop 函数将其<strong>置顶并弹出</strong>，如果不存在则启动微信。</p>
+<p>上述两个窗口分别代表的是微信的<strong>主界面窗口和登陆界面窗口</strong>，如果一个微信实例已经存在，则势必处于这两种状态之一。</p>
+<p>微信判断是否重复启动运行的条件：</p>
+<p>1.如果互斥体创建成功，则直接启动微信。</p>
+<p>2.如果互斥体创建失败，如果查找微信相关窗口，找到则置顶并退出，未找到则启动微信。</p>
+<p>用<strong>伪代码</strong>表示一下<strong>判断逻辑</strong>：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">// 尝试创建互斥体</span><br><span class="line">if (CreateMutex() == SUCCESS) {</span><br><span class="line">    // 创建成功则启动微信</span><br><span class="line">} else {</span><br><span class="line">    // 创建失败则尝试查找窗口</span><br><span class="line">    if (FindWindow() == SUCCESS) {</span><br><span class="line">        // 找到微信窗口，则将已有窗口置顶，然后结束程序</span><br><span class="line">    } else {</span><br><span class="line">         // 未找到微信窗口，则启动微信</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>所以破解思路就很简单了，首先使用 OllyDbg 查找所有参考文本字符串：</p>
+<p><strong>WeChatMainWndForPC</strong> 或 <strong>WeChatLoginWndForPC</strong></p>
+<p>然后找到以下这段代码并修改（<strong>看右侧的注释说明，需要修改 1 处星标的行</strong>）：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">5B36F8B0  /$  E8 6B000000   call WeChatWi.5B36F920                                                      创建互斥体</span><br><span class="line">5B36F8B5      84C0          test al,al                                                                  判断互斥体是否创建成功</span><br><span class="line">5B36F8B7  |.  74 56         je short WeChatWi.5B36F90F                                                  ★ je 改为 jmp，不管是否创建成功都强制跳转，并且跳过底下的窗口查找判断</span><br><span class="line">5B36F8B9  |.  56            push esi</span><br><span class="line">5B36F8BA  |.  6A 00         push 0x0                                 ; /Title = NULL</span><br><span class="line">5B36F8BC  |.  68 2819105C   push WeChatWi.5C101928                   ; |Class = "WeChatMainWndForPC"</span><br><span class="line">5B36F8C1  |.  FF15 1CD8F15B call dword ptr ds:[&lt;&amp;USER32.FindWindowW&gt;&gt;; \FindWindowW</span><br><span class="line">5B36F8C7  |.  8BF0          mov esi,eax                              ;  WeChatWi.5A960000</span><br><span class="line">5B36F8C9  |.  85F6          test esi,esi</span><br><span class="line">5B36F8CB  |.  75 12         jnz short WeChatWi.5B36F8DF                                                 &gt; 如果找到窗口 WeChatMainWndForPC 则将该窗口切换到顶层然后退出（按理说修改这个字符串也可以实现绕过多开检测）</span><br><span class="line">5B36F8CD  |.  50            push eax                                 ; /Title = "婍?"</span><br><span class="line">5B36F8CE  |.  68 9C0D105C   push WeChatWi.5C100D9C                   ; |Class = "WeChatLoginWndForPC"</span><br><span class="line">5B36F8D3  |.  FF15 1CD8F15B call dword ptr ds:[&lt;&amp;USER32.FindWindowW&gt;&gt;; \FindWindowW</span><br><span class="line">5B36F8D9  |.  8BF0          mov esi,eax                              ;  WeChatWi.5A960000</span><br><span class="line">5B36F8DB  |.  85F6          test esi,esi</span><br><span class="line">5B36F8DD  |.  74 2B         je short WeChatWi.5B36F90A                                                  &gt; 如果找到窗口 微信:WeChatLoginWndForPC 则将该窗口切换到顶层然后退出（按理说修改这个字符串也可以实现绕过多开检测）</span><br><span class="line">5B36F8DF  |&gt;  6A 01         push 0x1</span><br><span class="line">5B36F8E1  |.  56            push esi</span><br><span class="line">5B36F8E2  |.  FF15 88D7F15B call dword ptr ds:[&lt;&amp;USER32.SwitchToThis&gt;;  user32.SwitchToThisWindow       以下代码为置顶已登录的窗口</span><br><span class="line">5B36F8E8  |.  56            push esi                                 ; /hWnd = 00000001</span><br><span class="line">5B36F8E9  |.  FF15 8CD7F15B call dword ptr ds:[&lt;&amp;USER32.BringWindowT&gt;; \BringWindowToTop</span><br><span class="line">5B36F8EF  |.  6A 00         push 0x0                                 ; /pResult = NULL</span><br><span class="line">5B36F8F1  |.  68 E8030000   push 0x3E8                               ; |Timeout = 1000. ms</span><br><span class="line">5B36F8F6  |.  6A 02         push 0x2                                 ; |Flags = SMTO_NORMAL|SMTO_ABORTIFHUNG</span><br><span class="line">5B36F8F8  |.  6A 00         push 0x0                                 ; |lParam = 0x0</span><br><span class="line">5B36F8FA  |.  6A 00         push 0x0                                 ; |wParam = 0x0</span><br><span class="line">5B36F8FC  |.  68 E00B0000   push 0xBE0                               ; |Message = MSG(0xBE0)</span><br><span class="line">5B36F901  |.  56            push esi                                 ; |hWnd = 00000001</span><br><span class="line">5B36F902  |.  FF15 74D9F15B call dword ptr ds:[&lt;&amp;USER32.SendMessageT&gt;; \SendMessageTimeoutW</span><br><span class="line">5B36F908  |.  85F6          test esi,esi</span><br><span class="line">5B36F90A  |&gt;  0f95c0        setne al</span><br><span class="line">5B36F90D  |.  5E            pop esi                                  ;  LoadDl_1.60001057</span><br><span class="line">5B36F90E  |.  C3            retn                                                                        函数返回（有多开时）</span><br><span class="line">5B36F90F  |&gt;  32C0          xor al,al                                                                   函数返回（没有多开时）</span><br><span class="line">5B36F911  \.  C3            retn</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="消息防撤回"><a class="markdownIt-Anchor" href="#消息防撤回"></a> 消息防撤回</h2>
+<p><strong>消息防撤回，带对方撤回消息提示！</strong></p>
+<p>和上边一样，先查找所有参考文本字符串：<strong>pStrMsgid value is null</strong></p>
+<p>然后找到以下这段代码并修改（<strong>看右侧的注释说明，需要修改 1 处星标的行</strong>）：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">68E854DA  |&gt; \8B06          mov eax,dword ptr ds:[esi]</span><br><span class="line">68E854DC  |.  8BCE          mov ecx,esi</span><br><span class="line">68E854DE  |.  FF50 18       call dword ptr ds:[eax+0x18]</span><br><span class="line">68E854E1  |.  85C0          test eax,eax                             ;  WeChatWi.68B90000</span><br><span class="line">68E854E3  |.^ 74 9D         je short WeChatWi.68E85482</span><br><span class="line">68E854E5  |.  68 F4C7336A   push WeChatWi.6A33C7F4                   ;  ASCII "revokemsg"</span><br><span class="line">68E854EA  |.  8BC8          mov ecx,eax                              ;  WeChatWi.68B90000</span><br><span class="line">68E854EC  |.  E8 0F2F7700   call WeChatWi.695F8400</span><br><span class="line">68E854F1  |.  8BF0          mov esi,eax                              ;  WeChatWi.68B90000</span><br><span class="line">68E854F3  |.  85F6          test esi,esi</span><br><span class="line">68E854F5  |.^ 74 8B         je short WeChatWi.68E85482</span><br><span class="line">68E854F7  |.  68 F8D4336A   push WeChatWi.6A33D4F8                   ;  ASCII "newmsgid"</span><br><span class="line">68E854FC  |.  8BCE          mov ecx,esi</span><br><span class="line">68E854FE  |.  E8 FD2E7700   call WeChatWi.695F8400</span><br><span class="line">68E85503  |.  85C0          test eax,eax                             ;  WeChatWi.68B90000    ★ 修改为 xor eax,eax</span><br><span class="line">68E85505  |.  74 7B         je short WeChatWi.68E85582                                       &gt; PS：或者把 je 改为 jne 也可以？待测试！</span><br><span class="line">68E85507  |.  8BC8          mov ecx,eax                              ;  WeChatWi.68B90000</span><br><span class="line">68E85509  |.  E8 82377700   call WeChatWi.695F8C90</span><br><span class="line">68E8550E  |.  85C0          test eax,eax                             ;  WeChatWi.68B90000</span><br><span class="line">68E85510  |.  75 62         jnz short WeChatWi.68E85574</span><br><span class="line">68E85512  |.  0F1005 98F52B&gt;movups xmm0,dqword ptr ds:[0x6A2BF598]</span><br><span class="line">68E85519  |.  83EC 10       sub esp,0x10</span><br><span class="line">68E8551C  |.  BA C0C3336A   mov edx,WeChatWi.6A33C3C0                ;  ASCII "02_manager\ChatMgr.cpp"</span><br><span class="line">68E85521  |.  8BC4          mov eax,esp</span><br><span class="line">68E85523  |.  B9 02000000   mov ecx,0x2</span><br><span class="line">68E85528  |.  83EC 10       sub esp,0x10</span><br><span class="line">68E8552B  |.  0F1100        movups dqword ptr ds:[eax],xmm0</span><br><span class="line">68E8552E  |.  8BC4          mov eax,esp</span><br><span class="line">68E85530  |.  83EC 10       sub esp,0x10</span><br><span class="line">68E85533  |.  0F1100        movups dqword ptr ds:[eax],xmm0</span><br><span class="line">68E85536  |.  8BC4          mov eax,esp</span><br><span class="line">68E85538  |.  83EC 10       sub esp,0x10</span><br><span class="line">68E8553B  |.  0F1100        movups dqword ptr ds:[eax],xmm0</span><br><span class="line">68E8553E  |.  8BC4          mov eax,esp</span><br><span class="line">68E85540  |.  83EC 10       sub esp,0x10</span><br><span class="line">68E85543  |.  0F1100        movups dqword ptr ds:[eax],xmm0</span><br><span class="line">68E85546  |.  8BC4          mov eax,esp</span><br><span class="line">68E85548  |.  83EC 10       sub esp,0x10</span><br><span class="line">68E8554B  |.  0F1100        movups dqword ptr ds:[eax],xmm0</span><br><span class="line">68E8554E  |.  8BC4          mov eax,esp</span><br><span class="line">68E85550  |.  68 E0D4336A   push WeChatWi.6A33D4E0                   ;  ASCII "pStrMsgid value is null"</span><br><span class="line">68E85555  |.  68 F8C3336A   push WeChatWi.6A33C3F8                   ;  ASCII "ChatMgr"</span><br><span class="line">68E8555A  |.  68 C4D4336A   push WeChatWi.6A33D4C4                   ;  ASCII "ChatMgr::parseRevokeContent"</span><br><span class="line">68E8555F  |.  68 8B080000   push 0x88B</span><br><span class="line">68E85564  |.  0F1100        movups dqword ptr ds:[eax],xmm0</span><br><span class="line">68E85567  |.  E8 54732900   call WeChatWi.6911C8C0</span><br><span class="line">68E8556C  |.  83C4 70       add esp,0x70</span><br><span class="line">68E8556F  |.^ E9 0EFFFFFF   jmp WeChatWi.68E85482</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="破解完成"><a class="markdownIt-Anchor" href="#破解完成"></a> 破解完成</h1>
+<p>复制所有修改并保存到文件，然后替换 WeChatWin.dll 原文件，重新运行微信即可。</p>
+<h1 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h1>
+<p><a target="_blank" rel="noopener" href="https://user.guancha.cn/main/content?id=351956&amp;page=2">微信PC端多开的秘密</a></p>
+<p><a target="_blank" rel="noopener" href="http://vulsee.com/archives/vulsee_2021/0302_13882.html">微信PC段防撤回DLL（WeChatWin.dll）修改测试</a></p>
+<p><a target="_blank" rel="noopener" href="https://jishuin.proginn.com/p/763bfbd28ba4">深扒微信多开的秘密后，我竟然发现了个 bug</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.ghxi.com/pcwechat.html">微信 最新 电脑版 绿色修改版</a>，和官方同步更新，有现成破解补丁下载，<strong>安全性自测！</strong></p>
+<p><a target="_blank" rel="noopener" href="http://www.qiuquan.cc/chat/wechat.html">微信 最新 电脑版 正式版+测试版+开发版（多开+防撤回,带撤回提示）</a>，和官方同步更新，有现成破解补丁下载，<strong>安全性自测！</strong></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/posts/d40c.html" class="leancloud-visitors view" data-flag-title="微信电脑版多开、防撤回破解">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/posts/aecd.html" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"AA9eNAftQgfjEcK3l0j71rDS-gzGzoHsz","appKey":"E1r06kyXdl3RxWbXxaUQ6tPg","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2021-04-26 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Reverse/">Reverse<span>5</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2022 Heisenberg Lee's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'tlhg.top' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
+   </html>

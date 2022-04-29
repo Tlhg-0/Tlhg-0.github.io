@@ -1,0 +1,431 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>UNICODE_STRING | tlhg&#39;s Blog|</title>
+  <meta name="author" content="Heisenberg Lee">
+  
+  <meta name="description" content="学习记录。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="UNICODE_STRING"/>
+  <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="tlhg's Blog|" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">tlhg&#39;s Blog|</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> UNICODE_STRING</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="unicode_string数据类型"><a class="markdownIt-Anchor" href="#unicode_string数据类型"></a> UNICODE_STRING数据类型</h1>
+<p>内核层编程一般不直接使用WCHAR类型的Unicode字符串，而是使用UNICODE_STRING类型来表示Unicode。</p>
+<p>这里简单介绍一下 UNICODE_STRING 类型。</p>
+<p>UNICODE_STRING是内核中表示字符串的结构体；</p>
+<p>Buffer为一个指针，指向一个UNICODE类型的字符串缓冲区；</p>
+<p>MaximumLength表示Buffer所指向缓冲区的总空间大小，一般等于Buffer被分配时的内存大小，单位为字节；</p>
+<p>Length表示Buffer所指向缓冲区中字符串的长度，单位也是字节；</p>
+<p><strong>注意</strong>：Buffer指向的字符串，并不要求以’\0’作为结束，在大多数情况下，Buffer指向的字符串没有以’\0’结尾</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">UNICODE_STRING</span>{</span> </span><br><span class="line">       USHORT Length; </span><br><span class="line">       USHORT MaximumLength; </span><br><span class="line">       PWSTR Buffer;</span><br><span class="line">}UNICODE_STRING, *PUNICODE_STRING;</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="unicode_string-初始化"><a class="markdownIt-Anchor" href="#unicode_string-初始化"></a> UNICODE_STRING 初始化</h1>
+<h2 id="手动初始化"><a class="markdownIt-Anchor" href="#手动初始化"></a> 手动初始化</h2>
+<h3 id="指针赋值"><a class="markdownIt-Anchor" href="#指针赋值"></a> 指针赋值</h3>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MYSTRING <span class="string">L"www.tlhg.top"</span></span></span><br><span class="line">    <span class="comment">// 先定义后，再定义空间</span></span><br><span class="line">UNICODE_STRING str;</span><br><span class="line">str.Buffer = MYSTRING;</span><br><span class="line">str.Length = str.MaximumLength = wcslen(MYSTRING) * <span class="keyword">sizeof</span>(WCHAR);</span><br></pre></td></tr></tbody></table></figure>
+<p>指针Buffer进行了初始化赋值，这个指针指向的全局常量地址空间，所以这一段地址空间只能读，不可写。<br>
+如果我们强行对其地址修改，会触发系统的异常，导致蓝屏。</p>
+<h3 id="计算赋值"><a class="markdownIt-Anchor" href="#计算赋值"></a> 计算赋值</h3>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">UNICODE_STRING str = { </span><br><span class="line">    <span class="keyword">sizeof</span>(<span class="string">L"www.tlhg.top"</span>) – <span class="keyword">sizeof</span>((<span class="string">L"www.tlhg.top"</span>)[<span class="number">0</span>]),</span><br><span class="line">    <span class="keyword">sizeof</span>(<span class="string">L"www.tlhg.top"</span>),</span><br><span class="line">    <span class="string">L"www.tlhg.top"</span></span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+<p>分别对结构体的三个变量进行初始化：</p>
+<p>对于UNICODE_STRING的Length,相当于</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">str.Length = <span class="keyword">sizeof</span>(<span class="string">L"www.tlhg.top"</span>) – <span class="keyword">sizeof</span>((<span class="string">L"www.tlhg.top"</span>)[<span class="number">0</span>]);</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>sizeof(L”www.tlhg.top”) 计算该字符串所占的内存空间，这里包括L’\0’。</li>
+<li>sizeof((L”www.tlhg.top”)[0])相当于取的是这个字符串的第一个字符长度，这里因为宽字节，所以是2，两者相减，就计算出了字符串的长度。这里看到确实是以字节为单位计算的，而不是以宽字节的长度为单位的。</li>
+</ul>
+<p>对于UNIOCDE_STRING的MaximumLength成同，则直接使用sizeof计算其所占内存空间。所以这里也就包括了L’\0’2个字节的长度。</p>
+<p>对于UNIOCDE_STRING的Buffer成员，直接使用常量地址空间的地址赋值。</p>
+<h2 id="宏初始化rtl_constant_string"><a class="markdownIt-Anchor" href="#宏初始化rtl_constant_string"></a> 宏初始化（RTL_CONSTANT_STRING）</h2>
+<p>微软封装了字符串初始化的代码，封装成了一个宏RTL_CONSTANT_STRING，我们可以直接使用这个宏来初始化常量字符串。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> RTL_CONSTANT_STRING(s) \</span></span><br><span class="line"><span class="meta">{ \</span></span><br><span class="line"><span class="meta">    sizeof( s ) - sizeof( (s)[0] ), \</span></span><br><span class="line"><span class="meta">    sizeof( s ) / sizeof(_RTL_CONSTANT_STRING_type_check(s)), \</span></span><br><span class="line"><span class="meta">    _RTL_CONSTANT_STRING_remove_const_macro(s) \</span></span><br><span class="line"><span class="meta">}</span></span><br></pre></td></tr></tbody></table></figure>
+<p>这样一来，初始化字符串就简单的多了</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ntdef.h&gt;</span></span></span><br><span class="line">UNICODE_STRING str = RTL_CONSTANT_STRING(<span class="string">L"www.tlhg.top"</span>);</span><br></pre></td></tr></tbody></table></figure>
+<p>要使用宏RTL_CONSTANT_STRING，必须包括头文件ntdef.h，因为这个宏是在ntdef.h头文件中定义的。</p>
+<h2 id="函数初始化rtlinitunicodestring"><a class="markdownIt-Anchor" href="#函数初始化rtlinitunicodestring"></a> 函数初始化（RtlInitUnicodeString）</h2>
+<p>常用的初始化函数为RtlInitUnicodeString，这个函数的作用是把一个以’\0’结尾的WCHAR类型的Unicode字符串初始化成UNICODE_STRING类型的字符串。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">VOID <span class="title function_">RtlInitUnicodeString</span><span class="params">(</span></span><br><span class="line"><span class="params">    PUNICODE_STRING DestinationString,</span></span><br><span class="line"><span class="params">    PCWSTR SourceString</span></span><br><span class="line"><span class="params">)</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>RtlInitUnicodeString函数有两个参数，第一个参数为返回类型，表示需要初始化的UNICODE_STRING结构体，第二个参数为传入参数，表示被用来初始化DestinationString的常量WCHAR类型字符串，这个字符串以’\0’为结束符。</p>
+<p><strong>注意</strong>：RtlInitUnicodeString函数在使用的过程中，并不会为字符串的缓冲区申请内存，只是把定义的结构体的的缓冲区指向字符串的首地址，所以我们在使用的过程中，应该注意在使用DestinationString期间，必须保证SourceString有效。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">UNICODE_STRING str;</span><br><span class="line">RtlInitUnicodeString(&amp;str,<span class="string">L"www.tlhg.top"</span>);</span><br><span class="line">...</span><br><span class="line"><span class="comment">//可以再次初始化</span></span><br><span class="line">RtlInitUnicodeString(&amp;str,<span class="string">L"www.tlhg.top"</span>);</span><br></pre></td></tr></tbody></table></figure>
+<p>注意： 初始化的字符串，不用担心内存释放方面的问题。因为我们并没有分配任何内存,因为这些内存都是使用的是常量地址空间。</p>
+<h1 id="unicode_string-拷贝操作"><a class="markdownIt-Anchor" href="#unicode_string-拷贝操作"></a> UNICODE_STRING 拷贝操作</h1>
+<p>由于 UNICODE_STRING 和ANSI_STRING字符串是一个结构体，所以UNICODE_STRING 和ANSI_STRING字符串的拷贝就不能使用wcscpy和strcpy来进行拷贝了。</p>
+<p>常用的拷贝函数为RtlUnicodeStringCopyString，这个函数的功能是把以’\0’结尾的字符串pszSrc拷贝到DestinationString中。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">NTSTATUS <span class="title function_">RelUnicodeStringCopystring</span><span class="params">(</span></span><br><span class="line"><span class="params">	PUNICODE_STRING DestinationString,</span></span><br><span class="line"><span class="params">    NTSTATUS_PCWSTR pszSrc</span></span><br><span class="line"><span class="params">)</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>RtlUnicodeStringCopyString会把函数第二个参数pszSrc字符串拷贝到DestinationString所指向的内存中。</p>
+<p><strong>注意</strong>：</p>
+<ol>
+<li>RtlInitUnicodeString函数内部只是简单地使DestinationString.Buffer指向函数的第二个参数SourceString，没有任何的拷贝操作，而RtlUnicodeStringCopyString会把函数第二个参数pszSrc字符串拷贝到DestinationString所指向的内存中。</li>
+<li>使用的时候，要添加头文件 “Ntstrsafe.h”，引入相关的库文件 Ntstrsafe.lib ，简单的做法是在Sources文件中添加一行：TARGETLIBS = $(DDK_LIB_PATH)\ntstrsafe.lib。</li>
+</ol>
+<h2 id="unicode_strng示例"><a class="markdownIt-Anchor" href="#unicode_strng示例"></a> UNICODE_STRNG示例</h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">UNICODE_STRING dst;            <span class="comment">// 目标字符串</span></span><br><span class="line">WCHAR dst_buf[<span class="number">256</span>];         <span class="comment">// 不分配内存，故先定义缓冲区</span></span><br><span class="line">UNICODE_STRING src = RTL_CONST_STRING(<span class="string">L"www.tlhg.top"</span>);</span><br><span class="line"><span class="comment">// 把目标字符串初始化为拥有缓冲区长度为256的UNICODE_STRING空串。</span></span><br><span class="line">RtlInitEmptyString(dst,dst_buf,<span class="number">256</span>*<span class="keyword">sizeof</span>(WCHAR));</span><br><span class="line">RtlCopyUnicodeString(&amp;dst,&amp;src);    <span class="comment">// 字符串拷贝！</span></span><br></pre></td></tr></tbody></table></figure>
+<p>以上这个拷贝之所以可以成功，是因为256比 L”www.tlhg.top” 的长度要大。如果小，则拷贝也不会出现任何明示的错误。但是拷贝结束之后，与使用者的目标不符，字符串实际上被截短了。</p>
+<h2 id="stringansi_string示例"><a class="markdownIt-Anchor" href="#stringansi_string示例"></a> STRING/ANSI_STRING示例</h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">STRING dst;            <span class="comment">// 目标字符串</span></span><br><span class="line"><span class="type">char</span> dst_buf[<span class="number">256</span>]; 	<span class="comment">// 不分配内存，故先定义缓冲区</span></span><br><span class="line">STRING src = RTL_CONSTANT_STRING(<span class="string">"www.tlhg.top"</span>);</span><br><span class="line"><span class="comment">// 把目标字符串初始化为拥有缓冲区长度为256的STRING空串。</span></span><br><span class="line">RtlInitEmptyAnsiString(&amp;dst, dst_buf, <span class="number">256</span> * <span class="keyword">sizeof</span>(<span class="type">char</span>));</span><br><span class="line">RtlCopyString(&amp;dst, &amp;src);    <span class="comment">// 字符串拷贝！</span></span><br></pre></td></tr></tbody></table></figure>
+<p>注意：</p>
+<p>如果没有调用RtlInitEmptyString。dst字符串被初始化认为缓冲区长度为0，结果就是dst字符串为空串。</p>
+<h1 id="unicode_string-拼接"><a class="markdownIt-Anchor" href="#unicode_string-拼接"></a> UNICODE_STRING 拼接</h1>
+<h2 id="rtlappendunicodetostring"><a class="markdownIt-Anchor" href="#rtlappendunicodetostring"></a> RtlAppendUnicodeToString</h2>
+<p><strong>RtlAppendUnicodeToString</strong> : 将一个宽字节接接到  UNICODE_STRING 中</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">NTSTATUS status;</span><br><span class="line">UNICODE_STRING dst;      <span class="comment">// 目标字符串</span></span><br><span class="line">WCHAR dst_buf[<span class="number">256</span>];     <span class="comment">// 不分配内存，故先定义缓冲区</span></span><br><span class="line"><span class="comment">// 把目标字符串初始化为拥有缓冲区长度为256的UNICODE_STRING空串</span></span><br><span class="line">RtlInitEmptyUnicodeString(&amp;dst,dst_buf,<span class="number">256</span>*<span class="keyword">sizeof</span>(WCHAR));</span><br><span class="line">status = RtlAppendUnicodeToString(&amp;dst,<span class="string">L"www.tlhg.top"</span>);</span><br></pre></td></tr></tbody></table></figure>
+<p>NTSTATUS是常见的返回值类型。如果函数成功，返回STATUS_SUCCESS。否则的话，是一个错误码。RtlAppendUnicodeToString在目标字符串空间不足的时候依然可以连接字符串，但是会返回一个警告性的错误STATUS_BUFFER_TOO_SMALL。</p>
+<h2 id="rtlappendunicodestringtostring"><a class="markdownIt-Anchor" href="#rtlappendunicodestringtostring"></a> RtlAppendUnicodeStringToString</h2>
+<p>RtlAppendUnicodeStringToString: 希望连接两个UNICODE_STRING，这个函数的第二个参数也是一个UNICODE_STRING的指针。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">NTSTATUS status;</span><br><span class="line">UNICODE_STRING dst;           <span class="comment">// 目标字符串</span></span><br><span class="line">WCHAR dst_buf[<span class="number">256</span>];           <span class="comment">// 不分配内存，故先定义缓冲区</span></span><br><span class="line">UNICODE_STRING src = RTL_CONSTANT_STRING(<span class="string">L"www.tlhg.top"</span>);</span><br><span class="line">RtlInitEmptyUnicodeString(&amp;dst, dst_buf, <span class="number">256</span> * <span class="keyword">sizeof</span>(WCHAR));</span><br><span class="line">status = RtlAppendUnicodeStringToString(&amp;dst, &amp;src);    <span class="comment">// 字符串拷贝！</span></span><br></pre></td></tr></tbody></table></figure>
+<p>RtlAppendUnicodeStringToString在目标字符串空间不足的时候依然可以连接字符串，但是会返回一个警告性的错误STATUS_BUFFER_TOO_SMALL。</p>
+<h2 id="ansi_string的拼接"><a class="markdownIt-Anchor" href="#ansi_string的拼接"></a> ANSI_STRING的拼接</h2>
+<p>对于ANSI_STRING类型，使用RtlAppendStringToString函数进行字符串拼接。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">NTSTATUS status;</span><br><span class="line">UNICODE_STRING dst;            </span><br><span class="line">CHAR dst_buf[<span class="number">256</span>];                </span><br><span class="line">RtlInitEmptyString(dst, dst_buf, <span class="number">256</span> * <span class="keyword">sizeof</span>(CHAR));</span><br><span class="line">status = RtlAppendStringToString(&amp;dst,<span class="string">"www.tlhg.top"</span>);</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="unicode_string-打印"><a class="markdownIt-Anchor" href="#unicode_string-打印"></a> UNICODE_STRING 打印</h1>
+<h2 id="普通打印"><a class="markdownIt-Anchor" href="#普通打印"></a> 普通打印</h2>
+<p>字符串的连接另一种常见的情况是字符串和数字的组合。有时数字需要被转换为字符串。有时需要把若干个数字和字符串混合组合起来。这往往用于打印日志的时候。日志中可能含有文件名、时间、和行号，以及其他的信息。</p>
+<p>C语言sprintf函数的宽字符版本为swprintf。该函数在驱动开发中依然可以使用，但是不安全。微软建议使用RtlStringCbPrintfW来代替它。RtlStringCbPrintfW需要包含头文件ntstrsafe.h。在连接的时候，还需要连接库ntsafestr.lib。</p>
+<p>下面的代码生成一个字符串，字符串中包含文件的路径，和这个文件的大小。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ntstrsafe.h&gt;</span></span></span><br><span class="line"><span class="comment">/* 任何时候，假设文件路径的长度为有限的都是不对的。应该动态的分配内存。但是动态分配内存的方法还没有讲述，所以这里再次把内存空*间定义在局部变量中，也就是所谓的“在栈中”</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">WCHAR buf[<span class="number">512</span>] = { <span class="number">0</span> };</span><br><span class="line">UNICODE_STRING dst;</span><br><span class="line">NTSTATUS status;</span><br><span class="line">……</span><br><span class="line"><span class="comment">// 字符串初始化为空串。缓冲区长度为512*sizeof(WCHAR)</span></span><br><span class="line">RtlInitEmptyString(dst,dst_buf,<span class="number">512</span>*<span class="keyword">sizeof</span>(WCHAR));</span><br><span class="line"><span class="comment">// 调用RtlStringCbPrintfW来进行打印</span></span><br><span class="line">status = RtlStringCbPrintfW(</span><br><span class="line">    dst-&gt;Buffer,L”file path = %wZ file size = %d \r\n”，</span><br><span class="line">    &amp;file_path,file_size);</span><br><span class="line"><span class="comment">// 这里调用wcslen没问题，这是因为RtlStringCbPrintfW打印的</span></span><br><span class="line"><span class="comment">// 字符串是以空结束的。</span></span><br><span class="line">    dst-&gt;Length = wcslen(dst-&gt;Buffer) * <span class="keyword">sizeof</span>(WCHAR);</span><br></pre></td></tr></tbody></table></figure>
+<p>RtlStringCbPrintfW在目标缓冲区内存不足的时候依然可以打印，但是多余的部分被截去了。返回的status值为STATUS_BUFFER_OVERFLOW。调用这个函数之前很难知道究竟需要多长的缓冲区。一般都采取倍增尝试。每次都传入一个为前次尝试长度为2倍长度的新缓冲区，直到这个函数返回STATUS_SUCCESS为止。</p>
+<p>值得注意的是UNICODE_STRING类型的指针，用%wZ打印可以打印出字符串。在不能保证字符串为空结束的时候，必须避免使用%ws或者%s。其他的打印格式字符串与传统C语言中的printf函数完全相同。可以尽情使用。</p>
+<h2 id="输出打印"><a class="markdownIt-Anchor" href="#输出打印"></a> 输出打印</h2>
+<p>驱动中可以调用DbgPrint()函数来打印调试信息。这个函数的使用和printf基本相同。但是格式字符串要使用宽字符。DbgPrint()的一个缺点在于，发行版本的驱动程序往往不希望附带任何输出信息，只有调试版本才需要调试信息。但是DbgPrint()无论是发行版本还是调试版本编译都会有效。为此可以自己定义一个宏：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">if</span> DBG</span></span><br><span class="line">    KdPrint(a)    DbgPrint#<span class="meta">#a</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    KdPrint (a)</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></tbody></table></figure>
+<p>不过这样的后果是，由于KdPrint (a)只支持1个参数，因此必须把DbgPrint的所有参数都括起来当作一个参数传入。导致KdPrint看起来很奇特的用了双重括弧：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 调用KdPrint来进行输出调试信息</span></span><br><span class="line">status = KdPrint((<span class="string">L"file path = %wZ file size = %d \r\n"</span>,&amp;file_path,file_size));</span><br></pre></td></tr></tbody></table></figure>
+<p>这个宏没有必要自己定义，WDK包中已有。所以可以直接使用KdPrint来代替DbgPrint取得更方便的效果。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/posts/b83c.html" class="leancloud-visitors view" data-flag-title="UNICODE_STRING">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/posts/2587.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/posts/190e.html" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"AA9eNAftQgfjEcK3l0j71rDS-gzGzoHsz","appKey":"E1r06kyXdl3RxWbXxaUQ6tPg","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2021-02-02 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/kernel/">kernel<span>6</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/kernel-programm/">kernel programm<span>6</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2022 Heisenberg Lee's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'tlhg.top' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
+   </html>

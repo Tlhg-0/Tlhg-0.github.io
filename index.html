@@ -1,0 +1,1718 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>tlhg&#39;s Blog|</title>
+  <meta name="author" content="Heisenberg Lee">
+  
+  <meta name="description" content="学习记录。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="tlhg's Blog|" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">tlhg&#39;s Blog|</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header logo">
+  <h1>tlhg<span class="blink-fast">|</span></h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+
+
+		<i class="fa fa-heart blink-slow"></i>
+
+		wubba lubba dub dub.
+
+</div>    
+
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/d40c.html" >微信电脑版多开、防撤回破解</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2021-04-26  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>网上有一堆 微信电脑版多开、防撤回等<strong>破解补丁</strong>，可以实现类似的功能，但是微信是比较<strong>涉及个人隐私</strong>的社交软件，所以网上公开的补丁基本都不敢用，<strong>万一自带木马后门</strong>什么的就惨了。所以在这里教大家纯手工修改方法。</p>
+<h1 id="准备工作"><a class="markdownIt-Anchor" href="#准备工作"></a> 准备工作</h1>
+<p>1. OllyDbg 或 OllyICE(OllyDbg 爱好者二次开发升级版本) 等反汇编软件。</p>
+<p>2. 安装好微信电脑版，提取安装路径文件夹中的 WeChatWin.dll 备用。</p>
+<p>使用 OllyDbg 纯手工修改微信电脑版 WeChatWin.dll 的汇编代码，<strong>实现无限多开和消息防撤回功能</strong>，并且有撤回提示。</p>
+<p>该方法适用于微信电脑版（Windows PC 版）近几年的所有版本，甚至未来新版本。</p>
+<p>有一定的技术门槛，需要了解基本的反汇编破解知识，如果不能熟练掌握 OllyDbg 等反汇编软件，那么底下内容就可以不用看了。</p>
+<h1 id="破解流程"><a class="markdownIt-Anchor" href="#破解流程"></a> 破解流程</h1>
+<h2 id="解除多开限制"><a class="markdownIt-Anchor" href="#解除多开限制"></a> 解除多开限制</h2>
+	
+
+	</div>
+  <a type="button" href="/posts/d40c.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>网上有一堆 微信电脑版多开、防撤回等<strong>破解补丁</strong>，可以实现类似的功能，但是微信是比较<strong>涉及个人隐私</strong>的社交软件，所以网上公开的补丁基本都不敢用，<strong>万一自带木马后门</strong>什么的就惨了。所以在这里教大家纯手工修改方法。</p>
+<h1 id="准备工作"><a class="markdownIt-Anchor" href="#准备工作"></a> 准备工作</h1>
+<p>1. OllyDbg 或 OllyICE(OllyDbg 爱好者二次开发升级版本) 等反汇编软件。</p>
+<p>2. 安装好微信电脑版，提取安装路径文件夹中的 WeChatWin.dll 备用。</p>
+<p>使用 OllyDbg 纯手工修改微信电脑版 WeChatWin.dll 的汇编代码，<strong>实现无限多开和消息防撤回功能</strong>，并且有撤回提示。</p>
+<p>该方法适用于微信电脑版（Windows PC 版）近几年的所有版本，甚至未来新版本。</p>
+<p>有一定的技术门槛，需要了解基本的反汇编破解知识，如果不能熟练掌握 OllyDbg 等反汇编软件，那么底下内容就可以不用看了。</p>
+<h1 id="破解流程"><a class="markdownIt-Anchor" href="#破解流程"></a> 破解流程</h1>
+<h2 id="解除多开限制"><a class="markdownIt-Anchor" href="#解除多开限制"></a> 解除多开限制</h2>
+	
+	</div>
+  <a type="button" href="/posts/d40c.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/aecd.html" >注册表</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2021-02-08  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="注册表的打开与关闭"><a class="markdownIt-Anchor" href="#注册表的打开与关闭"></a> 注册表的打开与关闭</h1>
+<p>注册表是一个巨大的树形结构。操作一般都是打开某个子键。子键下有若干个值可以获得。每一个值有一个名字。值有不同的类型。一般需要查询才能获得其类型。</p>
+<p>应用程序编程：需要提供一个根子键的句柄。</p>
+<p>驱动：全部用路径表示。</p>
+<p>应用编程中对应的子键 驱动编程中的路径写法：</p>
+<table>
+<thead>
+<tr>
+<th><strong>HKEY_LOCAL_MACHINE</strong></th>
+<th><strong>\Registry\Machine</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HKEY_USERS</td>
+<td>\Registry\User</td>
+</tr>
+<tr>
+<td>HKEY_CLASSES_ROOT</td>
+<td>没有对应的路径</td>
+</tr>
+<tr>
+<td>HKEY_CURRENT_USER</td>
+<td>没有简单的对应路径，但是可以求得</td>
+</tr>
+</tbody>
+</table>
+<p>实际上应用程序和驱动程序很大的一个不同在于应用程序总是由某个“当前用户”启动的。因此可以直接读取HKEY_CLASSES_ROOT和HKEY_CURRENT_USER。而驱动程序和用户无关，所以直接去打开HKEY_CURRENT_USER也就不符合逻辑了。</p>
+<p>打开注册表键使用函数ZwOpenKey。新建或者打开则使用ZwCreateKey。一般在驱动编程中，使用ZwOpenKey的情况比较多见。</p>
+<h2 id="zwopenkey-函数"><a class="markdownIt-Anchor" href="#zwopenkey-函数"></a> <strong>ZwOpenKey</strong> 函数</h2>
+<p><strong>ZwOpenKey</strong> 函数（打开注册表键），函数原型如下：</p>
+	
+
+	</div>
+  <a type="button" href="/posts/aecd.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="注册表的打开与关闭"><a class="markdownIt-Anchor" href="#注册表的打开与关闭"></a> 注册表的打开与关闭</h1>
+<p>注册表是一个巨大的树形结构。操作一般都是打开某个子键。子键下有若干个值可以获得。每一个值有一个名字。值有不同的类型。一般需要查询才能获得其类型。</p>
+<p>应用程序编程：需要提供一个根子键的句柄。</p>
+<p>驱动：全部用路径表示。</p>
+<p>应用编程中对应的子键 驱动编程中的路径写法：</p>
+<table>
+<thead>
+<tr>
+<th><strong>HKEY_LOCAL_MACHINE</strong></th>
+<th><strong>\Registry\Machine</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HKEY_USERS</td>
+<td>\Registry\User</td>
+</tr>
+<tr>
+<td>HKEY_CLASSES_ROOT</td>
+<td>没有对应的路径</td>
+</tr>
+<tr>
+<td>HKEY_CURRENT_USER</td>
+<td>没有简单的对应路径，但是可以求得</td>
+</tr>
+</tbody>
+</table>
+<p>实际上应用程序和驱动程序很大的一个不同在于应用程序总是由某个“当前用户”启动的。因此可以直接读取HKEY_CLASSES_ROOT和HKEY_CURRENT_USER。而驱动程序和用户无关，所以直接去打开HKEY_CURRENT_USER也就不符合逻辑了。</p>
+<p>打开注册表键使用函数ZwOpenKey。新建或者打开则使用ZwCreateKey。一般在驱动编程中，使用ZwOpenKey的情况比较多见。</p>
+<h2 id="zwopenkey-函数"><a class="markdownIt-Anchor" href="#zwopenkey-函数"></a> <strong>ZwOpenKey</strong> 函数</h2>
+<p><strong>ZwOpenKey</strong> 函数（打开注册表键），函数原型如下：</p>
+	
+	</div>
+  <a type="button" href="/posts/aecd.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/d839.html" >对象与句柄</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2021-02-08  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="句柄的定义"><a class="markdownIt-Anchor" href="#句柄的定义"></a> 句柄的定义</h1>
+<p>每个进程都有一个表，这个表中的每一项保存着需要访问的内核对象信息，系统为用户态应用程序提供一个“句柄”值，这个句柄值实际上是这个表的某种索引，通过这个值，可以在表中定位到具体需要访问的内核对象信息。用户态程序通过API创建或打开一个内核对象时，这个表中的信息会增加一项，用来描述这个内核对象的信息，并产生一个相应的句柄值，用户态程序把这个句柄传递到相应API，API进入内核后，通过这个句柄值定位到需要操作的内核对象，对内核对象进行相应的操作。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">void</span> *HANDLE;</span><br><span class="line"><span class="keyword">typedef</span> HANDLE *PHANDLE</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="内核对象的引用计数"><a class="markdownIt-Anchor" href="#内核对象的引用计数"></a> 内核对象的引用计数</h1>
+<p>每个内核对象存在两个计数，一个称为“句柄计数”，另一个称为“指针计数”，句柄计数是指这个内核对象被多少个句柄值所指向，如在用户态中创建一个命名的EVENT对象，获取到一个句柄，那么这个EVENT的句柄计数就是1，当其他程序通过该EVENT名字打开该EVENT时，会获取到另外一个句柄，这时候，句柄计数等于2。指针计数是在句柄计数基础上递增的计数，在刚才所提的例子中，句柄计数等于2，指针计数也等于2，句柄计数的增加，会相应导致指针计数增加，同理，句柄计数的减少，会相应导致指针计数减少，但指针计数可以独立增加与减少而不影响句柄计数。当一个对象的指针计数等于0的时候，这个对象会被系统释放。请注意，不同操作系统，系统对引用计数值的管理稍有不同。</p>
+<h1 id="句柄操作code"><a class="markdownIt-Anchor" href="#句柄操作code"></a> 句柄操作CODE</h1>
+<h2 id="code"><a class="markdownIt-Anchor" href="#code"></a> ＣＯＤＥ</h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ntddk.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ntifs.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">BOOLEAN <span class="title function_">EventOperationSample</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">	BOOLEAN bSucc = FALSE;</span><br><span class="line">	HANDLE	hCreateEvent = <span class="literal">NULL</span>;</span><br><span class="line">	PVOID	pCrateEventObject = <span class="literal">NULL</span>;</span><br><span class="line">	HANDLE	hOpenEvent = <span class="literal">NULL</span>;</span><br><span class="line">	PVOID	pOpenEventObject = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">do</span></span><br><span class="line">	{</span><br><span class="line">		OBJECT_ATTRIBUTES ObjAttr = { <span class="number">0</span> };</span><br><span class="line">		UNICODE_STRING uNameString = { <span class="number">0</span> };</span><br><span class="line">		RtlInitUnicodeString(&amp;uNameString, <span class="string">L"\\BaseNameObjects\\TestEvent"</span>);</span><br><span class="line">		InitializeObjectAttributes(&amp;ObjAttr, &amp;uNameString, OBJ_KERNEL_HANDLE | OBJ_CASE_INSENSITIVE, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">		ZwCreateEvent(&amp;hCreateEvent, EVENT_ALL_ACCESS, &amp;ObjAttr, SynchronizationEvent, FALSE);</span><br><span class="line">		<span class="keyword">if</span> (hCreateEvent == <span class="literal">NULL</span>)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		ObReferenceObjectByHandle(hCreateEvent, EVENT_ALL_ACCESS, *ExEventObjectType, KernelMode, &amp;pCrateEventObject, <span class="literal">NULL</span>);</span><br><span class="line">		<span class="keyword">if</span> (hOpenEvent == <span class="literal">NULL</span>)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		ObReferenceObjectByHandle(hOpenEvent, EVENT_ALL_ACCESS, *ExEventObjectType, KernelMode, &amp;pCrateEventObject, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (pOpenEventObject == <span class="literal">NULL</span>)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		DbgPrint(<span class="string">"Create Handle: %p, Create Pointer = %p\n"</span>, hCreateEvent, pCrateEventObject);</span><br><span class="line">		DbgPrint(<span class="string">"Open Handle: %p, Open Pointer = %p\n"</span>, hOpenEvent, pOpenEventObject);</span><br><span class="line">		bSucc = TRUE;</span><br><span class="line">	} <span class="keyword">while</span> (FALSE);</span><br><span class="line">	<span class="keyword">if</span> (pCrateEventObject != <span class="literal">NULL</span>)</span><br><span class="line">	{</span><br><span class="line">		ObDereferenceObject(pCrateEventObject);</span><br><span class="line">		pCrateEventObject = <span class="literal">NULL</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (hCreateEvent != <span class="literal">NULL</span>)</span><br><span class="line">	{</span><br><span class="line">		ZwClose(hCreateEvent);</span><br><span class="line">		hCreateEvent = <span class="literal">NULL</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (pOpenEventObject != <span class="literal">NULL</span>)</span><br><span class="line">	{</span><br><span class="line">		ObDereferenceObject(pOpenEventObject);</span><br><span class="line">		pOpenEventObject = <span class="literal">NULL</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (hOpenEvent != <span class="literal">NULL</span>)</span><br><span class="line">	{</span><br><span class="line">		ZwClose(hOpenEvent);</span><br><span class="line">		hOpenEvent = <span class="literal">NULL</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> bSucc;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="逻辑分析"><a class="markdownIt-Anchor" href="#逻辑分析"></a> 逻辑分析</h2>
+<p>ZwCreateEvent成功后，句柄会保存在hCreateEvent变量中，这个句柄是一个内核句柄。接着代码中调用ObReferenceObåjectByHandle函数，获取hCreateEvent句柄对应的EVENT对象指针。</p>
+	
+
+	</div>
+  <a type="button" href="/posts/d839.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="句柄的定义"><a class="markdownIt-Anchor" href="#句柄的定义"></a> 句柄的定义</h1>
+<p>每个进程都有一个表，这个表中的每一项保存着需要访问的内核对象信息，系统为用户态应用程序提供一个“句柄”值，这个句柄值实际上是这个表的某种索引，通过这个值，可以在表中定位到具体需要访问的内核对象信息。用户态程序通过API创建或打开一个内核对象时，这个表中的信息会增加一项，用来描述这个内核对象的信息，并产生一个相应的句柄值，用户态程序把这个句柄传递到相应API，API进入内核后，通过这个句柄值定位到需要操作的内核对象，对内核对象进行相应的操作。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">void</span> *HANDLE;</span><br><span class="line"><span class="keyword">typedef</span> HANDLE *PHANDLE</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="内核对象的引用计数"><a class="markdownIt-Anchor" href="#内核对象的引用计数"></a> 内核对象的引用计数</h1>
+<p>每个内核对象存在两个计数，一个称为“句柄计数”，另一个称为“指针计数”，句柄计数是指这个内核对象被多少个句柄值所指向，如在用户态中创建一个命名的EVENT对象，获取到一个句柄，那么这个EVENT的句柄计数就是1，当其他程序通过该EVENT名字打开该EVENT时，会获取到另外一个句柄，这时候，句柄计数等于2。指针计数是在句柄计数基础上递增的计数，在刚才所提的例子中，句柄计数等于2，指针计数也等于2，句柄计数的增加，会相应导致指针计数增加，同理，句柄计数的减少，会相应导致指针计数减少，但指针计数可以独立增加与减少而不影响句柄计数。当一个对象的指针计数等于0的时候，这个对象会被系统释放。请注意，不同操作系统，系统对引用计数值的管理稍有不同。</p>
+<h1 id="句柄操作code"><a class="markdownIt-Anchor" href="#句柄操作code"></a> 句柄操作CODE</h1>
+<h2 id="code"><a class="markdownIt-Anchor" href="#code"></a> ＣＯＤＥ</h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ntddk.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ntifs.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">BOOLEAN <span class="title function_">EventOperationSample</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">	BOOLEAN bSucc = FALSE;</span><br><span class="line">	HANDLE	hCreateEvent = <span class="literal">NULL</span>;</span><br><span class="line">	PVOID	pCrateEventObject = <span class="literal">NULL</span>;</span><br><span class="line">	HANDLE	hOpenEvent = <span class="literal">NULL</span>;</span><br><span class="line">	PVOID	pOpenEventObject = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">do</span></span><br><span class="line">	{</span><br><span class="line">		OBJECT_ATTRIBUTES ObjAttr = { <span class="number">0</span> };</span><br><span class="line">		UNICODE_STRING uNameString = { <span class="number">0</span> };</span><br><span class="line">		RtlInitUnicodeString(&amp;uNameString, <span class="string">L"\\BaseNameObjects\\TestEvent"</span>);</span><br><span class="line">		InitializeObjectAttributes(&amp;ObjAttr, &amp;uNameString, OBJ_KERNEL_HANDLE | OBJ_CASE_INSENSITIVE, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">		ZwCreateEvent(&amp;hCreateEvent, EVENT_ALL_ACCESS, &amp;ObjAttr, SynchronizationEvent, FALSE);</span><br><span class="line">		<span class="keyword">if</span> (hCreateEvent == <span class="literal">NULL</span>)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		ObReferenceObjectByHandle(hCreateEvent, EVENT_ALL_ACCESS, *ExEventObjectType, KernelMode, &amp;pCrateEventObject, <span class="literal">NULL</span>);</span><br><span class="line">		<span class="keyword">if</span> (hOpenEvent == <span class="literal">NULL</span>)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		ObReferenceObjectByHandle(hOpenEvent, EVENT_ALL_ACCESS, *ExEventObjectType, KernelMode, &amp;pCrateEventObject, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (pOpenEventObject == <span class="literal">NULL</span>)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		DbgPrint(<span class="string">"Create Handle: %p, Create Pointer = %p\n"</span>, hCreateEvent, pCrateEventObject);</span><br><span class="line">		DbgPrint(<span class="string">"Open Handle: %p, Open Pointer = %p\n"</span>, hOpenEvent, pOpenEventObject);</span><br><span class="line">		bSucc = TRUE;</span><br><span class="line">	} <span class="keyword">while</span> (FALSE);</span><br><span class="line">	<span class="keyword">if</span> (pCrateEventObject != <span class="literal">NULL</span>)</span><br><span class="line">	{</span><br><span class="line">		ObDereferenceObject(pCrateEventObject);</span><br><span class="line">		pCrateEventObject = <span class="literal">NULL</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (hCreateEvent != <span class="literal">NULL</span>)</span><br><span class="line">	{</span><br><span class="line">		ZwClose(hCreateEvent);</span><br><span class="line">		hCreateEvent = <span class="literal">NULL</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (pOpenEventObject != <span class="literal">NULL</span>)</span><br><span class="line">	{</span><br><span class="line">		ObDereferenceObject(pOpenEventObject);</span><br><span class="line">		pOpenEventObject = <span class="literal">NULL</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (hOpenEvent != <span class="literal">NULL</span>)</span><br><span class="line">	{</span><br><span class="line">		ZwClose(hOpenEvent);</span><br><span class="line">		hOpenEvent = <span class="literal">NULL</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> bSucc;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="逻辑分析"><a class="markdownIt-Anchor" href="#逻辑分析"></a> 逻辑分析</h2>
+<p>ZwCreateEvent成功后，句柄会保存在hCreateEvent变量中，这个句柄是一个内核句柄。接着代码中调用ObReferenceObåjectByHandle函数，获取hCreateEvent句柄对应的EVENT对象指针。</p>
+	
+	</div>
+  <a type="button" href="/posts/d839.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/16c1.html" >C/C++ volatile</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2021-02-04  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<p><em>原文地址：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yc_sunniwell/archive/2010/07/14/1777432.html">https://www.cnblogs.com/yc_sunniwell/archive/2010/07/14/1777432.html</a></em></p>
+<p>近日在读操作系统导论，看到书中的代码里面有volatile 关键字，找到了一篇不错的文章，所以转载了过来。</p>
+<h1 id="为什么用volatile"><a class="markdownIt-Anchor" href="#为什么用volatile"></a> 为什么用volatile?</h1>
+<p>C/C++ 中的 volatile 关键字和 const 对应，用来修饰变量，通常用于建立语言级别的 memory barrier。这是 BS 在 “The C++ Programming Language” 对 volatile 修饰词的说明：</p>
+<p>​		<em>A volatile specifier is a hint to a compiler that an object may change its value in ways not specified by the language so that aggressive optimizations must be avoided.</em></p>
+<p>volatile 关键字是一种类型修饰符，用它声明的类型变量表示可以被某些编译器未知的因素更改，比如：操作系统、硬件或者其它线程等。遇到这个关键字声明的变量，编译器对访问该变量的代码就不再进行优化，从而可以提供对特殊地址的稳定访问。声明时语法：<strong>int volatile vInt;</strong> 当要求使用 volatile 声明的变量的值的时候，系统总是重新从它所在的内存读取数据，即使它前面的指令刚刚从该处读取过数据。而且读取的数据立刻被保存。</p>
+<p>例如：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">volatile</span> <span class="type">int</span> i=<span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> a = i;</span><br><span class="line">...</span><br><span class="line"><span class="comment">// 其他代码，并未明确告诉编译器，对 i 进行过操作</span></span><br><span class="line"><span class="type">int</span> b = i;</span><br></pre></td></tr></tbody></table></figure>
+<p>volatile 指出 i 是随时可能发生变化的，每次使用它的时候必须从 i的地址中读取，因而编译器生成的汇编代码会重新从i的地址读取数据放在 b 中。而优化做法是，由于编译器发现两次从 i读数据的代码之间的代码没有对 i 进行过操作，它会自动把上次读的数据放在 b 中。而不是重新从 i 里面读。这样以来，如果 i是一个寄存器变量或者表示一个端口数据就容易出错，所以说 volatile 可以保证对特殊地址的稳定访问。注意，在 VC 6 中，一般调试模式没有进行代码优化，所以这个关键字的作用看不出来。下面通过插入汇编代码，测试有无 volatile 关键字，对程序最终代码的影响，输入下面的代码：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">    <span class="type">int</span> i = <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> a = i;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"i = %d"</span>, a);</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 下面汇编语句的作用就是改变内存中 i 的值</span></span><br><span class="line">    <span class="comment">// 但是又不让编译器知道</span></span><br><span class="line">    __asm {</span><br><span class="line">        mov dword ptr [ebp<span class="number">-4</span>], <span class="number">20</span>h</span><br><span class="line">    }</span><br><span class="line"> </span><br><span class="line">    <span class="type">int</span> b = i;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"i = %d"</span>, b);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+	
+
+	</div>
+  <a type="button" href="/posts/16c1.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<p><em>原文地址：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yc_sunniwell/archive/2010/07/14/1777432.html">https://www.cnblogs.com/yc_sunniwell/archive/2010/07/14/1777432.html</a></em></p>
+<p>近日在读操作系统导论，看到书中的代码里面有volatile 关键字，找到了一篇不错的文章，所以转载了过来。</p>
+<h1 id="为什么用volatile"><a class="markdownIt-Anchor" href="#为什么用volatile"></a> 为什么用volatile?</h1>
+<p>C/C++ 中的 volatile 关键字和 const 对应，用来修饰变量，通常用于建立语言级别的 memory barrier。这是 BS 在 “The C++ Programming Language” 对 volatile 修饰词的说明：</p>
+<p>​		<em>A volatile specifier is a hint to a compiler that an object may change its value in ways not specified by the language so that aggressive optimizations must be avoided.</em></p>
+<p>volatile 关键字是一种类型修饰符，用它声明的类型变量表示可以被某些编译器未知的因素更改，比如：操作系统、硬件或者其它线程等。遇到这个关键字声明的变量，编译器对访问该变量的代码就不再进行优化，从而可以提供对特殊地址的稳定访问。声明时语法：<strong>int volatile vInt;</strong> 当要求使用 volatile 声明的变量的值的时候，系统总是重新从它所在的内存读取数据，即使它前面的指令刚刚从该处读取过数据。而且读取的数据立刻被保存。</p>
+<p>例如：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">volatile</span> <span class="type">int</span> i=<span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> a = i;</span><br><span class="line">...</span><br><span class="line"><span class="comment">// 其他代码，并未明确告诉编译器，对 i 进行过操作</span></span><br><span class="line"><span class="type">int</span> b = i;</span><br></pre></td></tr></tbody></table></figure>
+<p>volatile 指出 i 是随时可能发生变化的，每次使用它的时候必须从 i的地址中读取，因而编译器生成的汇编代码会重新从i的地址读取数据放在 b 中。而优化做法是，由于编译器发现两次从 i读数据的代码之间的代码没有对 i 进行过操作，它会自动把上次读的数据放在 b 中。而不是重新从 i 里面读。这样以来，如果 i是一个寄存器变量或者表示一个端口数据就容易出错，所以说 volatile 可以保证对特殊地址的稳定访问。注意，在 VC 6 中，一般调试模式没有进行代码优化，所以这个关键字的作用看不出来。下面通过插入汇编代码，测试有无 volatile 关键字，对程序最终代码的影响，输入下面的代码：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">    <span class="type">int</span> i = <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> a = i;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"i = %d"</span>, a);</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 下面汇编语句的作用就是改变内存中 i 的值</span></span><br><span class="line">    <span class="comment">// 但是又不让编译器知道</span></span><br><span class="line">    __asm {</span><br><span class="line">        mov dword ptr [ebp<span class="number">-4</span>], <span class="number">20</span>h</span><br><span class="line">    }</span><br><span class="line"> </span><br><span class="line">    <span class="type">int</span> b = i;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"i = %d"</span>, b);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+	
+	</div>
+  <a type="button" href="/posts/16c1.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/9fa6.html" >内存分配</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2021-02-03  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="内存分配与回收"><a class="markdownIt-Anchor" href="#内存分配与回收"></a> 内存分配与回收</h1>
+<h2 id="内存分配"><a class="markdownIt-Anchor" href="#内存分配"></a> 内存分配</h2>
+<p>ExAllocatePoolWithTag(内存分配函数)</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">PVOID <span class="title function_">ExAllocatePoolWithTag</span><span class="params">(</span></span><br><span class="line"><span class="params">	POOL_TYPE PoolType,</span></span><br><span class="line"><span class="params">    SIZE_T NumberOfBytes,</span></span><br><span class="line"><span class="params">    ULONG Tag</span></span><br><span class="line"><span class="params">)</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>PoolType</strong> 为 POOL_TYPE 枚举类型，表示需要申请何种类型的内存。</p>
+<p>常用的值是 NonPagedPool 与 PagedPool，NonPagedPool表示非分页内存，PagedPool表示分页内存。</p>
+<p><strong>注意</strong>： 非分页内存是指这块内存的内容不会被置换到磁盘上，非分页内存非常宝贵，一般用于高IRQL（大于等于DISPATCH_LEVEL）的代码中。</p>
+<p>两个类型：NonPagedPoolExecute  与  NonPagedPoolNx<br>
+NonPagedPoolNx类型是指分配出来的非分页内存不具备“可执行”属性。对非分页内存进行读写而不需要进行代码或指令执行，那么可以使用NonPagedPoolNx类型的内存</p>
+<p>NonPagedPoolExecute 类型与 NonPagedPool 类型等价。</p>
+<p><strong>NumberOfBytes</strong>参数表示需要申请内存大小，单位是字节。</p>
+	
+
+	</div>
+  <a type="button" href="/posts/9fa6.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="内存分配与回收"><a class="markdownIt-Anchor" href="#内存分配与回收"></a> 内存分配与回收</h1>
+<h2 id="内存分配"><a class="markdownIt-Anchor" href="#内存分配"></a> 内存分配</h2>
+<p>ExAllocatePoolWithTag(内存分配函数)</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">PVOID <span class="title function_">ExAllocatePoolWithTag</span><span class="params">(</span></span><br><span class="line"><span class="params">	POOL_TYPE PoolType,</span></span><br><span class="line"><span class="params">    SIZE_T NumberOfBytes,</span></span><br><span class="line"><span class="params">    ULONG Tag</span></span><br><span class="line"><span class="params">)</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>PoolType</strong> 为 POOL_TYPE 枚举类型，表示需要申请何种类型的内存。</p>
+<p>常用的值是 NonPagedPool 与 PagedPool，NonPagedPool表示非分页内存，PagedPool表示分页内存。</p>
+<p><strong>注意</strong>： 非分页内存是指这块内存的内容不会被置换到磁盘上，非分页内存非常宝贵，一般用于高IRQL（大于等于DISPATCH_LEVEL）的代码中。</p>
+<p>两个类型：NonPagedPoolExecute  与  NonPagedPoolNx<br>
+NonPagedPoolNx类型是指分配出来的非分页内存不具备“可执行”属性。对非分页内存进行读写而不需要进行代码或指令执行，那么可以使用NonPagedPoolNx类型的内存</p>
+<p>NonPagedPoolExecute 类型与 NonPagedPool 类型等价。</p>
+<p><strong>NumberOfBytes</strong>参数表示需要申请内存大小，单位是字节。</p>
+	
+	</div>
+  <a type="button" href="/posts/9fa6.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/e3da.html" >自旋锁</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2021-02-02  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="自旋锁"><a class="markdownIt-Anchor" href="#自旋锁"></a> 自旋锁</h1>
+<p>自旋锁是内核中提供的一种高IRQL锁，用同步以及独占的方式访问某个资源。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">KSPIN_LOCK my_spin_lock;</span><br><span class="line">KeInitializeSpinLock(&amp;my_spin_lock); <span class="comment">//函数无返回值</span></span><br></pre></td></tr></tbody></table></figure>
+<p>自旋锁的使用方法：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">KIRQL irql;		<span class="comment">//KIRQL是一个中断级</span></span><br><span class="line">KeAcquireSpinLock(&amp;my_spin_lock,&amp;irql);</span><br><span class="line"><span class="comment">// To do something ...</span></span><br><span class="line">KeReleaseSpinLock(&amp;my_spin_lock,irql);</span><br></pre></td></tr></tbody></table></figure>
+<p>KeAcquireSpinLock 和 KeReleaseSpinLock 之间的代码是只有单线程执行的，其他的线程会停留在 KeAcquireSpinLock 等候，直到 KeReleaseSpinLock 被调用。换句话说，只有一个线程能够获得自旋锁。</p>
+<p><strong>注意</strong>： 锁一般不会定义成局部变量，可以使用静态变量、全局变量，或者分配在池（POOL）中。因为每个线程来执行的时候都会重新初始化一个锁。只有所有的线程共用一个锁，锁才有意义。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/*正确使用自旋锁的例子*/</span></span><br><span class="line">KSPIN_LOCK my_spin_lock = {<span class="number">0</span>};</span><br><span class="line">Void <span class="title function_">InitSpinLock</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">    KeInitializeSpinLock(&amp;my_spin_lock);</span><br><span class="line">}</span><br><span class="line">Void <span class="title function_">MySafeFunction</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">    KIRQL irql;</span><br><span class="line">    KeAcquireSpinlock(&amp;my_spin_lock,&amp;irql);</span><br><span class="line">    <span class="comment">// To do something...</span></span><br><span class="line">    KeRealeaseSpinLock(&amp;my_spin_lock,irql);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="双向链表自旋锁"><a class="markdownIt-Anchor" href="#双向链表自旋锁"></a> 双向链表自旋锁</h1>
+<p>在双向链表中使用自旋锁的目的是保证多线程安全。在操作链表之前，调用KeAcquireSpinLock 来获取锁，在操作完成之后，调用 KeReleaseSpinLock 来释放锁。</p>
+	
+
+	</div>
+  <a type="button" href="/posts/e3da.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="自旋锁"><a class="markdownIt-Anchor" href="#自旋锁"></a> 自旋锁</h1>
+<p>自旋锁是内核中提供的一种高IRQL锁，用同步以及独占的方式访问某个资源。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">KSPIN_LOCK my_spin_lock;</span><br><span class="line">KeInitializeSpinLock(&amp;my_spin_lock); <span class="comment">//函数无返回值</span></span><br></pre></td></tr></tbody></table></figure>
+<p>自旋锁的使用方法：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">KIRQL irql;		<span class="comment">//KIRQL是一个中断级</span></span><br><span class="line">KeAcquireSpinLock(&amp;my_spin_lock,&amp;irql);</span><br><span class="line"><span class="comment">// To do something ...</span></span><br><span class="line">KeReleaseSpinLock(&amp;my_spin_lock,irql);</span><br></pre></td></tr></tbody></table></figure>
+<p>KeAcquireSpinLock 和 KeReleaseSpinLock 之间的代码是只有单线程执行的，其他的线程会停留在 KeAcquireSpinLock 等候，直到 KeReleaseSpinLock 被调用。换句话说，只有一个线程能够获得自旋锁。</p>
+<p><strong>注意</strong>： 锁一般不会定义成局部变量，可以使用静态变量、全局变量，或者分配在池（POOL）中。因为每个线程来执行的时候都会重新初始化一个锁。只有所有的线程共用一个锁，锁才有意义。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/*正确使用自旋锁的例子*/</span></span><br><span class="line">KSPIN_LOCK my_spin_lock = {<span class="number">0</span>};</span><br><span class="line">Void <span class="title function_">InitSpinLock</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">    KeInitializeSpinLock(&amp;my_spin_lock);</span><br><span class="line">}</span><br><span class="line">Void <span class="title function_">MySafeFunction</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">    KIRQL irql;</span><br><span class="line">    KeAcquireSpinlock(&amp;my_spin_lock,&amp;irql);</span><br><span class="line">    <span class="comment">// To do something...</span></span><br><span class="line">    KeRealeaseSpinLock(&amp;my_spin_lock,irql);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="双向链表自旋锁"><a class="markdownIt-Anchor" href="#双向链表自旋锁"></a> 双向链表自旋锁</h1>
+<p>在双向链表中使用自旋锁的目的是保证多线程安全。在操作链表之前，调用KeAcquireSpinLock 来获取锁，在操作完成之后，调用 KeReleaseSpinLock 来释放锁。</p>
+	
+	</div>
+  <a type="button" href="/posts/e3da.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/2587.html" >LIST_ENTRY</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2021-02-02  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="链表的定义"><a class="markdownIt-Anchor" href="#链表的定义"></a> 链表的定义：</h1>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">LIST_ENTRY</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">LIST_ENTRY</span> *<span class="title">Flink</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">LIST_ENTRY</span> *<span class="title">Blink</span>;</span></span><br><span class="line">}LIST_ENTRY, *PLIST_ENTRY;</span><br></pre></td></tr></tbody></table></figure>
+<p>LIST_ENTRY表示一个链表的节点，其中Flink成员指向当前节点的后一个节点，Blink成员指向当前节点的前一个节点。</p>
+<p>链表的使用：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">TestListEntry</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    ULONG m_ulDataA;</span><br><span class="line">    ULONG m_ulDataB;</span><br><span class="line">    LIST_ENTRY m_ListEntry;</span><br><span class="line">    <span class="comment">/*双向链表节点的结构，m_ListEntry可以放在结构体的任意位置*/</span></span><br><span class="line">    ULONG m_ulDataC;</span><br><span class="line">    ULONG m_ulDataD;</span><br><span class="line">}TestListEntry, *PTestListEntry;</span><br></pre></td></tr></tbody></table></figure>
+<p>m_ulDataA成员处于最低地址，m_ulDataD处于最高地址，而链表节点LIST_ENTRY的两个成员展开后在结构体中分别为Flink与Blink，其中Flink处于低地址，Blink处于高地址。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20210202175751.jpg" alt="内存布局"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20210202175817.jpg" alt="节点的关系"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20210202180503.jpg" alt="包含头结点"></p>
+<h1 id="头结点初始化"><a class="markdownIt-Anchor" href="#头结点初始化"></a> 头结点初始化</h1>
+	
+
+	</div>
+  <a type="button" href="/posts/2587.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="链表的定义"><a class="markdownIt-Anchor" href="#链表的定义"></a> 链表的定义：</h1>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">LIST_ENTRY</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">LIST_ENTRY</span> *<span class="title">Flink</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">LIST_ENTRY</span> *<span class="title">Blink</span>;</span></span><br><span class="line">}LIST_ENTRY, *PLIST_ENTRY;</span><br></pre></td></tr></tbody></table></figure>
+<p>LIST_ENTRY表示一个链表的节点，其中Flink成员指向当前节点的后一个节点，Blink成员指向当前节点的前一个节点。</p>
+<p>链表的使用：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">TestListEntry</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    ULONG m_ulDataA;</span><br><span class="line">    ULONG m_ulDataB;</span><br><span class="line">    LIST_ENTRY m_ListEntry;</span><br><span class="line">    <span class="comment">/*双向链表节点的结构，m_ListEntry可以放在结构体的任意位置*/</span></span><br><span class="line">    ULONG m_ulDataC;</span><br><span class="line">    ULONG m_ulDataD;</span><br><span class="line">}TestListEntry, *PTestListEntry;</span><br></pre></td></tr></tbody></table></figure>
+<p>m_ulDataA成员处于最低地址，m_ulDataD处于最高地址，而链表节点LIST_ENTRY的两个成员展开后在结构体中分别为Flink与Blink，其中Flink处于低地址，Blink处于高地址。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20210202175751.jpg" alt="内存布局"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20210202175817.jpg" alt="节点的关系"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20210202180503.jpg" alt="包含头结点"></p>
+<h1 id="头结点初始化"><a class="markdownIt-Anchor" href="#头结点初始化"></a> 头结点初始化</h1>
+	
+	</div>
+  <a type="button" href="/posts/2587.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/b83c.html" >UNICODE_STRING</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2021-02-02  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="unicode_string数据类型"><a class="markdownIt-Anchor" href="#unicode_string数据类型"></a> UNICODE_STRING数据类型</h1>
+<p>内核层编程一般不直接使用WCHAR类型的Unicode字符串，而是使用UNICODE_STRING类型来表示Unicode。</p>
+<p>这里简单介绍一下 UNICODE_STRING 类型。</p>
+<p>UNICODE_STRING是内核中表示字符串的结构体；</p>
+<p>Buffer为一个指针，指向一个UNICODE类型的字符串缓冲区；</p>
+<p>MaximumLength表示Buffer所指向缓冲区的总空间大小，一般等于Buffer被分配时的内存大小，单位为字节；</p>
+<p>Length表示Buffer所指向缓冲区中字符串的长度，单位也是字节；</p>
+<p><strong>注意</strong>：Buffer指向的字符串，并不要求以’\0’作为结束，在大多数情况下，Buffer指向的字符串没有以’\0’结尾</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">UNICODE_STRING</span>{</span> </span><br><span class="line">       USHORT Length; </span><br><span class="line">       USHORT MaximumLength; </span><br><span class="line">       PWSTR Buffer;</span><br><span class="line">}UNICODE_STRING, *PUNICODE_STRING;</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="unicode_string-初始化"><a class="markdownIt-Anchor" href="#unicode_string-初始化"></a> UNICODE_STRING 初始化</h1>
+	
+
+	</div>
+  <a type="button" href="/posts/b83c.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="unicode_string数据类型"><a class="markdownIt-Anchor" href="#unicode_string数据类型"></a> UNICODE_STRING数据类型</h1>
+<p>内核层编程一般不直接使用WCHAR类型的Unicode字符串，而是使用UNICODE_STRING类型来表示Unicode。</p>
+<p>这里简单介绍一下 UNICODE_STRING 类型。</p>
+<p>UNICODE_STRING是内核中表示字符串的结构体；</p>
+<p>Buffer为一个指针，指向一个UNICODE类型的字符串缓冲区；</p>
+<p>MaximumLength表示Buffer所指向缓冲区的总空间大小，一般等于Buffer被分配时的内存大小，单位为字节；</p>
+<p>Length表示Buffer所指向缓冲区中字符串的长度，单位也是字节；</p>
+<p><strong>注意</strong>：Buffer指向的字符串，并不要求以’\0’作为结束，在大多数情况下，Buffer指向的字符串没有以’\0’结尾</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">UNICODE_STRING</span>{</span> </span><br><span class="line">       USHORT Length; </span><br><span class="line">       USHORT MaximumLength; </span><br><span class="line">       PWSTR Buffer;</span><br><span class="line">}UNICODE_STRING, *PUNICODE_STRING;</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="unicode_string-初始化"><a class="markdownIt-Anchor" href="#unicode_string-初始化"></a> UNICODE_STRING 初始化</h1>
+	
+	</div>
+  <a type="button" href="/posts/b83c.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/190e.html" >C++ Calculator</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2021-02-01  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<p>《The C++ Programming Language》 第六章函数的一个例子。</p>
+<p>没有高深的算法，都是c++中最常用的语法现象，但是这150行程序里蕴含的功力极深（至少我达不到这种水平，程序的效率，存储开销等方面做的都非常出色，甚至是天衣无缝）。</p>
+<p>今日贴出，请大家一同欣赏（作者在程序中因为简化程序而改写了一些更好的方法，正如作者在序言中所说，要有一种健康的怀疑态度,我之所以说它完美，并不是指我们编不出比它好的程序，而是指它清晰的结构，合理的设计，以及蕴含在这里面的编程艺术）</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//以下是 c++之父写的一个简单计算器程序 包括分析器,输入,符号表,驱动程序 </span></span><br><span class="line"><span class="comment">//计算器的输入语法: </span></span><br><span class="line"><span class="comment">// 1)以 ";" 号作为一行的结束 </span></span><br><span class="line"><span class="comment">// 2)可用英文单词命名变量 (但变量后要有空格) </span></span><br><span class="line"><span class="comment">// 例子如下: </span></span><br><span class="line"><span class="comment">// 输入: r =2.5; (注意空格) </span></span><br><span class="line"><span class="comment">// 输出: 2.5 (记负值结果) </span></span><br><span class="line"><span class="comment">// 输入: area = r * r * pi ; </span></span><br><span class="line"><span class="comment">// 输出: 19.635 </span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// 以下代码为标准c++代码,我在vc++2003.net上运行无误 </span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cctype&gt;</span> </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std; </span><br><span class="line"><span class="type">const</span> <span class="type">int</span> ture=<span class="number">1</span>; </span><br><span class="line"><span class="type">const</span> <span class="type">int</span> flase=<span class="number">0</span>; </span><br><span class="line"></span><br><span class="line">map&lt;string,<span class="type">double</span>&gt; table; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//计算器输入允许的词法 </span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">Token_value</span>{ </span><br><span class="line">    NAME, NUMBER, END, </span><br><span class="line">    PLUS=<span class="string">'+'</span>, MINUS=<span class="string">'-'</span>, MUL=<span class="string">'*'</span>, DIV=<span class="string">'/'</span>, </span><br><span class="line">    PRINT=<span class="string">';'</span>, ASSIGN=<span class="string">'='</span>, LP=<span class="string">'('</span>, RP=<span class="string">')'</span>, </span><br><span class="line">}; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//分析器 加和减 </span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">expr</span><span class="params">(<span class="type">bool</span>)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//分析器 乘和除 </span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">term</span><span class="params">(<span class="type">bool</span>)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//分析器 处理初等项 </span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">prim</span><span class="params">(<span class="type">bool</span>)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//词法分析器 </span></span><br><span class="line"><span class="function">Token_value <span class="title">get_token</span><span class="params">()</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//错误处理 </span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">error</span><span class="params">(<span class="type">const</span> string &amp;s)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//当前词法标记 </span></span><br><span class="line">Token_value curr_tok=PRINT; </span><br><span class="line"></span><br><span class="line"><span class="type">double</span> number_value;  <span class="comment">//存放数值 </span></span><br><span class="line">string string_value; <span class="comment">//存放计算器变量名 </span></span><br><span class="line"><span class="type">int</span> no_of_errors; <span class="comment">//记录错误个数 </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">expr</span><span class="params">(<span class="type">bool</span> get)</span> </span>{ </span><br><span class="line">    <span class="type">double</span> left=<span class="built_in">term</span>( get); </span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>( ; ; ) </span><br><span class="line">        <span class="keyword">switch</span>(curr_tok) { </span><br><span class="line">        <span class="keyword">case</span> PLUS: </span><br><span class="line">            left+=<span class="built_in">term</span>(ture); </span><br><span class="line">            <span class="keyword">break</span>; </span><br><span class="line">        <span class="keyword">case</span> MINUS: </span><br><span class="line">            left-=<span class="built_in">term</span>(ture); </span><br><span class="line">            <span class="keyword">break</span>; </span><br><span class="line">        <span class="keyword">default</span>: </span><br><span class="line">            <span class="keyword">return</span> left; </span><br><span class="line">    } </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">term</span><span class="params">(<span class="type">bool</span> get)</span> </span>{ </span><br><span class="line">    <span class="type">double</span> left=<span class="built_in">prim</span>(get); </span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>( ; ; ) </span><br><span class="line">        <span class="keyword">switch</span>(curr_tok) { </span><br><span class="line">        <span class="keyword">case</span> MUL: </span><br><span class="line">            left*=<span class="built_in">prim</span>(ture); </span><br><span class="line">            <span class="keyword">break</span>; </span><br><span class="line">        <span class="keyword">case</span> DIV: </span><br><span class="line">            <span class="keyword">if</span>(<span class="type">double</span> d=<span class="built_in">prim</span>(ture)) { </span><br><span class="line">                left/=d; </span><br><span class="line">                <span class="keyword">break</span>; </span><br><span class="line">            } </span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">error</span>(<span class="string">"divide by 0"</span>); </span><br><span class="line">        <span class="keyword">default</span>: </span><br><span class="line">            <span class="keyword">return</span> left; </span><br><span class="line">    } </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">prim</span><span class="params">(<span class="type">bool</span> get)</span> </span>{ </span><br><span class="line">    <span class="keyword">if</span>(get) <span class="built_in">get_token</span>(); </span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span>(curr_tok) { </span><br><span class="line">    <span class="keyword">case</span> NUMBER: { </span><br><span class="line">        <span class="type">double</span> v=number_value; </span><br><span class="line">        <span class="built_in">get_token</span>(); </span><br><span class="line">        <span class="keyword">return</span> v; </span><br><span class="line">                 } </span><br><span class="line">    <span class="keyword">case</span> NAME: { </span><br><span class="line">        <span class="type">double</span>&amp; v=table[string_value]; </span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">get_token</span>()==ASSIGN) </span><br><span class="line">            v=<span class="built_in">expr</span>(ture); </span><br><span class="line">        <span class="keyword">return</span> v; </span><br><span class="line">               } </span><br><span class="line">    <span class="keyword">case</span> MINUS: </span><br><span class="line">        <span class="keyword">return</span> -<span class="built_in">prim</span>(ture); </span><br><span class="line">    <span class="keyword">case</span> LP: { </span><br><span class="line">        <span class="type">double</span> e=<span class="built_in">expr</span>(ture); </span><br><span class="line">        <span class="keyword">if</span>(curr_tok!=RP) </span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">error</span>(<span class="string">") expected"</span>); </span><br><span class="line">        <span class="built_in">get_token</span>(); </span><br><span class="line">        <span class="keyword">return</span> e; </span><br><span class="line">             } </span><br><span class="line">    <span class="keyword">default</span>: </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">error</span>(<span class="string">"primary expected"</span>); </span><br><span class="line">    } </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function">Token_value <span class="title">get_token</span><span class="params">()</span> </span>{ </span><br><span class="line">    <span class="type">char</span> ch=<span class="number">0</span>; </span><br><span class="line">    cin&gt;&gt;ch; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span>(ch) { </span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span>: </span><br><span class="line">        <span class="keyword">return</span> curr_tok=END; </span><br><span class="line">    <span class="keyword">case</span> <span class="string">';'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'*'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'/'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'+'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'('</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">')'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'='</span>: </span><br><span class="line">        <span class="keyword">return</span> curr_tok=<span class="built_in">Token_value</span>(ch); </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'0'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'1'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'2'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'3'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'4'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'5'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'6'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'7'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'8'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'9'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'.'</span>: </span><br><span class="line">        cin.<span class="built_in">putback</span>(ch); </span><br><span class="line">        cin&gt;&gt;number_value; </span><br><span class="line">        <span class="keyword">return</span> curr_tok=NUMBER; </span><br><span class="line">    <span class="keyword">default</span>: </span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">isalpha</span>(ch)) { </span><br><span class="line">            cin.<span class="built_in">putback</span>(ch); </span><br><span class="line">            cin&gt;&gt;string_value; </span><br><span class="line">            <span class="keyword">return</span> curr_tok=NAME; </span><br><span class="line">        } </span><br><span class="line">        <span class="built_in">error</span>(<span class="string">"bad token"</span>); </span><br><span class="line">        <span class="keyword">return</span> curr_tok=PRINT; </span><br><span class="line">    } </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">error</span><span class="params">(<span class="type">const</span> string&amp; s)</span></span></span><br><span class="line"><span class="function"></span>{ </span><br><span class="line">    no_of_errors++; </span><br><span class="line">    cerr&lt;&lt;<span class="string">"error: "</span>&lt;&lt;s&lt;&lt;endl; </span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>; </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>{ </span><br><span class="line">    table[<span class="string">"pi"</span>]=<span class="number">3.1415926</span>; </span><br><span class="line">    table[<span class="string">"e"</span>]=<span class="number">2.718281828</span>; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(cin) { </span><br><span class="line">        <span class="built_in">get_token</span>(); </span><br><span class="line">        <span class="keyword">if</span>(curr_tok==END) </span><br><span class="line">            <span class="keyword">break</span>; </span><br><span class="line">        <span class="keyword">if</span>(curr_tok==PRINT) </span><br><span class="line">            <span class="keyword">continue</span>; </span><br><span class="line">        cout&lt;&lt;<span class="built_in">expr</span>(<span class="literal">false</span>)&lt;&lt;endl; </span><br><span class="line">    } </span><br><span class="line">    <span class="keyword">return</span> no_of_errors; </span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	
+
+	</div>
+  <a type="button" href="/posts/190e.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<p>《The C++ Programming Language》 第六章函数的一个例子。</p>
+<p>没有高深的算法，都是c++中最常用的语法现象，但是这150行程序里蕴含的功力极深（至少我达不到这种水平，程序的效率，存储开销等方面做的都非常出色，甚至是天衣无缝）。</p>
+<p>今日贴出，请大家一同欣赏（作者在程序中因为简化程序而改写了一些更好的方法，正如作者在序言中所说，要有一种健康的怀疑态度,我之所以说它完美，并不是指我们编不出比它好的程序，而是指它清晰的结构，合理的设计，以及蕴含在这里面的编程艺术）</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//以下是 c++之父写的一个简单计算器程序 包括分析器,输入,符号表,驱动程序 </span></span><br><span class="line"><span class="comment">//计算器的输入语法: </span></span><br><span class="line"><span class="comment">// 1)以 ";" 号作为一行的结束 </span></span><br><span class="line"><span class="comment">// 2)可用英文单词命名变量 (但变量后要有空格) </span></span><br><span class="line"><span class="comment">// 例子如下: </span></span><br><span class="line"><span class="comment">// 输入: r =2.5; (注意空格) </span></span><br><span class="line"><span class="comment">// 输出: 2.5 (记负值结果) </span></span><br><span class="line"><span class="comment">// 输入: area = r * r * pi ; </span></span><br><span class="line"><span class="comment">// 输出: 19.635 </span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// 以下代码为标准c++代码,我在vc++2003.net上运行无误 </span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cctype&gt;</span> </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std; </span><br><span class="line"><span class="type">const</span> <span class="type">int</span> ture=<span class="number">1</span>; </span><br><span class="line"><span class="type">const</span> <span class="type">int</span> flase=<span class="number">0</span>; </span><br><span class="line"></span><br><span class="line">map&lt;string,<span class="type">double</span>&gt; table; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//计算器输入允许的词法 </span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">Token_value</span>{ </span><br><span class="line">    NAME, NUMBER, END, </span><br><span class="line">    PLUS=<span class="string">'+'</span>, MINUS=<span class="string">'-'</span>, MUL=<span class="string">'*'</span>, DIV=<span class="string">'/'</span>, </span><br><span class="line">    PRINT=<span class="string">';'</span>, ASSIGN=<span class="string">'='</span>, LP=<span class="string">'('</span>, RP=<span class="string">')'</span>, </span><br><span class="line">}; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//分析器 加和减 </span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">expr</span><span class="params">(<span class="type">bool</span>)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//分析器 乘和除 </span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">term</span><span class="params">(<span class="type">bool</span>)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//分析器 处理初等项 </span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">prim</span><span class="params">(<span class="type">bool</span>)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//词法分析器 </span></span><br><span class="line"><span class="function">Token_value <span class="title">get_token</span><span class="params">()</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//错误处理 </span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">error</span><span class="params">(<span class="type">const</span> string &amp;s)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////////////////////////////// </span></span><br><span class="line"><span class="comment">//当前词法标记 </span></span><br><span class="line">Token_value curr_tok=PRINT; </span><br><span class="line"></span><br><span class="line"><span class="type">double</span> number_value;  <span class="comment">//存放数值 </span></span><br><span class="line">string string_value; <span class="comment">//存放计算器变量名 </span></span><br><span class="line"><span class="type">int</span> no_of_errors; <span class="comment">//记录错误个数 </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">expr</span><span class="params">(<span class="type">bool</span> get)</span> </span>{ </span><br><span class="line">    <span class="type">double</span> left=<span class="built_in">term</span>( get); </span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>( ; ; ) </span><br><span class="line">        <span class="keyword">switch</span>(curr_tok) { </span><br><span class="line">        <span class="keyword">case</span> PLUS: </span><br><span class="line">            left+=<span class="built_in">term</span>(ture); </span><br><span class="line">            <span class="keyword">break</span>; </span><br><span class="line">        <span class="keyword">case</span> MINUS: </span><br><span class="line">            left-=<span class="built_in">term</span>(ture); </span><br><span class="line">            <span class="keyword">break</span>; </span><br><span class="line">        <span class="keyword">default</span>: </span><br><span class="line">            <span class="keyword">return</span> left; </span><br><span class="line">    } </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">term</span><span class="params">(<span class="type">bool</span> get)</span> </span>{ </span><br><span class="line">    <span class="type">double</span> left=<span class="built_in">prim</span>(get); </span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>( ; ; ) </span><br><span class="line">        <span class="keyword">switch</span>(curr_tok) { </span><br><span class="line">        <span class="keyword">case</span> MUL: </span><br><span class="line">            left*=<span class="built_in">prim</span>(ture); </span><br><span class="line">            <span class="keyword">break</span>; </span><br><span class="line">        <span class="keyword">case</span> DIV: </span><br><span class="line">            <span class="keyword">if</span>(<span class="type">double</span> d=<span class="built_in">prim</span>(ture)) { </span><br><span class="line">                left/=d; </span><br><span class="line">                <span class="keyword">break</span>; </span><br><span class="line">            } </span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">error</span>(<span class="string">"divide by 0"</span>); </span><br><span class="line">        <span class="keyword">default</span>: </span><br><span class="line">            <span class="keyword">return</span> left; </span><br><span class="line">    } </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">prim</span><span class="params">(<span class="type">bool</span> get)</span> </span>{ </span><br><span class="line">    <span class="keyword">if</span>(get) <span class="built_in">get_token</span>(); </span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span>(curr_tok) { </span><br><span class="line">    <span class="keyword">case</span> NUMBER: { </span><br><span class="line">        <span class="type">double</span> v=number_value; </span><br><span class="line">        <span class="built_in">get_token</span>(); </span><br><span class="line">        <span class="keyword">return</span> v; </span><br><span class="line">                 } </span><br><span class="line">    <span class="keyword">case</span> NAME: { </span><br><span class="line">        <span class="type">double</span>&amp; v=table[string_value]; </span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">get_token</span>()==ASSIGN) </span><br><span class="line">            v=<span class="built_in">expr</span>(ture); </span><br><span class="line">        <span class="keyword">return</span> v; </span><br><span class="line">               } </span><br><span class="line">    <span class="keyword">case</span> MINUS: </span><br><span class="line">        <span class="keyword">return</span> -<span class="built_in">prim</span>(ture); </span><br><span class="line">    <span class="keyword">case</span> LP: { </span><br><span class="line">        <span class="type">double</span> e=<span class="built_in">expr</span>(ture); </span><br><span class="line">        <span class="keyword">if</span>(curr_tok!=RP) </span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">error</span>(<span class="string">") expected"</span>); </span><br><span class="line">        <span class="built_in">get_token</span>(); </span><br><span class="line">        <span class="keyword">return</span> e; </span><br><span class="line">             } </span><br><span class="line">    <span class="keyword">default</span>: </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">error</span>(<span class="string">"primary expected"</span>); </span><br><span class="line">    } </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function">Token_value <span class="title">get_token</span><span class="params">()</span> </span>{ </span><br><span class="line">    <span class="type">char</span> ch=<span class="number">0</span>; </span><br><span class="line">    cin&gt;&gt;ch; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span>(ch) { </span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span>: </span><br><span class="line">        <span class="keyword">return</span> curr_tok=END; </span><br><span class="line">    <span class="keyword">case</span> <span class="string">';'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'*'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'/'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'+'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'('</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">')'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'='</span>: </span><br><span class="line">        <span class="keyword">return</span> curr_tok=<span class="built_in">Token_value</span>(ch); </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'0'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'1'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'2'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'3'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'4'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'5'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'6'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'7'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'8'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'9'</span>: </span><br><span class="line">    <span class="keyword">case</span> <span class="string">'.'</span>: </span><br><span class="line">        cin.<span class="built_in">putback</span>(ch); </span><br><span class="line">        cin&gt;&gt;number_value; </span><br><span class="line">        <span class="keyword">return</span> curr_tok=NUMBER; </span><br><span class="line">    <span class="keyword">default</span>: </span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">isalpha</span>(ch)) { </span><br><span class="line">            cin.<span class="built_in">putback</span>(ch); </span><br><span class="line">            cin&gt;&gt;string_value; </span><br><span class="line">            <span class="keyword">return</span> curr_tok=NAME; </span><br><span class="line">        } </span><br><span class="line">        <span class="built_in">error</span>(<span class="string">"bad token"</span>); </span><br><span class="line">        <span class="keyword">return</span> curr_tok=PRINT; </span><br><span class="line">    } </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">error</span><span class="params">(<span class="type">const</span> string&amp; s)</span></span></span><br><span class="line"><span class="function"></span>{ </span><br><span class="line">    no_of_errors++; </span><br><span class="line">    cerr&lt;&lt;<span class="string">"error: "</span>&lt;&lt;s&lt;&lt;endl; </span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>; </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>{ </span><br><span class="line">    table[<span class="string">"pi"</span>]=<span class="number">3.1415926</span>; </span><br><span class="line">    table[<span class="string">"e"</span>]=<span class="number">2.718281828</span>; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(cin) { </span><br><span class="line">        <span class="built_in">get_token</span>(); </span><br><span class="line">        <span class="keyword">if</span>(curr_tok==END) </span><br><span class="line">            <span class="keyword">break</span>; </span><br><span class="line">        <span class="keyword">if</span>(curr_tok==PRINT) </span><br><span class="line">            <span class="keyword">continue</span>; </span><br><span class="line">        cout&lt;&lt;<span class="built_in">expr</span>(<span class="literal">false</span>)&lt;&lt;endl; </span><br><span class="line">    } </span><br><span class="line">    <span class="keyword">return</span> no_of_errors; </span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	
+	</div>
+  <a type="button" href="/posts/190e.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/5a5a.html" >Git Command List</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2020-11-17  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<p>常用 Git 命令清单。几个专用名词的译名如下。</p>
+<pre><code>Workspace：工作区
+Index / Stage：暂存区
+Repository：仓库区（或本地仓库）
+Remote：远程仓库
+</code></pre>
+<h1 id="新建代码库"><a class="markdownIt-Anchor" href="#新建代码库"></a> 新建代码库</h1>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"># 在当前目录新建一个Git代码库</span><br><span class="line">$ git init</span><br><span class="line"></span><br><span class="line"># 新建一个目录，将其初始化为Git代码库</span><br><span class="line">$ git init [project-name]</span><br><span class="line"></span><br><span class="line"># 下载一个项目和它的整个代码历史</span><br><span class="line">$ git clone [url]</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="配置"><a class="markdownIt-Anchor" href="#配置"></a> 配置</h1>
+<p>Git的设置文件为.gitconfig，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"># 显示当前的Git配置</span><br><span class="line">$ git config --list</span><br><span class="line"></span><br><span class="line"># 编辑Git配置文件</span><br><span class="line">$ git config -e [--global]</span><br><span class="line"></span><br><span class="line"># 设置提交代码时的用户信息</span><br><span class="line">$ git config [--global] user.name "[name]"</span><br><span class="line">$ git config [--global] user.email "[email address]"</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="增加删除文件"><a class="markdownIt-Anchor" href="#增加删除文件"></a> 增加/删除文件</h1>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"># 添加指定文件到暂存区</span><br><span class="line">$ git add [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"># 添加指定目录到暂存区，包括子目录</span><br><span class="line">$ git add [dir]</span><br><span class="line"></span><br><span class="line"># 添加当前目录的所有文件到暂存区</span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line"># 添加每个变化前，都会要求确认</span><br><span class="line"># 对于同一个文件的多处变化，可以实现分次提交</span><br><span class="line">$ git add -p</span><br><span class="line"></span><br><span class="line"># 删除工作区文件，并且将这次删除放入暂存区</span><br><span class="line">$ git rm [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"># 停止追踪指定文件，但该文件会保留在工作区</span><br><span class="line">$ git rm --cached [file]</span><br><span class="line"></span><br><span class="line"># 改名文件，并且将这个改名放入暂存区</span><br><span class="line">$ git mv [file-original] [file-renamed]</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="代码提交"><a class="markdownIt-Anchor" href="#代码提交"></a> 代码提交</h1>
+	
+
+	</div>
+  <a type="button" href="/posts/5a5a.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<p>常用 Git 命令清单。几个专用名词的译名如下。</p>
+<pre><code>Workspace：工作区
+Index / Stage：暂存区
+Repository：仓库区（或本地仓库）
+Remote：远程仓库
+</code></pre>
+<h1 id="新建代码库"><a class="markdownIt-Anchor" href="#新建代码库"></a> 新建代码库</h1>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"># 在当前目录新建一个Git代码库</span><br><span class="line">$ git init</span><br><span class="line"></span><br><span class="line"># 新建一个目录，将其初始化为Git代码库</span><br><span class="line">$ git init [project-name]</span><br><span class="line"></span><br><span class="line"># 下载一个项目和它的整个代码历史</span><br><span class="line">$ git clone [url]</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="配置"><a class="markdownIt-Anchor" href="#配置"></a> 配置</h1>
+<p>Git的设置文件为.gitconfig，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"># 显示当前的Git配置</span><br><span class="line">$ git config --list</span><br><span class="line"></span><br><span class="line"># 编辑Git配置文件</span><br><span class="line">$ git config -e [--global]</span><br><span class="line"></span><br><span class="line"># 设置提交代码时的用户信息</span><br><span class="line">$ git config [--global] user.name "[name]"</span><br><span class="line">$ git config [--global] user.email "[email address]"</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="增加删除文件"><a class="markdownIt-Anchor" href="#增加删除文件"></a> 增加/删除文件</h1>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"># 添加指定文件到暂存区</span><br><span class="line">$ git add [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"># 添加指定目录到暂存区，包括子目录</span><br><span class="line">$ git add [dir]</span><br><span class="line"></span><br><span class="line"># 添加当前目录的所有文件到暂存区</span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line"># 添加每个变化前，都会要求确认</span><br><span class="line"># 对于同一个文件的多处变化，可以实现分次提交</span><br><span class="line">$ git add -p</span><br><span class="line"></span><br><span class="line"># 删除工作区文件，并且将这次删除放入暂存区</span><br><span class="line">$ git rm [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"># 停止追踪指定文件，但该文件会保留在工作区</span><br><span class="line">$ git rm --cached [file]</span><br><span class="line"></span><br><span class="line"># 改名文件，并且将这个改名放入暂存区</span><br><span class="line">$ git mv [file-original] [file-renamed]</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="代码提交"><a class="markdownIt-Anchor" href="#代码提交"></a> 代码提交</h1>
+	
+	</div>
+  <a type="button" href="/posts/5a5a.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/f962.html" >单链表的反转</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2020-10-25  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<p>反转链表：将链表整体“反过来”，将头变成尾、尾变成头。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025144559.png" alt="反转的链表"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025144605.png" alt="反转后的链表"></p>
+<p>常见的四种方法:</p>
+<ol>
+<li>
+<p>迭代反转法</p>
+</li>
+<li>
+<p>递归反转法</p>
+</li>
+<li>
+<p>就地逆置法</p>
+</li>
+<li>
+<p>头插法</p>
+</li>
+</ol>
+<p>递归反转法更适用于反转不带头节点的链表；其它 3 种方法既能反转不带头节点的链表，也能反转带头节点的链表。</p>
+<h1 id="迭代反转链表"><a class="markdownIt-Anchor" href="#迭代反转链表"></a> 迭代反转链表</h1>
+<p>方法：从当前链表的首元节点开始，一直遍历至链表的最后一个节点，这期间会逐个改变所遍历到的节点的指针域，另其指向前一个节点。</p>
+<p>具体实现：借助 3 个指针即可。首先我们定义 3 个指针并分别命名为 beg、mid、end。它们的初始指向如下图所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025145917.png" alt></p>
+	
+
+	</div>
+  <a type="button" href="/posts/f962.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<p>反转链表：将链表整体“反过来”，将头变成尾、尾变成头。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025144559.png" alt="反转的链表"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025144605.png" alt="反转后的链表"></p>
+<p>常见的四种方法:</p>
+<ol>
+<li>
+<p>迭代反转法</p>
+</li>
+<li>
+<p>递归反转法</p>
+</li>
+<li>
+<p>就地逆置法</p>
+</li>
+<li>
+<p>头插法</p>
+</li>
+</ol>
+<p>递归反转法更适用于反转不带头节点的链表；其它 3 种方法既能反转不带头节点的链表，也能反转带头节点的链表。</p>
+<h1 id="迭代反转链表"><a class="markdownIt-Anchor" href="#迭代反转链表"></a> 迭代反转链表</h1>
+<p>方法：从当前链表的首元节点开始，一直遍历至链表的最后一个节点，这期间会逐个改变所遍历到的节点的指针域，另其指向前一个节点。</p>
+<p>具体实现：借助 3 个指针即可。首先我们定义 3 个指针并分别命名为 beg、mid、end。它们的初始指向如下图所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025145917.png" alt></p>
+	
+	</div>
+  <a type="button" href="/posts/f962.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/82e6.html" >线性表</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2020-10-25  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="顺序表"><a class="markdownIt-Anchor" href="#顺序表"></a> 顺序表</h1>
+<h2 id="顺序表初始化"><a class="markdownIt-Anchor" href="#顺序表初始化"></a> 顺序表初始化</h2>
+<p><strong>定义数据表</strong></p>
+<ul>
+<li>
+<p>顺序表申请的存储容量；</p>
+</li>
+<li>
+<p>顺序表的长度，也就是表中存储数据元素的个数；</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Table</span>{</span></span><br><span class="line">    <span class="type">int</span> * head;<span class="comment">//声明了一个名为head的长度不确定的数组，也叫“动态数组”</span></span><br><span class="line">    <span class="type">int</span> length;<span class="comment">//记录当前顺序表的长度</span></span><br><span class="line">    <span class="type">int</span> size;<span class="comment">//记录顺序表分配的存储容量</span></span><br><span class="line">}table;</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>注意：head 是我们声明的一个未初始化的动态数组，不要只把它看做是普通的指针。</p>
+<p><strong>数据表的初始化</strong></p>
+<ul>
+<li>
+<p>给 head 动态数据申请足够大小的物理空间；</p>
+</li>
+<li>
+<p>给 size 和 length 赋初值；</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> Size 5 <span class="comment">//对Size进行宏定义，表示顺序表申请空间的大小</span></span></span><br><span class="line">table <span class="title function_">initTable</span><span class="params">()</span>{</span><br><span class="line">    table t;</span><br><span class="line">    t.head=(<span class="type">int</span>*)<span class="built_in">malloc</span>(Size*<span class="keyword">sizeof</span>(<span class="type">int</span>));<span class="comment">//构造一个空的顺序表，动态申请存储空间</span></span><br><span class="line">    <span class="keyword">if</span> (!t.head) <span class="comment">//如果申请失败，作出提示并直接退出程序</span></span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"初始化失败"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    }</span><br><span class="line">    t.length=<span class="number">0</span>;<span class="comment">//空表的长度初始化为0</span></span><br><span class="line">    t.size=Size;<span class="comment">//空表的初始存储空间为Size</span></span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>顺序表初始化的过程被封装到了一个函数中，此函数返回值是一个已经初始化完成的顺序表。这样做的好处是增加了代码的可用性，也更加美观。</p>
+	
+
+	</div>
+  <a type="button" href="/posts/82e6.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="顺序表"><a class="markdownIt-Anchor" href="#顺序表"></a> 顺序表</h1>
+<h2 id="顺序表初始化"><a class="markdownIt-Anchor" href="#顺序表初始化"></a> 顺序表初始化</h2>
+<p><strong>定义数据表</strong></p>
+<ul>
+<li>
+<p>顺序表申请的存储容量；</p>
+</li>
+<li>
+<p>顺序表的长度，也就是表中存储数据元素的个数；</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Table</span>{</span></span><br><span class="line">    <span class="type">int</span> * head;<span class="comment">//声明了一个名为head的长度不确定的数组，也叫“动态数组”</span></span><br><span class="line">    <span class="type">int</span> length;<span class="comment">//记录当前顺序表的长度</span></span><br><span class="line">    <span class="type">int</span> size;<span class="comment">//记录顺序表分配的存储容量</span></span><br><span class="line">}table;</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>注意：head 是我们声明的一个未初始化的动态数组，不要只把它看做是普通的指针。</p>
+<p><strong>数据表的初始化</strong></p>
+<ul>
+<li>
+<p>给 head 动态数据申请足够大小的物理空间；</p>
+</li>
+<li>
+<p>给 size 和 length 赋初值；</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> Size 5 <span class="comment">//对Size进行宏定义，表示顺序表申请空间的大小</span></span></span><br><span class="line">table <span class="title function_">initTable</span><span class="params">()</span>{</span><br><span class="line">    table t;</span><br><span class="line">    t.head=(<span class="type">int</span>*)<span class="built_in">malloc</span>(Size*<span class="keyword">sizeof</span>(<span class="type">int</span>));<span class="comment">//构造一个空的顺序表，动态申请存储空间</span></span><br><span class="line">    <span class="keyword">if</span> (!t.head) <span class="comment">//如果申请失败，作出提示并直接退出程序</span></span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"初始化失败"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    }</span><br><span class="line">    t.length=<span class="number">0</span>;<span class="comment">//空表的长度初始化为0</span></span><br><span class="line">    t.size=Size;<span class="comment">//空表的初始存储空间为Size</span></span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>顺序表初始化的过程被封装到了一个函数中，此函数返回值是一个已经初始化完成的顺序表。这样做的好处是增加了代码的可用性，也更加美观。</p>
+	
+	</div>
+  <a type="button" href="/posts/82e6.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/a251.html" >Function call Convention</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2020-10-18  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="cdecl"><a class="markdownIt-Anchor" href="#cdecl"></a> cdecl</h2>
+<p>cdecl是C语言中使用的调用方式，调用者负责处理栈</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"stdio.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">return</span> (a+b)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="built_in">main</span>(<span class="type">int</span> argc, <span class="type">char</span> *argv[]</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">add</span>(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201018182131.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201018182416.png" alt></p>
+<p>在调用完add() 函数之后，使用 ADD ESP,8 命令整理栈。调用者 main() 函数直接清理其压入栈的函数参数，这样的方式叫 cdecl。</p>
+<p>cdecl 调用的优点：可以向调用函数传递长度可变的参数，这种长度可变的参数在其他调用中很难实现。</p>
+<h2 id="stdcall"><a class="markdownIt-Anchor" href="#stdcall"></a> stdcall</h2>
+<p>stdcll是 win32 API常用的调用方式，被调用者负责清理栈。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"stdio.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> _stdcall <span class="title">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">return</span> (a+b)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="built_in">main</span>(<span class="type">int</span> argc, <span class="type">char</span> *argv[]</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">add</span>(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+	
+
+	</div>
+  <a type="button" href="/posts/a251.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="cdecl"><a class="markdownIt-Anchor" href="#cdecl"></a> cdecl</h2>
+<p>cdecl是C语言中使用的调用方式，调用者负责处理栈</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"stdio.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">return</span> (a+b)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="built_in">main</span>(<span class="type">int</span> argc, <span class="type">char</span> *argv[]</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">add</span>(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201018182131.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201018182416.png" alt></p>
+<p>在调用完add() 函数之后，使用 ADD ESP,8 命令整理栈。调用者 main() 函数直接清理其压入栈的函数参数，这样的方式叫 cdecl。</p>
+<p>cdecl 调用的优点：可以向调用函数传递长度可变的参数，这种长度可变的参数在其他调用中很难实现。</p>
+<h2 id="stdcall"><a class="markdownIt-Anchor" href="#stdcall"></a> stdcall</h2>
+<p>stdcll是 win32 API常用的调用方式，被调用者负责清理栈。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"stdio.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> _stdcall <span class="title">add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">return</span> (a+b)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="built_in">main</span>(<span class="type">int</span> argc, <span class="type">char</span> *argv[]</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">add</span>(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+	
+	</div>
+  <a type="button" href="/posts/a251.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/a7dd.html" >Stack frame</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2020-10-17  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="什么是栈帧"><a class="markdownIt-Anchor" href="#什么是栈帧"></a> 什么是栈帧</h2>
+<p>栈帧就是利用EBP（栈帧指针，注意不是ESP）寄存器访问栈内局部变量，参数，函数返回地址的手段，在IA-32寄存器中，ESP寄存器承担着栈顶指针的作用，而EBP寄存器则负责行使栈帧指针的职能。</p>
+<p>但是在程序运行的过程中，ESP寄存器的值随时发生变化，访问栈中函数的局部变量，参数时候，若以ESP值为基准编写程序会产生困难，并且难使CPU引用到准确的值。所以引入了栈帧。</p>
+<p>在调用某些函数时，先要把用作基准点（函数起始地址）的ESP值保存到EBP，并维持在函数内部，这样无论ESP的值如何变化，以EBP的值作为基准（base）就能够安全访问到相关函数的局部变量，参数，返回地址。</p>
+<h2 id="分析栈帧"><a class="markdownIt-Anchor" href="#分析栈帧"></a> 分析栈帧</h2>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span> <span class="string">"stdio.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">long</span> <span class="title">add</span> <span class="params">(<span class="type">long</span> a, <span class="type">long</span> b)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="type">long</span> x = a ,y = b;</span><br><span class="line">    <span class="keyword">return</span> (x + y);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="type">long</span> a = <span class="number">1</span>, b = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="built_in">add</span>(a, b));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201018115721.png" alt></p>
+<p><strong>main() 函数产生栈帧</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>*argv[])</span></span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">00401020         55                    push ebp</span><br><span class="line">00401021         8BEC                  mov ebp,esp</span><br></pre></td></tr></tbody></table></figure>
+	
+
+	</div>
+  <a type="button" href="/posts/a7dd.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="什么是栈帧"><a class="markdownIt-Anchor" href="#什么是栈帧"></a> 什么是栈帧</h2>
+<p>栈帧就是利用EBP（栈帧指针，注意不是ESP）寄存器访问栈内局部变量，参数，函数返回地址的手段，在IA-32寄存器中，ESP寄存器承担着栈顶指针的作用，而EBP寄存器则负责行使栈帧指针的职能。</p>
+<p>但是在程序运行的过程中，ESP寄存器的值随时发生变化，访问栈中函数的局部变量，参数时候，若以ESP值为基准编写程序会产生困难，并且难使CPU引用到准确的值。所以引入了栈帧。</p>
+<p>在调用某些函数时，先要把用作基准点（函数起始地址）的ESP值保存到EBP，并维持在函数内部，这样无论ESP的值如何变化，以EBP的值作为基准（base）就能够安全访问到相关函数的局部变量，参数，返回地址。</p>
+<h2 id="分析栈帧"><a class="markdownIt-Anchor" href="#分析栈帧"></a> 分析栈帧</h2>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span> <span class="string">"stdio.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">long</span> <span class="title">add</span> <span class="params">(<span class="type">long</span> a, <span class="type">long</span> b)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="type">long</span> x = a ,y = b;</span><br><span class="line">    <span class="keyword">return</span> (x + y);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="type">long</span> a = <span class="number">1</span>, b = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="built_in">add</span>(a, b));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201018115721.png" alt></p>
+<p><strong>main() 函数产生栈帧</strong></p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>*argv[])</span></span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">00401020         55                    push ebp</span><br><span class="line">00401021         8BEC                  mov ebp,esp</span><br></pre></td></tr></tbody></table></figure>
+	
+	</div>
+  <a type="button" href="/posts/a7dd.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/1a06.html" >IA-32 register</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2020-10-16  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<p><strong>基本程序运行寄存器</strong></p>
+<p>通用寄存器 （General Purpse Resigisters,32位，8个）</p>
+<p>段寄存器 （Segment Register，16位，6个）</p>
+<p>程序状态与控制寄存器 （Program Status and Contral Register,32位，1个）</p>
+<p>指令指针寄存器（Instruction Pointer， 32位，1个）</p>
+<ol>
+<li>通用寄存器</li>
+</ol>
+<p>EAX:（针对操作数和结果数据的） 累加器</p>
+<p>EBX：（DS段中的数据指针）基址寄存器</p>
+<p>ECX：（字符串和循环操作的）计数器</p>
+<p>EDX （I/O指针）数据寄存器</p>
+	
+
+	</div>
+  <a type="button" href="/posts/1a06.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<p><strong>基本程序运行寄存器</strong></p>
+<p>通用寄存器 （General Purpse Resigisters,32位，8个）</p>
+<p>段寄存器 （Segment Register，16位，6个）</p>
+<p>程序状态与控制寄存器 （Program Status and Contral Register,32位，1个）</p>
+<p>指令指针寄存器（Instruction Pointer， 32位，1个）</p>
+<ol>
+<li>通用寄存器</li>
+</ol>
+<p>EAX:（针对操作数和结果数据的） 累加器</p>
+<p>EBX：（DS段中的数据指针）基址寄存器</p>
+<p>ECX：（字符串和循环操作的）计数器</p>
+<p>EDX （I/O指针）数据寄存器</p>
+	
+	</div>
+  <a type="button" href="/posts/1a06.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/a89f.html" >git</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2020-09-27  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="创建版本库"><a class="markdownIt-Anchor" href="#创建版本库"></a> 创建版本库</h2>
+<ol>
+<li>选择一个合适的地方，创建一个空目录：</li>
+</ol>
+<figure class="highlight plaintext"><figcaption><span>bash</span></figcaption><table><tbody><tr><td class="code"><pre><span class="line">$ mkdir learngit</span><br><span class="line">$ cd learngit</span><br><span class="line">$ pwd</span><br><span class="line">/Users/michael/learngit</span><br></pre></td></tr></tbody></table></figure>
+<ol start="2">
+<li>通过<code>git init</code>命令把这个目录变成Git可以管理的仓库：</li>
+</ol>
+<figure class="highlight plaintext"><figcaption><span>bash</span></figcaption><table><tbody><tr><td class="code"><pre><span class="line">$ git init</span><br><span class="line">Initialized empty Git repository in /Users/michael/learngit/.git/</span><br></pre></td></tr></tbody></table></figure>
+<p>在文件夹目录下面会出现一个 .git 的目录，这个目录的作用是Git来跟踪版本管理库的，对于该文件夹下面的文件修改要慎重，盲目修改可能会导致版本库出现问题。<br>
+如果你没有看到.git目录，那是因为这个目录默认是隐藏的，用ls -ah命令就可以看见。<br>
+也不一定必须在空目录下创建Git仓库，选择一个已经有东西的目录也是可以的。</p>
+<p><strong>将文件提交到仓库的步骤</strong></p>
+<ol>
+<li>用命令<code>git add</code>告诉Git，把文件添加到仓库：</li>
+</ol>
+<figure class="highlight plaintext"><figcaption><span>bash</span></figcaption><table><tbody><tr><td class="code"><pre><span class="line">$ git add readme.txt</span><br></pre></td></tr></tbody></table></figure>
+<p>执行上面的命令，没有任何显示，这就对了，Unix的哲学是“没有消息就是好消息”，说明添加成功。</p>
+	
+
+	</div>
+  <a type="button" href="/posts/a89f.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="创建版本库"><a class="markdownIt-Anchor" href="#创建版本库"></a> 创建版本库</h2>
+<ol>
+<li>选择一个合适的地方，创建一个空目录：</li>
+</ol>
+<figure class="highlight plaintext"><figcaption><span>bash</span></figcaption><table><tbody><tr><td class="code"><pre><span class="line">$ mkdir learngit</span><br><span class="line">$ cd learngit</span><br><span class="line">$ pwd</span><br><span class="line">/Users/michael/learngit</span><br></pre></td></tr></tbody></table></figure>
+<ol start="2">
+<li>通过<code>git init</code>命令把这个目录变成Git可以管理的仓库：</li>
+</ol>
+<figure class="highlight plaintext"><figcaption><span>bash</span></figcaption><table><tbody><tr><td class="code"><pre><span class="line">$ git init</span><br><span class="line">Initialized empty Git repository in /Users/michael/learngit/.git/</span><br></pre></td></tr></tbody></table></figure>
+<p>在文件夹目录下面会出现一个 .git 的目录，这个目录的作用是Git来跟踪版本管理库的，对于该文件夹下面的文件修改要慎重，盲目修改可能会导致版本库出现问题。<br>
+如果你没有看到.git目录，那是因为这个目录默认是隐藏的，用ls -ah命令就可以看见。<br>
+也不一定必须在空目录下创建Git仓库，选择一个已经有东西的目录也是可以的。</p>
+<p><strong>将文件提交到仓库的步骤</strong></p>
+<ol>
+<li>用命令<code>git add</code>告诉Git，把文件添加到仓库：</li>
+</ol>
+<figure class="highlight plaintext"><figcaption><span>bash</span></figcaption><table><tbody><tr><td class="code"><pre><span class="line">$ git add readme.txt</span><br></pre></td></tr></tbody></table></figure>
+<p>执行上面的命令，没有任何显示，这就对了，Unix的哲学是“没有消息就是好消息”，说明添加成功。</p>
+	
+	</div>
+  <a type="button" href="/posts/a89f.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/6d4d.html" >LaTeX公式-Katex解析</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2020-08-09  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="概念"><a class="markdownIt-Anchor" href="#概念"></a> 概念</h2>
+<p>LaTeX是一种基于ΤΕΧ的排版系统，由美国计算机学家莱斯利·兰伯特（Leslie Lamport）在20世纪80年代初期开发，利用这种格式，即使使用者没有排版和程序设计的知识也可以充分发挥由TeX所提供的强大功能，能在几天，甚至几小时内生成很多具有书籍质量的印刷品。对于生成复杂表格和数学公式，这一点表现得尤为突出。因此它非常适用于生成高印刷质量的科技和数学类文档。</p>
+<p>MathJax是一个显示网络上数学公式的开源JavaScript引擎库，它可以在所有浏览器上面工作，其中就支持LaTeX，MathML和AsciiMath 符号，里面的数字会被MathJax使用JavaScript引擎解析成HTML，SVG或者是MathML 方程式，然后在现代的浏览器里面显示。 它的设计目标是利用最新的web技术，构建一个支持math的web平台。支持主要的浏览器和操作系统,包括那些移动设备</p>
+<p>KaTeX： 可汗学院出品，号称“最快”的数学公式渲染库<br>
+支持主流的浏览器：Chrome, Firefox, Safari, Opera和 IE8-IE11。</p>
+<p>快速：并发渲染，无需重排页面。根据这个测试，性能绝对秒杀MathJax； +渲染效果好：采用TeX语法，渲染效果达到印刷出版级别； +无依赖：不依赖其它库； +支持服务器端渲染：例如，服务器端的Node.js程序调用KaTeX，把渲染好的HTML片段直接发送给客户端。</p>
+<h2 id="在线测试工具"><a class="markdownIt-Anchor" href="#在线测试工具"></a> 在线测试工具</h2>
+<p>在线测试，我们可以进行latex公式、katex效果一一对应<br>
+<a target="_blank" rel="noopener" href="http://pandao.github.io/editor.md/examples/katex.html">http://pandao.github.io/editor.md/examples/katex.html</a><br>
+<a target="_blank" rel="noopener" href="http://latex.codecogs.com/eqneditor/editor.php">http://latex.codecogs.com/eqneditor/editor.php</a><br>
+<a target="_blank" rel="noopener" href="http://latex.91maths.com/">http://latex.91maths.com/</a></p>
+<p>latex公式<br>
+参考文档：<br>
+<a target="_blank" rel="noopener" href="http://www.mohu.org/info/lshort-cn.pdf">http://www.mohu.org/info/lshort-cn.pdf</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">空白</span><br><span class="line">1_1多个连续的空白字符等同为一个空白字符</span><br><span class="line">1_2每行开始的空白字符将被忽略</span><br><span class="line">1_3使用空行来结束段落，两行文本中的空行标志上一段落的结束和</span><br><span class="line">新段落的开始</span><br><span class="line"></span><br><span class="line">#空格</span><br><span class="line">使用\quad和\qquad 来表示空格</span><br><span class="line"></span><br><span class="line">#特殊字符</span><br><span class="line">前面需要添加\来表示特殊字符</span><br><span class="line">$ %  &amp; _ { } # ^ ~ </span><br><span class="line"></span><br><span class="line">语法对应</span><br><span class="line">\$ \%  \&amp; \_ \{ \}  \# </span><br><span class="line">\~{}  \^{}(测试有问题)</span><br><span class="line"></span><br><span class="line">#指数上下标</span><br><span class="line">指数可以用x^a 或者x^{a} 格式来表示,x代表底数，a是指数</span><br><span class="line">下标可以用x_{a}格式来表示,x代表底数,a代表下指数</span><br><span class="line">#下标</span><br><span class="line">a1(a的下标标为1)   表达式：a_{1}</span><br><span class="line"></span><br><span class="line">#指数(上标)</span><br><span class="line">x2(x的指数为2)   表达式：x^2</span><br><span class="line"></span><br><span class="line">#上下标</span><br><span class="line">b3ij(b的上标为3下标为ij)  表达式：b^{3}_{ij}</span><br><span class="line"></span><br><span class="line">#多次上标</span><br><span class="line">ex2(e的上标为x的平方)  表达式：{e^x}^2</span><br><span class="line"></span><br><span class="line">#平方根</span><br><span class="line">平方根命令为：\sqrt，n 次方根相应地为: \sqrt[n]</span><br><span class="line"></span><br><span class="line">x开根号  表达式：\sqrt{x} </span><br><span class="line">x开三次方根  表达式：\sqrt[3]{x} </span><br><span class="line">对x平方+根号y在开平方：表达式\sqrt{x^{2}+ \sqrt{y}}</span><br><span class="line"></span><br><span class="line">#分数</span><br><span class="line">分数使用\frac{a}{b} 排版,a是分子，b是分母</span><br><span class="line">例子如下：</span><br><span class="line">\frac{x^2}{k+1}</span><br><span class="line">x^{\frac{2}{k+1}}</span><br><span class="line">x^{1/2}</span><br><span class="line"></span><br><span class="line">#向量</span><br><span class="line">向量由\vec 得到。另两个命令\overrightarrow 和\overleftarrow在定义从A 到B 的向量</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#求和运算符</span><br><span class="line">求和运算符由\sum 生成</span><br><span class="line">\sum_{i=1}^{n}</span><br><span class="line"></span><br><span class="line">#数学运算符</span><br><span class="line">大于：&gt;  小于：&lt;  小于等于：\le  大于等于：\ge  不等于：\ne  双波浪线：\approx  单波浪线：\sim  子集：\subseteq  属于：\in  不属于：\notin  乘号：\times  除号：\div  加减号：\pm  右双箭头\Rightarrow 右单箭头：\rightarrow  无穷大：\infty   角度斜度\angle </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#常用小写希腊字母</span><br><span class="line">\alpha \beta \gamma \sigma \omega \delta \pi \rho \epsilon \eta \lambda \mu \xi \tau \kappa \zeta \phi \chi</span><br><span class="line"></span><br><span class="line">e^{2}\neq</span><br><span class="line"></span><br><span class="line">#小括号</span><br><span class="line">空格式：\left (  \right )</span><br><span class="line">效果：()</span><br><span class="line">有数据的括号格式：\left ( 123,45 \right )</span><br><span class="line">效果：(123,45)</span><br><span class="line">#中括号</span><br><span class="line">空格式：\left [  \right ]</span><br><span class="line">效果：[]</span><br><span class="line">有数据的括号格式：\left [ 3,5,9 \right ]</span><br><span class="line">效果：[3,5,9]</span><br><span class="line"></span><br><span class="line">#尖括号</span><br><span class="line">空数据格式：\left \langle  \right \rangle</span><br><span class="line">&lt;&gt;</span><br><span class="line">有数据格式：\left \langle 3,4 \right \rangle</span><br><span class="line">&lt;3,4&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#水平线</span><br><span class="line">使用 \overline 和 \underline 在表达式的上、下方画出水平线</span><br><span class="line">\overline{lindexi.oschina.io}+\underline{lindexi.github.io}</span><br><span class="line"></span><br><span class="line">#上大括号</span><br><span class="line">使用\overbrace 和 \underbrace 可以在表达式上方、下方添加花括号</span><br><span class="line"></span><br><span class="line">\overbrace{blog.csdn.net/lindexi_gd}_{lindexi} + \underbrace{lindexi.github.io}_{doubi}</span><br><span class="line"></span><br><span class="line">#三角函数</span><br><span class="line">\sin\theta </span><br><span class="line">\cos\theta </span><br><span class="line">\tan\theta </span><br><span class="line">\cot \theta</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="katex前端展示latex数学公式效果"><a class="markdownIt-Anchor" href="#katex前端展示latex数学公式效果"></a> katex前端展示latex数学公式效果</h2>
+	
+
+	</div>
+  <a type="button" href="/posts/6d4d.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="概念"><a class="markdownIt-Anchor" href="#概念"></a> 概念</h2>
+<p>LaTeX是一种基于ΤΕΧ的排版系统，由美国计算机学家莱斯利·兰伯特（Leslie Lamport）在20世纪80年代初期开发，利用这种格式，即使使用者没有排版和程序设计的知识也可以充分发挥由TeX所提供的强大功能，能在几天，甚至几小时内生成很多具有书籍质量的印刷品。对于生成复杂表格和数学公式，这一点表现得尤为突出。因此它非常适用于生成高印刷质量的科技和数学类文档。</p>
+<p>MathJax是一个显示网络上数学公式的开源JavaScript引擎库，它可以在所有浏览器上面工作，其中就支持LaTeX，MathML和AsciiMath 符号，里面的数字会被MathJax使用JavaScript引擎解析成HTML，SVG或者是MathML 方程式，然后在现代的浏览器里面显示。 它的设计目标是利用最新的web技术，构建一个支持math的web平台。支持主要的浏览器和操作系统,包括那些移动设备</p>
+<p>KaTeX： 可汗学院出品，号称“最快”的数学公式渲染库<br>
+支持主流的浏览器：Chrome, Firefox, Safari, Opera和 IE8-IE11。</p>
+<p>快速：并发渲染，无需重排页面。根据这个测试，性能绝对秒杀MathJax； +渲染效果好：采用TeX语法，渲染效果达到印刷出版级别； +无依赖：不依赖其它库； +支持服务器端渲染：例如，服务器端的Node.js程序调用KaTeX，把渲染好的HTML片段直接发送给客户端。</p>
+<h2 id="在线测试工具"><a class="markdownIt-Anchor" href="#在线测试工具"></a> 在线测试工具</h2>
+<p>在线测试，我们可以进行latex公式、katex效果一一对应<br>
+<a target="_blank" rel="noopener" href="http://pandao.github.io/editor.md/examples/katex.html">http://pandao.github.io/editor.md/examples/katex.html</a><br>
+<a target="_blank" rel="noopener" href="http://latex.codecogs.com/eqneditor/editor.php">http://latex.codecogs.com/eqneditor/editor.php</a><br>
+<a target="_blank" rel="noopener" href="http://latex.91maths.com/">http://latex.91maths.com/</a></p>
+<p>latex公式<br>
+参考文档：<br>
+<a target="_blank" rel="noopener" href="http://www.mohu.org/info/lshort-cn.pdf">http://www.mohu.org/info/lshort-cn.pdf</a></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">空白</span><br><span class="line">1_1多个连续的空白字符等同为一个空白字符</span><br><span class="line">1_2每行开始的空白字符将被忽略</span><br><span class="line">1_3使用空行来结束段落，两行文本中的空行标志上一段落的结束和</span><br><span class="line">新段落的开始</span><br><span class="line"></span><br><span class="line">#空格</span><br><span class="line">使用\quad和\qquad 来表示空格</span><br><span class="line"></span><br><span class="line">#特殊字符</span><br><span class="line">前面需要添加\来表示特殊字符</span><br><span class="line">$ %  &amp; _ { } # ^ ~ </span><br><span class="line"></span><br><span class="line">语法对应</span><br><span class="line">\$ \%  \&amp; \_ \{ \}  \# </span><br><span class="line">\~{}  \^{}(测试有问题)</span><br><span class="line"></span><br><span class="line">#指数上下标</span><br><span class="line">指数可以用x^a 或者x^{a} 格式来表示,x代表底数，a是指数</span><br><span class="line">下标可以用x_{a}格式来表示,x代表底数,a代表下指数</span><br><span class="line">#下标</span><br><span class="line">a1(a的下标标为1)   表达式：a_{1}</span><br><span class="line"></span><br><span class="line">#指数(上标)</span><br><span class="line">x2(x的指数为2)   表达式：x^2</span><br><span class="line"></span><br><span class="line">#上下标</span><br><span class="line">b3ij(b的上标为3下标为ij)  表达式：b^{3}_{ij}</span><br><span class="line"></span><br><span class="line">#多次上标</span><br><span class="line">ex2(e的上标为x的平方)  表达式：{e^x}^2</span><br><span class="line"></span><br><span class="line">#平方根</span><br><span class="line">平方根命令为：\sqrt，n 次方根相应地为: \sqrt[n]</span><br><span class="line"></span><br><span class="line">x开根号  表达式：\sqrt{x} </span><br><span class="line">x开三次方根  表达式：\sqrt[3]{x} </span><br><span class="line">对x平方+根号y在开平方：表达式\sqrt{x^{2}+ \sqrt{y}}</span><br><span class="line"></span><br><span class="line">#分数</span><br><span class="line">分数使用\frac{a}{b} 排版,a是分子，b是分母</span><br><span class="line">例子如下：</span><br><span class="line">\frac{x^2}{k+1}</span><br><span class="line">x^{\frac{2}{k+1}}</span><br><span class="line">x^{1/2}</span><br><span class="line"></span><br><span class="line">#向量</span><br><span class="line">向量由\vec 得到。另两个命令\overrightarrow 和\overleftarrow在定义从A 到B 的向量</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#求和运算符</span><br><span class="line">求和运算符由\sum 生成</span><br><span class="line">\sum_{i=1}^{n}</span><br><span class="line"></span><br><span class="line">#数学运算符</span><br><span class="line">大于：&gt;  小于：&lt;  小于等于：\le  大于等于：\ge  不等于：\ne  双波浪线：\approx  单波浪线：\sim  子集：\subseteq  属于：\in  不属于：\notin  乘号：\times  除号：\div  加减号：\pm  右双箭头\Rightarrow 右单箭头：\rightarrow  无穷大：\infty   角度斜度\angle </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#常用小写希腊字母</span><br><span class="line">\alpha \beta \gamma \sigma \omega \delta \pi \rho \epsilon \eta \lambda \mu \xi \tau \kappa \zeta \phi \chi</span><br><span class="line"></span><br><span class="line">e^{2}\neq</span><br><span class="line"></span><br><span class="line">#小括号</span><br><span class="line">空格式：\left (  \right )</span><br><span class="line">效果：()</span><br><span class="line">有数据的括号格式：\left ( 123,45 \right )</span><br><span class="line">效果：(123,45)</span><br><span class="line">#中括号</span><br><span class="line">空格式：\left [  \right ]</span><br><span class="line">效果：[]</span><br><span class="line">有数据的括号格式：\left [ 3,5,9 \right ]</span><br><span class="line">效果：[3,5,9]</span><br><span class="line"></span><br><span class="line">#尖括号</span><br><span class="line">空数据格式：\left \langle  \right \rangle</span><br><span class="line">&lt;&gt;</span><br><span class="line">有数据格式：\left \langle 3,4 \right \rangle</span><br><span class="line">&lt;3,4&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#水平线</span><br><span class="line">使用 \overline 和 \underline 在表达式的上、下方画出水平线</span><br><span class="line">\overline{lindexi.oschina.io}+\underline{lindexi.github.io}</span><br><span class="line"></span><br><span class="line">#上大括号</span><br><span class="line">使用\overbrace 和 \underbrace 可以在表达式上方、下方添加花括号</span><br><span class="line"></span><br><span class="line">\overbrace{blog.csdn.net/lindexi_gd}_{lindexi} + \underbrace{lindexi.github.io}_{doubi}</span><br><span class="line"></span><br><span class="line">#三角函数</span><br><span class="line">\sin\theta </span><br><span class="line">\cos\theta </span><br><span class="line">\tan\theta </span><br><span class="line">\cot \theta</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="katex前端展示latex数学公式效果"><a class="markdownIt-Anchor" href="#katex前端展示latex数学公式效果"></a> katex前端展示latex数学公式效果</h2>
+	
+	</div>
+  <a type="button" href="/posts/6d4d.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/cbad.html" >EOP 脱壳常用方法</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2020-07-01  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="0x1-oep"><a class="markdownIt-Anchor" href="#0x1-oep"></a> 0X1 OEP</h1>
+<hr>
+<p>OEP：(Original Entry Point)，程序的入口点，软件加壳就是隐藏了OEP（或者用了假的OEP）， 只要我们找到程序真正的OEP，就可以立刻脱壳。</p>
+<p>PUSHAD （压栈） 代表程序的入口点</p>
+<p>POPAD （出栈） 代表程序的出口点</p>
+<p>POPAD与PUSHAD相对应，一般找到这个OEP就在附近啦。</p>
+<h1 id="0x2-常见寻找oep脱壳的方法"><a class="markdownIt-Anchor" href="#0x2-常见寻找oep脱壳的方法"></a> 0x2 常见寻找OEP脱壳的方法</h1>
+<hr>
+<h2 id="方法一"><a class="markdownIt-Anchor" href="#方法一"></a> 方法一：</h2>
+<p>1.用OD载入，不分析代码！</p>
+	
+
+	</div>
+  <a type="button" href="/posts/cbad.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="0x1-oep"><a class="markdownIt-Anchor" href="#0x1-oep"></a> 0X1 OEP</h1>
+<hr>
+<p>OEP：(Original Entry Point)，程序的入口点，软件加壳就是隐藏了OEP（或者用了假的OEP）， 只要我们找到程序真正的OEP，就可以立刻脱壳。</p>
+<p>PUSHAD （压栈） 代表程序的入口点</p>
+<p>POPAD （出栈） 代表程序的出口点</p>
+<p>POPAD与PUSHAD相对应，一般找到这个OEP就在附近啦。</p>
+<h1 id="0x2-常见寻找oep脱壳的方法"><a class="markdownIt-Anchor" href="#0x2-常见寻找oep脱壳的方法"></a> 0x2 常见寻找OEP脱壳的方法</h1>
+<hr>
+<h2 id="方法一"><a class="markdownIt-Anchor" href="#方法一"></a> 方法一：</h2>
+<p>1.用OD载入，不分析代码！</p>
+	
+	</div>
+  <a type="button" href="/posts/cbad.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/3763.html" >获取Windosw系统信息批处理脚本</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2020-06-17  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<figure class="highlight bat"><table><tbody><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> System Information &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">systeminfo | <span class="built_in">findstr</span> /B /C:"OS" &gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> Hostname &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">hostname &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> Users&gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">net</span> users &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> Route table &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">route <span class="built_in">print</span> &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> Netstat INformation&gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">netstat -ano &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> Firewall State &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">netsh firewall show state &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> Firewall configuration &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">netsh firewall show config &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> Scheduled tasks &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">schtasks /query /fo LIST /v &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> tasklist &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">tasklist /SVC &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> <span class="built_in">net</span> <span class="built_in">start</span> &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">net</span> <span class="built_in">start</span> &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> driverquery &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">DRIVERQUERY &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> Wmic hotfix &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> reg queries - elavated &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> reg queries - elavated &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">sc qc Spooler &gt;&gt; System_Details.txt</span><br><span class="line">accesschk.exe -ucqv Spooler &gt;&gt; System_Details.txt</span><br><span class="line">accesschk.exe -uwcqv "Authenticated Users" * &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> upnhosts - elavated &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">sc qc upnphost &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> End of Script &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br></pre></td></tr></tbody></table></figure>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	
+
+	</div>
+  <a type="button" href="/posts/3763.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<figure class="highlight bat"><table><tbody><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> System Information &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">systeminfo | <span class="built_in">findstr</span> /B /C:"OS" &gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> Hostname &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">hostname &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> Users&gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">net</span> users &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> Route table &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">route <span class="built_in">print</span> &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> Netstat INformation&gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">netstat -ano &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> Firewall State &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">netsh firewall show state &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> Firewall configuration &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">netsh firewall show config &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> Scheduled tasks &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">schtasks /query /fo LIST /v &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> tasklist &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">tasklist /SVC &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> <span class="built_in">net</span> <span class="built_in">start</span> &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">net</span> <span class="built_in">start</span> &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> driverquery &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">DRIVERQUERY &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> Wmic hotfix &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">wmic qfe get Caption,Description,HotFixID,InstalledOn &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> reg queries - elavated &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> reg queries - elavated &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">sc qc Spooler &gt;&gt; System_Details.txt</span><br><span class="line">accesschk.exe -ucqv Spooler &gt;&gt; System_Details.txt</span><br><span class="line">accesschk.exe -uwcqv "Authenticated Users" * &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> upnhosts - elavated &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line">sc qc upnphost &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> End of Script &gt;&gt; System_Details.txt</span><br><span class="line"><span class="built_in">echo</span> --------------------------------------------------------------------------------------------------- &gt;&gt; System_Details.txt</span><br></pre></td></tr></tbody></table></figure>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	
+	</div>
+  <a type="button" href="/posts/3763.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/posts/7060.html" >VS Code edit background</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2020-05-29  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>  今天用VS Code 写代码，感觉背景有点单调，所以决定美化一下（美名其曰美化，其实是偷偷摸鱼），网上大部分教程都是使用background插件来自定义vscode的背景图，这种方法需要在配置文件中配置一下，但是折腾完了发现这个方法不是很对我的胃口。</p>
+<p>​	 这是在使用过程中出现的一些问题：</p>
+<ol>
+<li>在VS Code窗口右下角会有警告提示，虽然可以手动关闭，但是我不喜欢。</li>
+<li>背景图只能覆盖代码区，左侧菜单区是不能覆盖的。</li>
+<li>VS Code更新后，配置文件setting.json下修改的适应背景的配置代码会消失。</li>
+</ol>
+<p>  感兴趣的小伙伴可以去百度一下教程，我在这里就不在赘述了，这里着重介绍第二种方法：修改一下vscode的源css文件。</p>
+<p>**ps：**background插件在删除的时候，会自动删除添加的样式（依赖node环境）。<br>
+如果没有node环境，需要在 settings.json 中设置 {“background.enabled”: false} ，然后再删除插件。如果直接删除插件会有遗留，就需要重装vscode了。</p>
+<p>这里先把效果图放一下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200529162132.png" alt></p>
+<h1 id="如何实现"><a class="markdownIt-Anchor" href="#如何实现"></a> 如何实现</h1>
+<ol>
+<li>
+<p>进入VS Code的源文件下面，找到 workbench.desktop.main.css 文件，文件地址  E:\Microsoft VS Code\resources\app\out\vs\workbench  （我的VS Code安装在E盘下）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/J(OZ_WI@QE67%7BAU)59~7RZW.png" alt="img"></p>
+</li>
+<li>
+<p>任意的编译器打开workbench.desktop.main.css 文件，可以插入源代码中，也可以直接写在末尾位置，添加body{}，这一步也就是在css中写入配置文件，修改添加到背景的图片的相关信息，代码如下：</p>
+<figure class="highlight css"><table><tbody><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> {</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">11px</span>;</span><br><span class="line">  user-select: none;</span><br><span class="line">  <span class="attribute">pointer-events</span>: auto;</span><br><span class="line">  <span class="attribute">background-size</span>: cover;    //详见说明</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0.75</span>;             //透明度修改，注意这里图片和代码文字都能会被透明度影响</span><br><span class="line">  <span class="attribute">background-position</span>: <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">"file:///F:/picture/wallpaper/cartoon/大姐姐.png"</span>);</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">z-index</span>: <span class="number">99999</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+	
+
+	</div>
+  <a type="button" href="/posts/7060.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>  今天用VS Code 写代码，感觉背景有点单调，所以决定美化一下（美名其曰美化，其实是偷偷摸鱼），网上大部分教程都是使用background插件来自定义vscode的背景图，这种方法需要在配置文件中配置一下，但是折腾完了发现这个方法不是很对我的胃口。</p>
+<p>​	 这是在使用过程中出现的一些问题：</p>
+<ol>
+<li>在VS Code窗口右下角会有警告提示，虽然可以手动关闭，但是我不喜欢。</li>
+<li>背景图只能覆盖代码区，左侧菜单区是不能覆盖的。</li>
+<li>VS Code更新后，配置文件setting.json下修改的适应背景的配置代码会消失。</li>
+</ol>
+<p>  感兴趣的小伙伴可以去百度一下教程，我在这里就不在赘述了，这里着重介绍第二种方法：修改一下vscode的源css文件。</p>
+<p>**ps：**background插件在删除的时候，会自动删除添加的样式（依赖node环境）。<br>
+如果没有node环境，需要在 settings.json 中设置 {“background.enabled”: false} ，然后再删除插件。如果直接删除插件会有遗留，就需要重装vscode了。</p>
+<p>这里先把效果图放一下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200529162132.png" alt></p>
+<h1 id="如何实现"><a class="markdownIt-Anchor" href="#如何实现"></a> 如何实现</h1>
+<ol>
+<li>
+<p>进入VS Code的源文件下面，找到 workbench.desktop.main.css 文件，文件地址  E:\Microsoft VS Code\resources\app\out\vs\workbench  （我的VS Code安装在E盘下）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/J(OZ_WI@QE67%7BAU)59~7RZW.png" alt="img"></p>
+</li>
+<li>
+<p>任意的编译器打开workbench.desktop.main.css 文件，可以插入源代码中，也可以直接写在末尾位置，添加body{}，这一步也就是在css中写入配置文件，修改添加到背景的图片的相关信息，代码如下：</p>
+<figure class="highlight css"><table><tbody><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> {</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">11px</span>;</span><br><span class="line">  user-select: none;</span><br><span class="line">  <span class="attribute">pointer-events</span>: auto;</span><br><span class="line">  <span class="attribute">background-size</span>: cover;    //详见说明</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0.75</span>;             //透明度修改，注意这里图片和代码文字都能会被透明度影响</span><br><span class="line">  <span class="attribute">background-position</span>: <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">"file:///F:/picture/wallpaper/cartoon/大姐姐.png"</span>);</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">z-index</span>: <span class="number">99999</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+	
+	</div>
+  <a type="button" href="/posts/7060.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+
+   
+    
+           <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>上一页</a>
+        
+
+        <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+ 
+       <a href="/page/2/" type="button" class="btn btn-default ">下一页<i class="fa fa-arrow-circle-o-right"></i></a>     
+        
+
+  
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>分类</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Algorithm/">Algorithm<span>2</span></a></li>
+		
+			<li><a href="/categories/Blog/">Blog<span>1</span></a></li>
+		
+			<li><a href="/categories/PWN/">PWN<span>1</span></a></li>
+		
+			<li><a href="/categories/Reverse/">Reverse<span>5</span></a></li>
+		
+			<li><a href="/categories/System/">System<span>1</span></a></li>
+		
+			<li><a href="/categories/kernel/">kernel<span>6</span></a></li>
+		
+			<li><a href="/categories/language/">language<span>13</span></a></li>
+		
+			<li><a href="/categories/tools/">tools<span>4</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>标签云</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/get/">get<span>2</span></a></li>
+		
+			<li><a href="/tags/LaTex/">LaTex<span>1</span></a></li>
+		
+			<li><a href="/tags/Data-Structure/">Data Structure<span>2</span></a></li>
+		
+			<li><a href="/tags/matery/">matery<span>1</span></a></li>
+		
+			<li><a href="/tags/C/">C++<span>12</span></a></li>
+		
+			<li><a href="/tags/kernel-programm/">kernel programm<span>6</span></a></li>
+		
+			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/Shelling-method/">Shelling method<span>1</span></a></li>
+		
+			<li><a href="/tags/Markdown/">Markdown<span>1</span></a></li>
+		
+			<li><a href="/tags/Reverse/">Reverse<span>3</span></a></li>
+		
+			<li><a href="/tags/VS-Code/">VS Code<span>1</span></a></li>
+		
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>最新文章</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/posts/d40c.html" ><i class="fa fa-file-o"></i>微信电脑版多开、防撤回破解</a>
+      </li>
+    
+      <li>
+        <a href="/posts/aecd.html" ><i class="fa fa-file-o"></i>注册表</a>
+      </li>
+    
+      <li>
+        <a href="/posts/d839.html" ><i class="fa fa-file-o"></i>对象与句柄</a>
+      </li>
+    
+      <li>
+        <a href="/posts/16c1.html" ><i class="fa fa-file-o"></i>C/C++ volatile</a>
+      </li>
+    
+      <li>
+        <a href="/posts/9fa6.html" ><i class="fa fa-file-o"></i>内存分配</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+			
+<div class="widget">
+	<h4>链接</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li><i class="false"></i><a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" title="" target="_blank"]);">hexo-theme-bithack</a></li>
+	
+	</ul>
+</div>
+
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2022 Heisenberg Lee's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'tlhg.top' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
+   </html>

@@ -1,0 +1,381 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>自旋锁 | tlhg&#39;s Blog|</title>
+  <meta name="author" content="Heisenberg Lee">
+  
+  <meta name="description" content="学习记录。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="自旋锁"/>
+  <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="tlhg's Blog|" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">tlhg&#39;s Blog|</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 自旋锁</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="自旋锁"><a class="markdownIt-Anchor" href="#自旋锁"></a> 自旋锁</h1>
+<p>自旋锁是内核中提供的一种高IRQL锁，用同步以及独占的方式访问某个资源。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">KSPIN_LOCK my_spin_lock;</span><br><span class="line">KeInitializeSpinLock(&amp;my_spin_lock); <span class="comment">//函数无返回值</span></span><br></pre></td></tr></tbody></table></figure>
+<p>自旋锁的使用方法：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">KIRQL irql;		<span class="comment">//KIRQL是一个中断级</span></span><br><span class="line">KeAcquireSpinLock(&amp;my_spin_lock,&amp;irql);</span><br><span class="line"><span class="comment">// To do something ...</span></span><br><span class="line">KeReleaseSpinLock(&amp;my_spin_lock,irql);</span><br></pre></td></tr></tbody></table></figure>
+<p>KeAcquireSpinLock 和 KeReleaseSpinLock 之间的代码是只有单线程执行的，其他的线程会停留在 KeAcquireSpinLock 等候，直到 KeReleaseSpinLock 被调用。换句话说，只有一个线程能够获得自旋锁。</p>
+<p><strong>注意</strong>： 锁一般不会定义成局部变量，可以使用静态变量、全局变量，或者分配在池（POOL）中。因为每个线程来执行的时候都会重新初始化一个锁。只有所有的线程共用一个锁，锁才有意义。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/*正确使用自旋锁的例子*/</span></span><br><span class="line">KSPIN_LOCK my_spin_lock = {<span class="number">0</span>};</span><br><span class="line">Void <span class="title function_">InitSpinLock</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">    KeInitializeSpinLock(&amp;my_spin_lock);</span><br><span class="line">}</span><br><span class="line">Void <span class="title function_">MySafeFunction</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">    KIRQL irql;</span><br><span class="line">    KeAcquireSpinlock(&amp;my_spin_lock,&amp;irql);</span><br><span class="line">    <span class="comment">// To do something...</span></span><br><span class="line">    KeRealeaseSpinLock(&amp;my_spin_lock,irql);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="双向链表自旋锁"><a class="markdownIt-Anchor" href="#双向链表自旋锁"></a> 双向链表自旋锁</h1>
+<p>在双向链表中使用自旋锁的目的是保证多线程安全。在操作链表之前，调用KeAcquireSpinLock 来获取锁，在操作完成之后，调用 KeReleaseSpinLock 来释放锁。</p>
+<p>链表中初始化自旋锁。LIST_ENTRY有一系列操作，这些操作并不需要使用者自己调用获取与释放锁，只需要为每个链表定义并初始化一个锁即可。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">FILE_INFO</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    LIST_ENTRY m_ListEntry;</span><br><span class="line">    WCHAR m_strFileName[<span class="number">260</span>];</span><br><span class="line">    <span class="comment">// other member</span></span><br><span class="line">}FILE_INFO, *PFLIE_INFO;</span><br><span class="line"></span><br><span class="line">LIST_ENTRY my_list_head; <span class="comment">//链表头</span></span><br><span class="line">KSPIN_LOCK my_list_lock; <span class="comment">//链表的值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">MyFileInforInit</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">    InitializeListHead(&amp;my_list_head);</span><br><span class="line">    KeInitalizeSpinLock(&amp;my_list_lock);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>正常情况下链表插入一个节点：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">FILE_INFO my_file_infor={<span class="number">0</span>};</span><br><span class="line"><span class="comment">// 对 my_file_infor 进行初始化</span></span><br><span class="line"> InsertHeadList(&amp;my_list_head,(PLIST_ENTRY)&amp; my_file_infor);</span><br></pre></td></tr></tbody></table></figure>
+<p>加锁的情况下链表插入一个节点：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">ExInterlockInsertHeadList(</span><br><span class="line">	&amp;my_list_head,</span><br><span class="line">    (PLIST_ENTRY)&amp; my_file_infor,</span><br><span class="line">    &amp;my_list_lock</span><br><span class="line">);</span><br></pre></td></tr></tbody></table></figure>
+<p>加锁的情况下链表移除一个节点：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">PLSIT_ENTRY pRemoveEntry = <span class="literal">NULL</span>;</span><br><span class="line">pRemoveEntry = ExInterlockInsertHeadList(</span><br><span class="line">	&amp;my_list_head,</span><br><span class="line">    &amp;my_list_lock</span><br><span class="line">);</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>注意</strong>: 锁一般不会定义成局部变量。可以使用静态变量、全局变量，或者分配在堆中。</p>
+<h1 id="队列自旋锁"><a class="markdownIt-Anchor" href="#队列自旋锁"></a> 队列自旋锁</h1>
+<p>队列自旋锁遵守“谁先等待，谁先获取自旋锁”的原则。其过程和队列的“First inFirst out”特点非常类似，正是由于这个原因，这种自旋锁被称为“队列自旋锁”。</p>
+<p>队列自旋锁的获取和释放</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">VOID <span class="title function_">KeAcquireInStackQueueSpinlock</span><span class="params">(</span></span><br><span class="line"><span class="params">    IN PKSPIN_LOCK SpinLock,</span></span><br><span class="line"><span class="params">	IN PKSPIN_QUEUE_HANDLE LockHandle</span></span><br><span class="line"><span class="params">)</span>;</span><br><span class="line"></span><br><span class="line">VOID <span class="title function_">KeReleaseInStackQueueSpinLock</span><span class="params">(</span></span><br><span class="line"><span class="params">	IN PKLOCK_QUEUE_HANDLE LockHandle</span></span><br><span class="line"><span class="params">)</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>队列自旋锁初始化</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">KSPIN_LOCK my_Queue_SpinLock = {<span class="number">0</span>};</span><br><span class="line">KeInitializeSpinLock( &amp;my_Queue_SpinLock );</span><br></pre></td></tr></tbody></table></figure>
+<p>队列自旋锁的获取和释放</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">KLOCK_QUEUE_HANDLE my_lock_queue_handle;</span><br><span class="line">KeAcquireInStackQueuedSpinLock(&amp;my_Queue_SpinLock,&amp;my_lock_queue_handle )；<span class="comment">//do something</span></span><br><span class="line">KeReleaseInStackQueueSpinLock( &amp;my_Queue_SpinLock );</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>注意</strong>：</p>
+<ol>
+<li>队列自旋锁的使用增加了一个 KLOCK_QUEUE_HANDLE 数据结构，这个数据结构唯一地表示一个队列自旋锁。</li>
+<li>普通自旋锁和队列自旋锁虽然都是使用 KeInitializeSpinLock 函数来初始化的，但是对于一个初始化后的自旋锁，要么按普通自旋锁方式来使用，要么按队列自旋锁方式来使用，绝对不能混用。</li>
+</ol>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/posts/e3da.html" class="leancloud-visitors view" data-flag-title="自旋锁">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/posts/9fa6.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/posts/2587.html" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"AA9eNAftQgfjEcK3l0j71rDS-gzGzoHsz","appKey":"E1r06kyXdl3RxWbXxaUQ6tPg","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2021-02-02 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/kernel/">kernel<span>6</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/kernel-programm/">kernel programm<span>6</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2022 Heisenberg Lee's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'tlhg.top' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
+   </html>

@@ -1,0 +1,393 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>LIST_ENTRY | tlhg&#39;s Blog|</title>
+  <meta name="author" content="Heisenberg Lee">
+  
+  <meta name="description" content="学习记录。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="LIST_ENTRY"/>
+  <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="tlhg's Blog|" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">tlhg&#39;s Blog|</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> LIST_ENTRY</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="链表的定义"><a class="markdownIt-Anchor" href="#链表的定义"></a> 链表的定义：</h1>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">LIST_ENTRY</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">LIST_ENTRY</span> *<span class="title">Flink</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">LIST_ENTRY</span> *<span class="title">Blink</span>;</span></span><br><span class="line">}LIST_ENTRY, *PLIST_ENTRY;</span><br></pre></td></tr></tbody></table></figure>
+<p>LIST_ENTRY表示一个链表的节点，其中Flink成员指向当前节点的后一个节点，Blink成员指向当前节点的前一个节点。</p>
+<p>链表的使用：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">TestListEntry</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    ULONG m_ulDataA;</span><br><span class="line">    ULONG m_ulDataB;</span><br><span class="line">    LIST_ENTRY m_ListEntry;</span><br><span class="line">    <span class="comment">/*双向链表节点的结构，m_ListEntry可以放在结构体的任意位置*/</span></span><br><span class="line">    ULONG m_ulDataC;</span><br><span class="line">    ULONG m_ulDataD;</span><br><span class="line">}TestListEntry, *PTestListEntry;</span><br></pre></td></tr></tbody></table></figure>
+<p>m_ulDataA成员处于最低地址，m_ulDataD处于最高地址，而链表节点LIST_ENTRY的两个成员展开后在结构体中分别为Flink与Blink，其中Flink处于低地址，Blink处于高地址。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20210202175751.jpg" alt="内存布局"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20210202175817.jpg" alt="节点的关系"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20210202180503.jpg" alt="包含头结点"></p>
+<h1 id="头结点初始化"><a class="markdownIt-Anchor" href="#头结点初始化"></a> 头结点初始化</h1>
+<p>头结点的定义和初始化</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">LIST_ENTRAY ListHeader = {<span class="number">0</span>};</span><br><span class="line">InitializeListHeader(&amp;ListHeader);</span><br></pre></td></tr></tbody></table></figure>
+<p>InitializeListHead函数，函数只有一个参数ListHead，表示需要被初始化的头节点</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">VOID <span class="title function_">InitializeListHead</span><span class="params">(_Out_PLIST_ENTRAY ListHead)</span></span><br><span class="line">{</span><br><span class="line">    ListHeader-&gt;Flink = ListHeader-&gt;Blink = listHead;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>当只存在头结点的时候，没有其他节点时，这个链表就是一个空链表，用 IsListEmpty 可以判断一个链表是否为空，IsListEmpty返回TRUE表示链表为空链表，返回FALSE表示链表非空。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">BOOLEAN　<span class="title function_">IslistEmpty</span><span class="params">(const_LIST_ENTRY *ListHead )</span>；</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="节点插入"><a class="markdownIt-Anchor" href="#节点插入"></a> 节点插入</h1>
+<p>InsertHeadList函数的作用是把一个节点插入到链表的第一个位置</p>
+<p>InsertTailList函数的作用是把一个节点插入到链表的最后一个位置</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">VOID <span class="title function_">InsertHeadList</span><span class="params">(PLIST_ENTRY ListHead, PLSIT_ENTRY Entry)</span>;</span><br><span class="line">VOID <span class="title function_">InsertTailList</span><span class="params">(PLIST_ENTRY ListHead, PLSIT_ENTRY Entry)</span>;</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="链表的遍历"><a class="markdownIt-Anchor" href="#链表的遍历"></a> 链表的遍历</h1>
+<p>链表遍历可以通过Flink指针从前往后遍历，也可以通过Blink从后往前遍历。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">PLIST_ENTRY pListEntry = <span class="literal">NULL</span>;</span><br><span class="line">plistEntry = ListHeader.Flink;</span><br><span class="line"><span class="keyword">while</span>(pListEntry!=&amp;ListHeader)</span><br><span class="line">{</span><br><span class="line">    PTestListEntray pTestEntry = CONTINING_RECORD (pListEntry,TestListEntry,m_ListEntry );</span><br><span class="line">    Dbgprint(<span class="string">"ListPtr = %p，Entry = %p,Tag = %c\n"</span>,pListEntry,pTestEntry,(CHAR)pTestEntry-&gt;m_ulDataA);</span><br><span class="line">    PListEntry=pTestEntry-&gt;Flink;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>pTestEntry指针的获取:</p>
+<p>在while循环块中，是通过pListEntry指针进行遍历的，而pListEntry指向的地址是TestListEntry结构体中的m_ListEntry地址，而m_ListEntry成员的地址并不是这个结构体的首地址，所以这里需要通过一个宏CONTAINING_RECORD把m_ListEntry的地址转换成结构体TestListEntry的首地址.</p>
+<p>CONTAINING_RECORD宏的用法:</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">PCHAR <span class="title function_">CONTAINING_RECORD</span><span class="params">(PCHAR Address,TYPE Type,PCHAR Field)</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>Address表示LIST_ENTRY的地址，在本例中，就是pListEntry指向的地址</p>
+<p>Type表示类型，在本例中为TestListEntry</p>
+<p>Field表示结构体中LIST_ENTRY成员的名字，在本例中为m_ListEntry。</p>
+<p>CONTAINING_RECORD宏通过Type与Field这两个成员，计算出Field成员距离结构体顶部的内存距离，然后结合具体的Address成员，算出最终的结构体首地址。</p>
+<h1 id="节点移除"><a class="markdownIt-Anchor" href="#节点移除"></a> 节点移除</h1>
+<ol>
+<li>
+<p>移除链表中第一个节点与最后一个节点分别使用RemoveHeadList以及RemoveTailList函数。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">PLIST_ENTRY <span class="title function_">RemoveHeadList</span><span class="params">(PLIST_ENTRY ListHead)</span>;</span><br><span class="line">PLIST_ENTRY <span class="title function_">RemoveTailList</span><span class="params">(PLIST_ENTRY ListHead)</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>函数仅有一个参数，表示所需要移除的链表头节点指针，这两个函数的返回值均为PLIST_ENTRY，成功移除则返回从链表移除的节点指针，如果无节点可以移除（如链表为空）则返回NULL。</p>
+</li>
+<li>
+<p>移除某个特定节点，即可使用RemoveEntryList函数。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">BOOLEAN <span class="title function_">RemoveEntryList</span><span class="params">(PLSIT_ENTRY Entry)</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>Entry表示需要移除的链表节点指针，RemoveEntryList函数的返回值类型为BOOLEAN，节点被移除后，若链表变为空链表，RemoveEntryList返回TRUE，否则返回FALSE。</p>
+</li>
+</ol>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/posts/2587.html" class="leancloud-visitors view" data-flag-title="LIST_ENTRY">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/posts/e3da.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/posts/b83c.html" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"AA9eNAftQgfjEcK3l0j71rDS-gzGzoHsz","appKey":"E1r06kyXdl3RxWbXxaUQ6tPg","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2021-02-02 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/kernel/">kernel<span>6</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/kernel-programm/">kernel programm<span>6</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2022 Heisenberg Lee's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'tlhg.top' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
+   </html>

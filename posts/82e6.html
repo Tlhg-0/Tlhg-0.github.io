@@ -1,0 +1,544 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>线性表 | tlhg&#39;s Blog|</title>
+  <meta name="author" content="Heisenberg Lee">
+  
+  <meta name="description" content="学习记录。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="线性表"/>
+  <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="tlhg's Blog|" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">tlhg&#39;s Blog|</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 线性表</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="顺序表"><a class="markdownIt-Anchor" href="#顺序表"></a> 顺序表</h1>
+<h2 id="顺序表初始化"><a class="markdownIt-Anchor" href="#顺序表初始化"></a> 顺序表初始化</h2>
+<p><strong>定义数据表</strong></p>
+<ul>
+<li>
+<p>顺序表申请的存储容量；</p>
+</li>
+<li>
+<p>顺序表的长度，也就是表中存储数据元素的个数；</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Table</span>{</span></span><br><span class="line">    <span class="type">int</span> * head;<span class="comment">//声明了一个名为head的长度不确定的数组，也叫“动态数组”</span></span><br><span class="line">    <span class="type">int</span> length;<span class="comment">//记录当前顺序表的长度</span></span><br><span class="line">    <span class="type">int</span> size;<span class="comment">//记录顺序表分配的存储容量</span></span><br><span class="line">}table;</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>注意：head 是我们声明的一个未初始化的动态数组，不要只把它看做是普通的指针。</p>
+<p><strong>数据表的初始化</strong></p>
+<ul>
+<li>
+<p>给 head 动态数据申请足够大小的物理空间；</p>
+</li>
+<li>
+<p>给 size 和 length 赋初值；</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> Size 5 <span class="comment">//对Size进行宏定义，表示顺序表申请空间的大小</span></span></span><br><span class="line">table <span class="title function_">initTable</span><span class="params">()</span>{</span><br><span class="line">    table t;</span><br><span class="line">    t.head=(<span class="type">int</span>*)<span class="built_in">malloc</span>(Size*<span class="keyword">sizeof</span>(<span class="type">int</span>));<span class="comment">//构造一个空的顺序表，动态申请存储空间</span></span><br><span class="line">    <span class="keyword">if</span> (!t.head) <span class="comment">//如果申请失败，作出提示并直接退出程序</span></span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"初始化失败"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    }</span><br><span class="line">    t.length=<span class="number">0</span>;<span class="comment">//空表的长度初始化为0</span></span><br><span class="line">    t.size=Size;<span class="comment">//空表的初始存储空间为Size</span></span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>顺序表初始化的过程被封装到了一个函数中，此函数返回值是一个已经初始化完成的顺序表。这样做的好处是增加了代码的可用性，也更加美观。</p>
+<h2 id="顺序表的基本操作"><a class="markdownIt-Anchor" href="#顺序表的基本操作"></a> 顺序表的基本操作</h2>
+<p><strong>顺序表插入元素</strong></p>
+<p>向已有顺序表中插入数据元素，根据插入位置的不同，可分为以下 3 种情况：</p>
+<ol>
+<li>
+<p>插入到顺序表的表头；</p>
+</li>
+<li>
+<p>在表的中间位置插入元素；</p>
+</li>
+<li>
+<p>尾随顺序表中已有元素，作为顺序表中的最后一个元素；</p>
+</li>
+</ol>
+<p>插入的步骤：</p>
+<ol>
+<li>
+<p>将要插入位置元素以及后续的元素整体向后移动一个位置；</p>
+</li>
+<li>
+<p>将元素放到腾出来的位置上；</p>
+</li>
+</ol>
+<p>顺序表插入数据元素的 C 语言实现代码如下：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//插入函数，其中，elem为插入的元素，add为插入到顺序表的位置</span></span><br><span class="line">table <span class="title function_">addTable</span><span class="params">(table t,<span class="type">int</span> elem,<span class="type">int</span> add)</span></span><br><span class="line">{</span><br><span class="line">    <span class="comment">//判断插入本身是否存在问题（如果插入元素位置比整张表的长度+1还大（如果相等，是尾随的情况），或者插入的位置本身不存在，程序作为提示并自动退出）</span></span><br><span class="line">    <span class="keyword">if</span> (add&gt;t.length+<span class="number">1</span>||add&lt;<span class="number">1</span>) {</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"插入位置有问题\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//做插入操作时，首先需要看顺序表是否有多余的存储空间提供给插入的元素，如果没有，需要申请</span></span><br><span class="line">    <span class="keyword">if</span> (t.length==t.size) {</span><br><span class="line">        t.head=(<span class="type">int</span> *)<span class="built_in">realloc</span>(t.head, (t.size+<span class="number">1</span>)*<span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">        <span class="keyword">if</span> (!t.head) {</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"存储分配失败\n"</span>);</span><br><span class="line">            <span class="keyword">return</span> t;</span><br><span class="line">        }</span><br><span class="line">        t.size+=<span class="number">1</span>;</span><br><span class="line">    } </span><br><span class="line">    <span class="comment">//插入操作，需要将从插入位置开始的后续元素，逐个后移</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=t.length<span class="number">-1</span>; i&gt;=add<span class="number">-1</span>; i--) {</span><br><span class="line">        t.head[i+<span class="number">1</span>]=t.head[i];</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//后移完成后，直接将所需插入元素，添加到顺序表的相应位置</span></span><br><span class="line">    t.head[add<span class="number">-1</span>]=elem;</span><br><span class="line">    <span class="comment">//由于添加了元素，所以长度+1</span></span><br><span class="line">    t.length++;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>注意，动态数组额外申请更多物理空间使用的是 realloc 函数。并且，在实现后续元素整体后移的过程，目标位置其实是有数据的，还是 3，只是下一步新插入元素时会把旧元素直接覆盖。</p>
+<p><strong>顺序表删除元素</strong></p>
+<p>删除的步骤：</p>
+<p>找到目标元素，并将其后续所有元素整体前移 1 个位置即可。</p>
+<p>顺序表删除元素的 C 语言实现代码为：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">table <span class="title function_">delTable</span><span class="params">(table t,<span class="type">int</span> add)</span>{</span><br><span class="line">    <span class="keyword">if</span> (add&gt;t.length || add&lt;<span class="number">1</span>) {</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"被删除元素的位置有误\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//删除操作</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=add; i&lt;t.length; i++) {</span><br><span class="line"></span><br><span class="line">        t.head[i<span class="number">-1</span>]=t.head[i];</span><br><span class="line">    }</span><br><span class="line">    t.length--;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p><strong>顺序表查找元素</strong></p>
+<p>方法：顺序查找法</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//查找函数，其中，elem表示要查找的数据元素的值</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">selectTable</span><span class="params">(table t,<span class="type">int</span> elem)</span>{</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;t.length; i++) {</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (t.head[i]==elem) {</span><br><span class="line">            <span class="keyword">return</span> i+<span class="number">1</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//如果查找失败，返回-1</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>顺序表更改元素</strong></p>
+<p>顺序表更改元素的步骤是：</p>
+<ol>
+<li>
+<p>找到目标元素；</p>
+</li>
+<li>
+<p>直接修改该元素的值；</p>
+</li>
+</ol>
+<p>顺序表更改元素的 C 语言实现代码为：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//更改函数，其中，elem为要更改的元素，newElem为新的数据元素</span></span><br><span class="line">table <span class="title function_">amendTable</span><span class="params">(table t,<span class="type">int</span> elem,<span class="type">int</span> newElem)</span>{</span><br><span class="line">    <span class="type">int</span> add=selectTable(t, elem);</span><br><span class="line">    t.head[add<span class="number">-1</span>]=newElem;<span class="comment">//由于返回的是元素在顺序表中的位置，所以-1就是该元素在数组中的下标</span></span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="链表"><a class="markdownIt-Anchor" href="#链表"></a> 链表</h1>
+<p>与顺序表不同，链表不限制数据的物理存储状态，换句话说，使用链表存储的数据元素，其物理存储位置是随机的。</p>
+<p>链式存储结构：数据元素随机存储，并通过指针表示数据之间逻辑关系的存储结构</p>
+<h2 id="链表的节点"><a class="markdownIt-Anchor" href="#链表的节点"></a> 链表的节点</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">data</th>
+<th style="text-align:center">point</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">数据域</td>
+<td style="text-align:center">指针域</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>
+<p>数据元素本身，其所在的区域称为数据域；</p>
+</li>
+<li>
+<p>指向直接后继元素的指针，所在的区域称为指针域；</p>
+</li>
+</ol>
+<p>链表中每个节点的具体实现，需要使用 C 语言中的结构体，具体实现代码为：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Link</span>{</span></span><br><span class="line">    <span class="type">char</span> elem; <span class="comment">//代表数据域</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Link</span> * <span class="title">next</span>;</span> <span class="comment">//代表指针域，指向直接后继元素</span></span><br><span class="line">}link; <span class="comment">//link为节点名，每个节点都是一个 link 结构体</span></span><br></pre></td></tr></tbody></table></figure>
+<p><strong>头节点，头指针和首元节点</strong></p>
+<p>一个完整的链表需要由以下几部分构成：</p>
+<p>1.头指针：一个普通的指针，它的特点是永远指向链表第一个节点的位置。很明显，头指针用于指明链表的位置，便于后期找到链表并使用表中的数据；</p>
+<ol>
+<li>节点：链表中的节点又细分为头节点、首元节点和其他节点：</li>
+</ol>
+<ul>
+<li>
+<p>头节点：其实就是一个不存任何数据的空节点，通常作为链表的第一个节点。对于链表来说，头节点不是必须的，它的作用只是为了方便解决某些实际问题；</p>
+</li>
+<li>
+<p>首元节点：由于头节点（也就是空节点）的缘故，链表中称第一个存有数据的节点为首元节点。首元节点只是对链表中第一个存有数据节点的一个称谓，没有实际意义；</p>
+</li>
+<li>
+<p>其他节点：链表中其他的节点；</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025115428.png" alt=""></p>
+<p>##　链表的创建（初始化）</p>
+<p>创建链表的步骤是：</p>
+<ol>
+<li>
+<p>声明一个头指针（如果有必要，可以声明一个头节点）；</p>
+</li>
+<li>
+<p>创建多个存储数据的节点，在创建的过程中，要随时与其前驱节点建立逻辑关系；</p>
+</li>
+</ol>
+<p>例如</p>
+<p>创建一个存储 {1,2,3,4} 且无头节点的链表，C 语言实现代码如下：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">link * <span class="title function_">initLink</span><span class="params">()</span>{</span><br><span class="line">    link * p=<span class="literal">NULL</span>;<span class="comment">//创建头指针</span></span><br><span class="line">    link * temp = (link*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(link));<span class="comment">//创建首元节点</span></span><br><span class="line">    <span class="comment">//首元节点先初始化</span></span><br><span class="line">    temp-&gt;elem = <span class="number">1</span>;</span><br><span class="line">    temp-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    p = temp;<span class="comment">//头指针指向首元节点</span></span><br><span class="line">    <span class="comment">//从第二个节点开始创建</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">2</span>; i&lt;<span class="number">5</span>; i++) {</span><br><span class="line">     <span class="comment">//创建一个新节点并初始化</span></span><br><span class="line">        link *a=(link*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(link));</span><br><span class="line">        a-&gt;elem=i;</span><br><span class="line">        a-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">        <span class="comment">//将temp节点与新建立的a节点建立逻辑关系</span></span><br><span class="line">        temp-&gt;next=a;</span><br><span class="line">        <span class="comment">//指针temp每次都指向新链表的最后一个节点，其实就是 a节点，这里写temp=a也对</span></span><br><span class="line">        temp=temp-&gt;next;</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//返回建立的节点，只返回头指针 p即可，通过头指针即可找到整个链表</span></span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>创建一个存储 {1,2,3,4} 且含头节点的链表，则 C 语言实现代码为：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">link * <span class="title function_">initLink</span><span class="params">()</span>{</span><br><span class="line">    link * p=(link*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(link));<span class="comment">//创建一个头结点</span></span><br><span class="line">    link * temp=p;<span class="comment">//声明一个指针指向头结点，</span></span><br><span class="line">    <span class="comment">//生成链表</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;<span class="number">5</span>; i++) {</span><br><span class="line">        link *a=(link*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(link));</span><br><span class="line">        a-&gt;elem=i;</span><br><span class="line">        a-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">        temp-&gt;next=a;</span><br><span class="line">        temp=temp-&gt;next;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="链表的基本操作"><a class="markdownIt-Anchor" href="#链表的基本操作"></a> 链表的基本操作</h2>
+<p><strong>链表插入元素</strong></p>
+<p>向链表中增添元素，根据添加位置不同，可分为以下 3 种情况：</p>
+<ul>
+<li>
+<p>插入到链表的头部（头节点之后），作为首元节点；</p>
+</li>
+<li>
+<p>插入到链表中间的某个位置；</p>
+</li>
+<li>
+<p>插入到链表的最末端，作为链表中最后一个数据元素；</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20201025140149.png" alt=""></p>
+<p>链表插入元素的步骤：</p>
+<ol>
+<li>
+<p>将新结点的 next 指针指向插入位置后的结点；</p>
+</li>
+<li>
+<p>将插入位置前结点的 next 指针指向插入结点；</p>
+</li>
+</ol>
+<p>注意：链表插入元素的操作必须是先步骤 1，再步骤 2；反之，若先执行步骤 2，除非再添加一个指针，作为插入位置后续链表的头指针，否则会导致插入位置后的这部分链表丢失，无法再实现步骤 1。</p>
+<p>实现链表插入元素的操作：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//p为原链表，elem表示新数据元素，add表示新元素要插入的位置</span></span><br><span class="line">link * <span class="title function_">insertElem</span><span class="params">(link * p, <span class="type">int</span> elem, <span class="type">int</span> add)</span> {</span><br><span class="line">    link * temp = p;<span class="comment">//创建临时结点temp</span></span><br><span class="line">    <span class="comment">//首先找到要插入位置的上一个结点</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; add; i++) {</span><br><span class="line">        temp = temp-&gt;next;</span><br><span class="line">        <span class="keyword">if</span> (temp == <span class="literal">NULL</span>) {</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"插入位置无效\n"</span>);</span><br><span class="line">            <span class="keyword">return</span> p;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//创建插入结点c</span></span><br><span class="line">    link * c = (link*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(link));</span><br><span class="line">    c-&gt;elem = elem;</span><br><span class="line">    <span class="comment">//向链表中插入结点</span></span><br><span class="line">    c-&gt;next = temp-&gt;next;</span><br><span class="line">    temp-&gt;next = c;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p><strong>链表删除元素</strong></p>
+<p>链表删除元素的步骤：</p>
+<ol>
+<li>将结点从链表中摘下来;</li>
+</ol>
+<p>2.手动释放掉结点，回收被结点占用的存储空间;</p>
+<p>链表删除元素的的操作：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">link * delElem(link * p, int add) {</span><br><span class="line">    link * temp = p;</span><br><span class="line">    //遍历到被删除结点的上一个结点</span><br><span class="line">    for (int i = 1; i &lt; add; i++) {</span><br><span class="line">        temp = temp-&gt;next;</span><br><span class="line">        if (temp-&gt;next == NULL) {</span><br><span class="line">            printf("没有该结点\n");</span><br><span class="line">            return p;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    link * del = temp-&gt;next;//单独设置一个指针指向被删除结点，以防丢失</span><br><span class="line">    temp-&gt;next = temp-&gt;next-&gt;next;//删除某个结点的方法就是更改前一个结点的指针域</span><br><span class="line">    free(del);//手动释放该结点，防止内存泄漏</span><br><span class="line">    return p;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>链表查找元素</strong></p>
+<p>步骤：从表头依次遍历表中节点，用被查找元素与各节点数据域中存储的数据元素进行比对，直至比对成功或遍历至链表最末端的 <code>NULL</code>（比对失败的标志）。</p>
+<p>链表中查找特定数据元素的操作：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//p为原链表，elem表示被查找元素、</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">selectElem</span><span class="params">(link * p,<span class="type">int</span> elem)</span>{</span><br><span class="line"><span class="comment">//新建一个指针t，初始化为头指针 p</span></span><br><span class="line">    link * t=p;</span><br><span class="line">    <span class="type">int</span> i=<span class="number">1</span>;</span><br><span class="line">    <span class="comment">//由于头节点的存在，因此while中的判断为t-&gt;next</span></span><br><span class="line">    <span class="keyword">while</span> (t-&gt;next) {</span><br><span class="line">        t=t-&gt;next;</span><br><span class="line">        <span class="keyword">if</span> (t-&gt;elem==elem) {</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        }</span><br><span class="line">        i++;</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//程序执行至此处，表示查找失败</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>注意，遍历有头节点的链表时，需避免头节点对测试数据的影响，因此在遍历链表时，建立使用上面代码中的遍历方法，直接越过头节点对链表进行有效遍历。</p>
+<p><strong>链表更新元素</strong></p>
+<p>步骤：通过遍历找到存储此元素的节点，对节点中的数据域做更改操作即可。</p>
+<p>链表中更新数据元素的操作</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//更新函数，其中，add 表示更改结点在链表中的位置，newElem 为新的数据域的值</span></span><br><span class="line">link *<span class="title function_">amendElem</span><span class="params">(link * p,<span class="type">int</span> add,<span class="type">int</span> newElem)</span>{</span><br><span class="line">    link * temp=p;</span><br><span class="line">    temp=temp-&gt;next;<span class="comment">//在遍历之前，temp指向首元结点</span></span><br><span class="line">    <span class="comment">//遍历到待更新结点</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;add; i++) {</span><br><span class="line">        temp=temp-&gt;next;</span><br><span class="line">    }</span><br><span class="line">    temp-&gt;elem=newElem;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="静态链表"><a class="markdownIt-Anchor" href="#静态链表"></a> 静态链表</h2>
+<p>静态链表：兼顾了顺序表和链表的优点于一身，可以看做是顺序表和链表的升级版。</p>
+<p>使用静态链表存储数据，数据全部存储在数组中（和顺序表一样），但存储位置是随机的，数据之间"一对一"的逻辑关系通过一个整形变量（称为"游标"，和指针功能类似）维持（和链表类似）。</p>
+<p><strong>静态链表中的节点</strong></p>
+<p>静态链表存储数据元素也需要自定义数据类型，至少需要包含以下 2 部分信息：</p>
+<ul>
+<li>数据域：用于存储数据元素的值；</li>
+<li>其实就是数组下标，表示直接后继元素所在数组中的位置；</li>
+</ul>
+<p>静态链表中节点的构成用 C 语言实现为：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> {</span></span><br><span class="line">    <span class="type">int</span> data;<span class="comment">//数据域</span></span><br><span class="line">    <span class="type">int</span> cur;<span class="comment">//游标</span></span><br><span class="line">}component;</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>备用链表</strong></p>
+<p>备用链表：静态链表中，除了数据本身通过游标组成的链表外，还需要有一条连接各个空闲位置的链表，称为备用链表。</p>
+<p>备用链表的作用是回收数组中未使用或之前使用过（目前未使用）的存储空间，留待后期使用。也就是说，静态链表使用数组申请的物理空间中，存有两个链表，一条连接数据，另一条连接数组中未使用的空间。</p>
+<pre><code>通常，备用链表的表头位于数组下标为 0（a[0]） 的位置，而数据链表的表头位于数组下标为 1（a[1]）的位置。
+</code></pre>
+<p>静态链表中设置备用链表的好处是，可以清楚地知道数组中是否有空闲位置，以便数据链表添加新数据时使用。比如，若静态链表中数组下标为 0 的位置上存有数据，则证明数组已满。</p>
+<p><strong>静态链表的创建</strong></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>y</mi><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></msup><mo>=</mo><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo stretchy="false">)</mo><mi>n</mi></msup></mrow><mfrac><mn>1</mn><mn>3</mn></mfrac><mi>n</mi><mo stretchy="false">!</mo><mo stretchy="false">[</mo><mrow><mo stretchy="false">(</mo><mfrac><mn>1</mn><mrow><mi>x</mi><mo>−</mo><mn>4</mn></mrow></mfrac><msup><mo stretchy="false">)</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><mo>−</mo><mrow><mo stretchy="false">(</mo><mfrac><mn>1</mn><mrow><mi>x</mi><mo>−</mo><mn>1</mn></mrow></mfrac><msup><mo stretchy="false">)</mo><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">{y^{(n)}} = {( - 1)^n}{1 \over 3}n![{({1 \over {x - 4}})^{n + 1}} - {({1 \over {x - 1}})^{n + 1}}]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.13244em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathdefault mtight">n</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.09077em;vertical-align:-0.7693300000000001em;"></span><span class="mord"><span class="mopen">(</span><span class="mord">−</span><span class="mord">1</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">3</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mord mathdefault">n</span><span class="mclose">!</span><span class="mopen">[</span><span class="mord"><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">4</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.864108em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.09077em;vertical-align:-0.7693300000000001em;"></span><span class="mord"><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.864108em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span><span class="mclose">]</span></span></span></span></span></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/posts/82e6.html" class="leancloud-visitors view" data-flag-title="线性表">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/posts/f962.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/posts/a251.html" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"AA9eNAftQgfjEcK3l0j71rDS-gzGzoHsz","appKey":"E1r06kyXdl3RxWbXxaUQ6tPg","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2020-10-25 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Algorithm/">Algorithm<span>2</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Data-Structure/">Data Structure<span>2</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2022 Heisenberg Lee's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'tlhg.top' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
+   </html>

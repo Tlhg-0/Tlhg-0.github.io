@@ -1,0 +1,391 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>对象与句柄 | tlhg&#39;s Blog|</title>
+  <meta name="author" content="Heisenberg Lee">
+  
+  <meta name="description" content="学习记录。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="对象与句柄"/>
+  <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="tlhg's Blog|" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">tlhg&#39;s Blog|</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 对象与句柄</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="句柄的定义"><a class="markdownIt-Anchor" href="#句柄的定义"></a> 句柄的定义</h1>
+<p>每个进程都有一个表，这个表中的每一项保存着需要访问的内核对象信息，系统为用户态应用程序提供一个“句柄”值，这个句柄值实际上是这个表的某种索引，通过这个值，可以在表中定位到具体需要访问的内核对象信息。用户态程序通过API创建或打开一个内核对象时，这个表中的信息会增加一项，用来描述这个内核对象的信息，并产生一个相应的句柄值，用户态程序把这个句柄传递到相应API，API进入内核后，通过这个句柄值定位到需要操作的内核对象，对内核对象进行相应的操作。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">void</span> *HANDLE;</span><br><span class="line"><span class="keyword">typedef</span> HANDLE *PHANDLE</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="内核对象的引用计数"><a class="markdownIt-Anchor" href="#内核对象的引用计数"></a> 内核对象的引用计数</h1>
+<p>每个内核对象存在两个计数，一个称为“句柄计数”，另一个称为“指针计数”，句柄计数是指这个内核对象被多少个句柄值所指向，如在用户态中创建一个命名的EVENT对象，获取到一个句柄，那么这个EVENT的句柄计数就是1，当其他程序通过该EVENT名字打开该EVENT时，会获取到另外一个句柄，这时候，句柄计数等于2。指针计数是在句柄计数基础上递增的计数，在刚才所提的例子中，句柄计数等于2，指针计数也等于2，句柄计数的增加，会相应导致指针计数增加，同理，句柄计数的减少，会相应导致指针计数减少，但指针计数可以独立增加与减少而不影响句柄计数。当一个对象的指针计数等于0的时候，这个对象会被系统释放。请注意，不同操作系统，系统对引用计数值的管理稍有不同。</p>
+<h1 id="句柄操作code"><a class="markdownIt-Anchor" href="#句柄操作code"></a> 句柄操作CODE</h1>
+<h2 id="code"><a class="markdownIt-Anchor" href="#code"></a> ＣＯＤＥ</h2>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ntddk.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ntifs.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">BOOLEAN <span class="title function_">EventOperationSample</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">	BOOLEAN bSucc = FALSE;</span><br><span class="line">	HANDLE	hCreateEvent = <span class="literal">NULL</span>;</span><br><span class="line">	PVOID	pCrateEventObject = <span class="literal">NULL</span>;</span><br><span class="line">	HANDLE	hOpenEvent = <span class="literal">NULL</span>;</span><br><span class="line">	PVOID	pOpenEventObject = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">do</span></span><br><span class="line">	{</span><br><span class="line">		OBJECT_ATTRIBUTES ObjAttr = { <span class="number">0</span> };</span><br><span class="line">		UNICODE_STRING uNameString = { <span class="number">0</span> };</span><br><span class="line">		RtlInitUnicodeString(&amp;uNameString, <span class="string">L"\\BaseNameObjects\\TestEvent"</span>);</span><br><span class="line">		InitializeObjectAttributes(&amp;ObjAttr, &amp;uNameString, OBJ_KERNEL_HANDLE | OBJ_CASE_INSENSITIVE, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">		ZwCreateEvent(&amp;hCreateEvent, EVENT_ALL_ACCESS, &amp;ObjAttr, SynchronizationEvent, FALSE);</span><br><span class="line">		<span class="keyword">if</span> (hCreateEvent == <span class="literal">NULL</span>)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		ObReferenceObjectByHandle(hCreateEvent, EVENT_ALL_ACCESS, *ExEventObjectType, KernelMode, &amp;pCrateEventObject, <span class="literal">NULL</span>);</span><br><span class="line">		<span class="keyword">if</span> (hOpenEvent == <span class="literal">NULL</span>)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		ObReferenceObjectByHandle(hOpenEvent, EVENT_ALL_ACCESS, *ExEventObjectType, KernelMode, &amp;pCrateEventObject, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (pOpenEventObject == <span class="literal">NULL</span>)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		DbgPrint(<span class="string">"Create Handle: %p, Create Pointer = %p\n"</span>, hCreateEvent, pCrateEventObject);</span><br><span class="line">		DbgPrint(<span class="string">"Open Handle: %p, Open Pointer = %p\n"</span>, hOpenEvent, pOpenEventObject);</span><br><span class="line">		bSucc = TRUE;</span><br><span class="line">	} <span class="keyword">while</span> (FALSE);</span><br><span class="line">	<span class="keyword">if</span> (pCrateEventObject != <span class="literal">NULL</span>)</span><br><span class="line">	{</span><br><span class="line">		ObDereferenceObject(pCrateEventObject);</span><br><span class="line">		pCrateEventObject = <span class="literal">NULL</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (hCreateEvent != <span class="literal">NULL</span>)</span><br><span class="line">	{</span><br><span class="line">		ZwClose(hCreateEvent);</span><br><span class="line">		hCreateEvent = <span class="literal">NULL</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (pOpenEventObject != <span class="literal">NULL</span>)</span><br><span class="line">	{</span><br><span class="line">		ObDereferenceObject(pOpenEventObject);</span><br><span class="line">		pOpenEventObject = <span class="literal">NULL</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (hOpenEvent != <span class="literal">NULL</span>)</span><br><span class="line">	{</span><br><span class="line">		ZwClose(hOpenEvent);</span><br><span class="line">		hOpenEvent = <span class="literal">NULL</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> bSucc;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="逻辑分析"><a class="markdownIt-Anchor" href="#逻辑分析"></a> 逻辑分析</h2>
+<p>ZwCreateEvent成功后，句柄会保存在hCreateEvent变量中，这个句柄是一个内核句柄。接着代码中调用ObReferenceObåjectByHandle函数，获取hCreateEvent句柄对应的EVENT对象指针。</p>
+<p>例子代码在调用ObReferenceObjectByHandle函数成功后，使用ZwOpenEvent函数再次打开刚才创建的EVENT并获取一个句柄，保存在hOpenEvent变量中；接着通过hOpenEvent的值，使用ObReferenceObjectByHandle获取EVENT的对象指针，保存在pOpenEventObject变量中。</p>
+<p>所以最后会产生两个句柄以及两个对象指针。代码通过DbgPrint函数把这些信息输出：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">Create Handle : FFFFFFFF80000B90, Create Pointer = FFFFD1898059C260</span><br><span class="line">Open Handle : FFFFFFFF800003648, Create Pointer = FFFFD1898059C260</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="zwcreateevent-函数"><a class="markdownIt-Anchor" href="#zwcreateevent-函数"></a> ZwCreateEvent 函数</h2>
+<p>ZwCreateEvent  函数创建对象 EVENT 对象</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">NASTATUS <span class="title function_">ZwCreateEvent</span><span class="params">(</span></span><br><span class="line"><span class="params">	PHANDLE 			EventHandle,</span></span><br><span class="line"><span class="params">	ACCESS_MASK			DesiredAccess,</span></span><br><span class="line"><span class="params">	POBJECT_ATTRIBUTES 	objectAttributes,</span></span><br><span class="line"><span class="params">	EVENT_TYPE 			EventType,</span></span><br><span class="line"><span class="params">	BOOLEAN 			InitialState</span></span><br><span class="line"><span class="params">)</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>EventHandle</strong> 参数用于保存EVENT的句柄；</p>
+<p><strong>DesiredAccess</strong> 参数 表示EVENT的权限；</p>
+<p><strong>ObjectAttributes</strong>  参数表示创建EVENT的属性信息；</p>
+<p><strong>EventType</strong>  参数表示EVENT的类型，取值为SynchronizationEvent或者NotificationEvent，分别表示同步类型EVENT以及通告类型的EVENT；</p>
+<p><strong>InitialState</strong> 参数 表示EVENT的初始状态，TRUE表示EVENT被创建后的状态为“有信号”，否则为“无信号”。</p>
+<p><strong>注意</strong> ：ObjectAttributes参数的用法最为重要，ObjectAttributes描述了需要打开或创建的内核对象属性，大部分涉及打开或创建内核对象的API都会有ObjectAttributes参数。</p>
+<h2 id="object_attributes-结构体"><a class="markdownIt-Anchor" href="#object_attributes-结构体"></a> OBJECT_ATTRIBUTES 结构体</h2>
+<p>OBJECT_ATTRIBUTES 结构描述内核对象的属性；属性包括对象的名字，根目录</p>
+<p>的句柄，对象的安全描述。</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">OBJECT_ATTRIBUTES</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">	ULONG 			length;</span><br><span class="line">	HANDLE 			RootDirectory;</span><br><span class="line">	PUNICODE_STRING ObjectName;</span><br><span class="line">	ULONG 			Attributes;</span><br><span class="line">	PVOID 			SecurityDescriptor;</span><br><span class="line">	PVOID 			SecurityQuakityofService;</span><br><span class="line">} OBJECT_ATTRIBUTES, * POBJECT_ATTRIBUTES;</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>Length</strong> 成员表示结构体的大小，一般等于sizeof(OBJECT_ATTRIBUTES)，<strong>RootDirectory</strong> 表示对象的根目录句柄，可以为NULL。</p>
+<p><strong>ObjectName</strong> 是一个UNICODE_STRING的指针，表示对象的路径或名字，<strong>RootDirectory</strong> 与 <strong>ObjectName</strong> 共同组成了一个完整的对象全路径名字。<strong>Attributes</strong> 表示对象打开或创建时的具体属性，常见的有：</p>
+<ul>
+<li>OBJ_INHERIT 表示内核对象的句柄可以被继承</li>
+<li>OBJ_CASE_INSENSITIVE 表示内核对象的名字不区分大小写。</li>
+<li>OBJ_KERNEL_HANDLE 表示使用内核句柄，即句柄存在于系统句柄表中。</li>
+<li>SecurityDescriptor以及SecurityQualityOfService与安全性相关，可以暂设置成NULL。</li>
+</ul>
+<h2 id="obreferenceobjectbyhandle-函数"><a class="markdownIt-Anchor" href="#obreferenceobjectbyhandle-函数"></a> <strong>ObReferenceObjectByHandle</strong> 函数</h2>
+<p><strong>ObReferenceObjectByHandle</strong> 函数用于获取句柄对应的对象的指针。</p>
+<p><strong>ObReferenceObjectByHandle</strong> 函数成功则返回STATUS_SUCCESS，失败则返回错误码。函数原型如下：</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">NTSTATUS <span class="title function_">ObReferenceObjectByHandle</span><span class="params">(</span></span><br><span class="line"><span class="params">	HANDLE Handle,</span></span><br><span class="line"><span class="params">	ACCESS_MASK	DesiredAccess,</span></span><br><span class="line"><span class="params">	POBJECT_TYPE	ObjectType,</span></span><br><span class="line"><span class="params">	KPROCESSOR_MODE AccessMode,</span></span><br><span class="line"><span class="params">	PVOID* object,</span></span><br><span class="line"><span class="params">	POBJECT_HANDLE_INFORMATION HandleInformation</span></span><br><span class="line"><span class="params">)</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>Handle</strong> 参数表示句柄值。</p>
+<p><strong>DesiredAccess</strong> 参数表示需要获取此对象的权限，针对不同类型的对象，这个权限的值不同，对于本例的EVENT对象来说，这个值可以传递EVENT_ALL_ACCESS，表示EVENT的所有权限。</p>
+<p><strong>ObjectType</strong> 参数 表示对象的类型，不同的对象用不同的“对象类型”来表示，</p>
+<p><strong>AccessMode</strong>  参数表示访问模式，可以是KernelMode或UserMode，分别表示用户态与内核态。如果参数Handle是内核句柄，则应该传递KernelMode。参数Object是返回参数，若函数执行成功则该参数保存对象的指针。<strong>HandleInformation</strong> 参数暂时没用，可以设置为NULL。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/posts/d839.html" class="leancloud-visitors view" data-flag-title="对象与句柄">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/posts/aecd.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/posts/16c1.html" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"AA9eNAftQgfjEcK3l0j71rDS-gzGzoHsz","appKey":"E1r06kyXdl3RxWbXxaUQ6tPg","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2021-02-08 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/kernel/">kernel<span>6</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/kernel-programm/">kernel programm<span>6</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2022 Heisenberg Lee's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'tlhg.top' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
+   </html>

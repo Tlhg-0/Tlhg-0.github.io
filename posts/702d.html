@@ -1,0 +1,431 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Chapter08-IO库 | tlhg&#39;s Blog|</title>
+  <meta name="author" content="Heisenberg Lee">
+  
+  <meta name="description" content="学习记录。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Chapter08-IO库"/>
+  <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
+
+  
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200803213512.png" />
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="tlhg's Blog|" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">tlhg&#39;s Blog|</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Chapter08-IO库</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>部分IO库设施：</p>
+<ul>
+<li><code>istream</code>：输入流类型，提供输入操作。</li>
+<li><code>ostream</code>：输出流类型，提供输出操作。</li>
+<li><code>cin</code>：<code>istream</code>对象，从标准输入读取数据。</li>
+<li><code>cout</code>：<code>ostream</code>对象，向标准输出写入数据。</li>
+<li><code>cerr</code>：<code>ostream</code>对象，向标准错误写入数据。</li>
+<li><code>&gt;&gt;</code>运算符：从<code>istream</code>对象读取输入数据。</li>
+<li><code>&lt;&lt;</code>运算符：向<code>ostream</code>对象写入输出数据。</li>
+<li><code>getline</code>函数：从<code>istream</code>对象读取一行数据，写入<code>string</code>对象。</li>
+</ul>
+<h2 id="io类the-io-classes"><a class="markdownIt-Anchor" href="#io类the-io-classes"></a> IO类（The IO Classes）</h2>
+<p>头文件<em>iostream</em>定义了用于读写流的基本类型，<em>fstream</em>定义了读写命名文件的类型，<em>sstream</em>定义了读写内存中<code>string</code>对象的类型。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200825174630.png" alt=""></p>
+<p>宽字符版本的IO类型和函数的名字以<code>w</code>开始，如<code>wcin</code>、<code>wcout</code>和<code>wcerr</code>分别对应<code>cin</code>、<code>cout</code>和<code>cerr</code>。它们与其对应的普通<code>char</code>版本都定义在同一个头文件中，如头文件<em>fstream</em>定义了<code>ifstream</code>和<code>wifstream</code>类型。</p>
+<p>可以将派生类的对象当作其基类的对象使用。</p>
+<h3 id="io象无拷贝或赋值no-copy-or-assign-for-io-objects"><a class="markdownIt-Anchor" href="#io象无拷贝或赋值no-copy-or-assign-for-io-objects"></a> IO象无拷贝或赋值（No Copy or Assign for IO Objects）</h3>
+<p>不能拷贝或对IO对象赋值。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">ofstream out1, out2;</span><br><span class="line">out1 = out2;    <span class="comment">// error: cannot assign stream objects</span></span><br><span class="line"><span class="function">ofstream <span class="title">print</span><span class="params">(ofstream)</span></span>;   <span class="comment">// error: can't initialize the ofstream parameter</span></span><br><span class="line">out2 = <span class="built_in">print</span>(out2);     <span class="comment">// error: cannot copy stream objects</span></span><br></pre></td></tr></tbody></table></figure>
+<p>由于IO对象不能拷贝，因此不能将函数形参或返回类型定义为流类型。进行IO操作的函数通常以引用方式传递和返回流。读写一个IO对象会改变其状态，因此传递和返回的引用不能是<code>const</code>的。</p>
+<h3 id="条件状态condition-states"><a class="markdownIt-Anchor" href="#条件状态condition-states"></a> 条件状态（Condition States）</h3>
+<p>IO库条件状态：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200825174831.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200825174844.png" alt=""></p>
+<p><code>badbit</code>表示系统级错误，如不可恢复的读写错误。通常情况下，一旦<code>badbit</code>被置位，流就无法继续使用了。在发生可恢复错误后，<code>failbit</code>会被置位，如期望读取数值却读出一个字符。如果到达文件结束位置，<code>eofbit</code>和<code>failbit</code>都会被置位。如果流未发生错误，则<code>goodbit</code>的值为0。如果<code>badbit</code>、<code>failbit</code>和<code>eofbit</code>任何一个被置位，检测流状态的条件都会失败。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (cin &gt;&gt; word)</span><br><span class="line">    <span class="comment">// ok: read operation successful...</span></span><br></pre></td></tr></tbody></table></figure>
+<p><code>good</code>函数在所有错误均未置位时返回<code>true</code>。而<code>bad</code>、<code>fail</code>和<code>eof</code>函数在对应错误位被置位时返回<code>true</code>。此外，在<code>badbit</code>被置位时，<code>fail</code>函数也会返回<code>true</code>。因此应该使用<code>good</code>或<code>fail</code>函数确定流的总体状态，<code>eof</code>和<code>bad</code>只能检测特定错误。</p>
+<p>流对象的<code>rdstate</code>成员返回一个<code>iostate</code>值，表示流的当前状态。<code>setstate</code>成员用于将指定条件置位（叠加原始流状态）。<code>clear</code>成员的无参版本清除所有错误标志；含参版本接受一个<code>iostate</code>值，用于设置流的新状态（覆盖原始流状态）。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// remember the current state of cin</span></span><br><span class="line"><span class="keyword">auto</span> old_state = cin.<span class="built_in">rdstate</span>();     <span class="comment">// remember the current state of cin</span></span><br><span class="line">cin.<span class="built_in">clear</span>();    <span class="comment">// make cin valid</span></span><br><span class="line"><span class="built_in">process_input</span>(cin);     <span class="comment">// use cin</span></span><br><span class="line">cin.<span class="built_in">setstate</span>(old_state);    <span class="comment">// now reset cin to its old state</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="管理输出缓冲managing-the-output-buffer"><a class="markdownIt-Anchor" href="#管理输出缓冲managing-the-output-buffer"></a> 管理输出缓冲（Managing the Output Buffer）</h3>
+<p>每个输出流都管理一个缓冲区，用于保存程序读写的数据。导致缓冲刷新（即数据真正写入输出设备或文件）的原因有很多：</p>
+<ul>
+<li>程序正常结束。</li>
+<li>缓冲区已满。</li>
+<li>使用操纵符（如<code>endl</code>）显式刷新缓冲区。</li>
+<li>在每个输出操作之后，可以用<code>unitbuf</code>操纵符设置流的内部状态，从而清空缓冲区。默认情况下，对<code>cerr</code>是设置<code>unitbuf</code>的，因此写到<code>cerr</code>的内容都是立即刷新的。</li>
+<li>一个输出流可以被关联到另一个流。这种情况下，当读写被关联的流时，关联到的流的缓冲区会被刷新。默认情况下，<code>cin</code>和<code>cerr</code>都关联到<code>cout</code>，因此，读<code>cin</code>或写<code>cerr</code>都会刷新<code>cout</code>的缓冲区。</li>
+</ul>
+<p><code>flush</code>操纵符刷新缓冲区，但不输出任何额外字符。<code>ends</code>向缓冲区插入一个空字符，然后刷新缓冲区。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">cout &lt;&lt; <span class="string">"hi!"</span> &lt;&lt; endl;   <span class="comment">// writes hi and a newline, then flushes the buffer</span></span><br><span class="line">cout &lt;&lt; <span class="string">"hi!"</span> &lt;&lt; flush;  <span class="comment">// writes hi, then flushes the buffer; adds no data</span></span><br><span class="line">cout &lt;&lt; <span class="string">"hi!"</span> &lt;&lt; ends;   <span class="comment">// writes hi and a null, then flushes the buffer</span></span><br></pre></td></tr></tbody></table></figure>
+<p>如果想在每次输出操作后都刷新缓冲区，可以使用<code>unitbuf</code>操纵符。它令流在接下来的每次写操作后都进行一次<code>flush</code>操作。而<code>nounitbuf</code>操纵符则使流恢复使用正常的缓冲区刷新机制。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">cout &lt;&lt; unitbuf;    <span class="comment">// all writes will be flushed immediately</span></span><br><span class="line"><span class="comment">// any output is flushed immediately, no buffering</span></span><br><span class="line">cout &lt;&lt; nounitbuf;  <span class="comment">// returns to normal buffering</span></span><br></pre></td></tr></tbody></table></figure>
+<p>如果程序异常终止，输出缓冲区不会被刷新。</p>
+<p>当一个输入流被关联到一个输出流时，任何试图从输入流读取数据的操作都会先刷新关联的输出流。标准库将<code>cout</code>和<code>cin</code>关联在一起，因此下面的语句会导致<code>cout</code>的缓冲区被刷新：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">cin &gt;&gt; ival;</span><br></pre></td></tr></tbody></table></figure>
+<p>交互式系统通常应该关联输入流和输出流。这意味着包括用户提示信息在内的所有输出，都会在读操作之前被打印出来。</p>
+<p>使用<code>tie</code>函数可以关联两个流。它有两个重载版本：无参版本返回指向输出流的指针。如果本对象已关联到一个输出流，则返回的就是指向这个流的指针，否则返回空指针。<code>tie</code>的第二个版本接受一个指向<code>ostream</code>的指针，将本对象关联到此<code>ostream</code>。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">cin.<span class="built_in">tie</span>(&amp;cout);     <span class="comment">// illustration only: the library ties cin and cout for us</span></span><br><span class="line"><span class="comment">// old_tie points to the stream (if any) currently tied to cin</span></span><br><span class="line">ostream *old_tie = cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>); <span class="comment">// cin is no longer tied</span></span><br><span class="line"><span class="comment">// ties cin and cerr; not a good idea because cin should be tied to cout</span></span><br><span class="line">cin.<span class="built_in">tie</span>(&amp;cerr);     <span class="comment">// reading cin flushes cerr, not cout</span></span><br><span class="line">cin.<span class="built_in">tie</span>(old_tie);   <span class="comment">// reestablish normal tie between cin and cout</span></span><br></pre></td></tr></tbody></table></figure>
+<p>每个流同时最多关联一个流，但多个流可以同时关联同一个<code>ostream</code>。向<code>tie</code>传递空指针可以解开流的关联。</p>
+<h2 id="文件输入输出file-input-and-output"><a class="markdownIt-Anchor" href="#文件输入输出file-input-and-output"></a> 文件输入输出（File Input and Output）</h2>
+<p>头文件<em>fstream</em>定义了三个类型来支持文件IO：<code>ifstream</code>从给定文件读取数据，<code>ofstream</code>向指定文件写入数据，<code>fstream</code>可以同时读写指定文件。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200825174953.png" alt=""></p>
+<h3 id="使用文件流对象using-file-stream-objects"><a class="markdownIt-Anchor" href="#使用文件流对象using-file-stream-objects"></a> 使用文件流对象（Using File Stream Objects）</h3>
+<p>每个文件流类型都定义了<code>open</code>函数，它完成一些系统操作，定位指定文件，并视情况打开为读或写模式。</p>
+<p>创建文件流对象时，如果提供了文件名（可选），<code>open</code>会被自动调用。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function">ifstream <span class="title">in</span><span class="params">(ifile)</span></span>;   <span class="comment">// construct an ifstream and open the given file</span></span><br><span class="line">ofstream out;   <span class="comment">// output file stream that is not associated with any file</span></span><br></pre></td></tr></tbody></table></figure>
+<p>在C++11中，文件流对象的文件名可以是<code>string</code>对象或C风格字符数组。旧版本的标准库只支持C风格字符数组。</p>
+<p>在要求使用基类对象的地方，可以用继承类型的对象代替。因此一个接受<code>iostream</code>类型引用或指针参数的函数，可以用对应的<code>fstream</code>类型来调用。</p>
+<p>可以先定义空文件流对象，再调用<code>open</code>函数将其与指定文件关联。如果<code>open</code>调用失败，<code>failbit</code>会被置位。</p>
+<p>对一个已经打开的文件流调用<code>open</code>会失败，并导致<code>failbit</code>被置位。随后试图使用文件流的操作都会失败。如果想将文件流关联到另一个文件，必须先调用<code>close</code>关闭当前文件，再调用<code>clear</code>重置流的条件状态（<code>close</code>不会重置流的条件状态）。</p>
+<p>当<code>fstream</code>对象被销毁时，<code>close</code>会自动被调用。</p>
+<h3 id="文件模式file-modes"><a class="markdownIt-Anchor" href="#文件模式file-modes"></a> 文件模式（File Modes）</h3>
+<p>每个流都有一个关联的文件模式，用来指出如何使用文件。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200825175411.png" alt=""></p>
+<ul>
+<li>只能对<code>ofstream</code>或<code>fstream</code>对象设定<code>out</code>模式。</li>
+<li>只能对<code>ifstream</code>或<code>fstream</code>对象设定<code>in</code>模式。</li>
+<li>只有当<code>out</code>被设定时才能设定<code>trunc</code>模式。</li>
+<li>只要<code>trunc</code>没被设定，就能设定<code>app</code>模式。在<code>app</code>模式下，即使没有设定<code>out</code>模式，文件也是以输出方式打开。</li>
+<li>默认情况下，即使没有设定<code>trunc</code>，以<code>out</code>模式打开的文件也会被截断。如果想保留以<code>out</code>模式打开的文件内容，就必须同时设定<code>app</code>模式，这会将数据追加写到文件末尾；或者同时设定<code>in</code>模式，即同时进行读写操作。</li>
+<li><code>ate</code>和<code>binary</code>模式可用于任何类型的文件流对象，并可以和其他任何模式组合使用。</li>
+<li>与<code>ifstream</code>对象关联的文件默认以<code>in</code>模式打开，与<code>ofstream</code>对象关联的文件默认以<code>out</code>模式打开，与<code>fstream</code>对象关联的文件默认以<code>in</code>和<code>out</code>模式打开。</li>
+</ul>
+<p>默认情况下，打开<code>ofstream</code>对象时，文件内容会被丢弃，阻止文件清空的方法是同时指定<code>app</code>或<code>in</code>模式。</p>
+<p>流对象每次打开文件时都可以改变其文件模式。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">ofstream out;   <span class="comment">// no file mode is set</span></span><br><span class="line">out.<span class="built_in">open</span>(<span class="string">"scratchpad"</span>);    <span class="comment">// mode implicitly out and trunc</span></span><br><span class="line">out.<span class="built_in">close</span>();    <span class="comment">// close out so we can use it for a different file</span></span><br><span class="line">out.<span class="built_in">open</span>(<span class="string">"precious"</span>, ofstream::app);   <span class="comment">// mode is out and app</span></span><br><span class="line">out.<span class="built_in">close</span>();</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="string流string-streams"><a class="markdownIt-Anchor" href="#string流string-streams"></a> string流（string Streams）</h2>
+<p>头文件<em>sstream</em>定义了三个类型来支持内存IO：<code>istringstream</code>从<code>string</code>读取数据，<code>ostringstream</code>向<code>string</code>写入数据，<code>stringstream</code>可以同时读写<code>string</code>的数据。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200825175428.png" alt=""></p>
+<h3 id="使用istringstreamusing-an-istringstream"><a class="markdownIt-Anchor" href="#使用istringstreamusing-an-istringstream"></a> 使用istringstream（Using an istringstream）</h3>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// members are public by default</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">PersonInfo</span></span><br><span class="line">{</span><br><span class="line">    string name;</span><br><span class="line">    vector&lt;string&gt; phones;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line">string line, word;   <span class="comment">// will hold a line and word from input, respectively</span></span><br><span class="line">vector&lt;PersonInfo&gt; people;    <span class="comment">// will hold all the records from the input</span></span><br><span class="line"><span class="comment">// read the input a line at a time until cin hits end-of-file (or another error)</span></span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">getline</span>(cin, line))</span><br><span class="line">{</span><br><span class="line">    PersonInfo info;    <span class="comment">// create an object to hold this record's data</span></span><br><span class="line">    <span class="function">istringstream <span class="title">record</span><span class="params">(line)</span></span>;    <span class="comment">// bind record to the line we just read</span></span><br><span class="line">    record &gt;&gt; info.name;    <span class="comment">// read the name</span></span><br><span class="line">    <span class="keyword">while</span> (record &gt;&gt; word)  <span class="comment">// read the phone numbers</span></span><br><span class="line">        info.phones.<span class="built_in">push_back</span>(word);   <span class="comment">// and store them</span></span><br><span class="line">    people.<span class="built_in">push_back</span>(info);    <span class="comment">// append this record to people</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="使用ostringstreamusing-ostringstreams"><a class="markdownIt-Anchor" href="#使用ostringstreamusing-ostringstreams"></a> 使用ostringstream（Using ostringstreams）</h3>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span> &amp;entry : people)</span><br><span class="line">{ <span class="comment">// for each entry in people</span></span><br><span class="line">    ostringstream formatted, badNums;   <span class="comment">// objects created on each loop</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span> &amp;nums : entry.phones)</span><br><span class="line">    { <span class="comment">// for each number</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">valid</span>(nums))</span><br><span class="line">        {</span><br><span class="line">            badNums &lt;&lt; <span class="string">" "</span> &lt;&lt; nums;  <span class="comment">// string in badNums</span></span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="comment">// ''writes'' to formatted's string</span></span><br><span class="line">            formatted &lt;&lt; <span class="string">" "</span> &lt;&lt; format(nums);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (badNums.<span class="built_in">str</span>().<span class="built_in">empty</span>())   <span class="comment">// there were no bad numbers</span></span><br><span class="line">        os &lt;&lt; entry.name &lt;&lt; <span class="string">" "</span>  <span class="comment">// print the name</span></span><br><span class="line">            &lt;&lt; formatted.<span class="built_in">str</span>() &lt;&lt; endl;   <span class="comment">// and reformatted numbers</span></span><br><span class="line">    <span class="keyword">else</span>  <span class="comment">// otherwise, print the name and bad numbers</span></span><br><span class="line">        cerr &lt;&lt; <span class="string">"input error: "</span> &lt;&lt; entry.name</span><br><span class="line">            &lt;&lt; <span class="string">" invalid number(s) "</span> &lt;&lt; badNums.<span class="built_in">str</span>() &lt;&lt; endl;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/posts/702d.html" class="leancloud-visitors view" data-flag-title="Chapter08-IO库">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/posts/b01d.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/posts/fef1.html" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"AA9eNAftQgfjEcK3l0j71rDS-gzGzoHsz","appKey":"E1r06kyXdl3RxWbXxaUQ6tPg","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2020-05-12 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/language/">language<span>13</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/C/">C++<span>12</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2022 Heisenberg Lee's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'tlhg.top' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
+   </html>

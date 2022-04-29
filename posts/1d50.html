@@ -1,0 +1,502 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Chapter03 字符串、向量和数组 | tlhg&#39;s Blog|</title>
+  <meta name="author" content="Heisenberg Lee">
+  
+  <meta name="description" content="学习记录。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Chapter03 字符串、向量和数组"/>
+  <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
+
+  
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200803213512.png" />
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="tlhg's Blog|" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">tlhg&#39;s Blog|</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Chapter03 字符串、向量和数组</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="命名空间的using声明namespace-using-declarations"><a class="markdownIt-Anchor" href="#命名空间的using声明namespace-using-declarations"></a> 命名空间的using声明（Namespace using Declarations）</h2>
+<p>使用<code>using</code>声明后就无须再通过专门的前缀去获取所需的名字了。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> std::cout;</span><br></pre></td></tr></tbody></table></figure>
+<p>程序中使用的每个名字都需要用独立的<code>using</code>声明引入。</p>
+<p>头文件中通常不应该包含<code>using</code>声明。</p>
+<h2 id="标准库类型stringlibrary-string-type"><a class="markdownIt-Anchor" href="#标准库类型stringlibrary-string-type"></a> 标准库类型string（Library string Type）</h2>
+<p>标准库类型<code>string</code>表示可变长的字符序列，定义在头文件<em>string</em>中。</p>
+<h3 id="定义和初始化string对象defining-and-initializing-strings"><a class="markdownIt-Anchor" href="#定义和初始化string对象defining-and-initializing-strings"></a> 定义和初始化string对象（Defining and Initializing strings）</h3>
+<p>初始化<code>string</code>的方式：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200804211406.png" alt="3-1"></p>
+<p>如果使用等号初始化一个变量，实际上执行的是拷贝初始化（copy initialization），编译器把等号右侧的初始值拷贝到新创建的对象中去。如果不使用等号，则执行的是直接初始化（direct initialization）。</p>
+<p>如果初始化要用到的值有多个，那么一般来说只能使用直接初始化，如果非要用拷贝初始化的话，就需要显示的创建一个（临时对象）用于拷贝：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">string s5 = <span class="string">"hiya"</span>;     <span class="comment">//拷贝初始化</span></span><br><span class="line">string s6 = <span class="string">"hiya"</span>;     <span class="comment">//直接初始化</span></span><br><span class="line"><span class="function">string <span class="title">s7</span><span class="params">(<span class="number">10</span>, <span class="string">'c'</span>)</span></span>;      <span class="comment">//直接初始化</span></span><br><span class="line"></span><br><span class="line">string s8 = <span class="built_in">string</span>(<span class="number">10</span>,<span class="string">'c'</span>);  <span class="comment">//拷贝初始化 1</span></span><br><span class="line"></span><br><span class="line"><span class="function">string <span class="title">temp</span><span class="params">(<span class="number">10</span>,<span class="string">'c'</span>)</span></span>;        <span class="comment">//拷贝初始化  2</span></span><br><span class="line">string s8 = temp;</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="string对象上的操作operations-on-strings"><a class="markdownIt-Anchor" href="#string对象上的操作operations-on-strings"></a> string对象上的操作（Operations on strings）</h3>
+<p><code>string</code>的操作：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200804212827.png" alt="3-2"></p>
+<p>在执行读取操作时，<code>string</code>对象会自动忽略开头的空白（空格符、换行符、制表符等）并从第一个真正的字符开始读取，直到遇见下一处空白为止。</p>
+<p>使用<code>getline</code>函数可以读取一整行字符。该函数只要遇到换行符就结束读取并返回结果，如果输入的开始就是一个换行符，则得到空<code>string</code>。触发<code>getline</code>函数返回的那个换行符实际上被丢弃掉了，得到的<code>string</code>对象中并不包含该换行符。</p>
+<p><code>size</code>函数返回<code>string</code>对象的长度，返回值是<code>string::size_type</code>类型，这是一种无符号类型。要使用<code>size_type</code>，必须先指定它是由哪种类型定义的。</p>
+<p>如果一个表达式中已经有了<code>size</code>函数就不要再使用<code>int</code>了，这样可以避免混用<code>int</code>和<code>unsigned int</code>可能带来的问题。</p>
+<p>当把<code>string</code>对象和字符字面值及字符串字面值混合在一条语句中使用时，必须确保每个加法运算符两侧的运算对象中至少有一个是<code>string</code>。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">string s4 = s1 + <span class="string">", "</span>;          <span class="comment">// ok: adding a string and a literal</span></span><br><span class="line">string s5 = <span class="string">"hello"</span> + <span class="string">", "</span>;     <span class="comment">// error: no string operand</span></span><br><span class="line">string s6 = s1 + <span class="string">", "</span> + <span class="string">"world"</span>;    <span class="comment">// ok: each + has a string operand</span></span><br></pre></td></tr></tbody></table></figure>
+<p>为了与C兼容，C++语言中的字符串字面值并不是标准库<code>string</code>的对象。</p>
+<h3 id="处理string对象中的字符dealing-with-the-characters-in-a-string"><a class="markdownIt-Anchor" href="#处理string对象中的字符dealing-with-the-characters-in-a-string"></a> 处理string对象中的字符（Dealing with the Characters in a string）</h3>
+<p>头文件<em>cctype</em>中的字符操作函数：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200805111754.png" alt="3-3"></p>
+<p>建议使用C<ins>版本的C标准库头文件。C语言中名称为<em>name.h</em>的头文件，在C</ins>中则被命名为<em>cname</em>。</p>
+<p>C++11提供了范围<code>for</code>（range for）语句，可以遍历给定序列中的每个元素并执行某种操作。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (declaration : expression)</span><br><span class="line">    statement</span><br></pre></td></tr></tbody></table></figure>
+<p><em>expression</em>部分是一个对象，用于表示一个序列。<em>declaration</em>部分负责定义一个变量，该变量被用于访问序列中的基础元素。每次迭代，<em>declaration</em>部分的变量都会被初始化为<em>expression</em>部分的下一个元素值。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function">string <span class="title">str</span><span class="params">(<span class="string">"some string"</span>)</span></span>;</span><br><span class="line"><span class="comment">// print the characters in str one character to a line</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> c : str)      <span class="comment">// for every char in str</span></span><br><span class="line">    cout &lt;&lt; c &lt;&lt; endl;  <span class="comment">// print the current character followed by a newline</span></span><br></pre></td></tr></tbody></table></figure>
+<p>如果想在范围<code>for</code>语句中改变<code>string</code>对象中字符的值，必须把循环变量定义成引用类型。</p>
+<p>下标运算符接收的输入参数是<code>string::size_type</code>类型的值，表示要访问字符的位置，返回值是该位置上字符的引用。</p>
+<p>下标数值从0记起，范围是0至<em>size - 1</em>。使用超出范围的下标将引发不可预知的后果。</p>
+<p>C++标准并不要求标准库检测下标是否合法。编程时可以把下标的类型定义为相应的<code>size_type</code>，这是一种无符号数，可以确保下标不会小于0，此时代码只需要保证下标小于<code>size</code>的值就可以了。另一种确保下标合法的有效手段就是使用范围<code>for</code>语句。</p>
+<h2 id="标准库类型vectorlibrary-vector-type"><a class="markdownIt-Anchor" href="#标准库类型vectorlibrary-vector-type"></a> 标准库类型vector（Library vector Type）</h2>
+<p>标准库类型<code>vector</code>表示对象的集合，也叫做容器（container），定义在头文件<em>vector</em>中。<code>vector</code>中所有对象的类型都相同，每个对象都有一个索引与之对应并用于访问该对象。</p>
+<p><code>vector</code>是模板（template）而非类型，由<code>vector</code>生成的类型必须包含<code>vector</code>中元素的类型，如<code>vector&lt;int&gt;</code>。</p>
+<p><font color="red">因为引用不是对象，所以不存在包含引用的<code>vector</code>。</font></p>
+<p>在早期的C<ins>标准中，如果<code>vector</code>的元素还是<code>vector</code>，定义时必须在外层<code>vector</code>对象的右尖括号和其元素类型之间添加一个空格，如<code>vector&lt;vector&lt;int&gt; &gt;</code>。但是在C</ins>11标准中，可以直接写成<code>vector&lt;vector&lt;int&gt;&gt;</code>，不需要添加空格。</p>
+<h3 id="定义和初始化vector对象defining-and-initializing-vectors"><a class="markdownIt-Anchor" href="#定义和初始化vector对象defining-and-initializing-vectors"></a> 定义和初始化vector对象（Defining and Initializing vectors）</h3>
+<p>初始化<code>vector</code>对象的方法：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200805152813.png" alt="3-4"></p>
+<p>初始化<code>vector</code>对象时如果使用圆括号，可以说提供的值是用来构造（construct）<code>vector</code>对象的；如果使用的是花括号，则是在列表初始化（list initialize）该<code>vector</code>对象。</p>
+<p>可以只提供<code>vector</code>对象容纳的元素数量而省略初始值，此时会创建一个值初始化（value-initialized）的元素初值，并把它赋给容器中的所有元素。这个初值由<code>vector</code>对象中的元素类型决定。</p>
+<h3 id="向vector对象中添加元素adding-elements-to-a-vector"><a class="markdownIt-Anchor" href="#向vector对象中添加元素adding-elements-to-a-vector"></a> 向vector对象中添加元素（Adding Elements to a vector）</h3>
+<p><code>push_back</code>函数可以把一个值添加到<code>vector</code>的尾端。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; v2;         <span class="comment">// empty vector</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i != <span class="number">100</span>; ++i)</span><br><span class="line">    v2.<span class="built_in">push_back</span>(i);    <span class="comment">// append sequential integers to v2</span></span><br><span class="line"><span class="comment">// at end of loop v2 has 100 elements, values 0 . . . 99</span></span><br></pre></td></tr></tbody></table></figure>
+<p>范围<code>for</code>语句体内不应该改变其所遍历序列的大小。</p>
+<h3 id="其他vector操作other-vector-operations"><a class="markdownIt-Anchor" href="#其他vector操作other-vector-operations"></a> 其他vector操作（Other vector Operations）</h3>
+<p><code>vector</code>支持的操作：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200805162732.png" alt="3-5"></p>
+<p><code>size</code>函数返回<code>vector</code>对象中元素的个数，返回值是由<code>vector</code>定义的<code>size_type</code>类型。<code>vector</code>对象的类型包含其中元素的类型。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt;::size_type  <span class="comment">// ok</span></span><br><span class="line">vector::size_type       <span class="comment">// error</span></span><br></pre></td></tr></tbody></table></figure>
+<p><code>vector</code>和<code>string</code>对象的下标运算符只能用来访问已经存在的元素，而不能用来添加元素。<br>
+确保下标合法的一种有效手段是尽可能使用范围 for语句。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; ivec;   <span class="comment">// empty vector</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">decltype</span>(ivec.<span class="built_in">size</span>()) ix = <span class="number">0</span>; ix != <span class="number">10</span>; ++ix)</span><br><span class="line">{</span><br><span class="line">    ivec[ix] = ix;  <span class="comment">// disaster: ivec has no elements</span></span><br><span class="line">    ivec.<span class="built_in">push_back</span>(ix); <span class="comment">// ok: adds a new element with value ix</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="迭代器介绍introducing-iterators"><a class="markdownIt-Anchor" href="#迭代器介绍introducing-iterators"></a> 迭代器介绍（Introducing Iterators）</h2>
+<p>迭代器的作用和下标类似，但是更加通用。所有标准库容器都可以使用迭代器，但是其中只有少数几种同时支持下标运算符。</p>
+<h3 id="使用迭代器using-iterators"><a class="markdownIt-Anchor" href="#使用迭代器using-iterators"></a> 使用迭代器（Using Iterators）</h3>
+<p>vector 支持下标运算，string支持迭代器</p>
+<p>定义了迭代器的类型都拥有<code>begin</code>和<code>end</code>两个成员函数。<code>begin</code>函数返回指向第一个元素的迭代器，<code>end</code>函数返回指向容器“尾元素的下一位置（one past the end）”的迭代器，通常被称作尾后迭代器（off-the-end iterator）或者简称为尾迭代器（end iterator）。尾后迭代器仅是个标记，表示程序已经处理完了容器中的所有元素。迭代器一般为<code>iterator</code>类型。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// b denotes the first element and e denotes one past the last element in ivec</span></span><br><span class="line"><span class="keyword">auto</span> b = ivec.<span class="built_in">begin</span>(), e = ivec.<span class="built_in">end</span>();    <span class="comment">// b and e have the same type</span></span><br></pre></td></tr></tbody></table></figure>
+<p>如果容器为空，则<code>begin</code>和<code>end</code>返回的是同一个迭代器，都是尾后迭代器。</p>
+<p>标准容器迭代器的运算符：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200805212839.png" alt="3-6"></p>
+<p>因为<code>end</code>返回的迭代器并不实际指向某个元素，所以不能对其进行递增或者解引用的操作。</p>
+<p>在<code>for</code>或者其他循环语句的判断条件中，最好使用<code>!=</code>而不是<code>&lt;</code>。所有标准库容器的迭代器都定义了<code>==</code>和<code>!=</code>，但是只有其中少数同时定义了<code>&lt;</code>运算符。</p>
+<p>如果<code>vector</code>或<code>string</code>对象是常量，则只能使用<code>const_iterator</code>迭代器，该迭代器只能读元素，不能写元素。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt;::iterator it; <span class="comment">// it can read and write vector&lt;int&gt; elements</span></span><br><span class="line">string::iterator it2; <span class="comment">// it2 can read and write characters in a string</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt;::const_iterator it3; <span class="comment">// it3 can read but not write elements</span></span><br><span class="line">string::const_iterator it4; <span class="comment">// it4 can read but not write</span></span><br></pre></td></tr></tbody></table></figure>
+<p><code>begin</code>和<code>end</code>返回的迭代器具体类型由对象是否是常量决定，如果对象是常量，则返回<code>const_iterator</code>；如果对象不是常量，则返回<code>iterator</code>。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line"><span class="type">const</span> vector&lt;<span class="type">int</span>&gt; cv;</span><br><span class="line"><span class="keyword">auto</span> it1 = v.<span class="built_in">begin</span>();   <span class="comment">// it1 has type vector&lt;int&gt;::iterator</span></span><br><span class="line"><span class="keyword">auto</span> it2 = cv.<span class="built_in">begin</span>();  <span class="comment">// it2 has type vector&lt;int&gt;::const_iterator</span></span><br></pre></td></tr></tbody></table></figure>
+<p>C++11新增了<code>cbegin</code>和<code>cend</code>函数，不论<code>vector</code>或<code>string</code>对象是否为常量，都返回<code>const_iterator</code>迭代器。</p>
+<p>任何可能改变容器对象容量的操作，都会使该对象的迭代器失效。<br>
+失效的两个原因：<br>
+1.在范围for循环中向vector对象添加元素<br>
+2.使用一种可以改变vector对象容量的操作，比如 push_back</p>
+<h3 id="迭代器运算iterator-arithmetic"><a class="markdownIt-Anchor" href="#迭代器运算iterator-arithmetic"></a> 迭代器运算（Iterator Arithmetic）</h3>
+<p><code>vector</code>和<code>string</code>迭代器支持的操作：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200806194430.png" alt="3-7"></p>
+<p><code>difference_type</code>类型用来表示两个迭代器间的距离，这是一种带符号整数类型。</p>
+<p>迭代器运算例子：二分搜索</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// text must be sorted</span></span><br><span class="line"><span class="comment">// beg and end will denote the range we're searching</span></span><br><span class="line"><span class="keyword">auto</span> beg = text.<span class="built_in">begin</span>(), end = text.<span class="built_in">end</span>();</span><br><span class="line"><span class="keyword">auto</span> mid = text.<span class="built_in">begin</span>() + (end - beg)/<span class="number">2</span>;    <span class="comment">// original midpoint</span></span><br><span class="line"><span class="comment">// while there are still elements to look at and we haven't yet found sought</span></span><br><span class="line"><span class="keyword">while</span> (mid != end &amp;&amp; *mid != sought) {</span><br><span class="line">    <span class="keyword">if</span> (sought &lt; *mid) <span class="comment">// is the element we want in the first half?</span></span><br><span class="line">        end = mid;     <span class="comment">// if so, adjust the range to ignore the second half</span></span><br><span class="line">    <span class="keyword">else</span>               <span class="comment">// the element we want is in the second half</span></span><br><span class="line">        beg = mid + <span class="number">1</span>; <span class="comment">// start looking with the element just after mid</span></span><br><span class="line">    mid = beg + (end - beg)/<span class="number">2</span>; <span class="comment">// new midpoint</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="数组arrays"><a class="markdownIt-Anchor" href="#数组arrays"></a> 数组（Arrays）</h2>
+<p>数组类似<code>vector</code>，但数组的大小确定不变，不能随意向数组中添加元素。</p>
+<p>如果不清楚元素的确切个数，应该使用<code>vector</code>。</p>
+<h3 id="定义和初始化内置数组defining-and-initializing-built-in-arrays"><a class="markdownIt-Anchor" href="#定义和初始化内置数组defining-and-initializing-built-in-arrays"></a> 定义和初始化内置数组（Defining and Initializing Built-in Arrays）</h3>
+<p>数组是一种复合类型，声明形式为<code>a[d]</code>，其中<em>a</em>是数组名称，<em>d</em>是数组维度（dimension）。维度必须是一个常量表达式。</p>
+<p>默认情况下，数组的元素被默认初始化。</p>
+<p>定义数组的时候必须指定数组的类型，不允许用<code>auto</code>关键字由初始值列表推断类型。</p>
+<p>如果定义数组时提供了元素的初始化列表，则允许省略数组维度，编译器会根据初始值的数量计算维度。但如果显式指明了维度，那么初始值的数量不能超过指定的大小。如果维度比初始值的数量大，则用提供的值初始化数组中靠前的元素，剩下的元素被默认初始化。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">unsigned</span> sz = <span class="number">3</span>;</span><br><span class="line"><span class="type">int</span> ia1[sz] = {<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>};  <span class="comment">// array of three ints with values 0, 1, 2</span></span><br><span class="line"><span class="type">int</span> a2[] = {<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>};   <span class="comment">// an array of dimension 3</span></span><br><span class="line"><span class="type">int</span> a3[<span class="number">5</span>] = {<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>};  <span class="comment">// equivalent to a3[] = {0, 1, 2, 0, 0}</span></span><br><span class="line">string a4[<span class="number">3</span>] = {<span class="string">"hi"</span>, <span class="string">"bye"</span>};   <span class="comment">// same as a4[] = {"hi", "bye", ""}</span></span><br><span class="line"><span class="type">int</span> a5[<span class="number">2</span>] = {<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>};    <span class="comment">// error: too many initializers</span></span><br></pre></td></tr></tbody></table></figure>
+<p>可以用字符串字面值初始化字符数组，但字符串字面值结尾处的空字符也会一起被拷贝到字符数组中。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">char</span> a1[] = {<span class="string">'C'</span>, <span class="string">'+'</span>, <span class="string">'+'</span>};        <span class="comment">// list initialization, no null</span></span><br><span class="line"><span class="type">char</span> a2[] = {<span class="string">'C'</span>, <span class="string">'+'</span>, <span class="string">'+'</span>, <span class="string">'\0'</span>};  <span class="comment">// list initialization, explicit null</span></span><br><span class="line"><span class="type">char</span> a3[] = <span class="string">"C++"</span>;      <span class="comment">// null terminator added automatically</span></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> a4[<span class="number">6</span>] = <span class="string">"Daniel"</span>;    <span class="comment">// error: no space for the null!</span></span><br></pre></td></tr></tbody></table></figure>
+<p>不能用一个数组初始化或直接赋值给另一个数组。</p>
+<p>从数组的名字开始由内向外阅读有助于理解复杂数组声明的含义。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">int</span> *ptrs[<span class="number">10</span>];              <span class="comment">// ptrs is an array of ten pointers to int</span></span><br><span class="line"><span class="type">int</span> &amp;refs[<span class="number">10</span>] = <span class="comment">/* ? */</span>;    <span class="comment">// error: no arrays of references</span></span><br><span class="line"><span class="built_in">int</span> (*Parray)[<span class="number">10</span>] = &amp;arr;   <span class="comment">// Parray points to an array of ten ints</span></span><br><span class="line"><span class="built_in">int</span> (&amp;arrRef)[<span class="number">10</span>] = arr;    <span class="comment">// arrRef refers to an array of ten ints</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="访问数组元素accessing-the-elements-of-an-array"><a class="markdownIt-Anchor" href="#访问数组元素accessing-the-elements-of-an-array"></a> 访问数组元素（Accessing the Elements of an Array）</h3>
+<p>数组下标通常被定义成<code>size_t</code>类型，这是一种机器相关的无符号类型，可以表示内存中任意对象的大小。<code>size_t</code>定义在头文件<em>cstddef</em>中。</p>
+<p>大多数常见的安全问题都源于缓冲区溢出错误。当数组或其他类似数据结构的下标越界并试图访问非法内存区域时，就会产生此类错误。</p>
+<h3 id="指针和数组pointers-and-arrays"><a class="markdownIt-Anchor" href="#指针和数组pointers-and-arrays"></a> 指针和数组（Pointers and Arrays）</h3>
+<p>在大多数表达式中，使用数组类型的对象其实是在使用一个指向该数组首元素的指针。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">string nums[] = {<span class="string">"one"</span>, <span class="string">"two"</span>, <span class="string">"three"</span>};    <span class="comment">// array of strings</span></span><br><span class="line">string *p = &amp;nums[<span class="number">0</span>];   <span class="comment">// p points to the first element in nums</span></span><br><span class="line">string *p2 = nums;      <span class="comment">// equivalent to p2 = &amp;nums[0]</span></span><br></pre></td></tr></tbody></table></figure>
+<p>指针做迭代器：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">int</span> *e = &amp;arr[<span class="number">10</span>]; <span class="comment">// pointer just past the last element in arr</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> *b = arr; b != e; ++b)</span><br><span class="line">cout &lt;&lt; *b &lt;&lt; endl; <span class="comment">// print the elements in arr</span></span><br></pre></td></tr></tbody></table></figure>
+<p>一维数组寻址公式：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200806220854.png" alt="3-8"></p>
+<p>当使用数组作为一个<code>auto</code>变量的初始值时，推断得到的类型是指针而非数组。但<code>decltype</code>关键字不会发生这种转换，直接返回数组类型。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">int</span> ia[] = {<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>};   <span class="comment">// ia is an array of ten ints</span></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">ia2</span><span class="params">(ia)</span></span>;   <span class="comment">// ia2 is an int* that points to the first element in ia</span></span><br><span class="line">ia2 = <span class="number">42</span>;       <span class="comment">// error: ia2 is a pointer, and we can't assign an int to a pointer</span></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">ia2</span><span class="params">(&amp;ia[<span class="number">0</span>])</span></span>;   <span class="comment">// now it's clear that ia2 has type int*</span></span><br><span class="line"><span class="comment">// ia3 is an array of ten ints</span></span><br><span class="line"><span class="keyword">decltype</span>(ia) ia3 = {<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>};</span><br><span class="line">ia3 = p;    <span class="comment">// error: can't assign an int* to an array</span></span><br><span class="line">ia3[<span class="number">4</span>] = i;     <span class="comment">// ok: assigns the value of i to an element in ia3</span></span><br></pre></td></tr></tbody></table></figure>
+<p>C++11在头文件<em>iterator</em>中定义了两个名为<code>begin</code>和<code>end</code>的函数，功能与容器中的两个同名成员函数类似，参数是一个数组。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">int</span> ia[] = {<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>};   <span class="comment">// ia is an array of ten ints</span></span><br><span class="line"><span class="type">int</span> *beg = <span class="built_in">begin</span>(ia);   <span class="comment">// pointer to the first element in ia</span></span><br><span class="line"><span class="type">int</span> *last = <span class="built_in">end</span>(ia);    <span class="comment">// pointer one past the last element in ia</span></span><br></pre></td></tr></tbody></table></figure>
+<p>两个指针相减的结果类型是<code>ptrdiff_t</code>，这是一种定义在头文件<em>cstddef</em>中的带符号类型。</p>
+<p>标准库类型限定使用的下标必须是无符号类型，而内置的下标运算无此要求。</p>
+<h3 id="c风格字符串c-style-character-strings"><a class="markdownIt-Anchor" href="#c风格字符串c-style-character-strings"></a> C风格字符串（C-Style Character Strings）</h3>
+<p>C风格字符串是将字符串存放在字符数组中，并以空字符结束（null terminated）。这不是一种类型，而是一种为了表达和使用字符串而形成的书写方法。</p>
+<p>C<ins>标准支持C风格字符串，但是最好不要在C</ins>程序中使用它们。对大多数程序来说，使用标准库<code>string</code>要比使用C风格字符串更加安全和高效。</p>
+<p>C风格字符串的函数：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200806220526.png" alt="3-9"></p>
+<p>C风格字符串函数不负责验证其参数的正确性，传入此类函数的指针必须指向以空字符作为结尾的数组。</p>
+<h3 id="与旧代码的接口interfacing-to-older-code"><a class="markdownIt-Anchor" href="#与旧代码的接口interfacing-to-older-code"></a> 与旧代码的接口（Interfacing to Older Code）</h3>
+<p>任何出现字符串字面值的地方都可以用以空字符结束的字符数组来代替：</p>
+<ul>
+<li>允许使用以空字符结束的字符数组来初始化<code>string</code>对象或为<code>string</code>对象赋值。</li>
+<li>在<code>string</code>对象的加法运算中，允许使用以空字符结束的字符数组作为其中一个运算对象（不能两个运算对象都是）。</li>
+<li>在<code>string</code>对象的复合赋值运算中，允许使用以空字符结束的字符数组作为右侧运算对象。</li>
+</ul>
+<p>不能用<code>string</code>对象直接初始化指向字符的指针。为了实现该功能，<code>string</code>提供了一个名为<code>c_str</code>的成员函数，返回<code>const char*</code>类型的指针，指向一个以空字符结束的字符数组，数组的数据和<code>string</code>对象一样。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function">string <span class="title">s</span><span class="params">(<span class="string">"Hello World"</span>)</span></span>;    <span class="comment">// s holds Hello World</span></span><br><span class="line"><span class="type">char</span> *str = s;  <span class="comment">// error: can't initialize a char* from a string</span></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> *str = s.<span class="built_in">c_str</span>();    <span class="comment">// ok</span></span><br></pre></td></tr></tbody></table></figure>
+<p>针对<code>string</code>对象的后续操作有可能会让<code>c_str</code>函数之前返回的数组失去作用，如果程序想一直都能使用其返回的数组，最好将该数组重新拷贝一份。</p>
+<p>可以使用数组来初始化<code>vector</code>对象，但是需要指明要拷贝区域的首元素地址和尾后地址。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">int</span> int_arr[] = {<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>};</span><br><span class="line"><span class="comment">// ivec has six elements; each is a copy of the corresponding element in int_arr</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">ivec</span><span class="params">(begin(int_arr), end(int_arr))</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>在新版本的C++程序中应该尽量使用<code>vector</code>、<code>string</code>和迭代器，避免使用内置数组、C风格字符串和指针。</p>
+<h2 id="多维数组multidimensional-arrays"><a class="markdownIt-Anchor" href="#多维数组multidimensional-arrays"></a> 多维数组（Multidimensional Arrays）</h2>
+<p>C++中的多维数组其实就是数组的数组。当一个数组的元素仍然是数组时，通常需要用两个维度定义它：一个维度表示数组本身的大小，另一个维度表示其元素（也是数组）的大小。通常把二维数组的第一个维度称作行，第二个维度称作列。</p>
+<p>多维数组初始化的几种方式：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">int</span> ia[<span class="number">3</span>][<span class="number">4</span>] =</span><br><span class="line">{   <span class="comment">// three elements; each element is an array of size 4</span></span><br><span class="line">    {<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>},   <span class="comment">// initializers for the row indexed by 0</span></span><br><span class="line">    {<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>},   <span class="comment">// initializers for the row indexed by 1</span></span><br><span class="line">    {<span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>}  <span class="comment">// initializers for the row indexed by 2</span></span><br><span class="line">};</span><br><span class="line"><span class="comment">// equivalent initialization without the optional nested braces for each row</span></span><br><span class="line"><span class="type">int</span> ib[<span class="number">3</span>][<span class="number">4</span>] = {<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>};</span><br><span class="line"><span class="comment">// explicitly initialize only element 0 in each row</span></span><br><span class="line"><span class="type">int</span> ic[<span class="number">3</span>][<span class="number">4</span>] = {{ <span class="number">0</span> }, { <span class="number">4</span> }, { <span class="number">8</span> }};</span><br><span class="line"><span class="comment">// explicitly initialize row 0; the remaining elements are value initialized</span></span><br><span class="line"><span class="type">int</span> id[<span class="number">3</span>][<span class="number">4</span>] = {<span class="number">0</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">9</span>};</span><br></pre></td></tr></tbody></table></figure>
+<p>可以使用下标访问多维数组的元素，数组的每个维度对应一个下标运算符。如果表达式中下标运算符的数量和数组维度一样多，则表达式的结果是给定类型的元素。如果下标运算符数量比数组维度小，则表达式的结果是给定索引处的一个内层数组。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// assigns the first element of arr to the last element in the last row of ia</span></span><br><span class="line">ia[<span class="number">2</span>][<span class="number">3</span>] = arr[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line"><span class="built_in">int</span> (&amp;row)[<span class="number">4</span>] = ia[<span class="number">1</span>];  <span class="comment">// binds row to the second four-element array in ia</span></span><br></pre></td></tr></tbody></table></figure>
+<p>多维数组寻址公式：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200807121513.png" alt="3-10"></p>
+<p>使用范围<code>for</code>语句处理多维数组时，为了避免数组被自动转换成指针，语句中的外层循环控制变量必须声明成引用类型。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span> &amp;row : ia)  <span class="comment">// for every element in the outer array</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> col : row)    <span class="comment">// for every element in the inner array</span></span><br><span class="line">        cout &lt;&lt; col &lt;&lt; endl;</span><br></pre></td></tr></tbody></table></figure>
+<p>如果<em>row</em>不是引用类型，编译器初始化<em>row</em>时会自动将数组形式的元素转换成指向该数组内首元素的指针，这样得到的<em>row</em>就是<code>int*</code>类型，而之后的内层循环则试图在一个<code>int*</code>内遍历，程序将无法通过编译。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> row : ia)</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> col : row)</span><br></pre></td></tr></tbody></table></figure>
+<p>使用范围<code>for</code>语句处理多维数组时，除了最内层的循环，其他所有外层循环的控制变量都应该定义成引用类型。</p>
+<p>因为多维数组实际上是数组的数组，所以由多维数组名称转换得到的指针指向第一个内层数组。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">int</span> ia[<span class="number">3</span>][<span class="number">4</span>];       <span class="comment">// array of size 3; each element is an array of ints of size 4</span></span><br><span class="line"><span class="built_in">int</span> (*p)[<span class="number">4</span>] = ia;   <span class="comment">// p points to an array of four ints</span></span><br><span class="line">p = &amp;ia[<span class="number">2</span>];         <span class="comment">// p now points to the last element in ia</span></span><br></pre></td></tr></tbody></table></figure>
+<p>声明指向数组类型的指针时，必须带有圆括号。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">int</span> *ip[<span class="number">4</span>];     <span class="comment">// array of pointers to int</span></span><br><span class="line"><span class="built_in">int</span> (*ip)[<span class="number">4</span>];   <span class="comment">// pointer to an array of four ints</span></span><br></pre></td></tr></tbody></table></figure>
+<p>使用<code>auto</code>和<code>decltype</code>能省略复杂的指针定义。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// print the value of each element in ia, with each inner array on its own line</span></span><br><span class="line"><span class="comment">// p points to an array of four ints</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> p = ia; p != ia + <span class="number">3</span>; ++p)</span><br><span class="line">{</span><br><span class="line">    <span class="comment">// q points to the first element of an array of four ints; that is, q points to an int</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> q = *p; q != *p + <span class="number">4</span>; ++q)</span><br><span class="line">        cout &lt;&lt; *q &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>使用标准库函数<code>begin</code>和<code>end</code>能更加简洁</p>
+<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// p points to the first array in ia</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> p = <span class="built_in">begin</span>(ia); p != <span class="built_in">end</span>(ia); ++p) {</span><br><span class="line"><span class="comment">// q points to the first element in an inner array</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> q = <span class="built_in">begin</span>(*p); q != <span class="built_in">end</span>(*p); ++q)</span><br><span class="line">cout &lt;&lt; *q &lt;&lt; <span class="string">' '</span>; <span class="comment">// prints the int value to which q</span></span><br><span class="line">points</span><br><span class="line">cout &lt;&lt; endl;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/posts/1d50.html" class="leancloud-visitors view" data-flag-title="Chapter03 字符串、向量和数组">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/posts/a5.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/posts/2b89.html" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"AA9eNAftQgfjEcK3l0j71rDS-gzGzoHsz","appKey":"E1r06kyXdl3RxWbXxaUQ6tPg","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2020-04-03 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/language/">language<span>13</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/C/">C++<span>12</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2022 Heisenberg Lee's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'tlhg.top' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
+   </html>

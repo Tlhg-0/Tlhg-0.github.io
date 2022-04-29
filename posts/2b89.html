@@ -1,0 +1,362 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>CVE-2019-6778 | tlhg&#39;s Blog|</title>
+  <meta name="author" content="Heisenberg Lee">
+  
+  <meta name="description" content="学习记录。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="CVE-2019-6778"/>
+  <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="tlhg's Blog|" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">tlhg&#39;s Blog|</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> CVE-2019-6778</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="一切皆socket"><a class="markdownIt-Anchor" href="#一切皆socket"></a> 一切皆socket</h1>
+<p>socket起源于UNIX,可以看出来socket完美的贴合了UNIX一切皆文件的编程思想.我们可以对socket描述符进行ORW的操作,类似普通文件.</p>
+<p>在网络编程中,都是由socket实现的,在linux中,socket由上层的libc中的socket和内核中的socket两部分组成,当然为了和硬件交互,最后还需要控制网卡驱动,才是一个完整的体系.</p>
+<p>这里我们可以进行一个完整流程的追踪,直接断在tcp_emu上.然后查看调用栈,回溯一下</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">#0  tcp_emu (so=0x7fffe0193ed0, m=0x7fffe0180e20) at /home/mozhucy/qemu-3.0.0/slirp/tcp_subr.c:617</span><br><span class="line">#1  0x0000555555bfc697 in tcp_input (m=0x7fffe0180e20, iphlen=20, inso=0x0, af=2) at /home/mozhucy/qemu-3.0.0/slirp/tcp_input.c:572</span><br><span class="line">#2  0x0000555555bf35c7 in ip_input (m=0x7fffe0180e20) at /home/mozhucy/qemu-3.0.0/slirp/ip_input.c:206</span><br><span class="line">#3  0x0000555555bf6a4a in slirp_input (slirp=0x55555680c500, pkt=0x7fffe02f2700 "RU\n", pkt_len=1334) at /home/mozhucy/qemu-3.0.0/slirp/slirp.c:874</span><br><span class="line">#4  0x0000555555bdf408 in net_slirp_receive (nc=0x55555680c350, buf=0x7fffe02f2700 "RU\n", size=1334) at /home/mozhucy/qemu-3.0.0/net/slirp.c:121</span><br><span class="line">#5  0x0000555555bd5117 in nc_sendv_compat (nc=0x55555680c350, iov=0x7fffeedc3310, iovcnt=1, flags=0) at /home/mozhucy/qemu-3.0.0/net/net.c:701</span><br><span class="line">#6  0x0000555555bd51d9 in qemu_deliver_packet_iov (sender=0x5555578b7d90, flags=0, iov=0x7fffeedc3310, iovcnt=1, opaque=0x55555680c350) at /home/mozhucy/qemu-3.0.0/net/net.c:728</span><br><span class="line">#7  0x0000555555bd7b08 in qemu_net_queue_deliver (queue=0x55555680c290, sender=0x5555578b7d90, flags=0, data=0x7fffe02f2700 "RU\n", size=1334) at /home/mozhucy/qemu-3.0.0/net/queue.c:164</span><br><span class="line">#8  0x0000555555bd7c24 in qemu_net_queue_send (queue=0x55555680c290, sender=0x5555578b7d90, flags=0, data=0x7fffe02f2700 "RU\n", size=1334, sent_cb=0x0) at /home/mozhucy/qemu-3.0.0/net/queue.c:199</span><br><span class="line">#9  0x0000555555bd4f7e in qemu_send_packet_async_with_flags (sender=0x5555578b7d90, flags=0, buf=0x7fffe02f2700 "RU\n", size=1334, sent_cb=0x0) at /home/mozhucy/qemu-3.0.0/net/net.c:655</span><br><span class="line">#10 0x0000555555bd4fb6 in qemu_send_packet_async (sender=0x5555578b7d90, buf=0x7fffe02f2700 "RU\n", size=1334, sent_cb=0x0) at /home/mozhucy/qemu-3.0.0/net/net.c:662</span><br><span class="line">#11 0x0000555555bd4fe3 in qemu_send_packet (nc=0x5555578b7d90, buf=0x7fffe02f2700 "RU\n", size=1334) at /home/mozhucy/qemu-3.0.0/net/net.c:668</span><br><span class="line">#12 0x0000555555aeb758 in rtl8139_transfer_frame (s=0x5555578b2d30, buf=0x7fffe02f2700 "RU\n", size=1334, do_interrupt=1, dot1q_buf=0x0) at /home/mozhucy/qemu-3.0.0/hw/net/rtl8139.c:1804</span><br><span class="line">#13 0x0000555555aecb73 in rtl8139_cplus_transmit_one (s=0x5555578b2d30) at /home/mozhucy/qemu-3.0.0/hw/net/rtl8139.c:2332</span><br><span class="line">#14 0x0000555555aecc31 in rtl8139_cplus_transmit (s=0x5555578b2d30) at /home/mozhucy/qemu-3.0.0/hw/net/rtl8139.c:2359</span><br><span class="line">#15 0x0000555555aed8a2 in rtl8139_io_writeb (opaque=0x5555578b2d30, addr=217 '\331', val=64) at /home/mozhucy/qemu-3.0.0/hw/net/rtl8139.c:2742</span><br><span class="line">#16 0x0000555555aee87f in rtl8139_ioport_write (opaque=0x5555578b2d30, addr=217, val=64, size=1) at /home/mozhucy/qemu-3.0.0/hw/net/rtl8139.c:3279</span><br><span class="line">#17 0x000055555585cbb6 in memory_region_write_accessor (mr=0x5555578b57c0, addr=217, value=0x7fffeedc37e8, size=1, shift=0, mask=255, attrs=...) at /home/mozhucy/qemu-3.0.0/memory.c:527</span><br><span class="line">#18 0x000055555585cdce in access_with_adjusted_size (addr=217, value=0x7fffeedc37e8, size=1, access_size_min=1, access_size_max=4, access_fn=0x55555585cacc &lt;memory_region_write_accessor&gt;, mr=0x5555578b57c0, attrs=...) at /home/mozhucy/qemu-3.0.0/memory.c:594</span><br><span class="line">#19 0x000055555585f9f6 in memory_region_dispatch_write (mr=0x5555578b57c0, addr=217, data=64, size=1, attrs=...) at /home/mozhucy/qemu-3.0.0/memory.c:1473</span><br><span class="line">#20 0x00005555557fba28 in flatview_write_continue (fv=0x7fffe017c000, addr=4273803481, attrs=..., buf=0x7ffff7ff0028 "@\020", len=1, addr1=217, l=1, mr=0x5555578b57c0) at /home/mozhucy/qemu-3.0.0/exec.c:3255</span><br><span class="line">#21 0x00005555557fbb72 in flatview_write (fv=0x7fffe017c000, addr=4273803481, attrs=..., buf=0x7ffff7ff0028 "@\020", len=1) at /home/mozhucy/qemu-3.0.0/exec.c:3294</span><br><span class="line">#22 0x00005555557fbe78 in address_space_write (as=0x5555566e6640 &lt;address_space_memory&gt;, addr=4273803481, attrs=..., buf=0x7ffff7ff0028 "@\020", len=1) at /home/mozhucy/qemu-3.0.0/exec.c:3384</span><br><span class="line">#23 0x00005555557fbec9 in address_space_rw (as=0x5555566e6640 &lt;address_space_memory&gt;, addr=4273803481, attrs=..., buf=0x7ffff7ff0028 "@\020", len=1, is_write=true) at /home/mozhucy/qemu-3.0.0/exec.c:3395</span><br><span class="line">#24 0x000055555587ac06 in kvm_cpu_exec (cpu=0x555556833070) at /home/mozhucy/qemu-3.0.0/accel/kvm/kvm-all.c:1979</span><br><span class="line">#25 0x0000555555841f35 in qemu_kvm_cpu_thread_fn (arg=0x555556833070) at /home/mozhucy/qemu-3.0.0/cpus.c:1215</span><br><span class="line">#26 0x0000555555d668d7 in qemu_thread_start (args=0x555556854b30) at /home/mozhucy/qemu-3.0.0/util/qemu-thread-posix.c:504</span><br><span class="line">#27 0x00007ffff62526ba in start_thread (arg=0x7fffeedc4700) at pthread_create.c:333</span><br><span class="line">#28 0x00007ffff5f8841d in clone () at ../sysdeps/unix/sysv/linux/x86_64/clone.S:109</span><br></pre></td></tr></tbody></table></figure>
+<p>可以看到还是很多的调用流程,不过大概可以梳理出一个流程,28-24属于kvm/多CPU初始化的过程,23-17属于内存的处理过程,16-12属于网卡虚拟化内部的数据流处理流程,11-0属于qemu对于数据包的底层调用,也就是qemu网络的后端实现</p>
+<p>There are two parts to networking within QEMU:</p>
+<ul>
+<li>the virtual network device that is provided to the guest (e.g. a PCI network card).</li>
+<li>the network backend that interacts with the emulated NIC (e.g. puts packets onto the host’s network).</li>
+</ul>
+<p>slirp_input函数作为入口</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">ssize_t</span> <span class="title function_">net_slirp_receive</span><span class="params">(NetClientState *nc, <span class="type">const</span> <span class="type">uint8_t</span> *buf, <span class="type">size_t</span> size)</span></span><br><span class="line">{</span><br><span class="line">    SlirpState *s = DO_UPCAST(SlirpState, nc, nc);</span><br><span class="line"></span><br><span class="line">    slirp_input(s-&gt;slirp, buf, size);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> size;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>这里是qemu调用slirp_input的地方,可以看到,传入参数为buf,size,还有Slirp结构体,其中buf为网络包的内容size为网络包的大小</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">slirp_input</span><span class="params">(Slirp *slirp, <span class="type">const</span> <span class="type">uint8_t</span> *pkt, <span class="type">int</span> pkt_len)</span></span><br><span class="line">{</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">mbuf</span> *<span class="title">m</span>;</span></span><br><span class="line">    <span class="type">int</span> proto;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (pkt_len &lt; ETH_HLEN)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    proto = ntohs(*(<span class="type">uint16_t</span> *)(pkt + <span class="number">12</span>));</span><br><span class="line">    <span class="keyword">switch</span>(proto) {</span><br><span class="line">    <span class="keyword">case</span> ETH_P_ARP:</span><br><span class="line">        arp_input(slirp, pkt, pkt_len);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> ETH_P_IP:</span><br><span class="line">    <span class="keyword">case</span> ETH_P_IPV6:</span><br><span class="line">        m = m_get(slirp);</span><br><span class="line">        <span class="keyword">if</span> (!m)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">/* Note: we add 2 to align the IP header on 4 bytes,</span></span><br><span class="line"><span class="comment">         * and add the margin for the tcpiphdr overhead  */</span></span><br><span class="line">        <span class="keyword">if</span> (M_FREEROOM(m) &lt; pkt_len + TCPIPHDR_DELTA + <span class="number">2</span>) {</span><br><span class="line">            m_inc(m, pkt_len + TCPIPHDR_DELTA + <span class="number">2</span>);</span><br><span class="line">        }</span><br><span class="line">        m-&gt;m_len = pkt_len + TCPIPHDR_DELTA + <span class="number">2</span>;</span><br><span class="line">        <span class="built_in">memcpy</span>(m-&gt;m_data + TCPIPHDR_DELTA + <span class="number">2</span>, pkt, pkt_len);</span><br><span class="line"></span><br><span class="line">        m-&gt;m_data += TCPIPHDR_DELTA + <span class="number">2</span> + ETH_HLEN;</span><br><span class="line">        m-&gt;m_len -= TCPIPHDR_DELTA + <span class="number">2</span> + ETH_HLEN;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (proto == ETH_P_IP) {</span><br><span class="line">            ip_input(m);</span><br><span class="line">        } <span class="keyword">else</span> <span class="keyword">if</span> (proto == ETH_P_IPV6) {</span><br><span class="line">            ip6_input(m);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> ETH_P_NCSI:</span><br><span class="line">        ncsi_input(slirp, pkt, pkt_len);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>到达slirp_input函数后,libslirp开始解析网络包,首先验证packet_len和ETH_HLEN长度的大小,ETH_HLEN为以太帧头部的大小,两个6字节表示mac地址,两字节表示协议</p>
+<p>判断后,取出以太帧传输的协议部分.开始进行数据的分发,这里分为四个case,三个处理块,分别为ARP协议IP协议和NCSI协议</p>
+<p>在ip处理块中,计算了偏移,去除了ETH_HLEN,并且将待处理的值,放到m中</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">mbuf</span> {</span></span><br><span class="line">	<span class="comment">/* XXX should union some of these! */</span></span><br><span class="line">	<span class="comment">/* header at beginning of each mbuf: */</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span>	<span class="title">mbuf</span> *<span class="title">m_next</span>;</span>		<span class="comment">/* Linked list of mbufs */</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span>	<span class="title">mbuf</span> *<span class="title">m_prev</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span>	<span class="title">mbuf</span> *<span class="title">m_nextpkt</span>;</span>	<span class="comment">/* Next packet in queue/record */</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span>	<span class="title">mbuf</span> *<span class="title">m_prevpkt</span>;</span>	<span class="comment">/* Flags aren't used in the output queue */</span></span><br><span class="line">	<span class="type">int</span>	m_flags;		<span class="comment">/* Misc flags */</span></span><br><span class="line"></span><br><span class="line">	<span class="type">int</span>	m_size;			<span class="comment">/* Size of mbuf, from m_dat or m_ext */</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span>	<span class="title">socket</span> *<span class="title">m_so</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="type">caddr_t</span>	m_data;			<span class="comment">/* Current location of data */</span></span><br><span class="line">	<span class="type">int</span>	m_len;			<span class="comment">/* Amount of data in this mbuf, from m_data */</span></span><br><span class="line"></span><br><span class="line">	Slirp *slirp;</span><br><span class="line">	<span class="type">bool</span>	resolution_requested;</span><br><span class="line">	<span class="type">uint64_t</span> expiration_date;</span><br><span class="line">	<span class="type">char</span>   *m_ext;</span><br><span class="line">	<span class="comment">/* start of dynamic buffer area, must be last element */</span></span><br><span class="line">	<span class="type">char</span>    m_dat[];</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+<p>可以看到mbuf是由一个双向链表所维护的,还包括了socket结构体,data指针和长度,最后将这个传入ip_input中</p>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">void</span></span><br><span class="line"><span class="title function_">ip_input</span><span class="params">(<span class="keyword">struct</span> mbuf *m)</span></span><br><span class="line">{</span><br><span class="line">	Slirp *slirp = m-&gt;slirp;<span class="comment">//取出slirp结构体</span></span><br><span class="line">	<span class="keyword">register</span> <span class="class"><span class="keyword">struct</span> <span class="title">ip</span> *<span class="title">ip</span>;</span><span class="comment">//初始化ip结构体</span></span><br><span class="line">	<span class="type">int</span> hlen;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!slirp-&gt;in_enabled) {</span><br><span class="line">		<span class="keyword">goto</span> bad;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	DEBUG_CALL(<span class="string">"ip_input"</span>);</span><br><span class="line">	DEBUG_ARG(<span class="string">"m = %p"</span>, m);</span><br><span class="line">	DEBUG_ARG(<span class="string">"m_len = %d"</span>, m-&gt;m_len);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (m-&gt;m_len &lt; <span class="keyword">sizeof</span> (<span class="keyword">struct</span> ip)) { <span class="comment">//判断数据长度和ip结构体长度的关系</span></span><br><span class="line">		<span class="keyword">goto</span> bad;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	ip = mtod(m, <span class="keyword">struct</span> ip *);<span class="comment">//给数据转换类型为ip</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (ip-&gt;ip_v != IPVERSION) {<span class="comment">//检查是不是IPV4</span></span><br><span class="line">		<span class="keyword">goto</span> bad;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	hlen = ip-&gt;ip_hl &lt;&lt; <span class="number">2</span>; <span class="comment">//计算头部ip长度</span></span><br><span class="line">	<span class="keyword">if</span> (hlen&lt;<span class="keyword">sizeof</span>(<span class="keyword">struct</span> ip ) || hlen&gt;m-&gt;m_len) {<span class="comment">/* min header length */</span></span><br><span class="line">	  <span class="keyword">goto</span> bad;                                  <span class="comment">/* or packet too short */</span></span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* keep ip header intact for ICMP reply</span></span><br><span class="line"><span class="comment">	 * ip-&gt;ip_sum = cksum(m, hlen);</span></span><br><span class="line"><span class="comment">	 * if (ip-&gt;ip_sum) {</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">if</span>(cksum(m,hlen)) {<span class="comment">//计算校验和</span></span><br><span class="line">	  <span class="keyword">goto</span> bad;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Convert fields to host representation.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	NTOHS(ip-&gt;ip_len);</span><br><span class="line">	<span class="keyword">if</span> (ip-&gt;ip_len &lt; hlen) {</span><br><span class="line">		<span class="keyword">goto</span> bad;</span><br><span class="line">	}</span><br><span class="line">	NTOHS(ip-&gt;ip_id);</span><br><span class="line">	NTOHS(ip-&gt;ip_off);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Check that the amount of data in the buffers</span></span><br><span class="line"><span class="comment">	 * is as at least much as the IP header would have us expect.</span></span><br><span class="line"><span class="comment">	 * Trim mbufs if longer than we expect.</span></span><br><span class="line"><span class="comment">	 * Drop packet if shorter than we expect.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">if</span> (m-&gt;m_len &lt; ip-&gt;ip_len) {</span><br><span class="line">		<span class="keyword">goto</span> bad;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Should drop packet if mbuf too long? hmmm... */</span></span><br><span class="line">	<span class="keyword">if</span> (m-&gt;m_len &gt; ip-&gt;ip_len)</span><br><span class="line">	   m_adj(m, ip-&gt;ip_len - m-&gt;m_len);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* check ip_ttl for a correct ICMP reply */</span></span><br><span class="line">	<span class="keyword">if</span> (ip-&gt;ip_ttl == <span class="number">0</span>) {</span><br><span class="line">	    icmp_send_error(m, ICMP_TIMXCEED, ICMP_TIMXCEED_INTRANS, <span class="number">0</span>, <span class="string">"ttl"</span>);</span><br><span class="line">	    <span class="keyword">goto</span> bad;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * If offset or IP_MF are set, must reassemble.</span></span><br><span class="line"><span class="comment">	 * Otherwise, nothing need be done.</span></span><br><span class="line"><span class="comment">	 * (We could look in the reassembly queue to see</span></span><br><span class="line"><span class="comment">	 * if the packet was previously fragmented,</span></span><br><span class="line"><span class="comment">	 * but it's not worth the time; just let them time out.)</span></span><br><span class="line"><span class="comment">	 *</span></span><br><span class="line"><span class="comment">	 * XXX This should fail, don't fragment yet</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">if</span> (ip-&gt;ip_off &amp;~ IP_DF) {<span class="comment">//IP分片处理</span></span><br><span class="line">	  <span class="keyword">register</span> <span class="class"><span class="keyword">struct</span> <span class="title">ipq</span> *<span class="title">fp</span>;</span></span><br><span class="line">      <span class="class"><span class="keyword">struct</span> <span class="title">qlink</span> *<span class="title">l</span>;</span></span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		 * Look for queue of fragments</span></span><br><span class="line"><span class="comment">		 * of this datagram.</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="keyword">for</span> (l = slirp-&gt;ipq.ip_link.next; l != &amp;slirp-&gt;ipq.ip_link;</span><br><span class="line">		     l = l-&gt;next) {</span><br><span class="line">            fp = container_of(l, <span class="keyword">struct</span> ipq, ip_link);</span><br><span class="line">            <span class="keyword">if</span> (ip-&gt;ip_id == fp-&gt;ipq_id &amp;&amp;</span><br><span class="line">                    ip-&gt;ip_src.s_addr == fp-&gt;ipq_src.s_addr &amp;&amp;</span><br><span class="line">                    ip-&gt;ip_dst.s_addr == fp-&gt;ipq_dst.s_addr &amp;&amp;</span><br><span class="line">                    ip-&gt;ip_p == fp-&gt;ipq_p)</span><br><span class="line">		    <span class="keyword">goto</span> found;</span><br><span class="line">        }</span><br><span class="line">        fp = <span class="literal">NULL</span>;</span><br><span class="line">	found:</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		 * Adjust ip_len to not reflect header,</span></span><br><span class="line"><span class="comment">		 * set ip_mff if more fragments are expected,</span></span><br><span class="line"><span class="comment">		 * convert offset of this to bytes.</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		ip-&gt;ip_len -= hlen;</span><br><span class="line">		<span class="keyword">if</span> (ip-&gt;ip_off &amp; IP_MF)</span><br><span class="line">		  ip-&gt;ip_tos |= <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		  ip-&gt;ip_tos &amp;= ~<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">		ip-&gt;ip_off &lt;&lt;= <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		 * If datagram marked as having more fragments</span></span><br><span class="line"><span class="comment">		 * or if this is not the first fragment,</span></span><br><span class="line"><span class="comment">		 * attempt reassembly; if it succeeds, proceed.</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="keyword">if</span> (ip-&gt;ip_tos &amp; <span class="number">1</span> || ip-&gt;ip_off) {</span><br><span class="line">			ip = ip_reass(slirp, ip, fp);</span><br><span class="line">                        <span class="keyword">if</span> (ip == <span class="literal">NULL</span>)</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			m = dtom(slirp, ip);</span><br><span class="line">		} <span class="keyword">else</span></span><br><span class="line">			<span class="keyword">if</span> (fp)</span><br><span class="line">		   	   ip_freef(slirp, fp);</span><br><span class="line"></span><br><span class="line">	} <span class="keyword">else</span></span><br><span class="line">		ip-&gt;ip_len -= hlen;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Switch out to protocol's input routine.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">switch</span> (ip-&gt;ip_p) { <span class="comment">//选择协议模拟</span></span><br><span class="line">	 <span class="keyword">case</span> IPPROTO_TCP:</span><br><span class="line">		tcp_input(m, hlen, (<span class="keyword">struct</span> socket *)<span class="literal">NULL</span>, AF_INET);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	 <span class="keyword">case</span> IPPROTO_UDP:</span><br><span class="line">		udp_input(m, hlen);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	 <span class="keyword">case</span> IPPROTO_ICMP:</span><br><span class="line">		icmp_input(m, hlen);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	 <span class="keyword">default</span>:</span><br><span class="line">		m_free(m);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">bad:</span><br><span class="line">	m_free(m);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>可以看到这里是对数据包的检测以及分段的模拟等,随后进入到协议模拟</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/posts/2b89.html" class="leancloud-visitors view" data-flag-title="CVE-2019-6778">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/posts/1d50.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a type="button" class="btn btn-default disabled">下一页<i class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"AA9eNAftQgfjEcK3l0j71rDS-gzGzoHsz","appKey":"E1r06kyXdl3RxWbXxaUQ6tPg","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2020-03-17 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/PWN/">PWN<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2022 Heisenberg Lee's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'tlhg.top' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
+   </html>

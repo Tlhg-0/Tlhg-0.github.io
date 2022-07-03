@@ -6,7 +6,7 @@
   <link href="http://tlhg.top/atom.xml" rel="self"/>
   
   <link href="http://tlhg.top/"/>
-  <updated>2021-06-17T10:03:36.267Z</updated>
+  <updated>2022-07-03T12:08:38.178Z</updated>
   <id>http://tlhg.top/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python字符串</title>
+    <link href="http://tlhg.top/posts/8998.html"/>
+    <id>http://tlhg.top/posts/8998.html</id>
+    <published>2022-07-03T11:16:21.360Z</published>
+    <updated>2022-07-03T12:08:38.178Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;python字符串&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#python字符串&quot;&gt;&lt;/a&gt; Python字符串&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;str 转换bytes&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;纯英文的&lt;code&gt;str&lt;/code&gt;可以用&lt;code&gt;ASCII&lt;/code&gt;编码为&lt;code&gt;bytes&lt;/code&gt;，内容是一样的，&lt;br&gt;
+含有中文的&lt;code&gt;str&lt;/code&gt;可以用&lt;code&gt;UTF-8&lt;/code&gt;编码为&lt;code&gt;bytes&lt;/code&gt;。&lt;br&gt;
+含有中文的&lt;code&gt;str&lt;/code&gt;无法用&lt;code&gt;ASCII&lt;/code&gt;编码，因为中文编码的范围超过了&lt;code&gt;ASCII&lt;/code&gt;编码的范围，Python会报错。&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;bytes&lt;/code&gt;中，无法显示为ASCII字符的字节，用&lt;code&gt;\x##&lt;/code&gt;显示。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&#39;ABC&#39;&lt;/span&gt;.encode(&lt;span class=&quot;string&quot;&gt;&#39;ascii&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;b&#39;ABC&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&#39;中文&#39;&lt;/span&gt;.encode(&lt;span class=&quot;string&quot;&gt;&#39;utf-8&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;b&#39;\xe4\xb8\xad\xe6\x96\x87&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&#39;中文&#39;&lt;/span&gt;.encode(&lt;span class=&quot;string&quot;&gt;&#39;ascii&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Traceback (most recent call last):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  File &lt;span class=&quot;string&quot;&gt;&quot;&amp;lt;stdin&amp;gt;&quot;&lt;/span&gt;, line &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &amp;lt;module&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;UnicodeEncodeError: &lt;span class=&quot;string&quot;&gt;&#39;ascii&#39;&lt;/span&gt; codec can&lt;span class=&quot;string&quot;&gt;&#39;t encode characters in position 0-1: ordinal not in range(128)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;bytes转换str&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;把&lt;code&gt;bytes&lt;/code&gt;变为&lt;code&gt;str&lt;/code&gt;，就需要用&lt;code&gt;decode()&lt;/code&gt;方法：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;string&quot;&gt;b&#39;ABC&#39;&lt;/span&gt;.decode(&lt;span class=&quot;string&quot;&gt;&#39;ascii&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;&#39;ABC&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;string&quot;&gt;b&#39;\xe4\xb8\xad\xe6\x96\x87&#39;&lt;/span&gt;.decode(&lt;span class=&quot;string&quot;&gt;&#39;utf-8&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;&#39;中文&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;计算str包含的字符串/bytes包含的字节数&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;1个中文字符经过UTF-8编码后通常会占用3个字节，而1个英文字符只占用1个字节。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#str包含的字符串&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;len&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;ABC&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;len&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;中文&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#bytes包含的字节数&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;len&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;b&#39;ABC&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;len&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;b&#39;\xe4\xb8\xad\xe6\x96\x87&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;len&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;中文&#39;&lt;/span&gt;.encode(&lt;span class=&quot;string&quot;&gt;&#39;utf-8&#39;&lt;/span&gt;))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;文件乱码问题&lt;/p&gt;
+&lt;p&gt;在操作字符串时，我们经常遇到&lt;code&gt;str&lt;/code&gt;和&lt;code&gt;bytes&lt;/code&gt;的互相转换。为了避免乱码问题，应当始终坚持使用UTF-8编码对&lt;code&gt;str&lt;/code&gt;和&lt;code&gt;bytes&lt;/code&gt;进行转换。&lt;/p&gt;
+&lt;p&gt;当Python解释器读取源代码时，为了让它按UTF-8编码读取，我们通常在文件开头写上这两行：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#!/usr/bin/env python3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# -*- coding: utf-8 -*-、&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;第一行注释是为了告诉Linux/OS X系统，这是一个Python可执行程序，Windows系统会忽略这个注释；&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="language" scheme="http://tlhg.top/categories/language/"/>
+    
+    
+    <category term="Python" scheme="http://tlhg.top/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>微信电脑版多开、防撤回破解</title>
@@ -636,48 +688,6 @@ Remote：远程仓库
     
     
     <category term="Crack" scheme="http://tlhg.top/tags/Crack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>VS Code edit background</title>
-    <link href="http://tlhg.top/posts/7060.html"/>
-    <id>http://tlhg.top/posts/7060.html</id>
-    <published>2020-05-29T06:19:19.000Z</published>
-    <updated>2020-08-07T13:25:28.145Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#前言&quot;&gt;&lt;/a&gt; 前言&lt;/h1&gt;
-&lt;p&gt;  今天用VS Code 写代码，感觉背景有点单调，所以决定美化一下（美名其曰美化，其实是偷偷摸鱼），网上大部分教程都是使用background插件来自定义vscode的背景图，这种方法需要在配置文件中配置一下，但是折腾完了发现这个方法不是很对我的胃口。&lt;/p&gt;
-&lt;p&gt;​	 这是在使用过程中出现的一些问题：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;在VS Code窗口右下角会有警告提示，虽然可以手动关闭，但是我不喜欢。&lt;/li&gt;
-&lt;li&gt;背景图只能覆盖代码区，左侧菜单区是不能覆盖的。&lt;/li&gt;
-&lt;li&gt;VS Code更新后，配置文件setting.json下修改的适应背景的配置代码会消失。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;  感兴趣的小伙伴可以去百度一下教程，我在这里就不在赘述了，这里着重介绍第二种方法：修改一下vscode的源css文件。&lt;/p&gt;
-&lt;p&gt;**ps：**background插件在删除的时候，会自动删除添加的样式（依赖node环境）。&lt;br&gt;
-如果没有node环境，需要在 settings.json 中设置 {“background.enabled”: false} ，然后再删除插件。如果直接删除插件会有遗留，就需要重装vscode了。&lt;/p&gt;
-&lt;p&gt;这里先把效果图放一下：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200529162132.png&quot; alt&gt;&lt;/p&gt;
-&lt;h1 id=&quot;如何实现&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#如何实现&quot;&gt;&lt;/a&gt; 如何实现&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;进入VS Code的源文件下面，找到 workbench.desktop.main.css 文件，文件地址  E:\Microsoft VS Code\resources\app\out\vs\workbench  （我的VS Code安装在E盘下）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/J(OZ_WI@QE67%7BAU)59~7RZW.png&quot; alt=&quot;img&quot;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;任意的编译器打开workbench.desktop.main.css 文件，可以插入源代码中，也可以直接写在末尾位置，添加body{}，这一步也就是在css中写入配置文件，修改添加到背景的图片的相关信息，代码如下：&lt;/p&gt;
-&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;body&lt;/span&gt; {&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;height&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;100%&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;100%&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;margin&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;padding&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;overflow&lt;/span&gt;: hidden;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;font-size&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;11px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  user-select: none;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;pointer-events&lt;/span&gt;: auto;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;background-size&lt;/span&gt;: cover;    //详见说明&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;opacity&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;0.75&lt;/span&gt;;             //透明度修改，注意这里图片和代码文字都能会被透明度影响&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;background-position&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;background-image&lt;/span&gt;: &lt;span class=&quot;built_in&quot;&gt;url&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;file:///F:/picture/wallpaper/cartoon/大姐姐.png&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;content&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;position&lt;/span&gt;: absolute;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;z-index&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;99999&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;width&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;100%&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;background-repeat&lt;/span&gt;: no-repeat;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;}&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ol&gt;</summary>
-    
-    
-    
-    <category term="tools" scheme="http://tlhg.top/categories/tools/"/>
-    
-    
-    <category term="VS Code" scheme="http://tlhg.top/tags/VS-Code/"/>
     
   </entry>
   

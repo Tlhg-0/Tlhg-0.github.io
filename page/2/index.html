@@ -137,6 +137,92 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/posts/7060.html" >VS Code edit background</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2020-05-29  </div>
+		</div>
+	</div>
+	
+
+
+			<!--
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>  今天用VS Code 写代码，感觉背景有点单调，所以决定美化一下（美名其曰美化，其实是偷偷摸鱼），网上大部分教程都是使用background插件来自定义vscode的背景图，这种方法需要在配置文件中配置一下，但是折腾完了发现这个方法不是很对我的胃口。</p>
+<p>​	 这是在使用过程中出现的一些问题：</p>
+<ol>
+<li>在VS Code窗口右下角会有警告提示，虽然可以手动关闭，但是我不喜欢。</li>
+<li>背景图只能覆盖代码区，左侧菜单区是不能覆盖的。</li>
+<li>VS Code更新后，配置文件setting.json下修改的适应背景的配置代码会消失。</li>
+</ol>
+<p>  感兴趣的小伙伴可以去百度一下教程，我在这里就不在赘述了，这里着重介绍第二种方法：修改一下vscode的源css文件。</p>
+<p>**ps：**background插件在删除的时候，会自动删除添加的样式（依赖node环境）。<br>
+如果没有node环境，需要在 settings.json 中设置 {“background.enabled”: false} ，然后再删除插件。如果直接删除插件会有遗留，就需要重装vscode了。</p>
+<p>这里先把效果图放一下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200529162132.png" alt></p>
+<h1 id="如何实现"><a class="markdownIt-Anchor" href="#如何实现"></a> 如何实现</h1>
+<ol>
+<li>
+<p>进入VS Code的源文件下面，找到 workbench.desktop.main.css 文件，文件地址  E:\Microsoft VS Code\resources\app\out\vs\workbench  （我的VS Code安装在E盘下）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/J(OZ_WI@QE67%7BAU)59~7RZW.png" alt="img"></p>
+</li>
+<li>
+<p>任意的编译器打开workbench.desktop.main.css 文件，可以插入源代码中，也可以直接写在末尾位置，添加body{}，这一步也就是在css中写入配置文件，修改添加到背景的图片的相关信息，代码如下：</p>
+<figure class="highlight css"><table><tbody><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> {</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">11px</span>;</span><br><span class="line">  user-select: none;</span><br><span class="line">  <span class="attribute">pointer-events</span>: auto;</span><br><span class="line">  <span class="attribute">background-size</span>: cover;    //详见说明</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0.75</span>;             //透明度修改，注意这里图片和代码文字都能会被透明度影响</span><br><span class="line">  <span class="attribute">background-position</span>: <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">"file:///F:/picture/wallpaper/cartoon/大姐姐.png"</span>);</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">z-index</span>: <span class="number">99999</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+	
+
+	</div>
+  <a type="button" href="/posts/7060.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+-->
+<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>  今天用VS Code 写代码，感觉背景有点单调，所以决定美化一下（美名其曰美化，其实是偷偷摸鱼），网上大部分教程都是使用background插件来自定义vscode的背景图，这种方法需要在配置文件中配置一下，但是折腾完了发现这个方法不是很对我的胃口。</p>
+<p>​	 这是在使用过程中出现的一些问题：</p>
+<ol>
+<li>在VS Code窗口右下角会有警告提示，虽然可以手动关闭，但是我不喜欢。</li>
+<li>背景图只能覆盖代码区，左侧菜单区是不能覆盖的。</li>
+<li>VS Code更新后，配置文件setting.json下修改的适应背景的配置代码会消失。</li>
+</ol>
+<p>  感兴趣的小伙伴可以去百度一下教程，我在这里就不在赘述了，这里着重介绍第二种方法：修改一下vscode的源css文件。</p>
+<p>**ps：**background插件在删除的时候，会自动删除添加的样式（依赖node环境）。<br>
+如果没有node环境，需要在 settings.json 中设置 {“background.enabled”: false} ，然后再删除插件。如果直接删除插件会有遗留，就需要重装vscode了。</p>
+<p>这里先把效果图放一下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200529162132.png" alt></p>
+<h1 id="如何实现"><a class="markdownIt-Anchor" href="#如何实现"></a> 如何实现</h1>
+<ol>
+<li>
+<p>进入VS Code的源文件下面，找到 workbench.desktop.main.css 文件，文件地址  E:\Microsoft VS Code\resources\app\out\vs\workbench  （我的VS Code安装在E盘下）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/J(OZ_WI@QE67%7BAU)59~7RZW.png" alt="img"></p>
+</li>
+<li>
+<p>任意的编译器打开workbench.desktop.main.css 文件，可以插入源代码中，也可以直接写在末尾位置，添加body{}，这一步也就是在css中写入配置文件，修改添加到背景的图片的相关信息，代码如下：</p>
+<figure class="highlight css"><table><tbody><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> {</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">11px</span>;</span><br><span class="line">  user-select: none;</span><br><span class="line">  <span class="attribute">pointer-events</span>: auto;</span><br><span class="line">  <span class="attribute">background-size</span>: cover;    //详见说明</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0.75</span>;             //透明度修改，注意这里图片和代码文字都能会被透明度影响</span><br><span class="line">  <span class="attribute">background-position</span>: <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">"file:///F:/picture/wallpaper/cartoon/大姐姐.png"</span>);</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">z-index</span>: <span class="number">99999</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+	
+	</div>
+  <a type="button" href="/posts/7060.html#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/posts/b01d.html" >Markdown grammer</a>
 		</h3>
 		</div>
@@ -1038,7 +1124,7 @@ You live in Doe</p>
 		
 			<li><a href="/categories/kernel/">kernel<span>6</span></a></li>
 		
-			<li><a href="/categories/language/">language<span>13</span></a></li>
+			<li><a href="/categories/language/">language<span>14</span></a></li>
 		
 			<li><a href="/categories/tools/">tools<span>4</span></a></li>
 		
@@ -1051,29 +1137,31 @@ You live in Doe</p>
 		<h4>标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Data-Structure/">Data Structure<span>2</span></a></li>
-		
-			<li><a href="/tags/LaTex/">LaTex<span>1</span></a></li>
-		
-			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
-		
-			<li><a href="/tags/get/">get<span>2</span></a></li>
-		
-			<li><a href="/tags/C/">C++<span>12</span></a></li>
-		
-			<li><a href="/tags/Reverse/">Reverse<span>3</span></a></li>
-		
 			<li><a href="/tags/VS-Code/">VS Code<span>1</span></a></li>
 		
 			<li><a href="/tags/matery/">matery<span>1</span></a></li>
 		
+			<li><a href="/tags/Markdown/">Markdown<span>1</span></a></li>
+		
 			<li><a href="/tags/kernel-programm/">kernel programm<span>6</span></a></li>
 		
-			<li><a href="/tags/Markdown/">Markdown<span>1</span></a></li>
+			<li><a href="/tags/C/">C++<span>12</span></a></li>
+		
+			<li><a href="/tags/Data-Structure/">Data Structure<span>2</span></a></li>
+		
+			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/Python/">Python<span>1</span></a></li>
+		
+			<li><a href="/tags/Reverse/">Reverse<span>3</span></a></li>
+		
+			<li><a href="/tags/LaTex/">LaTex<span>1</span></a></li>
 		
 			<li><a href="/tags/Shelling-method/">Shelling method<span>1</span></a></li>
 		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+			<li><a href="/tags/get/">get<span>2</span></a></li>
 		
 		 
 		</ul>
@@ -1085,6 +1173,10 @@ You live in Doe</p>
 <div class="widget">
   <h4>最新文章</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/posts/8998.html" ><i class="fa fa-file-o"></i>Python字符串</a>
+      </li>
     
       <li>
         <a href="/posts/d40c.html" ><i class="fa fa-file-o"></i>微信电脑版多开、防撤回破解</a>
@@ -1100,10 +1192,6 @@ You live in Doe</p>
     
       <li>
         <a href="/posts/16c1.html" ><i class="fa fa-file-o"></i>C/C++ volatile</a>
-      </li>
-    
-      <li>
-        <a href="/posts/9fa6.html" ><i class="fa fa-file-o"></i>内存分配</a>
       </li>
     
   </ul>

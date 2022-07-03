@@ -6,7 +6,7 @@
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
   
-  <title>C++ getline() | tlhg&#39;s Blog|</title>
+  <title>Python字符串 | tlhg&#39;s Blog|</title>
   <meta name="author" content="Heisenberg Lee">
   
   <meta name="description" content="学习记录。">
@@ -14,11 +14,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="C++ getline()"/>
+  <meta property="og:title" content="Python字符串"/>
   <meta property="og:site_name" content="tlhg&#39;s Blog|"/>
 
   
-    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/tlhg-0/blogimage/images/20200803213512.png" />
+    <meta property="og:image" content=""/>
   
 
   
@@ -112,7 +112,7 @@
 
 	
 		<div class="page-header">
-			<h1> C++ getline()</h1>
+			<h1> Python字符串</h1>
 		</div>
 	
 
@@ -129,30 +129,88 @@
 	<div class="mypage">		
 	  		
 
-	  <p>虽然可以使用 cin 和 &gt;&gt; 运算符来输入字符串，但它可能会导致一些需要注意的问题。</p>
-<p>当 cin 读取数据时，它会传递并忽略任何前导白色空格字符（空格、制表符或换行符）。一旦它接触到第一个非空格字符即开始阅读，当它读取到下一个空白字符时，它将停止读取。以下面的语句为例：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line">cin &gt;&gt; namel;</span><br></pre></td></tr></tbody></table></figure>
-<p>可以输入 “Mark” 或 “Twain”，但不能输入 “Mark Twain”，因为 cin 不能输入包含嵌入空格的字符串。下面程序演示了这个问题：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// This program illustrates a problem that can occur if</span></span><br><span class="line"><span class="comment">// cin is used to read character data into a string object.</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span> <span class="comment">// Header file needed to use string objects</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    string name;</span><br><span class="line">    string city;</span><br><span class="line">    cout &lt;&lt; <span class="string">"Please enter your name: "</span>;</span><br><span class="line">    cin &gt;&gt; name;</span><br><span class="line">    cout &lt;&lt; <span class="string">"Enter the city you live in: "</span>;</span><br><span class="line">    cin &gt;&gt; city;</span><br><span class="line">    cout &lt;&lt; <span class="string">"Hello, "</span> &lt;&lt; name &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">"You live in "</span> &lt;&lt; city &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>程序输出结果：</p>
-<blockquote>
-<p>Please enter your name： John Doe<br>
-Enter the city you live in: Hello, John<br>
-You live in Doe</p>
-</blockquote>
-<p>请注意，在这个示例中，用户根本没有机会输入 city 城市名。因为在第一个输入语句中，当 cin 读取到 John 和 Doe 之间的空格时，它就会停止阅读，只存储 John 作为 name 的值。在第二个输入语句中， cin 使用键盘缓冲区中找到的剩余字符，并存储 Doe 作为 city 的值。</p>
-<p>为了解决这个问题，可以使用一个叫做 getline 的 C++ 函数。此函数可读取整行，包括前导和嵌入的空格，并将其存储在字符串对象中。</p>
-<p>getline 函数如下所示：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">getline</span>(cin, inputLine);</span><br></pre></td></tr></tbody></table></figure>
-<p>其中 cin 是正在读取的输入流，而 inputLine 是接收输入字符串的 string 变量的名称。下面的程序演示了 getline 函数的应用：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// This program illustrates using the getline function</span></span><br><span class="line"><span class="comment">//to read character data into a string object.</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span> <span class="comment">// Header file needed to use string objects</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    string name;</span><br><span class="line">    string city;</span><br><span class="line">    cout &lt;&lt; <span class="string">"Please enter your name: "</span>;</span><br><span class="line">    <span class="built_in">getline</span>(cin, name);</span><br><span class="line">    cout &lt;&lt; <span class="string">"Enter the city you live in: "</span>;</span><br><span class="line">    <span class="built_in">getline</span>(cin, city);</span><br><span class="line">    cout &lt;&lt; <span class="string">"Hello, "</span> &lt;&lt; name &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">"You live in "</span> &lt;&lt; city &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>程序输出结果：</p>
-<blockquote>
-<p>Please enter your name: John Doe<br>
-Enter the city you live in: Chicago<br>
-Hello, John Doe<br>
-You live in Chicago</p>
-</blockquote>
+	  <h2 id="python字符串"><a class="markdownIt-Anchor" href="#python字符串"></a> Python字符串</h2>
+<ul>
+<li>
+<p><strong>str 转换bytes</strong></p>
+<p>纯英文的<code>str</code>可以用<code>ASCII</code>编码为<code>bytes</code>，内容是一样的，<br>
+含有中文的<code>str</code>可以用<code>UTF-8</code>编码为<code>bytes</code>。<br>
+含有中文的<code>str</code>无法用<code>ASCII</code>编码，因为中文编码的范围超过了<code>ASCII</code>编码的范围，Python会报错。</p>
+<p>在<code>bytes</code>中，无法显示为ASCII字符的字节，用<code>\x##</code>显示。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'ABC'</span>.encode(<span class="string">'ascii'</span>)</span><br><span class="line"><span class="string">b'ABC'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'中文'</span>.encode(<span class="string">'utf-8'</span>)</span><br><span class="line"><span class="string">b'\xe4\xb8\xad\xe6\x96\x87'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'中文'</span>.encode(<span class="string">'ascii'</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">UnicodeEncodeError: <span class="string">'ascii'</span> codec can<span class="string">'t encode characters in position 0-1: ordinal not in range(128)</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>
+<p><strong>bytes转换str</strong></p>
+<p>把<code>bytes</code>变为<code>str</code>，就需要用<code>decode()</code>方法：</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">b'ABC'</span>.decode(<span class="string">'ascii'</span>)</span><br><span class="line"><span class="string">'ABC'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">b'\xe4\xb8\xad\xe6\x96\x87'</span>.decode(<span class="string">'utf-8'</span>)</span><br><span class="line"><span class="string">'中文'</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>
+<p><strong>计算str包含的字符串/bytes包含的字节数</strong></p>
+<p>1个中文字符经过UTF-8编码后通常会占用3个字节，而1个英文字符只占用1个字节。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">#str包含的字符串</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">len</span>(<span class="string">'ABC'</span>)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">len</span>(<span class="string">'中文'</span>)</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="comment">#bytes包含的字节数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">len</span>(<span class="string">b'ABC'</span>)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">len</span>(<span class="string">b'\xe4\xb8\xad\xe6\x96\x87'</span>)</span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">len</span>(<span class="string">'中文'</span>.encode(<span class="string">'utf-8'</span>))</span><br><span class="line"><span class="number">6</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>
+<p>文件乱码问题</p>
+<p>在操作字符串时，我们经常遇到<code>str</code>和<code>bytes</code>的互相转换。为了避免乱码问题，应当始终坚持使用UTF-8编码对<code>str</code>和<code>bytes</code>进行转换。</p>
+<p>当Python解释器读取源代码时，为了让它按UTF-8编码读取，我们通常在文件开头写上这两行：</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-、</span></span><br></pre></td></tr></tbody></table></figure>
+<p>第一行注释是为了告诉Linux/OS X系统，这是一个Python可执行程序，Windows系统会忽略这个注释；</p>
+<p>第二行注释是为了告诉Python解释器，按照UTF-8编码读取源代码，否则，你在源代码中写的中文输出可能会有乱码。</p>
+<ul>
+<li>字符串格式化方法</li>
+</ul>
+<ol>
+<li>占位符格式化<br>
+不太确定应该用什么，<code>%s</code>永远起作用，它会把任何数据类型转换为字符串：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">占位符</th>
+<th style="text-align:left">替换内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">%d</td>
+<td style="text-align:left">整数</td>
+</tr>
+<tr>
+<td style="text-align:left">%f</td>
+<td style="text-align:left">浮点数</td>
+</tr>
+<tr>
+<td style="text-align:left">%s</td>
+<td style="text-align:left">字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">%x</td>
+<td style="text-align:left">十六进制整数</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li>
+<p>fromat()</p>
+<p>另一种格式化字符串的方法是使用字符串的<code>format()</code>方法，它会用传入的参数依次替换字符串内的占位符<code>{0}</code>、<code>{1}</code>……，不过这种方式写起来比%要麻烦得多：</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'Hello, {0}, 成绩提升了 {1:.1f}%'</span>.<span class="built_in">format</span>(<span class="string">'小明'</span>, <span class="number">17.125</span>)</span><br><span class="line"><span class="string">'Hello, 小明, 成绩提升了 17.1%'</span></span><br></pre></td></tr></tbody></table></figure>
+<ol start="3">
+<li>
+<p>f-string</p>
+<p>最后一种格式化字符串的方法是使用以<code>f</code>开头的字符串，称之为<code>f-string</code>，它和普通字符串不同之处在于，字符串如果包含<code>{xxx}</code>，就会以对应的变量替换：</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = <span class="number">2.5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="number">3.14</span> * r ** <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">f'The area of a circle with radius <span class="subst">{r}</span> is <span class="subst">{s:<span class="number">.2</span>f}</span>'</span>)</span><br><span class="line">The area of a circle <span class="keyword">with</span> radius <span class="number">2.5</span> <span class="keyword">is</span> <span class="number">19.62</span></span><br></pre></td></tr></tbody></table></figure>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -180,7 +238,7 @@ You live in Chicago</p>
 	</div>
 
 	
-	<span id="/posts/87ea.html" class="leancloud-visitors view" data-flag-title="C++ getline()">
+	<span id="/posts/8998.html" class="leancloud-visitors view" data-flag-title="Python字符串">
 		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
 	</span>
 	
@@ -191,13 +249,12 @@ You live in Chicago</p>
 
     
     
-    <a href="/posts/45e4.html" type="button" class="btn btn-default"><i
-                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>上一页</a>
     
 
     <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
-    <a href="/posts/a5.html" type="button" class="btn btn-default ">下一页<i
+    <a href="/posts/d40c.html" type="button" class="btn btn-default ">下一页<i
                 class="fa fa-arrow-circle-o-right"></i></a>
     
 
@@ -254,7 +311,7 @@ new Valine(valineConfig);
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	2020-04-04 
+	2022-07-03 
 	</div>
 	
 
@@ -278,7 +335,7 @@ new Valine(valineConfig);
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/C/">C++<span>12</span></a></li>
+  <li><a href="/tags/Python/">Python<span>1</span></a></li>
     </ul>
 	</div>
 		
